@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Using R: essential information | UKDS-intro-to-R.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Using R: essential information | UKDS-intro-to-R.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Using R: essential information | UKDS-intro-to-R.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="opening-ukds-datasets-in-r.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">UKDS Introduction to R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#what-is-r"><i class="fa fa-check"></i><b>1.1</b> What is R ?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="using-r-essential-information.html"><a href="using-r-essential-information.html"><i class="fa fa-check"></i><b>2</b> Using R: essential information</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="using-r-essential-information.html"><a href="using-r-essential-information.html#download-and-installation"><i class="fa fa-check"></i><b>2.1</b> Download and installation</a></li>
+<li class="chapter" data-level="2.2" data-path="using-r-essential-information.html"><a href="using-r-essential-information.html#installing-and-setting-up-rstudio"><i class="fa fa-check"></i><b>2.2</b> Installing and setting up RStudio</a></li>
+<li class="chapter" data-level="2.3" data-path="using-r-essential-information.html"><a href="using-r-essential-information.html#interacting-with-r"><i class="fa fa-check"></i><b>2.3</b> Interacting with R</a></li>
+<li class="chapter" data-level="2.4" data-path="using-r-essential-information.html"><a href="using-r-essential-information.html#installing-and-loading-packages"><i class="fa fa-check"></i><b>2.4</b> Installing and loading packages</a></li>
+<li class="chapter" data-level="2.5" data-path="using-r-essential-information.html"><a href="using-r-essential-information.html#getting-help"><i class="fa fa-check"></i><b>2.5</b> Getting help</a></li>
+<li class="chapter" data-level="2.6" data-path="using-r-essential-information.html"><a href="using-r-essential-information.html#objects"><i class="fa fa-check"></i><b>2.6</b> Objects</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="opening-ukds-datasets-in-r.html"><a href="opening-ukds-datasets-in-r.html"><i class="fa fa-check"></i><b>3</b> Opening UKDS datasets in R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="opening-ukds-datasets-in-r.html"><a href="opening-ukds-datasets-in-r.html#essential-information"><i class="fa fa-check"></i><b>3.1</b> Essential information</a></li>
+<li class="chapter" data-level="3.2" data-path="opening-ukds-datasets-in-r.html"><a href="opening-ukds-datasets-in-r.html#the-2017-british-social-attitudes-survey"><i class="fa fa-check"></i><b>3.2</b> The 2017 British Social Attitudes Survey</a></li>
+<li class="chapter" data-level="3.3" data-path="opening-ukds-datasets-in-r.html"><a href="opening-ukds-datasets-in-r.html#understanding-the-dataset"><i class="fa fa-check"></i><b>3.3</b> Understanding the dataset</a></li>
+<li class="chapter" data-level="3.4" data-path="opening-ukds-datasets-in-r.html"><a href="opening-ukds-datasets-in-r.html#identifying-and-selecting-variables"><i class="fa fa-check"></i><b>3.4</b> Identifying and selecting variables</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html"><i class="fa fa-check"></i><b>4</b> Essentials of Data Manipulation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html#creating-and-transforming-numerical-variables"><i class="fa fa-check"></i><b>4.1</b> Creating and transforming numerical variables</a></li>
+<li class="chapter" data-level="4.2" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html#categorical-variables"><i class="fa fa-check"></i><b>4.2</b> Categorical variables</a></li>
+<li class="chapter" data-level="4.3" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html#recoding-variables"><i class="fa fa-check"></i><b>4.3</b> Recoding variables</a></li>
+<li class="chapter" data-level="4.4" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html#missing-values"><i class="fa fa-check"></i><b>4.4</b> Missing Values</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html#inspecting-missing-data"><i class="fa fa-check"></i><b>4.4.1</b> Inspecting missing data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html#recoding-missing-values-as-na-continuous-variables"><i class="fa fa-check"></i><b>4.4.2</b> Recoding missing values as NA (continuous variables)</a></li>
+<li class="chapter" data-level="4.4.3" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html#working-with-missing-values"><i class="fa fa-check"></i><b>4.4.3</b> Working with missing values</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html#subsetting-datasets"><i class="fa fa-check"></i><b>4.5</b> Subsetting datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html"><i class="fa fa-check"></i><b>5</b> Descriptive statistics</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#continuous-variables"><i class="fa fa-check"></i><b>5.1</b> Continuous variables</a></li>
+<li class="chapter" data-level="5.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#bivariate-association-between-continuous-variables"><i class="fa fa-check"></i><b>5.2</b> Bivariate association between continuous variables</a></li>
+<li class="chapter" data-level="5.3" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#categorical-variables-1"><i class="fa fa-check"></i><b>5.3</b> Categorical Variables</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#one-way-frequency-tables"><i class="fa fa-check"></i><b>5.3.1</b> One way frequency tables</a></li>
+<li class="chapter" data-level="5.3.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#two-way-or-more-contingency-table"><i class="fa fa-check"></i><b>5.3.2</b> Two way or more contingency table</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#grouped-summary-statistics-for-continuous-variables"><i class="fa fa-check"></i><b>5.4</b> Grouped summary statistics for continuous variables</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="producing-weighted-estimates.html"><a href="producing-weighted-estimates.html"><i class="fa fa-check"></i><b>6</b> Producing weighted estimates</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="producing-weighted-estimates.html"><a href="producing-weighted-estimates.html#central-tendency-and-dispersion-continuous-variables"><i class="fa fa-check"></i><b>6.1</b> Central tendency and dispersion (continuous variables)</a></li>
+<li class="chapter" data-level="6.2" data-path="producing-weighted-estimates.html"><a href="producing-weighted-estimates.html#frequencies-and-contingency-tables"><i class="fa fa-check"></i><b>6.2</b> Frequencies and contingency tables</a></li>
+<li class="chapter" data-level="6.3" data-path="producing-weighted-estimates.html"><a href="producing-weighted-estimates.html#robust-inference"><i class="fa fa-check"></i><b>6.3</b> Robust inference</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="graphs-and-plots.html"><a href="graphs-and-plots.html"><i class="fa fa-check"></i><b>7</b> Graphs and plots</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="graphs-and-plots.html"><a href="graphs-and-plots.html#distributional-graphs-for-continuous-variables"><i class="fa fa-check"></i><b>7.1</b> Distributional graphs for continuous variables</a></li>
+<li class="chapter" data-level="7.2" data-path="graphs-and-plots.html"><a href="graphs-and-plots.html#plotting-categorical-variables"><i class="fa fa-check"></i><b>7.2</b> Plotting categorical variables</a></li>
+<li class="chapter" data-level="7.3" data-path="graphs-and-plots.html"><a href="graphs-and-plots.html#more-advanced-plots"><i class="fa fa-check"></i><b>7.3</b> More advanced plots</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="statistical-testing.html"><a href="statistical-testing.html"><i class="fa fa-check"></i><b>8</b> Statistical testing</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="statistical-testing.html"><a href="statistical-testing.html#differences-in-means"><i class="fa fa-check"></i><b>8.1</b> Differences in means</a></li>
+<li class="chapter" data-level="8.2" data-path="statistical-testing.html"><a href="statistical-testing.html#differences-in-variance"><i class="fa fa-check"></i><b>8.2</b> Differences in variance</a></li>
+<li class="chapter" data-level="8.3" data-path="statistical-testing.html"><a href="statistical-testing.html#significance-of-measures-of-association"><i class="fa fa-check"></i><b>8.3</b> Significance of measures of association</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="regression-analysis.html"><a href="regression-analysis.html"><i class="fa fa-check"></i><b>9</b> Regression analysis</a></li>
+<li class="chapter" data-level="10" data-path="further-information.html"><a href="further-information.html"><i class="fa fa-check"></i><b>10</b> Further information</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="further-information.html"><a href="further-information.html#additional-commands-of-interest"><i class="fa fa-check"></i><b>10.1</b> Additional commands of interest</a></li>
+<li class="chapter" data-level="10.2" data-path="further-information.html"><a href="further-information.html#additional-online-resources"><i class="fa fa-check"></i><b>10.2</b> Additional online resources</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://ukdataservice.ac.uk" target="blank">UK Data Service</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="using-r-essential-information" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Using R: essential information<a href="using-r-essential-information.html#using-r-essential-information" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="download-and-installation" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Download and installation<a href="using-r-essential-information.html#download-and-installation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R can be downloaded for free from the <a href="https://cran.r-project.org/">CRAN
+website</a> and run like any other Windows
+application. Versions for Mac and Linux are also available. After installation,
+the standard and rather minimalist R interface that appears when the programme
+is launched is shown below.</p>
+<div class="figure">
+<img src="pics/screen2.1.jpg" alt="Screenshot of the standard R Windows interface" width="800" />
+<p class="caption">
+(#fig:2.1)The standard R interface
+</p>
+</div>
+<p>This interface merely allows the user to type in commands one by one in the
+console, and to install packages via pull-down menus. However, this basic
+installation, although fully functional, is rather minimal, not very ergonomic
+or user friendly. As with other statistical software, the primary way of
+interacting with R for most is to write programs, even basic ones in a syntax
+file (also called script file) that is saved and run whenever needed, which is
+not directly feasible with the standard R GUI.</p>
+<p>It is therefore highly recommended to use R via an Integrated Development
+Environment (ie a more sophisticated user interface) such as
+<a href="https://www.rstudio.com/products/rstudio/download/">RStudio</a> for beginners to
+intermediate users or the <a href="https://www.eclipse.org/statet/news/">StatEt module</a>
+for <a href="https://www.eclipse.org/downloads/">Eclipse</a> for more advanced
+programmers. Both are free, available for Windows, MacOS and Linux and offer
+users a large number of additional functionalities, such as syntax
+highlighting, integration with Github. Given that it probably has the largest
+number of users RStudio will be used to demonstrate examplkes of R syntax in
+the remainder of this document. In order for this guide to remain as universal
+as possible, we will not rely on the advanced features of RStudio, instead using
+it merely as an interface to the R engine.</p>
+</div>
+<div id="installing-and-setting-up-rstudio" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Installing and setting up RStudio<a href="using-r-essential-information.html#installing-and-setting-up-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>RStudio needs to be installed separately from R. The program can be downloaded
+from <a href="https://www.rstudio.com/products/rstudio/download/">the RStudio website</a>.
+The site will automatically generate a link to the version most compatible with
+the computer used to access it. Once downloaded double click on the file and
+follow the installation instructions.</p>
+<p>By default, the R Studio interface consists of four main panels, respectively
+known as the script editor (top left panel), the console (bottom left panel),
+the Environment (top right panel) and the File/Directory/Help (bottom right
+panel).</p>
+<div class="figure">
+<img src="pics/screen2.2.png" alt="Screenshot of the standard RStudio interface with four panes: top left: script; bottom left: console; top right: global environment; bottom right: files or help" width="900" />
+<p class="caption">
+(#fig:2.2)The R Studio default interface
+</p>
+</div>
+As such a complex interface can be visually overwhelming for some users and is
+not required for the purpose of this guide, we will minimise the Global
+Environment and Files/Directory/Help panels by clicking in the center of the
+window and dragging right to the edge of the screen. This way, only the script
+and console panels remain visible. The tiling of the panels can be customised
+in <code>Tools&gt;Global Options&gt;Pane Layout</code>. For instance, Script can be moved to the
+bottom of the window and Console to the top:
+<div class="figure">
+<img src="pics/screen2.3.png" alt="Screenshot of the customised R Studio interface, with the console pane at the top and the script pane at the bottom" width="900" />
+<p class="caption">
+(#fig:2.3)A customised R Studio interface
+</p>
+</div>
+</div>
+<div id="interacting-with-r" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Interacting with R<a href="using-r-essential-information.html#interacting-with-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As already mentioned, one can type R commands directly in the console of RStudio
+and/or by typing sequences of commands in a script file.</p>
+<p>Most R commands adopt the following syntax: </p>
+<pre><code>&gt; command(parameter1, parameter2, ...) </code></pre>
+<p><code>All</code> R commands are followed by brackets, even if there are no parameters.</p>
+<p>In the following example we are going to set up the default working directory, that is the default location for opening and storing files, by using the <code>getwd()</code> and <code>setwd()</code> commands. First, let us visualise the current default working directory.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="using-r-essential-information.html#cb2-1" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;/home/piet/Dropbox/work/UKDS/RGuide/UKDS_RGuide&quot;</code></pre>
+<p>Let us say we would like the code from this guide to be all in a folder called ‘R_UKDS’, to be located in ‘My Documents’. To tell R to use the folder ’R_UKDS, we can either create it from within Windows or ask R to do it for us. So type: </p>
+<p>For Windows: </p>
+<pre><code>&gt; setwd(&quot;C:/Documents and Settings/&lt;INSERT YOUR USERNAME HERE&gt;/My Documents/R_UKDS&quot;) </code></pre>
+<p>For Mac:</p>
+<pre><code>&gt; setwd(&quot;/Users/&lt;INSERT YOUR USERNAME HERE&gt;/Documents/R_UKDS&quot;) </code></pre>
+<p>For Linux:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="using-r-essential-information.html#cb6-1" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">&quot;~/Documents/R_UKDS&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in dir.create(&quot;~/Documents/R_UKDS&quot;): &#39;/home/piet/Documents/R_UKDS&#39; already exists</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="using-r-essential-information.html#cb8-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;~/Documents/R_UKDS&quot;</span>)</span></code></pre></div>
+<p>Typing <code>getwd()</code> confirms that the change has been recorded. </p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="using-r-essential-information.html#cb9-1" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;/home/piet/Dropbox/work/UKDS/RGuide/UKDS_RGuide&quot;</code></pre>
+<p><strong>Notes:</strong></p>
+<ul>
+<li><p>Any character string that is neither a command or the name of an object (such
+as a variable name) needs to be put between inverted commas or quotation
+marks, otherwise it will be interpreted as the name of an object</p>
+<ul>
+<li>see the example below about loading user-created packages;</li>
+</ul></li>
+<li><p>Even when no parameters are specified for a command, brackets are compulsory
+as shown in the <code>getwd()</code> example above;</p></li>
+<li><p>R uses forward slashes rather than backslashes (unlike most other
+Windows applications) to separate directories. Using backlashes will return an
+error message;</p></li>
+<li><p>Although most R commands accept a large number of options to be specified,
+in many cases default values have been ‘factory set’ so that only the
+essential parameters need specifying.</p></li>
+</ul>
+<p>The output of most R commands can be either directly displayed on the screen (as
+in the above example) or stored in objects that can be subsequently reused in
+further commands. This object-oriented feature separates R from traditional
+statistical software.</p>
+<p>For instance, typing: </p>
+<pre><code>&gt;   a&lt;-getwd()</code></pre>
+<p>will store the output of <code>getwd()</code> (that is, the name of the current default directory)  into an object called ‘a’. In order to view the content of a, one can just type its name: </p>
+<pre><code>&gt;   a</code></pre>
+<!-- Another approach to set a working directory is by creating an R Project. To learn more about why and how to set working directory in R and see how an R project is generated, see the “Setting a working directory” section in our Data Skills Module: Exploring crime surveys with R. -->
+<div id="writing-r-scripts-via-r-studio" class="section level4 unnumbered hasAnchor">
+<h4>Writing R scripts via R Studio <a href="using-r-essential-information.html#writing-r-scripts-via-r-studio" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Most users will want to write their code in a script file, similar to the ‘do’ file in Stata or syntax file in SPSS. R script files end with the .R suffix. To open an existing R script in RStudio select <code>File&gt;Open File</code> then the relevant script file. To create a new script select <code>File&gt;New File&gt;Open File</code> (shortcut: Control+Shift+N) this will open a new script window in which to type commands.</p>
+</div>
+</div>
+<div id="installing-and-loading-packages" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Installing and loading packages<a href="using-r-essential-information.html#installing-and-loading-packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Apart from a basic set of commands and functions, most of the tools offered by R are available in packages that are not provided during the main installation and need to be installed and downloaded separately from within R.
+For example, to install the ‘foreign’ package one need to type:</p>
+<pre><code>install.packages(&quot;foreign&quot;,repos = &quot;https://cloud.r-project.org&quot;)</code></pre>
+<p>This only needs to be done once.
+If the address of the package repository is not specified via the <code>repos</code> option, a pull-down menu will appear, asking for one. Choosing <code>https://cloud.r-project.org</code> will automatically select the closest mirror site.</p>
+<p>Originally, <code>Foreign</code> enabled users to import Stata (version 12 or older) or SPSS datasets. For Stata datasets saved under version 13 and above, the <code>haven</code> or <code>readstata13</code> package are required.</p>
+<pre><code>install.packages(&quot;haven&quot;,repos = &quot;https://cloud.r-project.org&quot;)</code></pre>
+<p>To use a package already installed in the local R library, the <code>library()</code> command is needed:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="using-r-essential-information.html#cb15-1" tabindex="-1"></a><span class="fu">library</span>(foreign)</span></code></pre></div>
+<p>Simply typing: </p>
+<pre><code>&gt; library()</code></pre>
+<p>Will list all libraries installed on the computer that can be loaded in memory. This can be a rather long list!</p>
+<!-- For users who feel more comfortable using ‘click-and-point', there is also the option to use ‘Install Packages’ from the Packages tab in the main R window. This will display a list of packages available in alphabetical order for the user to choose from. Next, select the desired package, double click on it and press ‘OK’ for the installation to begin. -->
+<p>Besides a full archive of R packages, the CRAN website provides a series of manuals, including <a href="https://cran.r-project.org/doc/manuals/R-exts.html">Writing R Extensions</a>, which describes how users can write their own packages and submit them to CRAN. </p>
+<p>Once a package is installed, it will be permanently stored in the local R library on the computer, unless deleted it with the <code>remove.packages()</code> command (not advised as this can break dependencies between packages!).</p>
+<pre><code>&gt; remove.packages(&quot;name of the package&quot;)</code></pre>
+<p>Packages required for an analysis have to be loaded every time a new R session is started<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.<br />
+More information about R packages are available in our Data Skills Module: Exploring crime surveys with R.</p>
+</div>
+<div id="getting-help" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Getting help<a href="using-r-essential-information.html#getting-help" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Within R, the most straightforward way to request help with a command consists of a question mark followed by the command name, without a space in between. The standard help system in R (unless using RStudio or Eclipse) relies on the default web browser installed on your computer (ie Chrome, Firefox or Edge in most cases) to display pages.
+Typing:</p>
+<pre><code>&gt; ?getwd </code></pre>
+<p>Is equivalent of:</p>
+<pre><code>help(&#39;getwd&#39;)</code></pre>
+<p>and will open the help page for the <code>getwd()</code> command in the default web browser. If you are using RStudio or Eclipse, the help will most likely open in a new tab within the program.</p>
+<p>This will work for any command directly available in the <code>Base</code> package that is loaded at startup or in other packages loaded via the <code>library()</code> command. Otherwise, R will return an error message.</p>
+<p>Typing two question marks followed by a keyword will search all of R for the available documentation for that keyword:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="using-r-essential-information.html#cb20-1" tabindex="-1"></a> ??foreign</span></code></pre></div>
+<p>An index of all commands and functions in the foreign package can be obtained by typing:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="using-r-essential-information.html#cb21-1" tabindex="-1"></a><span class="fu">help</span>(<span class="at">package=</span><span class="st">&#39;foreign&#39;</span>)</span></code></pre></div>
+<p>Note: this command only works because the ‘foreign’ package was previously loaded in memory with the <code>library()</code> command. More information about where to find help when using R is provided at the end of this document.</p>
+</div>
+<div id="objects" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Objects<a href="using-r-essential-information.html#objects" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R is an object oriented language, which means that almost any information it uses is stored as ‘objects’ (i.e. containers) that can be manipulated independently. During an R session, multiple objects are available simultaneously (for instance datasets, but also summary tables or new variables produced from it).
+Typing:</p>
+<pre><code>&gt; ls()</code></pre>
+<p>will list all the objects that are currently in memory.</p>
+<p>Objects belong to <code>classes</code> or types which have distinct <code>properties</code>. There are many classes of objects in R. By comparison, Stata has only macros, variables and scalars that are directly available to most users. Common object classes include factors (these are equivalent to categorical variables), vectors (numerical variables – whether continuous or ordinal), data frames (datasets), matrices, etc. Not all operations are possible with all objects in R. More advanced users can also create their own object classes. Describing R objects and their properties is well beyond the purpose of this guide and users interested should consult the <a href="https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects">online documentation</a> for further explanations. </p>
+<p>To create or assign a value to an object, one uses the assignment operator (&lt;-). For example:</p>
+<pre><code>&gt; x &lt;- 5 </code></pre>
+<p>In this example we have assigned the value 5 to an object called x. If you type the letter x, the value ‘5’ will be returned in your console. The object x will appear in the R environment after the ls() command.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="using-r-essential-information.html#cb24-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span>  </span>
+<span id="cb24-2"><a href="using-r-essential-information.html#cb24-2" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="using-r-essential-information.html#cb26-1" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code>##  [1] &quot;a&quot;               &quot;b&quot;               &quot;bsa&quot;             &quot;bsa.design&quot;      &quot;bsa.young&quot;       &quot;bsa.young.males&quot; &quot;dev.d&quot;          
+##  [8] &quot;df.d&quot;            &quot;fit1&quot;            &quot;fit2&quot;            &quot;m&quot;               &quot;mydata&quot;          &quot;p&quot;               &quot;pa&quot;             
+## [15] &quot;party.tab&quot;       &quot;rm&quot;              &quot;x&quot;</code></pre>
+<div id="deleting-objects" class="section level4 unnumbered hasAnchor">
+<h4>Deleting objects<a href="using-r-essential-information.html#deleting-objects" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The rm() function can be used to remove objects from the environment (session). These objects can be variables, lists, datasets, etc. For instance, to remove the object ‘x’, or the fictitious dataset called ‘mydata’: </p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="using-r-essential-information.html#cb28-1" tabindex="-1"></a><span class="fu">rm</span>(x)   </span>
+<span id="cb28-2"><a href="using-r-essential-information.html#cb28-2" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code>##  [1] &quot;a&quot;               &quot;b&quot;               &quot;bsa&quot;             &quot;bsa.design&quot;      &quot;bsa.young&quot;       &quot;bsa.young.males&quot; &quot;dev.d&quot;          
+##  [8] &quot;df.d&quot;            &quot;fit1&quot;            &quot;fit2&quot;            &quot;m&quot;               &quot;mydata&quot;          &quot;p&quot;               &quot;pa&quot;             
+## [15] &quot;party.tab&quot;       &quot;rm&quot;</code></pre>
+<pre><code>&gt; rm(mydata)</code></pre>
+<!-- The rm() function only works with R objects; but if you want to delete a specific variable of a dataset, you need a different function. For example, to delete the variable ‘age’ of the dataset ‘mydata’, an option is to set the variable to NULL:  -->
+<!-- > mydata$age<-NULL  -->
+<!-- There are other ways to delete variables from a dataset, but these will be looked at later on in this guide.  -->
+</div>
+<div id="data-frames" class="section level4 unnumbered hasAnchor">
+<h4>Data frames<a href="using-r-essential-information.html#data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Among the various classes of objects one may use in R, a few are essential to understand when analysing survey data. Their characteristics are briefly listed below;</p>
+<p>Data frames are objects that come closest to datasets or excel sheets in traditional statistical software. They are objects that have indexed rows and columns, both of which may have names. Data frames columns can be seen as variables and lines or rows as observations. Each cell in the data frame can be uniquely identified by its position. Data frames are typically the object in which survey datasets are stored.</p>
+<p>Let’s assume that we have a small data frame called ‘mydata’. Here are a few basic commands to examine it:</p>
+<p><strong>Determining the size of a data frame:</strong>
+the <code>dim()</code> command returns the number of rows and columns of a data frame</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="using-r-essential-information.html#cb31-1" tabindex="-1"></a><span class="fu">dim</span>(mydata)</span></code></pre></div>
+<pre><code>## [1] 50  6</code></pre>
+<p>R tells us that our data is made of 50 rows and 6 columns, in other words of 50 observations and 6 variables. What if I want a quick overview of the dataset?</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="using-r-essential-information.html#cb33-1" tabindex="-1"></a><span class="fu">head</span>(mydata)</span></code></pre></div>
+<pre><code>##     RSex skipmeal                   Married       Poverty1                         HEdQual3 NatFrEst
+## 1 Female       NA Married/living as married        Was not Higher educ below degree/A level        5
+## 2 Female        1        Separated/divorced        Was not Higher educ below degree/A level       30
+## 3 Female       NA Married/living as married        Was not             O level or equiv/CSE       50
+## 4   Male       NA             Never married        Was not Higher educ below degree/A level       50
+## 5   Male        1             Never married        Was not                 No qualification       50
+## 6   Male       NA Married/living as married Was in poverty                             &lt;NA&gt;       10</code></pre>
+<p>The <code>head()</code> command displays the first six lines of the dataset. Depending on the number of variables the output of <code>head()</code> can become quickly overwhelming, as the size of the lines on most screens is limited!</p>
+<p><strong>Obtaining the names of variables (or columns) in the dataset:</strong>
+This can be done using either <code>ls()</code> which we already have used, or the <code>names()</code> commands. <code>ls()</code> returns the variables names, sorted alphabetically, whereas <code>names()</code> returns them in their actual order in the data frame.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="using-r-essential-information.html#cb35-1" tabindex="-1"></a><span class="fu">ls</span>(mydata)</span></code></pre></div>
+<pre><code>## [1] &quot;HEdQual3&quot; &quot;Married&quot;  &quot;NatFrEst&quot; &quot;Poverty1&quot; &quot;RSex&quot;     &quot;skipmeal&quot;</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="using-r-essential-information.html#cb37-1" tabindex="-1"></a><span class="fu">names</span>(mydata)</span></code></pre></div>
+<pre><code>## [1] &quot;RSex&quot;     &quot;skipmeal&quot; &quot;Married&quot;  &quot;Poverty1&quot; &quot;HEdQual3&quot; &quot;NatFrEst&quot;</code></pre>
+<p>We can see that in the data frame, the “RSex” column comes in fact before “Poverty1”.</p>
+<p><strong>Accessing variables:</strong></p>
+<p>Each column of a data frame, or variable, can be accessed by its name preceded by the $ sign:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="using-r-essential-information.html#cb39-1" tabindex="-1"></a>mydata<span class="sc">$</span>NatFrEst</span></code></pre></div>
+<pre><code>##  [1]  5 30 50 50 50 10  1 NA  5 50 60 25 30  3 25 10 80  5 50 50 40 45  2 82 60 40 10 10 40 15 30 30  2 10 75 99 70 50 10 30  1 10 85 45 70 25 40
+## [48] 30 10 25
+## attr(,&quot;value.labels&quot;)
+## named numeric(0)</code></pre>
+<p>Alternatively, columns/variables and rows can be identified numerically by their position in the data frame using square brackets:</p>
+<pre><code>dataframe[row number,column number]</code></pre>
+<p>Given that <code>RSex</code> is the first column of our dataset</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="using-r-essential-information.html#cb42-1" tabindex="-1"></a>mydata[,<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>##  [1] Female Female Female Male   Male   Male   Male   Female Male   Male   Male   Female Female Male   Female Female Female Female Female Female
+## [21] Male   Female Female Male   Male   Female Female Female Female Male   Female Female Female Female Male   Male   Female Female Male   Female
+## [41] Male   Male   Female Male   Female Male   Female Female Female Male  
+## Levels: Male Female</code></pre>
+<p>Returns the same output as previously. Not specifying a row or column name within the square brackets tells R to display them all.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="using-r-essential-information.html#cb44-1" tabindex="-1"></a>mydata[<span class="dv">6</span>,]</span></code></pre></div>
+<pre><code>##   RSex skipmeal                   Married       Poverty1 HEdQual3 NatFrEst
+## 6 Male       NA Married/living as married Was in poverty     &lt;NA&gt;       10</code></pre>
+<p>Returns the values of all the variables for the sixth row of the data frame. Specifying both a row and column number, will return a unique observation:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="using-r-essential-information.html#cb46-1" tabindex="-1"></a>mydata[<span class="dv">6</span>,<span class="dv">6</span>]</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<p>which in this case is 10.
+Finally, more than one column or row can be displayed by concatenating their number using the <code>c()</code> function:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="using-r-essential-information.html#cb48-1" tabindex="-1"></a>mydata[<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">9</span>),<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">6</span>)]</span></code></pre></div>
+<pre><code>##   RSex NatFrEst
+## 6 Male       10
+## 9 Male        5</code></pre>
+<p>The above command returns respectively the sixth and 9th observations for the sixth column. Please note that columns names can also be used instead of their number, provided that they are put between inverted commas:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="using-r-essential-information.html#cb50-1" tabindex="-1"></a>mydata[<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">9</span>),<span class="fu">c</span>(<span class="st">&#39;RSex&#39;</span>,<span class="st">&#39;NatFrEst&#39;</span>)]</span></code></pre></div>
+<pre><code>##   RSex NatFrEst
+## 6 Male       10
+## 9 Male        5</code></pre>
+<p>Returns the same result as previously.
+Having a data frame to hand allows us to explore other types of objects commonly found in R. The type of a variable can be displayed by simply using the <code>class()</code> function.</p>
+</div>
+<div id="numeric" class="section level4 unnumbered hasAnchor">
+<h4>Numeric<a href="using-r-essential-information.html#numeric" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><code>Numeric</code> objects are simple numerical vectors (ie a single or a list of numbers). Here this is the case for <code>NatFrEst</code>, the estimated proportion of people making wrong benefits claims, according to respondents to the survey.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="using-r-essential-information.html#cb52-1" tabindex="-1"></a><span class="fu">class</span>(mydata<span class="sc">$</span>NatFrEst)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+</div>
+<div id="character" class="section level4 unnumbered hasAnchor">
+<h4>Character<a href="using-r-essential-information.html#character" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Character objects are alphanumeric vectors, that is variables which consist of text string(s).</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="using-r-essential-information.html#cb54-1" tabindex="-1"></a><span class="fu">class</span>(mydata<span class="sc">$</span>Married)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+</div>
+<div id="factors" class="section level4 unnumbered hasAnchor">
+<h4>Factors<a href="using-r-essential-information.html#factors" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>An important feature of R is that categorical variables whether ordinal or polynomial are stored in objects known as <strong>factors</strong>. The main difference between factors and traditional categorical variables in Stata or SPSS is that they do <strong>not</strong> consist of discrete numerical values with which value labels are associated. They should be thought of instead as a special type of character variable with a discrete set of values, which are known as <code>levels</code>. In our data, <code>Rsex</code> (Gender of the respondent) is such an object:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="using-r-essential-information.html#cb56-1" tabindex="-1"></a><span class="fu">class</span>(mydata<span class="sc">$</span>RSex)</span></code></pre></div>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
+<p>Let’s further examine this factor.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="using-r-essential-information.html#cb58-1" tabindex="-1"></a><span class="fu">levels</span>(mydata<span class="sc">$</span>RSex)</span></code></pre></div>
+<pre><code>## [1] &quot;Male&quot;   &quot;Female&quot;</code></pre>
+<p>returns the levels (ie the values) of <code>RSex</code>. Even if ‘Male’ is the first level of <code>Rsex</code>,
+and female the second one, these do not correspond to underlying numbers in the
+data. Please also note that it is possible to change the ordering of factor
+levels with the <code>factor()</code> function. It is good practice to carry out such manipulation in a newly created variable.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="using-r-essential-information.html#cb60-1" tabindex="-1"></a>mydata<span class="sc">$</span>RSex.New<span class="ot">&lt;-</span><span class="fu">factor</span>(mydata<span class="sc">$</span>RSex,<span class="at">levels =</span> <span class="fu">levels</span>(mydata<span class="sc">$</span>RSex)[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>)])</span>
+<span id="cb60-2"><a href="using-r-essential-information.html#cb60-2" tabindex="-1"></a><span class="fu">levels</span>(mydata<span class="sc">$</span>RSex.New)</span></code></pre></div>
+<pre><code>## [1] &quot;Female&quot; &quot;Male&quot;</code></pre>
+<p>The above code tells R to create a new factor variable -<code>RSex.New</code> - whose levels are the same as the initial <code>RSex</code>, but with ‘Female’ coming first, and “Male”, second. The name of the new variable is arbitrary.</p>
+<!-- ##  Saving data  in R -->
+<!-- library(RStata)-->
+<!-- When working with data, it is very likely that the user will edit the original dataset, either by recoding variables or creating new ones, etc. In those cases, saving the progress made in the data used is crucial to avoid repeating every single operation in the next session working with the data. There are several ways of accomplishing this, depending on the format in which the data will be stored. The line of command used to save the data frame  called “mydata” is: -->
+<!-- > save(mydata, file="mydata.Rda") -->
+<!-- This command will save the data into a format that can be read by R. The first part of the command is referring to the data frame used in the current R session, while the section file=“mydata.Rda”, is referring to the data that will be saved in the working directory. The name of the saved file can be changed, for instance: -->
+<!-- > save(mydata, file="mydata_Jan2021.Rda") -->
+<!-- To load the saved .Rda data: -->
+<!-- > load("mydata_Jan2021.Rda") -->
+<!-- This command will work only if the working directory where the data is stored is defined in advance. Alternatively, the path to the folder where the data is saved can be specified. -->
+<!-- > load("c:/mydocuments/mydata_Jan2021.Rda") -->
+<!-- Another option to save the data is using the “foreign” package, so data can be exported to several formats, such as .txt, .cvs, .dta, which can be used in other software packages. The following example shows how to export data from R to a comma delimited format (.csv) that can be read in excel, Stata and SPSS. -->
+<!-- > library(foreign) -->
+<!-- >  write.csv(mydata, “mydata.csv”, row.names=FALSE)  -->
+<!-- Another example is to export the data as a Stata file, using the foreign package previously loaded: -->
+<!-- > write.dta(mydata, "mydata.dta")  -->
+<!-- The newly created files will be stored in the project or working directory defined earlier on. -->
+<!-- Some users will want to save the whole R project in which they are working. This would include functions, variables, data (in R it is possible to load and work with more than one dataset at a time). This option is very handy, especially when working with several datasets.  -->
+<!-- Thus, another approach is to save the current session or workspace as an image, using the save.image command, specifying the path where the workspace will be saved. For example, to save ‘my current session’ in R, one needs to write the following command, making sure to include the .RData extension. -->
+<!-- > save.image("c:/Folder/my_current_session.RData") -->
+<!-- Instead, a workspace can also be saved using the graphical interface:  -->
+<!-- File… Save workspace…  -->
+<!-- This will open a window to save the workspace in a particular folder, which can be different from the current working directory. The name needs to be specified in the ‘File name’ section. The workspace will be saved in the chosen folder as an .RData file. -->
+<!-- Insert the screenshot here -->
+<!-- The data can be retrieved using the load function: -->
+<!-- > load("c:/Folder/my_current_session.RData") -->
+<!-- Or using graphical interface as follows: -->
+<!-- File -> load workspace -->
+<div style="page-break-after: always;"></div>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>But not every time a syntax file is run<a href="using-r-essential-information.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="opening-ukds-datasets-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/PierreWal/UKDS_RGuide/main/02-Using.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["UKDS-intro-to-R.pdf", "UKDS-intro-to-R.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

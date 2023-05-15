@@ -1,0 +1,94 @@
+# Producing weighted estimates
+
+Most users   of social surveys are interested at some point in inferring nationally representative estimates and/or compensate for bias involved in the sampling process when conducting analyses: sampling and non-response bias. These are often tackled with sampling weights, which are meant to correct estimates for the under/over representation of certain groups in the sample and adjusts standard errors accordingly. 
+
+However, robust inference usually relies not just on weighting estimates   but also on factoring in the survey design when conducting analyses -- which can be done with the `survey` package in R, but  is a topic that goes beyond the present guide. At the same time for users who are concerned with reducing bias rather than producing publication-quality estimates, it may be useful to be aware how common R commands and operations can be used with weights. 
+
+Some of the most common ones are mentioned below:
+
+## Central tendency and dispersion (continuous variables)
+The `stats` packages which comes with the  installation of Base R includes `weighted.mean()` which, as indicated by its name, computes weighted estimates of the mean of a variable when weights are provided. However the Hmisc package includes a more comprehensive set of functions that can be used when weighting estimates. The code below provides an illustration of weighted means, variance and median of the left-right score used before, each time comparing it with the unweighted estimate:
+
+```{r}
+### Mean
+c(mean(bsa$leftrigh,na.rm=T),wtd.mean(bsa$leftrigh,bsa$WtFactor))
+
+### Variance
+c(var(bsa$leftrigh,na.rm=T),wtd.var(bsa$leftrigh,bsa$WtFactor))
+
+### Median and quartiles
+c(quantile(bsa$leftrigh,na.rm=T,probs=c(.25,.5,.75)),wtd.quantile(bsa$leftrigh,bsa$WtFactor,probs=c(.25,.5,.75)))
+
+```
+
+The above functions can be used in conjunction with `group_by()` and `summarise()` in order  to compute weighted estimates of continuous variables by groups of categorical variables:
+
+```{r}
+bsa%>%filter(!is.na(RAgeCat))%>%group_by(RAgeCat)%>%summarise(Mean=wtd.mean(leftrigh,WtFactor),
+                                     Var=wtd.var(leftrigh,WtFactor),
+                                     Median=wtd.quantile(leftrigh,WtFactor,probs=c(.5)))
+```
+
+## Frequencies and contingency tables
+
+Neither `ftable()` or `table()` used above allow for using weights. And although the `Hmisc` packages includes the `wtd.table()` function for single frequency tables, we recommend using `xtabs()` as previously, as it it more versatile:
+
+```{r}
+## Unweighted vs weighted frequency tables
+cbind(Unweighted=round(100*prop.table(xtabs(~plnenvt,bsa)),1),
+Weighted=round(100*prop.table(xtabs(WtFactor~plnenvt,bsa)),1)
+)
+```
+
+Weights are passed to `xtabs()` by specifying their name on the left hand side of the equation (or the tilde `~` ) 
+
+Obtaining weighted contingency tables follow the same logic:
+```{r}
+## Unweighted vs weighted contingency tables
+cbind(round(100*prop.table(xtabs(~plnenvt+Rsex,bsa),1),1),
+round(100*prop.table(xtabs(WtFactor~plnenvt+Rsex,bsa),1),1)
+)
+```
+
+## Robust inference
+
+The weighting procedures described above could be described as 'quick and dirty' in that they mostly compute point estimates -- ie a single value -- and do not provide  a reliable idea of their precision. Computing the precision of survey data estimates -- usually via their standard error -- usually requires more than just adding weights to a command. Information about the survey design, its primary sampling units, strata and clusters is requires so that robust standard errors, statistical tests and/or confidence interval are computed.
+
+The `Survey` package was designed in order to deal with this set of issues. It provides functions for integrating survey design into R as well as computing common estimates. We describe below the most important features. In order to  use survey fonctions consist one first needs to create a svydesign object, in essence a version of the data that incorporates the sample design information available, then to compute the estimate using the svydesign object.
+
+An common issue with survey datasets available in the UK is that  sampling information is often only available in secure lab version of the data, restricting its access to authorised users. Although it is sometimes possible to use  available variables to account for aspects of the sample design -- region as a strata in the case of stratified samples -- in most cases users are left with computing standard errors without sample design information, which amounts to assuming that the sample was drawn purely at random. Even if this is the case however, using  the `survey` package is recommended, as it provides a coherent framework for computing survey parameters.     
+
+
+```{r}
+library(survey) ### Loading the package in memory
+bsa.design<-svydesign(ids =~1,weights=~WtFactor,data=bsa) 
+```
+
+The code above simply declares the survey design by creating the `bsa.design` object (the name is arbitrary). The `ids=` parameter is where  primary sampling units are declared, as well as any clustering information as a formula ie `~PSU+cluster2id...`. When PSU information is unavailable `ids` is given the value 1 or 0. A `strata=` and `fpc=` are available in order to declare the sampling strata and the variable used for finite population correction. None of these are available in the bsa dataset, and estimation commands will therefore rely on the assumption of simple random sampling.
+
+We can now compute estimates similar estimates as in the previous sections. The code below provides the mean of the left vs right political orientation indicator, as well as its 95% confidence interval: 
+
+```{r}
+svymean(~leftrigh,bsa.design,na.rm = T)  ### Computes the mean and its standard error...
+confint(svymean(~leftrigh,bsa.design,na.rm = T)) ### ... and confidence interval
+
+```
+And now for the median:
+```{r}
+svyquantile(~leftrigh,bsa.design,quantiles=.5,na.rm = T)
+```
+Frequency and contingency tables are computed using `svytable()`, which follows the same syntax as `xtabs()`
+```{r}
+### A frequency table...
+round(100*
+      prop.table(
+        svytable(~RAgeCat,bsa.design)
+        ),1)
+
+### And a two-way contingency table:
+
+round(100*
+      prop.table(
+        svytable(~RAgeCat+Rsex,bsa.design)
+        ,1),1)
+```

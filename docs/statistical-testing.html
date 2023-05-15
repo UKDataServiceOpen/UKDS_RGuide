@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8 Statistical testing | UKDS-intro-to-R.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8 Statistical testing | UKDS-intro-to-R.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8 Statistical testing | UKDS-intro-to-R.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="graphs-and-plots.html"/>
+<link rel="next" href="regression-analysis.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">UKDS Introduction to R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#what-is-r"><i class="fa fa-check"></i><b>1.1</b> What is R ?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="using-r-essential-information.html"><a href="using-r-essential-information.html"><i class="fa fa-check"></i><b>2</b> Using R: essential information</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="using-r-essential-information.html"><a href="using-r-essential-information.html#download-and-installation"><i class="fa fa-check"></i><b>2.1</b> Download and installation</a></li>
+<li class="chapter" data-level="2.2" data-path="using-r-essential-information.html"><a href="using-r-essential-information.html#installing-and-setting-up-rstudio"><i class="fa fa-check"></i><b>2.2</b> Installing and setting up RStudio</a></li>
+<li class="chapter" data-level="2.3" data-path="using-r-essential-information.html"><a href="using-r-essential-information.html#interacting-with-r"><i class="fa fa-check"></i><b>2.3</b> Interacting with R</a></li>
+<li class="chapter" data-level="2.4" data-path="using-r-essential-information.html"><a href="using-r-essential-information.html#installing-and-loading-packages"><i class="fa fa-check"></i><b>2.4</b> Installing and loading packages</a></li>
+<li class="chapter" data-level="2.5" data-path="using-r-essential-information.html"><a href="using-r-essential-information.html#getting-help"><i class="fa fa-check"></i><b>2.5</b> Getting help</a></li>
+<li class="chapter" data-level="2.6" data-path="using-r-essential-information.html"><a href="using-r-essential-information.html#objects"><i class="fa fa-check"></i><b>2.6</b> Objects</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="opening-ukds-datasets-in-r.html"><a href="opening-ukds-datasets-in-r.html"><i class="fa fa-check"></i><b>3</b> Opening UKDS datasets in R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="opening-ukds-datasets-in-r.html"><a href="opening-ukds-datasets-in-r.html#essential-information"><i class="fa fa-check"></i><b>3.1</b> Essential information</a></li>
+<li class="chapter" data-level="3.2" data-path="opening-ukds-datasets-in-r.html"><a href="opening-ukds-datasets-in-r.html#the-2017-british-social-attitudes-survey"><i class="fa fa-check"></i><b>3.2</b> The 2017 British Social Attitudes Survey</a></li>
+<li class="chapter" data-level="3.3" data-path="opening-ukds-datasets-in-r.html"><a href="opening-ukds-datasets-in-r.html#understanding-the-dataset"><i class="fa fa-check"></i><b>3.3</b> Understanding the dataset</a></li>
+<li class="chapter" data-level="3.4" data-path="opening-ukds-datasets-in-r.html"><a href="opening-ukds-datasets-in-r.html#identifying-and-selecting-variables"><i class="fa fa-check"></i><b>3.4</b> Identifying and selecting variables</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html"><i class="fa fa-check"></i><b>4</b> Essentials of Data Manipulation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html#creating-and-transforming-numerical-variables"><i class="fa fa-check"></i><b>4.1</b> Creating and transforming numerical variables</a></li>
+<li class="chapter" data-level="4.2" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html#categorical-variables"><i class="fa fa-check"></i><b>4.2</b> Categorical variables</a></li>
+<li class="chapter" data-level="4.3" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html#recoding-variables"><i class="fa fa-check"></i><b>4.3</b> Recoding variables</a></li>
+<li class="chapter" data-level="4.4" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html#missing-values"><i class="fa fa-check"></i><b>4.4</b> Missing Values</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html#inspecting-missing-data"><i class="fa fa-check"></i><b>4.4.1</b> Inspecting missing data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html#recoding-missing-values-as-na-continuous-variables"><i class="fa fa-check"></i><b>4.4.2</b> Recoding missing values as NA (continuous variables)</a></li>
+<li class="chapter" data-level="4.4.3" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html#working-with-missing-values"><i class="fa fa-check"></i><b>4.4.3</b> Working with missing values</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="essentials-of-data-manipulation.html"><a href="essentials-of-data-manipulation.html#subsetting-datasets"><i class="fa fa-check"></i><b>4.5</b> Subsetting datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html"><i class="fa fa-check"></i><b>5</b> Descriptive statistics</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#continuous-variables"><i class="fa fa-check"></i><b>5.1</b> Continuous variables</a></li>
+<li class="chapter" data-level="5.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#bivariate-association-between-continuous-variables"><i class="fa fa-check"></i><b>5.2</b> Bivariate association between continuous variables</a></li>
+<li class="chapter" data-level="5.3" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#categorical-variables-1"><i class="fa fa-check"></i><b>5.3</b> Categorical Variables</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#one-way-frequency-tables"><i class="fa fa-check"></i><b>5.3.1</b> One way frequency tables</a></li>
+<li class="chapter" data-level="5.3.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#two-way-or-more-contingency-table"><i class="fa fa-check"></i><b>5.3.2</b> Two way or more contingency table</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#grouped-summary-statistics-for-continuous-variables"><i class="fa fa-check"></i><b>5.4</b> Grouped summary statistics for continuous variables</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="producing-weighted-estimates.html"><a href="producing-weighted-estimates.html"><i class="fa fa-check"></i><b>6</b> Producing weighted estimates</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="producing-weighted-estimates.html"><a href="producing-weighted-estimates.html#central-tendency-and-dispersion-continuous-variables"><i class="fa fa-check"></i><b>6.1</b> Central tendency and dispersion (continuous variables)</a></li>
+<li class="chapter" data-level="6.2" data-path="producing-weighted-estimates.html"><a href="producing-weighted-estimates.html#frequencies-and-contingency-tables"><i class="fa fa-check"></i><b>6.2</b> Frequencies and contingency tables</a></li>
+<li class="chapter" data-level="6.3" data-path="producing-weighted-estimates.html"><a href="producing-weighted-estimates.html#robust-inference"><i class="fa fa-check"></i><b>6.3</b> Robust inference</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="graphs-and-plots.html"><a href="graphs-and-plots.html"><i class="fa fa-check"></i><b>7</b> Graphs and plots</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="graphs-and-plots.html"><a href="graphs-and-plots.html#distributional-graphs-for-continuous-variables"><i class="fa fa-check"></i><b>7.1</b> Distributional graphs for continuous variables</a></li>
+<li class="chapter" data-level="7.2" data-path="graphs-and-plots.html"><a href="graphs-and-plots.html#plotting-categorical-variables"><i class="fa fa-check"></i><b>7.2</b> Plotting categorical variables</a></li>
+<li class="chapter" data-level="7.3" data-path="graphs-and-plots.html"><a href="graphs-and-plots.html#more-advanced-plots"><i class="fa fa-check"></i><b>7.3</b> More advanced plots</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="statistical-testing.html"><a href="statistical-testing.html"><i class="fa fa-check"></i><b>8</b> Statistical testing</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="statistical-testing.html"><a href="statistical-testing.html#differences-in-means"><i class="fa fa-check"></i><b>8.1</b> Differences in means</a></li>
+<li class="chapter" data-level="8.2" data-path="statistical-testing.html"><a href="statistical-testing.html#differences-in-variance"><i class="fa fa-check"></i><b>8.2</b> Differences in variance</a></li>
+<li class="chapter" data-level="8.3" data-path="statistical-testing.html"><a href="statistical-testing.html#significance-of-measures-of-association"><i class="fa fa-check"></i><b>8.3</b> Significance of measures of association</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="regression-analysis.html"><a href="regression-analysis.html"><i class="fa fa-check"></i><b>9</b> Regression analysis</a></li>
+<li class="chapter" data-level="10" data-path="further-information.html"><a href="further-information.html"><i class="fa fa-check"></i><b>10</b> Further information</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="further-information.html"><a href="further-information.html#additional-commands-of-interest"><i class="fa fa-check"></i><b>10.1</b> Additional commands of interest</a></li>
+<li class="chapter" data-level="10.2" data-path="further-information.html"><a href="further-information.html#additional-online-resources"><i class="fa fa-check"></i><b>10.2</b> Additional online resources</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>11</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://ukdataservice.ac.uk" target="blank">UK Data Service</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="statistical-testing" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">8</span> Statistical testing<a href="statistical-testing.html#statistical-testing" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This section covers how to implement common statistical tests in R with survey data. A working knowledge of these tests is assumed.</p>
+<div id="differences-in-means" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Differences in means<a href="statistical-testing.html#differences-in-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Two common ways of testing means in simple consist in testing whether it is significantly different from 0 (one sample t-test), or whether it differs between two groups (two samples t test). In the latter case, it can be further distinguished between independent samples (where means come from different groups), or paired samples (when the same measure is taken a several point in time). Given that it is the most widely used in social science, we will only cover the former here.</p>
+<p>Several R packages provide t.tests functions. We will be using <code>t.test()</code>, part the <code>stats</code> package. Suppose we would like to test whether <code>libauth</code> significantly differs between men and women. A two sided test is teh default (with H_0 there being no differences between groups), and H_1 that the group means do indeed differ. The test is specified with a formula with on the left hand side the quantity to be tested and on the right the grouping variable.</p>
+<p>One sided test can be conducted by specifying that the alternative hypothesis (H_1) is either <strong>greater</strong> or <strong>less</strong>. <code>t.test()</code> assumes that by default the variances are unequal. this can be changed with the <code>var.equal=T</code> option.</p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="statistical-testing.html#cb223-1" tabindex="-1"></a><span class="co"># Testing for significant differences in liberal vs authoritarian score</span></span>
+<span id="cb223-2"><a href="statistical-testing.html#cb223-2" tabindex="-1"></a><span class="fu">t.test</span>(libauth<span class="sc">~</span>Rsex,<span class="at">data=</span>bsa)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  libauth by Rsex
+## t = 1.1622, df = 3011.9, p-value = 0.2452
+## alternative hypothesis: true difference in means between group Male and group Female is not equal to 0
+## 95 percent confidence interval:
+##  -0.02035161  0.07959393
+## sample estimates:
+##   mean in group Male mean in group Female 
+##             3.527793             3.498172</code></pre>
+<p>No significant differences (ie the difference in <code>libauth</code> between men and women is not significantly different from zero)</p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="statistical-testing.html#cb225-1" tabindex="-1"></a><span class="co"># Testing for whether men have a lower (ie more left-wing)  score</span></span>
+<span id="cb225-2"><a href="statistical-testing.html#cb225-2" tabindex="-1"></a><span class="fu">t.test</span>(leftrigh<span class="sc">~</span>Rsex,<span class="at">data=</span>bsa, <span class="at">alternative=</span><span class="st">&quot;less&quot;</span>)      </span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  leftrigh by Rsex
+## t = -2.0687, df = 2858, p-value = 0.01933
+## alternative hypothesis: true difference in means between group Male and group Female is less than 0
+## 95 percent confidence interval:
+##         -Inf -0.01197607
+## sample estimates:
+##   mean in group Male mean in group Female 
+##             2.487564             2.546087</code></pre>
+<p>Men have a significantly lower score on the scale (at the .05 threshold) and are therefore on average leaning more to the left than women.</p>
+</div>
+<div id="differences-in-variance" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Differences in variance<a href="statistical-testing.html#differences-in-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Another common significance test with in social science are familiar is the <strong>variance test</strong> which consists of testing whether the variances of the same variable across two groups are equal. This is usually achieved by testing whether the ratio of the variance between the two groups is significantly different from zero. With the BSA data, this amounts to testing whether men and women are more homogenous with regard to their political views.</p>
+<p>The syntax for the variance test <code>var.test</code> also included in <code>stats</code> is almost identical to that of <code>t.test()</code></p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="statistical-testing.html#cb227-1" tabindex="-1"></a><span class="co"># Testing for gender differences in liberal vs authoritarian score</span></span>
+<span id="cb227-2"><a href="statistical-testing.html#cb227-2" tabindex="-1"></a><span class="fu">var.test</span>(libauth<span class="sc">~</span>Rsex,<span class="at">data=</span>bsa)</span></code></pre></div>
+<pre><code>## 
+##  F test to compare two variances
+## 
+## data:  libauth by Rsex
+## F = 1.0892, num df = 1434, denom df = 1777, p-value = 0.0879
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.9873927 1.2022204
+## sample estimates:
+## ratio of variances 
+##           1.089239</code></pre>
+<p>Significant differences in the variance between men and women, but only at the .1 threshold.</p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="statistical-testing.html#cb229-1" tabindex="-1"></a><span class="co"># Testing for whether men have a lower (ie more left-wing)  score</span></span>
+<span id="cb229-2"><a href="statistical-testing.html#cb229-2" tabindex="-1"></a><span class="fu">var.test</span>(leftrigh<span class="sc">~</span>Rsex,<span class="at">data=</span>bsa,<span class="at">alternative=</span><span class="st">&quot;greater&quot;</span>)      </span></code></pre></div>
+<pre><code>## 
+##  F test to compare two variances
+## 
+## data:  leftrigh by Rsex
+## F = 1.3218, num df = 1433, denom df = 1771, p-value = 0.00000001263
+## alternative hypothesis: true ratio of variances is greater than 1
+## 95 percent confidence interval:
+##  1.217167      Inf
+## sample estimates:
+## ratio of variances 
+##             1.3218</code></pre>
+<p>The variance of left-right political leaning is larger among men than women, in other words there ae more divergence between mend than between women.</p>
+</div>
+<div id="significance-of-measures-of-association" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Significance of measures of association<a href="statistical-testing.html#significance-of-measures-of-association" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Between continuous variables</strong></p>
+<p>Another type of common statistical test in social science is about examining whether a coefficient of correlation is significantly different from 0 (alternative hypothesis).</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="statistical-testing.html#cb231-1" tabindex="-1"></a><span class="fu">cor.test</span>(bsa<span class="sc">$</span>leftrigh, bsa<span class="sc">$</span>libauth, <span class="at">use=</span><span class="st">&#39;complete.obs&#39;</span>)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  bsa$leftrigh and bsa$libauth
+## t = 0.54472, df = 3202, p-value = 0.586
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.02501074  0.04423951
+## sample estimates:
+##         cor 
+## 0.009625928</code></pre>
+<p>As we could have suspected the coefficient of correlation between the two scales is so small that it cannot be said to be significantly different from zero.</p>
+<p><strong>Between categorical variables</strong></p>
+<p>The chi-square test of independence is a very common test of association between categorical variables. It consists in examining whether the association between two variables is likely to be due to chance or not, in other words whether the variability observed in a contingency table is significantly different from what would be expected were it due to chance.</p>
+<p>By contrast with the test of correlation, the chi-square test needs to be applied to a contingency table that already been computed.
+If we go back to an earlier example, and attempt to test whether the gender differences in political affiliations are due to chance or not, we would need to use chisq.test() on the table.</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="statistical-testing.html#cb233-1" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>PartyId2 <span class="sc">+</span>Rsex,bsa))</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test
+## 
+## data:  xtabs(~PartyId2 + Rsex, bsa)
+## X-squared = 27.191, df = 5, p-value = 0.00005236</code></pre>
+<div style="page-break-after: always;"></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="graphs-and-plots.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regression-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/PierreWal/UKDS_RGuide/main/08-Testing.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["UKDS-intro-to-R.pdf", "UKDS-intro-to-R.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
