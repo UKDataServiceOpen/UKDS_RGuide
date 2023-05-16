@@ -36,7 +36,7 @@ setwd("~/Dropbox/work/UKDS/RGuide/UKDS_RGuide")
 We can finally open the file:
 
 ```{r 3.2}
- bsa<-read.spss("data/8849spss_73589506FAA92AEFC9646C684CD2427012F90FA9F6541F3BE46E4BE1A047987C_V1/bsa2017_open_enviropol.sav", to.data.frame = TRUE,
+ bsa<-read.spss(paste0(datadir,"8849spss_73589506FAA92AEFC9646C684CD2427012F90FA9F6541F3BE46E4BE1A047987C_V1/bsa2017_open_enviropol.sav"), to.data.frame = TRUE,
           use.value.labels=TRUE,max.value.labels = 9)  
 
 dim(bsa)

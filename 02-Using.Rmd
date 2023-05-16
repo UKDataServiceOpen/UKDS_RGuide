@@ -260,7 +260,9 @@ Data frames are  objects that come closest to datasets or excel sheets in tradit
 
 
 ```{r 2.12,echo=F,message=F}
-mydata<-read.spss("data/bsa_spss/bsa2019_poverty_open.sav",to.data.frame = T,max.value.labels=5)%>%select(RSex,skipmeal,Married,Poverty1,HEdQual3,NatFrEst)%>%slice(1:50)
+library(dplyr)
+datadir<-"/home/piet/Dropbox/work/UKDS/RGuide/data/"
+mydata<-read.spss(paste0(datadir,"bsa_spss/bsa2019_poverty_open.sav"),to.data.frame = T,max.value.labels=5)%>%select(RSex,skipmeal,Married,Poverty1,HEdQual3,NatFrEst)%>%slice(1:50)
 mydata$Married<-as.character(mydata$Married)
 ```
 

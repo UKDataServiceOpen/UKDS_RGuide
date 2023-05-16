@@ -4,24 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>8 Statistical testing | UKDS-intro-to-R.knit</title>
-  <meta name="description" content="" />
+  <title>8 Statistical testing | Analysing survey data using R</title>
+  <meta name="description" content="8 Statistical testing | Analysing survey data using R" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="8 Statistical testing | UKDS-intro-to-R.knit" />
+  <meta property="og:title" content="8 Statistical testing | Analysing survey data using R" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8 Statistical testing | UKDS-intro-to-R.knit" />
+  <meta name="twitter:title" content="8 Statistical testing | Analysing survey data using R" />
   
   
   
 
+<meta name="author" content="Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service" />
 
 
+<meta name="date" content="2023-03-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -30,15 +32,15 @@
   
 <link rel="prev" href="graphs-and-plots.html"/>
 <link rel="next" href="regression-analysis.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,9 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -215,7 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing survey data using R</a>
           </h1>
         </div>
 
@@ -237,13 +239,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  Welch Two Sample t-test
 ## 
 ## data:  libauth by Rsex
-## t = 1.1622, df = 3011.9, p-value = 0.2452
+## t = 1.2, df = 3012, p-value = 0.2
 ## alternative hypothesis: true difference in means between group Male and group Female is not equal to 0
 ## 95 percent confidence interval:
-##  -0.02035161  0.07959393
+##  -0.02035  0.07959
 ## sample estimates:
 ##   mean in group Male mean in group Female 
-##             3.527793             3.498172</code></pre>
+##                3.528                3.498</code></pre>
 <p>No significant differences (ie the difference in <code>libauth</code> between men and women is not significantly different from zero)</p>
 <div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="statistical-testing.html#cb225-1" tabindex="-1"></a><span class="co"># Testing for whether men have a lower (ie more left-wing)  score</span></span>
 <span id="cb225-2"><a href="statistical-testing.html#cb225-2" tabindex="-1"></a><span class="fu">t.test</span>(leftrigh<span class="sc">~</span>Rsex,<span class="at">data=</span>bsa, <span class="at">alternative=</span><span class="st">&quot;less&quot;</span>)      </span></code></pre></div>
@@ -251,13 +253,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  Welch Two Sample t-test
 ## 
 ## data:  leftrigh by Rsex
-## t = -2.0687, df = 2858, p-value = 0.01933
+## t = -2.1, df = 2858, p-value = 0.02
 ## alternative hypothesis: true difference in means between group Male and group Female is less than 0
 ## 95 percent confidence interval:
-##         -Inf -0.01197607
+##      -Inf -0.01198
 ## sample estimates:
 ##   mean in group Male mean in group Female 
-##             2.487564             2.546087</code></pre>
+##                2.488                2.546</code></pre>
 <p>Men have a significantly lower score on the scale (at the .05 threshold) and are therefore on average leaning more to the left than women.</p>
 </div>
 <div id="differences-in-variance" class="section level2 hasAnchor" number="8.2">
@@ -270,13 +272,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  F test to compare two variances
 ## 
 ## data:  libauth by Rsex
-## F = 1.0892, num df = 1434, denom df = 1777, p-value = 0.0879
+## F = 1.1, num df = 1434, denom df = 1777, p-value
+## = 0.09
 ## alternative hypothesis: true ratio of variances is not equal to 1
 ## 95 percent confidence interval:
-##  0.9873927 1.2022204
+##  0.9874 1.2022
 ## sample estimates:
 ## ratio of variances 
-##           1.089239</code></pre>
+##              1.089</code></pre>
 <p>Significant differences in the variance between men and women, but only at the .1 threshold.</p>
 <div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="statistical-testing.html#cb229-1" tabindex="-1"></a><span class="co"># Testing for whether men have a lower (ie more left-wing)  score</span></span>
 <span id="cb229-2"><a href="statistical-testing.html#cb229-2" tabindex="-1"></a><span class="fu">var.test</span>(leftrigh<span class="sc">~</span>Rsex,<span class="at">data=</span>bsa,<span class="at">alternative=</span><span class="st">&quot;greater&quot;</span>)      </span></code></pre></div>
@@ -284,13 +287,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  F test to compare two variances
 ## 
 ## data:  leftrigh by Rsex
-## F = 1.3218, num df = 1433, denom df = 1771, p-value = 0.00000001263
+## F = 1.3, num df = 1433, denom df = 1771, p-value
+## = 1e-08
 ## alternative hypothesis: true ratio of variances is greater than 1
 ## 95 percent confidence interval:
-##  1.217167      Inf
+##  1.217   Inf
 ## sample estimates:
 ## ratio of variances 
-##             1.3218</code></pre>
+##              1.322</code></pre>
 <p>The variance of left-right political leaning is larger among men than women, in other words there ae more divergence between mend than between women.</p>
 </div>
 <div id="significance-of-measures-of-association" class="section level2 hasAnchor" number="8.3">
@@ -302,13 +306,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  Pearson&#39;s product-moment correlation
 ## 
 ## data:  bsa$leftrigh and bsa$libauth
-## t = 0.54472, df = 3202, p-value = 0.586
+## t = 0.54, df = 3202, p-value = 0.6
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
-##  -0.02501074  0.04423951
+##  -0.02501  0.04424
 ## sample estimates:
-##         cor 
-## 0.009625928</code></pre>
+##      cor 
+## 0.009626</code></pre>
 <p>As we could have suspected the coefficient of correlation between the two scales is so small that it cannot be said to be significantly different from zero.</p>
 <p><strong>Between categorical variables</strong></p>
 <p>The chi-square test of independence is a very common test of association between categorical variables. It consists in examining whether the association between two variables is likely to be due to chance or not, in other words whether the variability observed in a contingency table is significantly different from what would be expected were it due to chance.</p>
@@ -319,7 +323,7 @@ If we go back to an earlier example, and attempt to test whether the gender diff
 ##  Pearson&#39;s Chi-squared test
 ## 
 ## data:  xtabs(~PartyId2 + Rsex, bsa)
-## X-squared = 27.191, df = 5, p-value = 0.00005236</code></pre>
+## X-squared = 27, df = 5, p-value = 5e-05</code></pre>
 <div style="page-break-after: always;"></div>
 
 </div>
@@ -333,14 +337,14 @@ If we go back to an earlier example, and attempt to test whether the gender diff
 <a href="regression-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

@@ -1,3 +1,24 @@
+---
+title: Analysing survey data using R
+author: Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service
+date: "2023-03-24"
+knit: "bookdown::render_book"
+fontsize: 12pt
+site: bookdown::bookdown_site
+---
+
+```{r setup, include=FALSE}
+options(
+  htmltools.dir.version = FALSE, formatR.indent = 2,
+  width = 55, digits = 4, warnPartialMatchAttr = FALSE, warnPartialMatchDollar = FALSE
+)
+library(dplyr)
+library(Hmisc)
+library(ggplot2)
+```
+
+<!--chapter:end:index.Rmd-->
+
 # Introduction
 This guide provides an introduction to analysing large scale social survey
 dataset using R with examples from the British Social Attitudes Survey 2020. It
@@ -355,7 +376,9 @@ Data frames are  objects that come closest to datasets or excel sheets in tradit
 
 
 ```{r 2.12,echo=F,message=F}
-mydata<-read.spss("data/bsa_spss/bsa2019_poverty_open.sav",to.data.frame = T,max.value.labels=5)%>%select(RSex,skipmeal,Married,Poverty1,HEdQual3,NatFrEst)%>%slice(1:50)
+library(dplyr)
+datadir<-"/home/piet/Dropbox/work/UKDS/RGuide/data/"
+mydata<-read.spss(paste0(datadir,"bsa_spss/bsa2019_poverty_open.sav"),to.data.frame = T,max.value.labels=5)%>%select(RSex,skipmeal,Married,Poverty1,HEdQual3,NatFrEst)%>%slice(1:50)
 mydata$Married<-as.character(mydata$Married)
 ```
 
@@ -540,7 +563,7 @@ setwd("~/Dropbox/work/UKDS/RGuide/UKDS_RGuide")
 We can finally open the file:
 
 ```{r 3.2}
- bsa<-read.spss("data/8849spss_73589506FAA92AEFC9646C684CD2427012F90FA9F6541F3BE46E4BE1A047987C_V1/bsa2017_open_enviropol.sav", to.data.frame = TRUE,
+ bsa<-read.spss(paste0(datadir,"8849spss_73589506FAA92AEFC9646C684CD2427012F90FA9F6541F3BE46E4BE1A047987C_V1/bsa2017_open_enviropol.sav"), to.data.frame = TRUE,
           use.value.labels=TRUE,max.value.labels = 9)  
 
 dim(bsa)
@@ -1416,15 +1439,17 @@ The following non exhaustive list provides a few examples of commands and packag
 - Further regression analysis: the `glm()` command  can be used for fitting a
   large number of regression including Poisson and multinomial models. The
   packages ‘lme4’ and  ‘nlme’  are used to fit respectively linear and non
-  linear and non-linear multilevel models, also known as
-  mixed models.
+  linear multilevel models, also known as mixed models.
+
 - Complex survey data and analysis commands and functions can be found in the ‘survey’ package. It includes commands for taking into account stratified and clustered samples, weights compute design effects and confidence intervals, etc.. 
-- Users interested in latent variable modelling will be interested in the
-  factanal() command. Other resources are provided in the ‘poLCA’ (Latent Class
-  Analysis), ‘ltm’ (Latent Trait modelling), ‘sem’ (Structural equation
-  modelling)   `Lavaan` provides functions for structural equation modelling
+
+- For users interested in latent variable modelling the
+  `factanal()` command from the `stats` package conducts factor analysis. Other resources are available in the `poLCA` (Latent Class
+  Analysis), `ltm` (Latent Trait modelling), `sem` (Structural equation
+  modelling) packages. The  `Lavaan` package provides functions for structural equation modelling
   including with categorical outcomes.
-- Users interested in longitudinal and time series analysis will be interested in the ‘stats’ and the, ‘tseries’ packages. The packages ‘survival’ and ‘eha’ deal with event history and survival analysis, whereas ‘grofit’ and ‘plm’ are designed for panel data and growth analyses.
+
+- Users interested in longitudinal and time series analysis will be interested in the  `stats`and the ‘tseries’ packages. The packages `survival` and `eha` deal with event history and survival analysis, whereas ‘grofit’ and ‘plm’ are designed for panel data and growth analyses.
 
 
 ## Additional online resources

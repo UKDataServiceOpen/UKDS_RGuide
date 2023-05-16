@@ -4,24 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 Opening UKDS datasets in R | UKDS-intro-to-R.knit</title>
-  <meta name="description" content="" />
+  <title>3 Opening UKDS datasets in R | Analysing survey data using R</title>
+  <meta name="description" content="3 Opening UKDS datasets in R | Analysing survey data using R" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 Opening UKDS datasets in R | UKDS-intro-to-R.knit" />
+  <meta property="og:title" content="3 Opening UKDS datasets in R | Analysing survey data using R" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Opening UKDS datasets in R | UKDS-intro-to-R.knit" />
+  <meta name="twitter:title" content="3 Opening UKDS datasets in R | Analysing survey data using R" />
   
   
   
 
+<meta name="author" content="Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service" />
 
 
+<meta name="date" content="2023-03-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -30,15 +32,15 @@
   
 <link rel="prev" href="using-r-essential-information.html"/>
 <link rel="next" href="essentials-of-data-manipulation.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,9 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -215,7 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing survey data using R</a>
           </h1>
         </div>
 
@@ -253,7 +255,7 @@ using value labels as levels, which may be an issue for categorical variables wi
 <h2><span class="header-section-number">3.2</span> The 2017 British Social Attitudes Survey<a href="opening-ukds-datasets-in-r.html#the-2017-british-social-attitudes-survey" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>For the rest of this guide, we will use the <code>British Social Attitudes Survey, 2017, Environment and Politics: Open Access Teaching Dataset</code>, which can be downloaded from the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8849">UK Data Service website</a>. We will use the SPSS version of the dataset, which will be assumed to be saved in a <code>UKDS</code> folder created inside <code>Documents</code> folder. <code>C:\\Users\\Your_User_Name_Here\\Documents</code> We will set this as default working directory. This way, we won’t have to specify the full path of files that we will be opening or saving.</p>
 <p>We can finally open the file:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="opening-ukds-datasets-in-r.html#cb63-1" tabindex="-1"></a> bsa<span class="ot">&lt;-</span><span class="fu">read.spss</span>(<span class="st">&quot;data/8849spss_73589506FAA92AEFC9646C684CD2427012F90FA9F6541F3BE46E4BE1A047987C_V1/bsa2017_open_enviropol.sav&quot;</span>, <span class="at">to.data.frame =</span> <span class="cn">TRUE</span>,</span>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="opening-ukds-datasets-in-r.html#cb63-1" tabindex="-1"></a> bsa<span class="ot">&lt;-</span><span class="fu">read.spss</span>(<span class="fu">paste0</span>(datadir,<span class="st">&quot;8849spss_73589506FAA92AEFC9646C684CD2427012F90FA9F6541F3BE46E4BE1A047987C_V1/bsa2017_open_enviropol.sav&quot;</span>), <span class="at">to.data.frame =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb63-2"><a href="opening-ukds-datasets-in-r.html#cb63-2" tabindex="-1"></a>          <span class="at">use.value.labels=</span><span class="cn">TRUE</span>,<span class="at">max.value.labels =</span> <span class="dv">9</span>)  </span></code></pre></div>
 <pre><code>## re-encoding from CP1252</code></pre>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="opening-ukds-datasets-in-r.html#cb65-1" tabindex="-1"></a><span class="fu">dim</span>(bsa)</span></code></pre></div>
@@ -267,45 +269,99 @@ using value labels as levels, which may be an issue for categorical variables wi
 <p>We can see that there are 3,988 observations and 25 variables in the BSA dataset.</p>
 <p>Typing:</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="opening-ukds-datasets-in-r.html#cb69-1" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code>##  [1] &quot;a&quot;               &quot;b&quot;               &quot;bsa&quot;             &quot;bsa.design&quot;      &quot;bsa.young&quot;       &quot;bsa.young.males&quot; &quot;dev.d&quot;          
-##  [8] &quot;df.d&quot;            &quot;fit1&quot;            &quot;fit2&quot;            &quot;m&quot;               &quot;mydata&quot;          &quot;p&quot;               &quot;pa&quot;             
-## [15] &quot;party.tab&quot;       &quot;rm&quot;</code></pre>
+<pre><code>##  [1] &quot;a&quot;               &quot;b&quot;              
+##  [3] &quot;bsa&quot;             &quot;bsa.design&quot;     
+##  [5] &quot;bsa.young&quot;       &quot;bsa.young.males&quot;
+##  [7] &quot;datadir&quot;         &quot;m&quot;              
+##  [9] &quot;mydata&quot;          &quot;pa&quot;             
+## [11] &quot;party.tab&quot;       &quot;rm&quot;</code></pre>
 <p>will show us that the object ‘bsa’ has appeared, but what if we want to get the list of all variables in the dataset? We need to type:</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="opening-ukds-datasets-in-r.html#cb71-1" tabindex="-1"></a><span class="fu">ls</span>(bsa)</span></code></pre></div>
-<pre><code>##  [1] &quot;actchar&quot;          &quot;actpol&quot;           &quot;carallow&quot;         &quot;carenvdc&quot;         &quot;carnod2&quot;          &quot;carreduc&quot;         &quot;cartaxhi&quot;        
-##  [8] &quot;CCBELIEV&quot;         &quot;ChildHh&quot;          &quot;eq_inc_quintiles&quot; &quot;govnosa2&quot;         &quot;HEdQual3&quot;         &quot;leftrigh&quot;         &quot;libauth&quot;         
-## [15] &quot;Married&quot;          &quot;PartyId2&quot;         &quot;plnenvt&quot;          &quot;plnuppri&quot;         &quot;Politics&quot;         &quot;RAgeCat&quot;          &quot;RClassGp&quot;        
-## [22] &quot;Rsex&quot;             &quot;Sserial&quot;          &quot;Voted&quot;            &quot;WtFactor&quot;</code></pre>
+<pre><code>##  [1] &quot;actchar&quot;          &quot;actpol&quot;          
+##  [3] &quot;carallow&quot;         &quot;carenvdc&quot;        
+##  [5] &quot;carnod2&quot;          &quot;carreduc&quot;        
+##  [7] &quot;cartaxhi&quot;         &quot;CCBELIEV&quot;        
+##  [9] &quot;ChildHh&quot;          &quot;eq_inc_quintiles&quot;
+## [11] &quot;govnosa2&quot;         &quot;HEdQual3&quot;        
+## [13] &quot;leftrigh&quot;         &quot;libauth&quot;         
+## [15] &quot;Married&quot;          &quot;PartyId2&quot;        
+## [17] &quot;plnenvt&quot;          &quot;plnuppri&quot;        
+## [19] &quot;Politics&quot;         &quot;RAgeCat&quot;         
+## [21] &quot;RClassGp&quot;         &quot;Rsex&quot;            
+## [23] &quot;Sserial&quot;          &quot;Voted&quot;           
+## [25] &quot;WtFactor&quot;</code></pre>
 <p>If we want to get a better sense of the data, we use the <code>head()</code> function which will return the first six rows.</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="opening-ukds-datasets-in-r.html#cb73-1" tabindex="-1"></a><span class="fu">head</span>(bsa)</span></code></pre></div>
-<pre><code>##   Sserial   Rsex RAgeCat                   Married ChildHh                         HEdQual3                          eq_inc_quintiles
-## 1  290001   Male   35-44 Married/living as married     Yes             O level or equiv/CSE 3rd quintile - More than £292, up to £404
-## 2  290002 Female     65+        Separated/divorced      No Higher educ below degree/A level                                      &lt;NA&gt;
-## 3  290003 Female   45-54 Married/living as married     Yes                           Degree 3rd quintile - More than £292, up to £404
-## 4  290004 Female   45-54 Married/living as married     Yes                           Degree 3rd quintile - More than £292, up to £404
-## 5  290005   Male     65+             Never married      No Higher educ below degree/A level 4th quintile - More than £404, up to £577
-## 6  290006 Female   25-34             Never married     Yes Higher educ below degree/A level              Lowest quintile - Up to £175
-##                                    RClassGp                                                                                         CCBELIEV
-## 1 Lower supervisory &amp; technical occupations               I believe that climate change is taking place but not as a result of human actions
-## 2        Semi-routine &amp; routine occupations I believe that climate change is taking place and is, at least partly, a result of human actions
-## 3          Managerial &amp; professional occups                                                                                             &lt;NA&gt;
-## 4          Managerial &amp; professional occups                                                                                             &lt;NA&gt;
-## 5          Managerial &amp; professional occups                                                                                             &lt;NA&gt;
-## 6          Managerial &amp; professional occups                                                                                             &lt;NA&gt;
-##   carallow carreduc carnod2 cartaxhi carenvdc plnenvt plnuppri          Politics Voted               actchar                actpol
-## 1     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;             some,   Yes                 never                 never
-## 2     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt; ... a great deal,   Yes                  &lt;NA&gt;                  &lt;NA&gt;
-## 3     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;             some,   Yes                  &lt;NA&gt;                  &lt;NA&gt;
-## 4     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt; ... a great deal,   Yes once in the past year once in the past year
-## 5     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;    not very much,   Yes                  &lt;NA&gt;                  &lt;NA&gt;
-## 6     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;    not very much,   Yes                  &lt;NA&gt;                  &lt;NA&gt;
-##                     govnosa2         PartyId2 leftrigh  libauth  WtFactor
-## 1                      agree           Labour      1.0 4.500000 0.9380587
-## 2                   disagree           Labour      1.8 4.333333 0.6844214
-## 3                       &lt;NA&gt;           Labour       NA       NA 0.9060821
-## 4                      agree           Labour      1.5 2.500000 1.3085513
-## 5                       &lt;NA&gt; Liberal Democrat      2.0 3.166667 0.4392823
-## 6 neither agree nor disagree             &lt;NA&gt;      3.0 3.000000 0.5695720</code></pre>
+<pre><code>##   Sserial   Rsex RAgeCat                   Married
+## 1  290001   Male   35-44 Married/living as married
+## 2  290002 Female     65+        Separated/divorced
+## 3  290003 Female   45-54 Married/living as married
+## 4  290004 Female   45-54 Married/living as married
+## 5  290005   Male     65+             Never married
+## 6  290006 Female   25-34             Never married
+##   ChildHh                         HEdQual3
+## 1     Yes             O level or equiv/CSE
+## 2      No Higher educ below degree/A level
+## 3     Yes                           Degree
+## 4     Yes                           Degree
+## 5      No Higher educ below degree/A level
+## 6     Yes Higher educ below degree/A level
+##                            eq_inc_quintiles
+## 1 3rd quintile - More than £292, up to £404
+## 2                                      &lt;NA&gt;
+## 3 3rd quintile - More than £292, up to £404
+## 4 3rd quintile - More than £292, up to £404
+## 5 4th quintile - More than £404, up to £577
+## 6              Lowest quintile - Up to £175
+##                                    RClassGp
+## 1 Lower supervisory &amp; technical occupations
+## 2        Semi-routine &amp; routine occupations
+## 3          Managerial &amp; professional occups
+## 4          Managerial &amp; professional occups
+## 5          Managerial &amp; professional occups
+## 6          Managerial &amp; professional occups
+##                                                                                           CCBELIEV
+## 1               I believe that climate change is taking place but not as a result of human actions
+## 2 I believe that climate change is taking place and is, at least partly, a result of human actions
+## 3                                                                                             &lt;NA&gt;
+## 4                                                                                             &lt;NA&gt;
+## 5                                                                                             &lt;NA&gt;
+## 6                                                                                             &lt;NA&gt;
+##   carallow carreduc carnod2 cartaxhi carenvdc plnenvt
+## 1     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;
+## 2     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;
+## 3     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;
+## 4     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;
+## 5     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;
+## 6     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;
+##   plnuppri          Politics Voted
+## 1     &lt;NA&gt;             some,   Yes
+## 2     &lt;NA&gt; ... a great deal,   Yes
+## 3     &lt;NA&gt;             some,   Yes
+## 4     &lt;NA&gt; ... a great deal,   Yes
+## 5     &lt;NA&gt;    not very much,   Yes
+## 6     &lt;NA&gt;    not very much,   Yes
+##                 actchar                actpol
+## 1                 never                 never
+## 2                  &lt;NA&gt;                  &lt;NA&gt;
+## 3                  &lt;NA&gt;                  &lt;NA&gt;
+## 4 once in the past year once in the past year
+## 5                  &lt;NA&gt;                  &lt;NA&gt;
+## 6                  &lt;NA&gt;                  &lt;NA&gt;
+##                     govnosa2         PartyId2 leftrigh
+## 1                      agree           Labour      1.0
+## 2                   disagree           Labour      1.8
+## 3                       &lt;NA&gt;           Labour       NA
+## 4                      agree           Labour      1.5
+## 5                       &lt;NA&gt; Liberal Democrat      2.0
+## 6 neither agree nor disagree             &lt;NA&gt;      3.0
+##   libauth WtFactor
+## 1   4.500   0.9381
+## 2   4.333   0.6844
+## 3      NA   0.9061
+## 4   2.500   1.3086
+## 5   3.167   0.4393
+## 6   3.000   0.5696</code></pre>
 <p>Single variables for example, <code>Rsex</code> (gender of respondents) may be also summarised with <code>head()</code>, which returns as previously the first six observations of the gender variable, whereas typing</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="opening-ukds-datasets-in-r.html#cb75-1" tabindex="-1"></a><span class="fu">head</span>(bsa<span class="sc">$</span>Rsex)</span></code></pre></div>
 <pre><code>## [1] Male   Female Female Female Male   Female
@@ -323,8 +379,10 @@ using value labels as levels, which may be an issue for categorical variables wi
 ##   1806   2182</code></pre>
 <p>When encountering a continuous variable, <code>summary()</code> will compute basic descriptive statistics (mean, median, quartiles, maximum and minimum). For example, in the case of the libertarian-authoritarian scale <code>libauth</code>:</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="opening-ukds-datasets-in-r.html#cb82-1" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>libauth)</span></code></pre></div>
-<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
-##   1.167   3.000   3.500   3.511   4.000   5.000     775</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     1.2     3.0     3.5     3.5     4.0     5.0 
+##    NA&#39;s 
+##     775</code></pre>
 </div>
 <div id="identifying-and-selecting-variables" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Identifying and selecting variables<a href="opening-ukds-datasets-in-r.html#identifying-and-selecting-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -348,14 +406,14 @@ The <code>class()</code> displays the type of an object:.</p>
 <a href="essentials-of-data-manipulation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

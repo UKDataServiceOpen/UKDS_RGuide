@@ -4,24 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Using R: essential information | UKDS-intro-to-R.knit</title>
-  <meta name="description" content="" />
+  <title>2 Using R: essential information | Analysing survey data using R</title>
+  <meta name="description" content="2 Using R: essential information | Analysing survey data using R" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Using R: essential information | UKDS-intro-to-R.knit" />
+  <meta property="og:title" content="2 Using R: essential information | Analysing survey data using R" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Using R: essential information | UKDS-intro-to-R.knit" />
+  <meta name="twitter:title" content="2 Using R: essential information | Analysing survey data using R" />
   
   
   
 
+<meta name="author" content="Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service" />
 
 
+<meta name="date" content="2023-03-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -30,15 +32,15 @@
   
 <link rel="prev" href="introduction.html"/>
 <link rel="next" href="opening-ukds-datasets-in-r.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,9 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -215,7 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing survey data using R</a>
           </h1>
         </div>
 
@@ -306,7 +308,8 @@ and/or by typing sequences of commands in a script file.</p>
 <pre><code>&gt; setwd(&quot;/Users/&lt;INSERT YOUR USERNAME HERE&gt;/Documents/R_UKDS&quot;) </code></pre>
 <p>For Linux:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="using-r-essential-information.html#cb6-1" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">&quot;~/Documents/R_UKDS&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning in dir.create(&quot;~/Documents/R_UKDS&quot;): &#39;/home/piet/Documents/R_UKDS&#39; already exists</code></pre>
+<pre><code>## Warning in dir.create(&quot;~/Documents/R_UKDS&quot;):
+## &#39;/home/piet/Documents/R_UKDS&#39; already exists</code></pre>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="using-r-essential-information.html#cb8-1" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;~/Documents/R_UKDS&quot;</span>)</span></code></pre></div>
 <p>Typing <code>getwd()</code> confirms that the change has been recorded. </p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="using-r-essential-information.html#cb9-1" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
@@ -392,17 +395,24 @@ Typing:</p>
 <span id="cb24-2"><a href="using-r-essential-information.html#cb24-2" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="using-r-essential-information.html#cb26-1" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code>##  [1] &quot;a&quot;               &quot;b&quot;               &quot;bsa&quot;             &quot;bsa.design&quot;      &quot;bsa.young&quot;       &quot;bsa.young.males&quot; &quot;dev.d&quot;          
-##  [8] &quot;df.d&quot;            &quot;fit1&quot;            &quot;fit2&quot;            &quot;m&quot;               &quot;mydata&quot;          &quot;p&quot;               &quot;pa&quot;             
-## [15] &quot;party.tab&quot;       &quot;rm&quot;              &quot;x&quot;</code></pre>
+<pre><code>##  [1] &quot;a&quot;               &quot;b&quot;              
+##  [3] &quot;bsa&quot;             &quot;bsa.design&quot;     
+##  [5] &quot;bsa.young&quot;       &quot;bsa.young.males&quot;
+##  [7] &quot;datadir&quot;         &quot;m&quot;              
+##  [9] &quot;mydata&quot;          &quot;pa&quot;             
+## [11] &quot;party.tab&quot;       &quot;rm&quot;             
+## [13] &quot;x&quot;</code></pre>
 <div id="deleting-objects" class="section level4 unnumbered hasAnchor">
 <h4>Deleting objects<a href="using-r-essential-information.html#deleting-objects" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The rm() function can be used to remove objects from the environment (session). These objects can be variables, lists, datasets, etc. For instance, to remove the object ‘x’, or the fictitious dataset called ‘mydata’: </p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="using-r-essential-information.html#cb28-1" tabindex="-1"></a><span class="fu">rm</span>(x)   </span>
 <span id="cb28-2"><a href="using-r-essential-information.html#cb28-2" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code>##  [1] &quot;a&quot;               &quot;b&quot;               &quot;bsa&quot;             &quot;bsa.design&quot;      &quot;bsa.young&quot;       &quot;bsa.young.males&quot; &quot;dev.d&quot;          
-##  [8] &quot;df.d&quot;            &quot;fit1&quot;            &quot;fit2&quot;            &quot;m&quot;               &quot;mydata&quot;          &quot;p&quot;               &quot;pa&quot;             
-## [15] &quot;party.tab&quot;       &quot;rm&quot;</code></pre>
+<pre><code>##  [1] &quot;a&quot;               &quot;b&quot;              
+##  [3] &quot;bsa&quot;             &quot;bsa.design&quot;     
+##  [5] &quot;bsa.young&quot;       &quot;bsa.young.males&quot;
+##  [7] &quot;datadir&quot;         &quot;m&quot;              
+##  [9] &quot;mydata&quot;          &quot;pa&quot;             
+## [11] &quot;party.tab&quot;       &quot;rm&quot;</code></pre>
 <pre><code>&gt; rm(mydata)</code></pre>
 <!-- The rm() function only works with R objects; but if you want to delete a specific variable of a dataset, you need a different function. For example, to delete the variable ‘age’ of the dataset ‘mydata’, an option is to set the variable to NULL:  -->
 <!-- > mydata$age<-NULL  -->
@@ -419,40 +429,64 @@ the <code>dim()</code> command returns the number of rows and columns of a data 
 <pre><code>## [1] 50  6</code></pre>
 <p>R tells us that our data is made of 50 rows and 6 columns, in other words of 50 observations and 6 variables. What if I want a quick overview of the dataset?</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="using-r-essential-information.html#cb33-1" tabindex="-1"></a><span class="fu">head</span>(mydata)</span></code></pre></div>
-<pre><code>##     RSex skipmeal                   Married       Poverty1                         HEdQual3 NatFrEst
-## 1 Female       NA Married/living as married        Was not Higher educ below degree/A level        5
-## 2 Female        1        Separated/divorced        Was not Higher educ below degree/A level       30
-## 3 Female       NA Married/living as married        Was not             O level or equiv/CSE       50
-## 4   Male       NA             Never married        Was not Higher educ below degree/A level       50
-## 5   Male        1             Never married        Was not                 No qualification       50
-## 6   Male       NA Married/living as married Was in poverty                             &lt;NA&gt;       10</code></pre>
+<pre><code>##     RSex skipmeal                   Married
+## 1 Female       NA Married/living as married
+## 2 Female        1        Separated/divorced
+## 3 Female       NA Married/living as married
+## 4   Male       NA             Never married
+## 5   Male        1             Never married
+## 6   Male       NA Married/living as married
+##         Poverty1                         HEdQual3
+## 1        Was not Higher educ below degree/A level
+## 2        Was not Higher educ below degree/A level
+## 3        Was not             O level or equiv/CSE
+## 4        Was not Higher educ below degree/A level
+## 5        Was not                 No qualification
+## 6 Was in poverty                             &lt;NA&gt;
+##   NatFrEst
+## 1        5
+## 2       30
+## 3       50
+## 4       50
+## 5       50
+## 6       10</code></pre>
 <p>The <code>head()</code> command displays the first six lines of the dataset. Depending on the number of variables the output of <code>head()</code> can become quickly overwhelming, as the size of the lines on most screens is limited!</p>
 <p><strong>Obtaining the names of variables (or columns) in the dataset:</strong>
 This can be done using either <code>ls()</code> which we already have used, or the <code>names()</code> commands. <code>ls()</code> returns the variables names, sorted alphabetically, whereas <code>names()</code> returns them in their actual order in the data frame.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="using-r-essential-information.html#cb35-1" tabindex="-1"></a><span class="fu">ls</span>(mydata)</span></code></pre></div>
-<pre><code>## [1] &quot;HEdQual3&quot; &quot;Married&quot;  &quot;NatFrEst&quot; &quot;Poverty1&quot; &quot;RSex&quot;     &quot;skipmeal&quot;</code></pre>
+<pre><code>## [1] &quot;HEdQual3&quot; &quot;Married&quot;  &quot;NatFrEst&quot; &quot;Poverty1&quot;
+## [5] &quot;RSex&quot;     &quot;skipmeal&quot;</code></pre>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="using-r-essential-information.html#cb37-1" tabindex="-1"></a><span class="fu">names</span>(mydata)</span></code></pre></div>
-<pre><code>## [1] &quot;RSex&quot;     &quot;skipmeal&quot; &quot;Married&quot;  &quot;Poverty1&quot; &quot;HEdQual3&quot; &quot;NatFrEst&quot;</code></pre>
+<pre><code>## [1] &quot;RSex&quot;     &quot;skipmeal&quot; &quot;Married&quot;  &quot;Poverty1&quot;
+## [5] &quot;HEdQual3&quot; &quot;NatFrEst&quot;</code></pre>
 <p>We can see that in the data frame, the “RSex” column comes in fact before “Poverty1”.</p>
 <p><strong>Accessing variables:</strong></p>
 <p>Each column of a data frame, or variable, can be accessed by its name preceded by the $ sign:</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="using-r-essential-information.html#cb39-1" tabindex="-1"></a>mydata<span class="sc">$</span>NatFrEst</span></code></pre></div>
-<pre><code>##  [1]  5 30 50 50 50 10  1 NA  5 50 60 25 30  3 25 10 80  5 50 50 40 45  2 82 60 40 10 10 40 15 30 30  2 10 75 99 70 50 10 30  1 10 85 45 70 25 40
-## [48] 30 10 25
+<pre><code>##  [1]  5 30 50 50 50 10  1 NA  5 50 60 25 30  3 25 10 80
+## [18]  5 50 50 40 45  2 82 60 40 10 10 40 15 30 30  2 10
+## [35] 75 99 70 50 10 30  1 10 85 45 70 25 40 30 10 25
 ## attr(,&quot;value.labels&quot;)
 ## named numeric(0)</code></pre>
 <p>Alternatively, columns/variables and rows can be identified numerically by their position in the data frame using square brackets:</p>
 <pre><code>dataframe[row number,column number]</code></pre>
 <p>Given that <code>RSex</code> is the first column of our dataset</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="using-r-essential-information.html#cb42-1" tabindex="-1"></a>mydata[,<span class="dv">1</span>]</span></code></pre></div>
-<pre><code>##  [1] Female Female Female Male   Male   Male   Male   Female Male   Male   Male   Female Female Male   Female Female Female Female Female Female
-## [21] Male   Female Female Male   Male   Female Female Female Female Male   Female Female Female Female Male   Male   Female Female Male   Female
-## [41] Male   Male   Female Male   Female Male   Female Female Female Male  
+<pre><code>##  [1] Female Female Female Male   Male   Male   Male  
+##  [8] Female Male   Male   Male   Female Female Male  
+## [15] Female Female Female Female Female Female Male  
+## [22] Female Female Male   Male   Female Female Female
+## [29] Female Male   Female Female Female Female Male  
+## [36] Male   Female Female Male   Female Male   Male  
+## [43] Female Male   Female Male   Female Female Female
+## [50] Male  
 ## Levels: Male Female</code></pre>
 <p>Returns the same output as previously. Not specifying a row or column name within the square brackets tells R to display them all.</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="using-r-essential-information.html#cb44-1" tabindex="-1"></a>mydata[<span class="dv">6</span>,]</span></code></pre></div>
-<pre><code>##   RSex skipmeal                   Married       Poverty1 HEdQual3 NatFrEst
-## 6 Male       NA Married/living as married Was in poverty     &lt;NA&gt;       10</code></pre>
+<pre><code>##   RSex skipmeal                   Married
+## 6 Male       NA Married/living as married
+##         Poverty1 HEdQual3 NatFrEst
+## 6 Was in poverty     &lt;NA&gt;       10</code></pre>
 <p>Returns the values of all the variables for the sixth row of the data frame. Specifying both a row and column number, will return a unique observation:</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="using-r-essential-information.html#cb46-1" tabindex="-1"></a>mydata[<span class="dv">6</span>,<span class="dv">6</span>]</span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
@@ -545,14 +579,14 @@ levels with the <code>factor()</code> function. It is good practice to carry out
 <a href="opening-ukds-datasets-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

@@ -4,24 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 Descriptive statistics | UKDS-intro-to-R.knit</title>
-  <meta name="description" content="" />
+  <title>5 Descriptive statistics | Analysing survey data using R</title>
+  <meta name="description" content="5 Descriptive statistics | Analysing survey data using R" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 Descriptive statistics | UKDS-intro-to-R.knit" />
+  <meta property="og:title" content="5 Descriptive statistics | Analysing survey data using R" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 Descriptive statistics | UKDS-intro-to-R.knit" />
+  <meta name="twitter:title" content="5 Descriptive statistics | Analysing survey data using R" />
   
   
   
 
+<meta name="author" content="Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service" />
 
 
+<meta name="date" content="2023-03-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -30,15 +32,15 @@
   
 <link rel="prev" href="essentials-of-data-manipulation.html"/>
 <link rel="next" href="producing-weighted-estimates.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,9 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -215,7 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing survey data using R</a>
           </h1>
         </div>
 
@@ -229,22 +231,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.1</span> Continuous variables<a href="descriptive-statistics.html#continuous-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Producing descriptive statistics in R is relatively straightforward, as key functions are included by default in the Base package. We have already seen above that the <code>summary()</code> command provides essential information about a variable. For instance,</p>
 <div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="descriptive-statistics.html#cb133-1" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>leftrigh)</span></code></pre></div>
-<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
-##    1.00    2.00    2.40    2.52    3.00    5.00     782</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     1.0     2.0     2.4     2.5     3.0     5.0 
+##    NA&#39;s 
+##     782</code></pre>
 <p>provides information about the mean, median and quartiles of the political scale of respondents.</p>
 <p>The <code>describe()</code> command from the <code>Hmisc</code> package provides a more detailed set of summary statistics.</p>
 <div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="descriptive-statistics.html#cb135-1" tabindex="-1"></a><span class="fu">describe</span>(bsa<span class="sc">$</span>leftrigh)</span></code></pre></div>
 <pre><code>## bsa$leftrigh 
-##        n  missing distinct     Info     Mean      Gmd      .05      .10      .25      .50      .75      .90      .95 
-##     3206      782       30    0.993     2.52   0.8831      1.2      1.4      2.0      2.4      3.0      3.6      4.0 
+##        n  missing distinct     Info     Mean      Gmd 
+##     3206      782       30    0.993     2.52   0.8831 
+##      .05      .10      .25      .50      .75      .90 
+##      1.2      1.4      2.0      2.4      3.0      3.6 
+##      .95 
+##      4.0 
 ## 
 ## lowest : 1.00 1.20 1.40 1.50 1.60, highest: 4.40 4.60 4.75 4.80 5.00</code></pre>
 <p><code>describe()</code> also provides the number of observations (including missing and unique observations), deciles as well as the five largest and smallest values.</p>
 <p>Commands producing single statistics are also available:</p>
 <div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="descriptive-statistics.html#cb137-1" tabindex="-1"></a><span class="fu">mean</span>(bsa<span class="sc">$</span>leftrigh, <span class="at">na.rm =</span> T)</span></code></pre></div>
-<pre><code>## [1] 2.519911</code></pre>
+<pre><code>## [1] 2.52</code></pre>
 <div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="descriptive-statistics.html#cb139-1" tabindex="-1"></a><span class="fu">sd</span>(bsa<span class="sc">$</span>leftrigh, <span class="at">na.rm =</span> T)</span></code></pre></div>
-<pre><code>## [1] 0.7852958</code></pre>
+<pre><code>## [1] 0.7853</code></pre>
 <div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="descriptive-statistics.html#cb141-1" tabindex="-1"></a><span class="fu">median</span>(bsa<span class="sc">$</span>leftrigh, <span class="at">na.rm =</span> T)</span></code></pre></div>
 <pre><code>## [1] 2.4</code></pre>
 <div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="descriptive-statistics.html#cb143-1" tabindex="-1"></a><span class="fu">max</span>(bsa<span class="sc">$</span>leftrigh, <span class="at">na.rm =</span> T)</span></code></pre></div>
@@ -259,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb147-5"><a href="descriptive-statistics.html#cb147-5" tabindex="-1"></a><span class="fu">max</span>(bsa<span class="sc">$</span>leftrigh, <span class="at">na.rm =</span> T),</span>
 <span id="cb147-6"><a href="descriptive-statistics.html#cb147-6" tabindex="-1"></a><span class="fu">min</span>(bsa<span class="sc">$</span>leftrigh, <span class="at">na.rm =</span> T)</span>
 <span id="cb147-7"><a href="descriptive-statistics.html#cb147-7" tabindex="-1"></a>)</span></code></pre></div>
-<pre><code>## [1] 2.5199106 0.7852958 2.4000000 5.0000000 1.0000000</code></pre>
+<pre><code>## [1] 2.5199 0.7853 2.4000 5.0000 1.0000</code></pre>
 <p>As we saw previously, the <code>na.rm = T</code> option prevents missing values from being taken into account (in which case the output would have been NA, as this is the default behaviour of these functions). Using these individual commands may come in handy, for instance when further processing of the result is needed:</p>
 <div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="descriptive-statistics.html#cb149-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(bsa<span class="sc">$</span>leftrigh, <span class="at">na.rm=</span> T)</span></code></pre></div>
 <p>Let’s round the results to two decimal places:</p>
@@ -276,7 +284,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.2</span> Bivariate association between continuous variables<a href="descriptive-statistics.html#bivariate-association-between-continuous-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>R provides a wide range of bivariate statistics under its base packages The cor() and cov() functions provide basic measures of association between two variables. For instance, in order to measure the correlation between the leftright scale and the libertarian-authoritarian scale: The later variable is a numeric variable that details how far someone sits on the libartrian – authoritarian scale from 1 to 5</p>
 <div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="descriptive-statistics.html#cb155-1" tabindex="-1"></a><span class="fu">cor</span>(bsa<span class="sc">$</span>leftrigh, bsa<span class="sc">$</span>libauth, <span class="at">use=</span><span class="st">&#39;complete.obs&#39;</span>)</span></code></pre></div>
-<pre><code>## [1] 0.009625928</code></pre>
+<pre><code>## [1] 0.009626</code></pre>
 <p>A correlation of 0.009 indicates an positive but very small relationship. It can be translated to mean ’an increase in authoritarianism is associated with a marginal increase in rightwing views.</p>
 <p>Note: When using the cor() and cov() functions missing values are dealt with the ‘use=’ “everything”, “all.obs”, “complete.obs”, “na.or.complete”, or “pairwise.complete.obs” options. See ‘?cor’ for additional information.</p>
 </div>
@@ -288,16 +296,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>There are several R commands that we can use to create frequency tables. The most common ones <code>table()</code>,<code>xtabs()</code> or <code>ftable()</code> which return the frequencies of observations within each level of a factor. For example, in order to obtain the political affiliation of BSA respondents in 2017:</p>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="descriptive-statistics.html#cb157-1" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>PartyId2)</span></code></pre></div>
 <pre><code>## 
-##     Conservative           Labour Liberal Democrat      Other party             None      Green Party 
-##             1263             1479              241              193              515               79</code></pre>
+##     Conservative           Labour Liberal Democrat 
+##             1263             1479              241 
+##      Other party             None      Green Party 
+##              193              515               79</code></pre>
 <p>As with any other R functions, the outcome of <code>table()</code> can be stored as an object for further processing:</p>
 <div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="descriptive-statistics.html#cb159-1" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fu">table</span>(bsa<span class="sc">$</span>PartyId2)</span></code></pre></div>
 <p><code>table()</code> does not compute proportions or percentages. Proportions are obtained using the <code>prop.table()</code> function which in turn does not produce percentages. It is also a good idea to round the results for greater readability.
 Either:</p>
 <div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="descriptive-statistics.html#cb160-1" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(a),<span class="dv">1</span>) </span></code></pre></div>
 <pre><code>## 
-##     Conservative           Labour Liberal Democrat      Other party             None      Green Party 
-##             33.5             39.2              6.4              5.1             13.7              2.1</code></pre>
+##     Conservative           Labour Liberal Democrat 
+##             33.5             39.2              6.4 
+##      Other party             None      Green Party 
+##              5.1             13.7              2.1</code></pre>
 <p>… or:</p>
 <div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="descriptive-statistics.html#cb162-1" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span></span>
 <span id="cb162-2"><a href="descriptive-statistics.html#cb162-2" tabindex="-1"></a>  <span class="fu">prop.table</span>(</span>
@@ -305,8 +317,10 @@ Either:</p>
 <span id="cb162-4"><a href="descriptive-statistics.html#cb162-4" tabindex="-1"></a>    ),</span>
 <span id="cb162-5"><a href="descriptive-statistics.html#cb162-5" tabindex="-1"></a>  <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## 
-##     Conservative           Labour Liberal Democrat      Other party             None      Green Party 
-##             33.5             39.2              6.4              5.1             13.7              2.1</code></pre>
+##     Conservative           Labour Liberal Democrat 
+##             33.5             39.2              6.4 
+##      Other party             None      Green Party 
+##              5.1             13.7              2.1</code></pre>
 </div>
 <div id="two-way-or-more-contingency-table" class="section level3 hasAnchor" number="5.3.2">
 <h3><span class="header-section-number">5.3.2</span> Two way or more contingency table<a href="descriptive-statistics.html#two-way-or-more-contingency-table" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -434,11 +448,23 @@ Either:</p>
 <span id="cb180-3"><a href="descriptive-statistics.html#cb180-3" tabindex="-1"></a><span class="at">msscore=</span><span class="fu">sd</span>(libauth,<span class="at">na.rm=</span>T) ,<span class="at">mdscore=</span><span class="fu">median</span>(libauth,<span class="at">na.rm=</span>T))</span></code></pre></div>
 <p>However, we also need to add the newly created variables into the existing bsa dataset, which the first line of the syntax above does. We can check that the variables have been created and that the correct values have been allocated to each sex/affiliation category.</p>
 <div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="descriptive-statistics.html#cb181-1" tabindex="-1"></a><span class="fu">names</span>(bsa)</span></code></pre></div>
-<pre><code>##  [1] &quot;Sserial&quot;          &quot;Rsex&quot;             &quot;RAgeCat&quot;          &quot;Married&quot;          &quot;ChildHh&quot;          &quot;HEdQual3&quot;         &quot;eq_inc_quintiles&quot;
-##  [8] &quot;RClassGp&quot;         &quot;CCBELIEV&quot;         &quot;carallow&quot;         &quot;carreduc&quot;         &quot;carnod2&quot;          &quot;cartaxhi&quot;         &quot;carenvdc&quot;        
-## [15] &quot;plnenvt&quot;          &quot;plnuppri&quot;         &quot;Politics&quot;         &quot;Voted&quot;            &quot;actchar&quot;          &quot;actpol&quot;           &quot;govnosa2&quot;        
-## [22] &quot;PartyId2&quot;         &quot;leftrigh&quot;         &quot;libauth&quot;          &quot;WtFactor&quot;         &quot;lnleftrigh_log&quot;   &quot;govnosa2.n&quot;       &quot;lngovnosa2&quot;      
-## [29] &quot;test&quot;             &quot;Married2&quot;         &quot;Married3&quot;         &quot;RAgeCat2&quot;         &quot;msscore&quot;          &quot;mdscore&quot;</code></pre>
+<pre><code>##  [1] &quot;Sserial&quot;          &quot;Rsex&quot;            
+##  [3] &quot;RAgeCat&quot;          &quot;Married&quot;         
+##  [5] &quot;ChildHh&quot;          &quot;HEdQual3&quot;        
+##  [7] &quot;eq_inc_quintiles&quot; &quot;RClassGp&quot;        
+##  [9] &quot;CCBELIEV&quot;         &quot;carallow&quot;        
+## [11] &quot;carreduc&quot;         &quot;carnod2&quot;         
+## [13] &quot;cartaxhi&quot;         &quot;carenvdc&quot;        
+## [15] &quot;plnenvt&quot;          &quot;plnuppri&quot;        
+## [17] &quot;Politics&quot;         &quot;Voted&quot;           
+## [19] &quot;actchar&quot;          &quot;actpol&quot;          
+## [21] &quot;govnosa2&quot;         &quot;PartyId2&quot;        
+## [23] &quot;leftrigh&quot;         &quot;libauth&quot;         
+## [25] &quot;WtFactor&quot;         &quot;lnleftrigh_log&quot;  
+## [27] &quot;govnosa2.n&quot;       &quot;lngovnosa2&quot;      
+## [29] &quot;test&quot;             &quot;Married2&quot;        
+## [31] &quot;Married3&quot;         &quot;RAgeCat2&quot;        
+## [33] &quot;msscore&quot;          &quot;mdscore&quot;</code></pre>
 <div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="descriptive-statistics.html#cb183-1" tabindex="-1"></a>bsa[<span class="dv">4</span><span class="sc">:</span><span class="dv">8</span>,<span class="fu">c</span>(<span class="st">&quot;Rsex&quot;</span>,<span class="st">&quot;PartyId2&quot;</span>,<span class="st">&quot;mdscore&quot;</span>)]</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 3
 ## # Groups:   Rsex, PartyId2 [4]
@@ -462,14 +488,14 @@ Either:</p>
 <a href="producing-weighted-estimates.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

@@ -4,24 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9 Regression analysis | UKDS-intro-to-R.knit</title>
-  <meta name="description" content="" />
+  <title>9 Regression analysis | Analysing survey data using R</title>
+  <meta name="description" content="9 Regression analysis | Analysing survey data using R" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9 Regression analysis | UKDS-intro-to-R.knit" />
+  <meta property="og:title" content="9 Regression analysis | Analysing survey data using R" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9 Regression analysis | UKDS-intro-to-R.knit" />
+  <meta name="twitter:title" content="9 Regression analysis | Analysing survey data using R" />
   
   
   
 
+<meta name="author" content="Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service" />
 
 
+<meta name="date" content="2023-03-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -30,15 +32,15 @@
   
 <link rel="prev" href="statistical-testing.html"/>
 <link rel="next" href="further-information.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -47,9 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -215,7 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analysing survey data using R</a>
           </h1>
         </div>
 
@@ -238,19 +240,30 @@ In this section, we will use the <code>glm()</code> command to investigate the a
 <pre><code>## [1] &quot;factor&quot;</code></pre>
 <div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="regression-analysis.html#cb241-1" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>HEdQual3)</span></code></pre></div>
 <pre><code>## 
-##                           Degree Higher educ below degree/A level             O level or equiv/CSE                 No qualification 
-##                             1050                             1086                             1026                              747</code></pre>
+##                           Degree 
+##                             1050 
+## Higher educ below degree/A level 
+##                             1086 
+##             O level or equiv/CSE 
+##                             1026 
+##                 No qualification 
+##                              747</code></pre>
 <p>It is a good idea to make sure that categorical variables are stored as factors. This is not absolutely necessary, but gives greater flexibility, for instance when having to change the reference category on the go.</p>
 <p>For greater readability we can also shorten the levels of <code>HEdQual3</code> using the <code>level()</code> function:</p>
 <div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="regression-analysis.html#cb243-1" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>HEdQual3) <span class="do">### The original level names  are a bit verbose too specific...</span></span></code></pre></div>
-<pre><code>## [1] &quot;Degree&quot;                           &quot;Higher educ below degree/A level&quot; &quot;O level or equiv/CSE&quot;             &quot;No qualification&quot;</code></pre>
+<pre><code>## [1] &quot;Degree&quot;                          
+## [2] &quot;Higher educ below degree/A level&quot;
+## [3] &quot;O level or equiv/CSE&quot;            
+## [4] &quot;No qualification&quot;</code></pre>
 <div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="regression-analysis.html#cb245-1" tabindex="-1"></a><span class="do">### ... Fortunately we can shorten them easily</span></span>
 <span id="cb245-2"><a href="regression-analysis.html#cb245-2" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>HEdQual3) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Degree&quot;</span>,<span class="st">&quot;A level and above&quot;</span>,<span class="st">&quot;GCSE or equiv&quot;</span>,<span class="st">&quot;No Qual&quot;</span>)</span>
 <span id="cb245-3"><a href="regression-analysis.html#cb245-3" tabindex="-1"></a></span>
 <span id="cb245-4"><a href="regression-analysis.html#cb245-4" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>HEdQual3)</span></code></pre></div>
 <pre><code>## 
-##            Degree A level and above     GCSE or equiv           No Qual 
-##              1050              1086              1026               747</code></pre>
+##            Degree A level and above     GCSE or equiv 
+##              1050              1086              1026 
+##           No Qual 
+##               747</code></pre>
 <p>What about the levels for our dependent variable? By default, the first level of a factor will be used as the reference category. This can be also checked with the <code>contrasts()</code>. In this case, 1 is associated with ‘No’, so the model will be predicting the probability of NOT voting. If the 1 was associated with ‘Yes’ then the model will be predicting the probability of voting.</p>
 <div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="regression-analysis.html#cb247-1" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>Voted)     <span class="co">#Note that Yes comes before No</span></span></code></pre></div>
 <pre><code>## [1] &quot;Yes&quot; &quot;No&quot;</code></pre>
@@ -277,20 +290,26 @@ The code below runs the model and stores the result into an object called <code>
 ##     data = bsa)
 ## 
 ## Coefficients:
-##                           Estimate Std. Error z value             Pr(&gt;|z|)    
-## (Intercept)                1.49561    0.09188  16.278 &lt; 0.0000000000000002 ***
-## HEdQual3A level and above -0.21342    0.12514  -1.706               0.0881 .  
-## HEdQual3GCSE or equiv     -0.64062    0.12191  -5.255      0.0000001481649 ***
-## HEdQual3No Qual           -0.83672    0.12769  -6.553      0.0000000000565 ***
+##                           Estimate Std. Error z value
+## (Intercept)                 1.4956     0.0919   16.28
+## HEdQual3A level and above  -0.2134     0.1251   -1.71
+## HEdQual3GCSE or equiv      -0.6406     0.1219   -5.25
+## HEdQual3No Qual            -0.8367     0.1277   -6.55
+##                           Pr(&gt;|z|)    
+## (Intercept)                &lt; 2e-16 ***
+## HEdQual3A level and above    0.088 .  
+## HEdQual3GCSE or equiv      1.5e-07 ***
+## HEdQual3No Qual            5.6e-11 ***
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  
+## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
 ##     Null deviance: 3297.6  on 2916  degrees of freedom
 ## Residual deviance: 3240.4  on 2913  degrees of freedom
 ##   (1071 observations deleted due to missingness)
-## AIC: 3248.4
+## AIC: 3248
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <p>To run a model controlling for gender ‘Rsex’ and age ‘RAgeCat’, one simply needs to add them on the right hand side of the formula, separated with a plus (+) sign.</p>
@@ -302,87 +321,116 @@ The code below runs the model and stores the result into an object called <code>
 ##     data = bsa)
 ## 
 ## Coefficients:
-##                           Estimate Std. Error z value             Pr(&gt;|z|)    
-## (Intercept)                1.11251    0.20044   5.550   0.0000000285099931 ***
-## HEdQual3A level and above -0.38676    0.13215  -2.927             0.003427 ** 
-## HEdQual3GCSE or equiv     -0.99023    0.13109  -7.554   0.0000000000000423 ***
-## HEdQual3No Qual           -1.90625    0.15687 -12.152 &lt; 0.0000000000000002 ***
-## RsexFemale                -0.15708    0.09218  -1.704             0.088363 .  
-## RAgeCat25-34              -0.24604    0.19670  -1.251             0.210996    
-## RAgeCat35-44               0.20668    0.19808   1.043             0.296764    
-## RAgeCat45-54               0.85685    0.20000   4.284   0.0000183286374063 ***
-## RAgeCat55-59               0.84062    0.23225   3.619             0.000295 ***
-## RAgeCat60-64               1.60276    0.25272   6.342   0.0000000002267768 ***
-## RAgeCat65+                 2.16408    0.21450  10.089 &lt; 0.0000000000000002 ***
+##                           Estimate Std. Error z value
+## (Intercept)                 1.1125     0.2004    5.55
+## HEdQual3A level and above  -0.3868     0.1322   -2.93
+## HEdQual3GCSE or equiv      -0.9902     0.1311   -7.55
+## HEdQual3No Qual            -1.9063     0.1569  -12.15
+## RsexFemale                 -0.1571     0.0922   -1.70
+## RAgeCat25-34               -0.2460     0.1967   -1.25
+## RAgeCat35-44                0.2067     0.1981    1.04
+## RAgeCat45-54                0.8569     0.2000    4.28
+## RAgeCat55-59                0.8406     0.2323    3.62
+## RAgeCat60-64                1.6028     0.2527    6.34
+## RAgeCat65+                  2.1641     0.2145   10.09
+##                           Pr(&gt;|z|)    
+## (Intercept)                2.9e-08 ***
+## HEdQual3A level and above   0.0034 ** 
+## HEdQual3GCSE or equiv      4.2e-14 ***
+## HEdQual3No Qual            &lt; 2e-16 ***
+## RsexFemale                  0.0884 .  
+## RAgeCat25-34                0.2110    
+## RAgeCat35-44                0.2968    
+## RAgeCat45-54               1.8e-05 ***
+## RAgeCat55-59                0.0003 ***
+## RAgeCat60-64               2.3e-10 ***
+## RAgeCat65+                 &lt; 2e-16 ***
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  
+## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
 ##     Null deviance: 3293.1  on 2912  degrees of freedom
 ## Residual deviance: 2922.5  on 2902  degrees of freedom
 ##   (1075 observations deleted due to missingness)
-## AIC: 2944.5
+## AIC: 2945
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <p><strong>Model interpretation</strong></p>
 <p><code>Summary()</code> provide a broad overview of the model output, not dissimilar to traditional statistical software.
 We can also examine the content of fit1 and fit2 more in detail and requests a specific elements, for example:</p>
 <div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="regression-analysis.html#cb257-1" tabindex="-1"></a><span class="fu">ls</span>(fit1)</span></code></pre></div>
-<pre><code>##  [1] &quot;aic&quot;               &quot;boundary&quot;          &quot;call&quot;              &quot;coefficients&quot;      &quot;contrasts&quot;         &quot;control&quot;           &quot;converged&quot;        
-##  [8] &quot;data&quot;              &quot;deviance&quot;          &quot;df.null&quot;           &quot;df.residual&quot;       &quot;effects&quot;           &quot;family&quot;            &quot;fitted.values&quot;    
-## [15] &quot;formula&quot;           &quot;iter&quot;              &quot;linear.predictors&quot; &quot;method&quot;            &quot;model&quot;             &quot;na.action&quot;         &quot;null.deviance&quot;    
-## [22] &quot;offset&quot;            &quot;prior.weights&quot;     &quot;qr&quot;                &quot;R&quot;                 &quot;rank&quot;              &quot;residuals&quot;         &quot;terms&quot;            
-## [29] &quot;weights&quot;           &quot;xlevels&quot;           &quot;y&quot;</code></pre>
+<pre><code>##  [1] &quot;aic&quot;               &quot;boundary&quot;         
+##  [3] &quot;call&quot;              &quot;coefficients&quot;     
+##  [5] &quot;contrasts&quot;         &quot;control&quot;          
+##  [7] &quot;converged&quot;         &quot;data&quot;             
+##  [9] &quot;deviance&quot;          &quot;df.null&quot;          
+## [11] &quot;df.residual&quot;       &quot;effects&quot;          
+## [13] &quot;family&quot;            &quot;fitted.values&quot;    
+## [15] &quot;formula&quot;           &quot;iter&quot;             
+## [17] &quot;linear.predictors&quot; &quot;method&quot;           
+## [19] &quot;model&quot;             &quot;na.action&quot;        
+## [21] &quot;null.deviance&quot;     &quot;offset&quot;           
+## [23] &quot;prior.weights&quot;     &quot;qr&quot;               
+## [25] &quot;R&quot;                 &quot;rank&quot;             
+## [27] &quot;residuals&quot;         &quot;terms&quot;            
+## [29] &quot;weights&quot;           &quot;xlevels&quot;          
+## [31] &quot;y&quot;</code></pre>
 <div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="regression-analysis.html#cb259-1" tabindex="-1"></a><span class="fu">round</span>(fit1<span class="sc">$</span>coefficients,<span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##               (Intercept) HEdQual3A level and above     HEdQual3GCSE or equiv           HEdQual3No Qual 
-##                      1.50                     -0.21                     -0.64                     -0.84</code></pre>
+<pre><code>##               (Intercept) HEdQual3A level and above 
+##                      1.50                     -0.21 
+##     HEdQual3GCSE or equiv           HEdQual3No Qual 
+##                     -0.64                     -0.84</code></pre>
 <div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="regression-analysis.html#cb261-1" tabindex="-1"></a><span class="do">### The coef() function will give the same output:</span></span>
 <span id="cb261-2"><a href="regression-analysis.html#cb261-2" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">coef</span>(fit1),<span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##               (Intercept) HEdQual3A level and above     HEdQual3GCSE or equiv           HEdQual3No Qual 
-##                      1.50                     -0.21                     -0.64                     -0.84</code></pre>
+<pre><code>##               (Intercept) HEdQual3A level and above 
+##                      1.50                     -0.21 
+##     HEdQual3GCSE or equiv           HEdQual3No Qual 
+##                     -0.64                     -0.84</code></pre>
 <p>It is beyond the remit of this guide to describe the full output of <code>glm()</code>. Please refer to the package documentation for more detailed explanations.</p>
 <p>Raw logistic regression coefficients measure the effect of variables on the probability of the outcome such as log(betaX)=P(y). It is common practice to convert these into odd ratios by exponentiating them, such as that betaX=exp(P(y)). The following code does this in R:</p>
 <div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="regression-analysis.html#cb263-1" tabindex="-1"></a>          <span class="fu">cbind</span>(</span>
 <span id="cb263-2"><a href="regression-analysis.html#cb263-2" tabindex="-1"></a>            <span class="fu">exp</span>(<span class="fu">coef</span>(fit2)),<span class="fu">exp</span>(<span class="fu">confint</span>(fit2))</span>
 <span id="cb263-3"><a href="regression-analysis.html#cb263-3" tabindex="-1"></a>                ) </span></code></pre></div>
 <pre><code>## Waiting for profiling to be done...</code></pre>
-<pre><code>##                                         2.5 %     97.5 %
-## (Intercept)               3.0419750 2.0618311  4.5276614
-## HEdQual3A level and above 0.6792550 0.5237628  0.8795335
-## HEdQual3GCSE or equiv     0.3714919 0.2868078  0.4796010
-## HEdQual3No Qual           0.1486366 0.1089442  0.2015607
-## RsexFemale                0.8546343 0.7130680  1.0235515
-## RAgeCat25-34              0.7818917 0.5300310  1.1469983
-## RAgeCat35-44              1.2295882 0.8316608  1.8095457
-## RAgeCat45-54              2.3557310 1.5886305  3.4827615
-## RAgeCat55-59              2.3178122 1.4718049  3.6621685
-## RAgeCat60-64              4.9667132 3.0428167  8.2090111
-## RAgeCat65+                8.7065916 5.7183039 13.2696921</code></pre>
+<pre><code>##                                   2.5 %  97.5 %
+## (Intercept)               3.0420 2.0618  4.5277
+## HEdQual3A level and above 0.6793 0.5238  0.8795
+## HEdQual3GCSE or equiv     0.3715 0.2868  0.4796
+## HEdQual3No Qual           0.1486 0.1089  0.2016
+## RsexFemale                0.8546 0.7131  1.0236
+## RAgeCat25-34              0.7819 0.5300  1.1470
+## RAgeCat35-44              1.2296 0.8317  1.8095
+## RAgeCat45-54              2.3557 1.5886  3.4828
+## RAgeCat55-59              2.3178 1.4718  3.6622
+## RAgeCat60-64              4.9667 3.0428  8.2090
+## RAgeCat65+                8.7066 5.7183 13.2697</code></pre>
 <p>Using the <code>coef()</code> and <code>confint()</code> functions, the code above respectively extracts the coefficients and associated 95% confidence intervals from fit2 then collate them using <code>cbind()</code>.</p>
 <p>** Plotting the coefficients ** –&gt;
 We can visualise the odd ratios and their confidence intervals using the <code>plot.model()</code> function from the ‘sjPlot’ package.
 The ’sjPlot’ package needs to be installed and loaded</p>
 <pre><code>install.packages(&#39;sjPlot&#39;)</code></pre>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="regression-analysis.html#cb267-1" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
-<span id="cb267-2"><a href="regression-analysis.html#cb267-2" tabindex="-1"></a><span class="fu">set_theme</span>(<span class="at">base =</span> <span class="fu">theme_minimal</span>())           <span class="do">### Default sets of options </span></span>
-<span id="cb267-3"><a href="regression-analysis.html#cb267-3" tabindex="-1"></a><span class="fu">plot_model</span>(fit2,</span>
-<span id="cb267-4"><a href="regression-analysis.html#cb267-4" tabindex="-1"></a>           <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;#702082&quot;</span>, <span class="st">&quot;#008755&quot;</span>) <span class="do">### Added for accessibility reasons</span></span>
-<span id="cb267-5"><a href="regression-analysis.html#cb267-5" tabindex="-1"></a>           ) </span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="regression-analysis.html#cb267-1" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span></code></pre></div>
+<pre><code>## Learn more about sjPlot with &#39;browseVignettes(&quot;sjPlot&quot;)&#39;.</code></pre>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="regression-analysis.html#cb269-1" tabindex="-1"></a><span class="fu">set_theme</span>(<span class="at">base =</span> <span class="fu">theme_minimal</span>())           <span class="do">### Default sets of options </span></span>
+<span id="cb269-2"><a href="regression-analysis.html#cb269-2" tabindex="-1"></a><span class="fu">plot_model</span>(fit2,</span>
+<span id="cb269-3"><a href="regression-analysis.html#cb269-3" tabindex="-1"></a>           <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;#702082&quot;</span>, <span class="st">&quot;#008755&quot;</span>) <span class="do">### Added for accessibility reasons</span></span>
+<span id="cb269-4"><a href="regression-analysis.html#cb269-4" tabindex="-1"></a>           ) </span></code></pre></div>
 <p><img src="UKDS-intro-to-R_files/figure-html/9.10-1.png" alt="Horizontal line plot for the odds ratios of the regression of voting behaviour by qualification, age categories and gender together with their confidence intervals" width="672" /></p>
 <p><strong>Assessing model fit</strong>
 The Akaike Information Criterion (AIC) is a measure of relative fit for maximum likelihood fitted models. It is used to compare the improvement in how several models fit some data relative to each other, allowing for the different number of parameters or degrees of freedom. The smaller the AIC, the better the fit. In order for the comparison to be valid, we need to ensure that the models were run with the same number of observations each time. As it is likely that the second model was run on a smaller sample, due to missing values for the Age and Sex variables, we will need to re-run the first one without .</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="regression-analysis.html#cb268-1" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Voted2 <span class="sc">~</span> HEdQual3, <span class="at">data=</span>bsa<span class="sc">%&gt;%</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Rsex) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(RAgeCat)), <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span>logit))</span>
-<span id="cb268-2"><a href="regression-analysis.html#cb268-2" tabindex="-1"></a></span>
-<span id="cb268-3"><a href="regression-analysis.html#cb268-3" tabindex="-1"></a><span class="fu">c</span>(fit1<span class="sc">$</span>aic,fit2<span class="sc">$</span>aic)</span></code></pre></div>
-<pre><code>## [1] 3244.507 2944.535</code></pre>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="regression-analysis.html#cb270-1" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Voted2 <span class="sc">~</span> HEdQual3, <span class="at">data=</span>bsa<span class="sc">%&gt;%</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Rsex) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(RAgeCat)), <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span>logit))</span>
+<span id="cb270-2"><a href="regression-analysis.html#cb270-2" tabindex="-1"></a></span>
+<span id="cb270-3"><a href="regression-analysis.html#cb270-3" tabindex="-1"></a><span class="fu">c</span>(fit1<span class="sc">$</span>aic,fit2<span class="sc">$</span>aic)</span></code></pre></div>
+<pre><code>## [1] 3245 2945</code></pre>
 <p>We can see that the model controlling for gender and sex is a better fit to the data than the one without controls as it has an AIC of 2944.5 against 3244.5 for fit1.</p>
 <p>With the information about the deviance from fit1 and fit2, we can also compute the overall significance of the model, that is whether the difference between the deviance (a likelihood-based measure of fit) for the fitted model is significantly different from that of the empty or null model. This is usually carried by conducting a chi square test, accounting for the differences in the number of parameters (ie degrees of freedom) between the two models. As with other R code, this can achieved step by step or in one go:</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="regression-analysis.html#cb270-1" tabindex="-1"></a>dev.d<span class="ot">&lt;-</span>fit2<span class="sc">$</span>null.deviance <span class="sc">-</span> fit2<span class="sc">$</span>deviance </span>
-<span id="cb270-2"><a href="regression-analysis.html#cb270-2" tabindex="-1"></a>df.d<span class="ot">&lt;-</span>fit2<span class="sc">$</span>df.null <span class="sc">-</span> fit2<span class="sc">$</span>df.residual</span>
-<span id="cb270-3"><a href="regression-analysis.html#cb270-3" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(dev.d, df.d)</span>
-<span id="cb270-4"><a href="regression-analysis.html#cb270-4" tabindex="-1"></a><span class="fu">c</span>(dev.d,df.d,p)</span></code></pre></div>
-<pre><code>## [1] 370.5486  10.0000   0.0000</code></pre>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="regression-analysis.html#cb272-1" tabindex="-1"></a>dev.d<span class="ot">&lt;-</span>fit2<span class="sc">$</span>null.deviance <span class="sc">-</span> fit2<span class="sc">$</span>deviance </span>
+<span id="cb272-2"><a href="regression-analysis.html#cb272-2" tabindex="-1"></a>df.d<span class="ot">&lt;-</span>fit2<span class="sc">$</span>df.null <span class="sc">-</span> fit2<span class="sc">$</span>df.residual</span>
+<span id="cb272-3"><a href="regression-analysis.html#cb272-3" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(dev.d, df.d)</span>
+<span id="cb272-4"><a href="regression-analysis.html#cb272-4" tabindex="-1"></a><span class="fu">c</span>(dev.d,df.d,p)</span></code></pre></div>
+<pre><code>## [1] 370.5  10.0   0.0</code></pre>
 <p>The Chi square test indicates that a difference in deviance of 370.5 with 10 degrees of freedom is highly significant (P&lt;.001)
 </p>
 
@@ -396,14 +444,14 @@ The Akaike Information Criterion (AIC) is a measure of relative fit for maximum 
 <a href="further-information.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
