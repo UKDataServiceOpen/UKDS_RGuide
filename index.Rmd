@@ -3,7 +3,7 @@ title: |
   ![](./pics/UKDS_Logos_Col_Grey_300dpi.png){width=6cm}  
   Analysing survey data using R
 author: Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service
-date: "2023-03-24"
+date: "`r Sys.Date()`"
 knit: "bookdown::render_book"
 fontsize: 12pt
 site: bookdown::bookdown_site
