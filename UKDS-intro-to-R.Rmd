@@ -294,8 +294,8 @@ Once a package is installed, it will be permanently stored in the local R librar
 ```
 > remove.packages("name of the package")
 ```
-Packages required  for an analysis have to be loaded every time a new R session is started^[But not every time a syntax file is run].  
-More information about R packages are available in our Data Skills Module: Exploring crime surveys with R.
+Packages required  for an analysis have to be loaded every time a new R session is started (But not every time a syntax file is run!).  
+
 
 ##  Getting help
 Within R, the most straightforward way to request help with a command consists of a question mark followed by the command name, without a space in between.  The standard help system in R (unless using RStudio or Eclipse) relies on the default web browser installed on your computer (ie Chrome, Firefox or Edge in most cases) to display pages. 
@@ -471,7 +471,7 @@ levels(mydata$RSex)
 returns the levels (ie the values) of  `RSex`. Even if 'Male' is the first level of `Rsex`,
 and female the second one, these do not correspond to underlying numbers in the
 data. Please also note that it is possible to change the ordering of factor
-levels with the `factor()` function. It is good practice to carry out such manipulation in a newly created variable. 
+levels with the `factor()` function. It is always a good idea to check the ordering of factor levels in a newly created variable. 
 
 ```{r 2.26}
 mydata$RSex.New<-factor(mydata$RSex,levels = levels(mydata$RSex)[c(2,1)])
