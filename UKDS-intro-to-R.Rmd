@@ -1450,7 +1450,7 @@ The following non exhaustive list provides a few examples of commands and packag
 - For users interested in latent variable modelling the
   `factanal()` command from the `stats` package conducts factor analysis. Other resources are available in the `poLCA` (Latent Class
   Analysis), `ltm` (Latent Trait modelling), `sem` (Structural equation
-  modelling) packages. The  `Lavaan` package provides functions for structural equation modelling
+  modelling) packages. The  `Lavaan` package aslso provides a wide range of functions for structural equation modelling
   including with categorical outcomes.
 
 - Users interested in longitudinal and time series analysis will be interested in the  `stats`and the ‘tseries’ packages. The packages `survival` and `eha` deal with event history and survival analysis, whereas ‘grofit’ and ‘plm’ are designed for panel data and growth analyses.
@@ -1459,18 +1459,16 @@ The following non exhaustive list provides a few examples of commands and packag
 ## Additional online resources
 There are hundreds of web sites dedicated to R that users can consult, in addition to CRAN and the main R help list, R-Help with its searchable archives. A few of the most common ones are listed here: 
 
-- [www.ats.ucla.edu/stat/r/](www.ats.ucla.edu/stat/r/) - as with other statistical packages, the UCLA website provides a good starting point for the beginner 
+- As with other statistical packages, the [UCLA](https://stats.oarc.ucla.edu/r/) website provides a good starting point for beginners 
 
-- [www.unt.edu/rss/class/Jon/R_SC/](www.unt.edu/rss/class/Jon/R_SC/) at the University of North Texas provides useful links to R resources 
-- [www.r-bloggers.com/](www.r-bloggers.com/) contains many posts about R - in particular,
+- The [University of North Texas](http://bayes.acs.unt.edu:8083/BayesContent/class/Jon/R_SC/) provides useful links to R resources 
+- [The R Bloggers website](https://www.r-bloggers.com) contains many posts about R - in particular useful [introductory information](https://www.r-bloggers.com/r-tutorial-series-r-beginners-guide-and-r-bloggers-updates/)
 
-- [www.r-bloggers.com/r-tutorial-series-r-beginners-guide-and-r-bloggers-updates/](www.r-bloggers.com/r-tutorial-series-r-beginners-guide-and-r-bloggers-updates/)contains useful introductory information 
+- [Stackexchange](https://stats.stackexchange.com/) is not specific to R but contains many forum-type questions and answers raised by R users 
 
-- [stats.stackexchange.com/](stats.stackexchange.com/) is not specific to R but contains forum-type questions and answers raised by R users 
+- [This website](https://www.harding.edu/fmccown/r/) presents useful basic information about graphs in R.
 
-- [www.harding.edu/fmccown/r/](www.harding.edu/fmccown/r/) presents useful information about graphs in R.
-
-- [www.bristol.ac.uk/cmm/learning/course.html](www.bristol.ac.uk/cmm/learning/course.html) - the Centre for Multilevel modeling at Bristol University has several pages dedicated to R users interested in Multilevel modeling
+- [The Centre for Multilevel modeling at Bristol University](https://www.bristol.ac.uk/cmm/learning/course.html)  has several pages dedicated to R users interested in Multilevel modeling
 
 
 \newpage
