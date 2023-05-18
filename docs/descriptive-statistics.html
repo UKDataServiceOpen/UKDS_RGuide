@@ -7,7 +7,7 @@
   <title>5 Descriptive statistics |  Analysing survey data using R</title>
   <meta name="description" content="<br />
 Analysing survey data using R</p>" />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Descriptive statistics |  Analysing survey data using R" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@ Analysing survey data using R</p>" />
 <meta name="author" content="Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service" />
 
 
-<meta name="date" content="2023-05-17" />
+<meta name="date" content="2023-05-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -248,7 +252,7 @@ Analysing survey data using R</p></a>
 ##      .95 
 ##      4.0 
 ## 
-## lowest : 1.00 1.20 1.40 1.50 1.60, highest: 4.40 4.60 4.75 4.80 5.00</code></pre>
+## lowest : 1    1.2  1.4  1.5  1.6 , highest: 4.4  4.6  4.75 4.8  5</code></pre>
 <p><code>describe()</code> also provides the number of observations (including missing and unique observations), deciles as well as the five largest and smallest values.</p>
 <p>Commands producing single statistics are also available:</p>
 <div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="descriptive-statistics.html#cb137-1" tabindex="-1"></a><span class="fu">mean</span>(bsa<span class="sc">$</span>leftrigh, <span class="at">na.rm =</span> T)</span></code></pre></div>

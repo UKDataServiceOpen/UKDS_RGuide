@@ -7,7 +7,7 @@
   <title>7 Graphs and plots |  Analysing survey data using R</title>
   <meta name="description" content="<br />
 Analysing survey data using R</p>" />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7 Graphs and plots |  Analysing survey data using R" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@ Analysing survey data using R</p>" />
 <meta name="author" content="Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service" />
 
 
-<meta name="date" content="2023-05-17" />
+<meta name="date" content="2023-05-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -233,63 +237,63 @@ Analysing survey data using R</p></a>
 <div id="distributional-graphs-for-continuous-variables" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Distributional graphs for continuous variables<a href="graphs-and-plots.html#distributional-graphs-for-continuous-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Graphs such as histograms or box plots are a convenient way to gain a quick overview of the distribution of a variable and are easy to produce. Go back to the BSA data, we can plot the distribution of left-right political orientations scores with the <code>hist()</code> command.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="graphs-and-plots.html#cb208-1" tabindex="-1"></a><span class="fu">hist</span>(bsa<span class="sc">$</span>leftrigh,<span class="at">freq=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="graphs-and-plots.html#cb215-1" tabindex="-1"></a><span class="fu">hist</span>(bsa<span class="sc">$</span>leftrigh,<span class="at">freq=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="UKDS-intro-to-R_files/figure-html/7.1-1.png" alt="Unformatted histogram of left-right political orientations scores" width="672" /></p>
 <p>The graphs appear visible in the ‘Plot’ tab on the right hand side of the R Studio window. It shows us that political orientations are slightly skewed towards the left. The <code>freq=FALSE</code> option requires the y-axis to be expressed in terms of proportions rather than frequencies.</p>
 <p>Titles and labels can easily be added:</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="graphs-and-plots.html#cb209-1" tabindex="-1"></a><span class="fu">hist</span>(bsa<span class="sc">$</span>leftrigh,</span>
-<span id="cb209-2"><a href="graphs-and-plots.html#cb209-2" tabindex="-1"></a>     <span class="at">freq=</span><span class="cn">FALSE</span>,</span>
-<span id="cb209-3"><a href="graphs-and-plots.html#cb209-3" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Histogram of political orientations&quot;</span>,</span>
-<span id="cb209-4"><a href="graphs-and-plots.html#cb209-4" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Proportions&quot;</span>,</span>
-<span id="cb209-5"><a href="graphs-and-plots.html#cb209-5" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Left-right political orientations score&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="graphs-and-plots.html#cb216-1" tabindex="-1"></a><span class="fu">hist</span>(bsa<span class="sc">$</span>leftrigh,</span>
+<span id="cb216-2"><a href="graphs-and-plots.html#cb216-2" tabindex="-1"></a>     <span class="at">freq=</span><span class="cn">FALSE</span>,</span>
+<span id="cb216-3"><a href="graphs-and-plots.html#cb216-3" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Histogram of political orientations&quot;</span>,</span>
+<span id="cb216-4"><a href="graphs-and-plots.html#cb216-4" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Proportions&quot;</span>,</span>
+<span id="cb216-5"><a href="graphs-and-plots.html#cb216-5" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Left-right political orientations score&quot;</span>)</span></code></pre></div>
 <p><img src="UKDS-intro-to-R_files/figure-html/7.2-1.png" alt="Histogram of left vs right political orientations, with title and y axis labels" width="672" /></p>
 <p>Note that <code>main</code>, <code>ylab</code> and <code>xlab</code> can be used with any Base R plot commands.</p>
 <p>We can also produce a box and whisker plot of the same variable:</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="graphs-and-plots.html#cb210-1" tabindex="-1"></a><span class="fu">boxplot</span>(bsa<span class="sc">$</span>leftrigh,</span>
-<span id="cb210-2"><a href="graphs-and-plots.html#cb210-2" tabindex="-1"></a>    <span class="at">main=</span><span class="st">&quot;Box and whisker plot of political orientations&quot;</span>,</span>
-<span id="cb210-3"><a href="graphs-and-plots.html#cb210-3" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Left-right political orientations score&quot;</span></span>
-<span id="cb210-4"><a href="graphs-and-plots.html#cb210-4" tabindex="-1"></a>        )</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="graphs-and-plots.html#cb217-1" tabindex="-1"></a><span class="fu">boxplot</span>(bsa<span class="sc">$</span>leftrigh,</span>
+<span id="cb217-2"><a href="graphs-and-plots.html#cb217-2" tabindex="-1"></a>    <span class="at">main=</span><span class="st">&quot;Box and whisker plot of political orientations&quot;</span>,</span>
+<span id="cb217-3"><a href="graphs-and-plots.html#cb217-3" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">&quot;Left-right political orientations score&quot;</span></span>
+<span id="cb217-4"><a href="graphs-and-plots.html#cb217-4" tabindex="-1"></a>        )</span></code></pre></div>
 <p><img src="UKDS-intro-to-R_files/figure-html/7.3-1.png" alt="Box and whisker plot of left vs right political orientations, with title and y axis labels" width="672" /></p>
 <p>The generic <code>plot()</code> command produces one or two-way scatterplots:</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="graphs-and-plots.html#cb211-1" tabindex="-1"></a><span class="fu">plot</span>(bsa<span class="sc">$</span>leftrigh)             <span class="do">### One way scatter plot of left-right political orientations score</span></span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="graphs-and-plots.html#cb218-1" tabindex="-1"></a><span class="fu">plot</span>(bsa<span class="sc">$</span>leftrigh)             <span class="do">### One way scatter plot of left-right political orientations score</span></span></code></pre></div>
 <p><img src="UKDS-intro-to-R_files/figure-html/7.4.1-1.png" alt="Raw scatterplot of left-right political orientations" width="672" /></p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="graphs-and-plots.html#cb212-1" tabindex="-1"></a><span class="fu">plot</span>(bsa<span class="sc">$</span>leftrigh,bsa<span class="sc">$</span>libauth) <span class="do">### Two-way scatterplot of political orientations by authoritarianism score</span></span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="graphs-and-plots.html#cb219-1" tabindex="-1"></a><span class="fu">plot</span>(bsa<span class="sc">$</span>leftrigh,bsa<span class="sc">$</span>libauth) <span class="do">### Two-way scatterplot of political orientations by authoritarianism score</span></span></code></pre></div>
 <p><img src="UKDS-intro-to-R_files/figure-html/7.4.2-1.png" alt="Raw scatterplot of left-right political orientations vs degree of authoritarianism" width="672" /></p>
 <p>The second graph shows us that there is little association between the two variables. However, slightly fewer respondents simultaneously score high on the authoritarianism and left vs right scales.</p>
 </div>
 <div id="plotting-categorical-variables" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> Plotting categorical variables<a href="graphs-and-plots.html#plotting-categorical-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The generic <code>plot()</code> function provides a quick way to produce bar plots of categorical data. For example, we can examine the distribution of political party affiliations (<code>Politics</code> variable) which is a factor (ie categorical) variable. Some preliminary abbreviating of the factor levels are required in order for them to be displayed properly.</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="graphs-and-plots.html#cb213-1" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>PartyId2) <span class="do">## The third and fourth factor levels are a bit long</span></span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="graphs-and-plots.html#cb220-1" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>PartyId2) <span class="do">## The third and fourth factor levels are a bit long</span></span></code></pre></div>
 <pre><code>## [1] &quot;Conservative&quot;     &quot;Labour&quot;          
 ## [3] &quot;Liberal Democrat&quot; &quot;Other party&quot;     
 ## [5] &quot;None&quot;             &quot;Green Party&quot;</code></pre>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="graphs-and-plots.html#cb215-1" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>PartyId2)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Con&quot;</span>,<span class="st">&quot;Lab&quot;</span>,<span class="st">&quot;Lib Dems&quot;</span>,<span class="st">&quot;Other&quot;</span>,<span class="st">&quot;None&quot;</span>, <span class="st">&quot;Greens&quot;</span>) </span>
-<span id="cb215-2"><a href="graphs-and-plots.html#cb215-2" tabindex="-1"></a><span class="fu">plot</span>(bsa<span class="sc">$</span>PartyId2)</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="graphs-and-plots.html#cb222-1" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>PartyId2)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Con&quot;</span>,<span class="st">&quot;Lab&quot;</span>,<span class="st">&quot;Lib Dems&quot;</span>,<span class="st">&quot;Other&quot;</span>,<span class="st">&quot;None&quot;</span>, <span class="st">&quot;Greens&quot;</span>) </span>
+<span id="cb222-2"><a href="graphs-and-plots.html#cb222-2" tabindex="-1"></a><span class="fu">plot</span>(bsa<span class="sc">$</span>PartyId2)</span></code></pre></div>
 <p><img src="UKDS-intro-to-R_files/figure-html/7.5-1.png" alt="Default frequency bar plot of political party affiliation using the plot command" width="672" />
 More advanced plots require the barplot() function, which can be used in conjunction with table(). Whereas table() creates the data that will be plotted, barplot() does the actual plotting. For instance, we can produce the same bar plot, but this time with percentages, by creating a frequency table as we did above in Section 5.2, then plot it.</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="graphs-and-plots.html#cb216-1" tabindex="-1"></a>party.tab<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(</span>
-<span id="cb216-2"><a href="graphs-and-plots.html#cb216-2" tabindex="-1"></a>  <span class="fu">table</span>(bsa<span class="sc">$</span>PartyId2)</span>
-<span id="cb216-3"><a href="graphs-and-plots.html#cb216-3" tabindex="-1"></a>),</span>
-<span id="cb216-4"><a href="graphs-and-plots.html#cb216-4" tabindex="-1"></a><span class="dv">1</span>)</span>
-<span id="cb216-5"><a href="graphs-and-plots.html#cb216-5" tabindex="-1"></a></span>
-<span id="cb216-6"><a href="graphs-and-plots.html#cb216-6" tabindex="-1"></a>party.tab</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="graphs-and-plots.html#cb223-1" tabindex="-1"></a>party.tab<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(</span>
+<span id="cb223-2"><a href="graphs-and-plots.html#cb223-2" tabindex="-1"></a>  <span class="fu">table</span>(bsa<span class="sc">$</span>PartyId2)</span>
+<span id="cb223-3"><a href="graphs-and-plots.html#cb223-3" tabindex="-1"></a>),</span>
+<span id="cb223-4"><a href="graphs-and-plots.html#cb223-4" tabindex="-1"></a><span class="dv">1</span>)</span>
+<span id="cb223-5"><a href="graphs-and-plots.html#cb223-5" tabindex="-1"></a></span>
+<span id="cb223-6"><a href="graphs-and-plots.html#cb223-6" tabindex="-1"></a>party.tab</span></code></pre></div>
 <pre><code>## 
 ##      Con      Lab Lib Dems    Other     None   Greens 
 ##     33.5     39.2      6.4      5.1     13.7      2.1</code></pre>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="graphs-and-plots.html#cb218-1" tabindex="-1"></a><span class="fu">barplot</span>(party.tab,</span>
-<span id="cb218-2"><a href="graphs-and-plots.html#cb218-2" tabindex="-1"></a>        <span class="at">main=</span><span class="st">&quot;Political party affiliation&quot;</span>,</span>
-<span id="cb218-3"><a href="graphs-and-plots.html#cb218-3" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">&quot;Percent&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="graphs-and-plots.html#cb225-1" tabindex="-1"></a><span class="fu">barplot</span>(party.tab,</span>
+<span id="cb225-2"><a href="graphs-and-plots.html#cb225-2" tabindex="-1"></a>        <span class="at">main=</span><span class="st">&quot;Political party affiliation&quot;</span>,</span>
+<span id="cb225-3"><a href="graphs-and-plots.html#cb225-3" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">&quot;Percent&quot;</span>)</span></code></pre></div>
 <p><img src="UKDS-intro-to-R_files/figure-html/7.6-1.png" alt="Neater frequency bar plot of political party affiliation using the barplot command" width="672" /></p>
 <p>We can go further and create plots for two way contingency tables of party affiliation by gender. This time we will do it in a single command:</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="graphs-and-plots.html#cb219-1" tabindex="-1"></a><span class="fu">barplot</span>(</span>
-<span id="cb219-2"><a href="graphs-and-plots.html#cb219-2" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(</span>
-<span id="cb219-3"><a href="graphs-and-plots.html#cb219-3" tabindex="-1"></a>  <span class="fu">table</span>(bsa<span class="sc">$</span>Rsex,bsa<span class="sc">$</span>PartyId2),</span>
-<span id="cb219-4"><a href="graphs-and-plots.html#cb219-4" tabindex="-1"></a><span class="dv">2</span>),                              <span class="do">## Column % (here, gender)</span></span>
-<span id="cb219-5"><a href="graphs-and-plots.html#cb219-5" tabindex="-1"></a><span class="dv">1</span>),                               <span class="do">## Rounded to 1 decimal</span></span>
-<span id="cb219-6"><a href="graphs-and-plots.html#cb219-6" tabindex="-1"></a><span class="at">beside =</span> T,                     <span class="do">## Side-by-side bars   </span></span>
-<span id="cb219-7"><a href="graphs-and-plots.html#cb219-7" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Political party affiliation by gender&quot;</span>,</span>
-<span id="cb219-8"><a href="graphs-and-plots.html#cb219-8" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">&quot;Percent&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="graphs-and-plots.html#cb226-1" tabindex="-1"></a><span class="fu">barplot</span>(</span>
+<span id="cb226-2"><a href="graphs-and-plots.html#cb226-2" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(</span>
+<span id="cb226-3"><a href="graphs-and-plots.html#cb226-3" tabindex="-1"></a>  <span class="fu">table</span>(bsa<span class="sc">$</span>Rsex,bsa<span class="sc">$</span>PartyId2),</span>
+<span id="cb226-4"><a href="graphs-and-plots.html#cb226-4" tabindex="-1"></a><span class="dv">2</span>),                              <span class="do">## Column % (here, gender)</span></span>
+<span id="cb226-5"><a href="graphs-and-plots.html#cb226-5" tabindex="-1"></a><span class="dv">1</span>),                               <span class="do">## Rounded to 1 decimal</span></span>
+<span id="cb226-6"><a href="graphs-and-plots.html#cb226-6" tabindex="-1"></a><span class="at">beside =</span> T,                     <span class="do">## Side-by-side bars   </span></span>
+<span id="cb226-7"><a href="graphs-and-plots.html#cb226-7" tabindex="-1"></a>     <span class="at">main=</span><span class="st">&quot;Political party affiliation by gender&quot;</span>,</span>
+<span id="cb226-8"><a href="graphs-and-plots.html#cb226-8" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">&quot;Percent&quot;</span>)</span></code></pre></div>
 <p><img src="UKDS-intro-to-R_files/figure-html/7.7-1.png" alt="Two-way frequency bar plot of political party affiliation by gender using the barplot command" width="672" /></p>
 </div>
 <div id="more-advanced-plots" class="section level2 hasAnchor" number="7.3">
@@ -300,11 +304,11 @@ We would like to look at how differences in political party affiliations vary by
 <p>Let us first prepare the data: we need to create the table of result, the proportion of degree vs non degree holders by gender and political party. This is a three-way contingency table, that we can obtain with <code>ftable()</code> as shown in Section 5.2, combined with <code>prop.table()</code> for the computation of proportions and <code>round()</code>.
 As they are more straightforward to handle in <code>ggplot</code>, we convert the table object created by ftable into a data frame. Although we can specify titles and axis labels in the plotting command, it is preferable to keep things simple here and have them already in the the data.<br />
 Rather than using the full range of educational achievements recorded in <code>HEdQual3</code>, we would like instead to have a dichotomic variable between degree holders and non degree holders. Adding it directly in the ftable command as a boolean expression return a dichotomic variable: “TRUE” for Degree educated respondents, and “FALSE” for everyone else. We just need to change the levels of this factor variable to make them more intelligible. Finally we change the variable names in our data frame.</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="graphs-and-plots.html#cb220-1" tabindex="-1"></a>pa<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>((<span class="fu">ftable</span>(bsa<span class="sc">$</span>PartyId2,bsa<span class="sc">$</span>Rsex,(bsa<span class="sc">$</span>HEdQual3<span class="sc">==</span><span class="st">&quot;Degree&quot;</span>))),<span class="dv">1</span>),<span class="dv">1</span>)</span>
-<span id="cb220-2"><a href="graphs-and-plots.html#cb220-2" tabindex="-1"></a>pa<span class="ot">&lt;-</span><span class="fu">data.frame</span>(pa)</span>
-<span id="cb220-3"><a href="graphs-and-plots.html#cb220-3" tabindex="-1"></a><span class="fu">levels</span>(pa<span class="sc">$</span>Var3)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Below&quot;</span>,<span class="st">&quot;Degree&quot;</span>)</span>
-<span id="cb220-4"><a href="graphs-and-plots.html#cb220-4" tabindex="-1"></a><span class="fu">names</span>(pa)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Affiliation&quot;</span>,<span class="st">&quot;Gender&quot;</span>,<span class="st">&quot;Education&quot;</span>,<span class="st">&quot;Percent&quot;</span>)</span>
-<span id="cb220-5"><a href="graphs-and-plots.html#cb220-5" tabindex="-1"></a>pa</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="graphs-and-plots.html#cb227-1" tabindex="-1"></a>pa<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>((<span class="fu">ftable</span>(bsa<span class="sc">$</span>PartyId2,bsa<span class="sc">$</span>Rsex,(bsa<span class="sc">$</span>HEdQual3<span class="sc">==</span><span class="st">&quot;Degree&quot;</span>))),<span class="dv">1</span>),<span class="dv">1</span>)</span>
+<span id="cb227-2"><a href="graphs-and-plots.html#cb227-2" tabindex="-1"></a>pa<span class="ot">&lt;-</span><span class="fu">data.frame</span>(pa)</span>
+<span id="cb227-3"><a href="graphs-and-plots.html#cb227-3" tabindex="-1"></a><span class="fu">levels</span>(pa<span class="sc">$</span>Var3)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Below&quot;</span>,<span class="st">&quot;Degree&quot;</span>)</span>
+<span id="cb227-4"><a href="graphs-and-plots.html#cb227-4" tabindex="-1"></a><span class="fu">names</span>(pa)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Affiliation&quot;</span>,<span class="st">&quot;Gender&quot;</span>,<span class="st">&quot;Education&quot;</span>,<span class="st">&quot;Percent&quot;</span>)</span>
+<span id="cb227-5"><a href="graphs-and-plots.html#cb227-5" tabindex="-1"></a>pa</span></code></pre></div>
 <pre><code>##    Affiliation Gender Education Percent
 ## 1          Con   Male     Below    72.7
 ## 2          Lab   Male     Below    70.1
@@ -331,11 +335,11 @@ Rather than using the full range of educational achievements recorded in <code>H
 ## 23        None Female    Degree    16.1
 ## 24      Greens Female    Degree    51.1</code></pre>
 <p>We are now ready to plot the data. the <code>ggplot()</code> commands usually works as a succession of layers or options that are added to an initial plot specifications. Each extra layer is added after a <code>+</code> sign. In the example below, we specify the data and the aesthetic (ie the main parameters of the plot) with the first command: the x and y variables , and the first grouping variable, education). <code>geom_bar()</code> stipulates the bar plot, with the ṕosition=“dodge” for the bars to be located side by side (position=“stack”would have them on top of each other). Finally, facet_wrap() splits the plot by gender.</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="graphs-and-plots.html#cb222-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>pa,<span class="fu">aes</span>(<span class="at">y=</span>Percent,<span class="at">x=</span>Affiliation,<span class="at">fill=</span>Education))<span class="sc">+</span></span>
-<span id="cb222-2"><a href="graphs-and-plots.html#cb222-2" tabindex="-1"></a><span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>,<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>)<span class="sc">+</span></span>
-<span id="cb222-3"><a href="graphs-and-plots.html#cb222-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Gender)<span class="sc">+</span></span>
-<span id="cb222-4"><a href="graphs-and-plots.html#cb222-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span>                                  <span class="do">### Theme for visualisation</span></span>
-<span id="cb222-5"><a href="graphs-and-plots.html#cb222-5" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;#702082&quot;</span>, <span class="st">&quot;#008755&quot;</span>)) <span class="do">### Manually specifying the colours (optional)</span></span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="graphs-and-plots.html#cb229-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>pa,<span class="fu">aes</span>(<span class="at">y=</span>Percent,<span class="at">x=</span>Affiliation,<span class="at">fill=</span>Education))<span class="sc">+</span></span>
+<span id="cb229-2"><a href="graphs-and-plots.html#cb229-2" tabindex="-1"></a><span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>,<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>)<span class="sc">+</span></span>
+<span id="cb229-3"><a href="graphs-and-plots.html#cb229-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Gender)<span class="sc">+</span></span>
+<span id="cb229-4"><a href="graphs-and-plots.html#cb229-4" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span>                                  <span class="do">### Theme for visualisation</span></span>
+<span id="cb229-5"><a href="graphs-and-plots.html#cb229-5" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;#702082&quot;</span>, <span class="st">&quot;#008755&quot;</span>)) <span class="do">### Manually specifying the colours (optional)</span></span></code></pre></div>
 <p><img src="UKDS-intro-to-R_files/figure-html/7.9-1.png" alt="Bar plot of political party affiliation by gender and qualification using ggplot" width="672" />
 </p>
 

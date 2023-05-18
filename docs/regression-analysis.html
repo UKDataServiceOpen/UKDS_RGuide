@@ -7,7 +7,7 @@
   <title>9 Regression analysis |  Analysing survey data using R</title>
   <meta name="description" content="<br />
 Analysing survey data using R</p>" />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9 Regression analysis |  Analysing survey data using R" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@ Analysing survey data using R</p>" />
 <meta name="author" content="Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service" />
 
 
-<meta name="date" content="2023-05-17" />
+<meta name="date" content="2023-05-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -231,16 +235,16 @@ Analysing survey data using R</p></a>
 <h1><span class="header-section-number">9</span> Regression analysis<a href="regression-analysis.html#regression-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>The <code>glm()</code> command from the R base package is used for fitting linear and non-linear regressions. These include logistic regression, and more generally models falling under the Generalized Linear Model framework.<br />
 In this section, we will use the <code>glm()</code> command to investigate the association between the level of education <code>HEdQual3</code> and <code>Voted</code>, whether someone voted or not. Let’s first briefly explore the variables using the <code>class()</code> and <code>table()</code> commands from the previous chapters:</p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="regression-analysis.html#cb235-1" tabindex="-1"></a><span class="fu">class</span>(bsa<span class="sc">$</span>Voted)</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="regression-analysis.html#cb242-1" tabindex="-1"></a><span class="fu">class</span>(bsa<span class="sc">$</span>Voted)</span></code></pre></div>
 <pre><code>## [1] &quot;factor&quot;</code></pre>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="regression-analysis.html#cb237-1" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>Voted)</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="regression-analysis.html#cb244-1" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>Voted)</span></code></pre></div>
 <pre><code>## 
 ##  Yes   No 
 ## 2205  776</code></pre>
 <p>and</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="regression-analysis.html#cb239-1" tabindex="-1"></a><span class="fu">class</span>(bsa<span class="sc">$</span>HEdQual3)</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="regression-analysis.html#cb246-1" tabindex="-1"></a><span class="fu">class</span>(bsa<span class="sc">$</span>HEdQual3)</span></code></pre></div>
 <pre><code>## [1] &quot;factor&quot;</code></pre>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="regression-analysis.html#cb241-1" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>HEdQual3)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="regression-analysis.html#cb248-1" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>HEdQual3)</span></code></pre></div>
 <pre><code>## 
 ##                           Degree 
 ##                             1050 
@@ -252,40 +256,40 @@ In this section, we will use the <code>glm()</code> command to investigate the a
 ##                              747</code></pre>
 <p>It is a good idea to make sure that categorical variables are stored as factors. This is not absolutely necessary, but gives greater flexibility, for instance when having to change the reference category on the go.</p>
 <p>For greater readability we can also shorten the levels of <code>HEdQual3</code> using the <code>level()</code> function:</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="regression-analysis.html#cb243-1" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>HEdQual3) <span class="do">### The original level names  are a bit verbose too specific...</span></span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="regression-analysis.html#cb250-1" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>HEdQual3) <span class="do">### The original level names  are a bit verbose too specific...</span></span></code></pre></div>
 <pre><code>## [1] &quot;Degree&quot;                          
 ## [2] &quot;Higher educ below degree/A level&quot;
 ## [3] &quot;O level or equiv/CSE&quot;            
 ## [4] &quot;No qualification&quot;</code></pre>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="regression-analysis.html#cb245-1" tabindex="-1"></a><span class="do">### ... Fortunately we can shorten them easily</span></span>
-<span id="cb245-2"><a href="regression-analysis.html#cb245-2" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>HEdQual3) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Degree&quot;</span>,<span class="st">&quot;A level and above&quot;</span>,<span class="st">&quot;GCSE or equiv&quot;</span>,<span class="st">&quot;No Qual&quot;</span>)</span>
-<span id="cb245-3"><a href="regression-analysis.html#cb245-3" tabindex="-1"></a></span>
-<span id="cb245-4"><a href="regression-analysis.html#cb245-4" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>HEdQual3)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="regression-analysis.html#cb252-1" tabindex="-1"></a><span class="do">### ... Fortunately we can shorten them easily</span></span>
+<span id="cb252-2"><a href="regression-analysis.html#cb252-2" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>HEdQual3) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Degree&quot;</span>,<span class="st">&quot;A level and above&quot;</span>,<span class="st">&quot;GCSE or equiv&quot;</span>,<span class="st">&quot;No Qual&quot;</span>)</span>
+<span id="cb252-3"><a href="regression-analysis.html#cb252-3" tabindex="-1"></a></span>
+<span id="cb252-4"><a href="regression-analysis.html#cb252-4" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>HEdQual3)</span></code></pre></div>
 <pre><code>## 
 ##            Degree A level and above     GCSE or equiv 
 ##              1050              1086              1026 
 ##           No Qual 
 ##               747</code></pre>
 <p>What about the levels for our dependent variable? By default, the first level of a factor will be used as the reference category. This can be also checked with the <code>contrasts()</code>. In this case, 1 is associated with ‘No’, so the model will be predicting the probability of NOT voting. If the 1 was associated with ‘Yes’ then the model will be predicting the probability of voting.</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="regression-analysis.html#cb247-1" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>Voted)     <span class="co">#Note that Yes comes before No</span></span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="regression-analysis.html#cb254-1" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>Voted)     <span class="co">#Note that Yes comes before No</span></span></code></pre></div>
 <pre><code>## [1] &quot;Yes&quot; &quot;No&quot;</code></pre>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="regression-analysis.html#cb249-1" tabindex="-1"></a><span class="fu">contrasts</span>(bsa<span class="sc">$</span>Voted)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="regression-analysis.html#cb256-1" tabindex="-1"></a><span class="fu">contrasts</span>(bsa<span class="sc">$</span>Voted)</span></code></pre></div>
 <pre><code>##     No
 ## Yes  0
 ## No   1</code></pre>
 <p>As we are interested in the latter we need to change the reference category using the <code>relevel()</code> function. We can also create a new variable named Voted2 so as to keep a copy of the original variable intact.</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="regression-analysis.html#cb251-1" tabindex="-1"></a><span class="co"># Reverse the order</span></span>
-<span id="cb251-2"><a href="regression-analysis.html#cb251-2" tabindex="-1"></a>bsa<span class="sc">$</span>Voted2 <span class="ot">&lt;-</span> <span class="fu">relevel</span>(bsa<span class="sc">$</span>Voted, <span class="at">ref =</span> <span class="st">&quot;No&quot;</span>)</span>
-<span id="cb251-3"><a href="regression-analysis.html#cb251-3" tabindex="-1"></a></span>
-<span id="cb251-4"><a href="regression-analysis.html#cb251-4" tabindex="-1"></a><span class="co">#Check the contrasts</span></span>
-<span id="cb251-5"><a href="regression-analysis.html#cb251-5" tabindex="-1"></a><span class="fu">contrasts</span>(bsa<span class="sc">$</span>Voted2)</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="regression-analysis.html#cb258-1" tabindex="-1"></a><span class="co"># Reverse the order</span></span>
+<span id="cb258-2"><a href="regression-analysis.html#cb258-2" tabindex="-1"></a>bsa<span class="sc">$</span>Voted2 <span class="ot">&lt;-</span> <span class="fu">relevel</span>(bsa<span class="sc">$</span>Voted, <span class="at">ref =</span> <span class="st">&quot;No&quot;</span>)</span>
+<span id="cb258-3"><a href="regression-analysis.html#cb258-3" tabindex="-1"></a></span>
+<span id="cb258-4"><a href="regression-analysis.html#cb258-4" tabindex="-1"></a><span class="co">#Check the contrasts</span></span>
+<span id="cb258-5"><a href="regression-analysis.html#cb258-5" tabindex="-1"></a><span class="fu">contrasts</span>(bsa<span class="sc">$</span>Voted2)</span></code></pre></div>
 <pre><code>##     Yes
 ## No    0
 ## Yes   1</code></pre>
 <p>Since the outcome variable (Voted or Voted2) has a binomial distribution, we need to specify to the glm() function that we will be fitting a logistic regression model. We will do this by setting the argument ‘family’ to ‘binomial’ and the link function to ‘logit’. In this case we could have used ‘probit’ instead as a link function.
 The code below runs the model and stores the result into an object called <code>fit1</code>:</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="regression-analysis.html#cb253-1" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Voted2 <span class="sc">~</span> HEdQual3, <span class="at">data=</span>bsa, <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span>logit))</span>
-<span id="cb253-2"><a href="regression-analysis.html#cb253-2" tabindex="-1"></a><span class="fu">summary</span>(fit1)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="regression-analysis.html#cb260-1" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Voted2 <span class="sc">~</span> HEdQual3, <span class="at">data=</span>bsa, <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span>logit))</span>
+<span id="cb260-2"><a href="regression-analysis.html#cb260-2" tabindex="-1"></a><span class="fu">summary</span>(fit1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = Voted2 ~ HEdQual3, family = binomial(link = logit), 
@@ -315,8 +319,8 @@ The code below runs the model and stores the result into an object called <code>
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <p>To run a model controlling for gender ‘Rsex’ and age ‘RAgeCat’, one simply needs to add them on the right hand side of the formula, separated with a plus (+) sign.</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="regression-analysis.html#cb255-1" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Voted2 <span class="sc">~</span> HEdQual3 <span class="sc">+</span> Rsex <span class="sc">+</span> RAgeCat, <span class="at">data=</span>bsa, <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span>logit))</span>
-<span id="cb255-2"><a href="regression-analysis.html#cb255-2" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="regression-analysis.html#cb262-1" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Voted2 <span class="sc">~</span> HEdQual3 <span class="sc">+</span> Rsex <span class="sc">+</span> RAgeCat, <span class="at">data=</span>bsa, <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span>logit))</span>
+<span id="cb262-2"><a href="regression-analysis.html#cb262-2" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = Voted2 ~ HEdQual3 + Rsex + RAgeCat, family = binomial(link = logit), 
@@ -362,7 +366,7 @@ The code below runs the model and stores the result into an object called <code>
 <p><strong>Model interpretation</strong></p>
 <p><code>Summary()</code> provide a broad overview of the model output, not dissimilar to traditional statistical software.
 We can also examine the content of fit1 and fit2 more in detail and requests a specific elements, for example:</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="regression-analysis.html#cb257-1" tabindex="-1"></a><span class="fu">ls</span>(fit1)</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="regression-analysis.html#cb264-1" tabindex="-1"></a><span class="fu">ls</span>(fit1)</span></code></pre></div>
 <pre><code>##  [1] &quot;aic&quot;               &quot;boundary&quot;         
 ##  [3] &quot;call&quot;              &quot;coefficients&quot;     
 ##  [5] &quot;contrasts&quot;         &quot;control&quot;          
@@ -379,22 +383,22 @@ We can also examine the content of fit1 and fit2 more in detail and requests a s
 ## [27] &quot;residuals&quot;         &quot;terms&quot;            
 ## [29] &quot;weights&quot;           &quot;xlevels&quot;          
 ## [31] &quot;y&quot;</code></pre>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="regression-analysis.html#cb259-1" tabindex="-1"></a><span class="fu">round</span>(fit1<span class="sc">$</span>coefficients,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="regression-analysis.html#cb266-1" tabindex="-1"></a><span class="fu">round</span>(fit1<span class="sc">$</span>coefficients,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##               (Intercept) HEdQual3A level and above 
 ##                      1.50                     -0.21 
 ##     HEdQual3GCSE or equiv           HEdQual3No Qual 
 ##                     -0.64                     -0.84</code></pre>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="regression-analysis.html#cb261-1" tabindex="-1"></a><span class="do">### The coef() function will give the same output:</span></span>
-<span id="cb261-2"><a href="regression-analysis.html#cb261-2" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">coef</span>(fit1),<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="regression-analysis.html#cb268-1" tabindex="-1"></a><span class="do">### The coef() function will give the same output:</span></span>
+<span id="cb268-2"><a href="regression-analysis.html#cb268-2" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">coef</span>(fit1),<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##               (Intercept) HEdQual3A level and above 
 ##                      1.50                     -0.21 
 ##     HEdQual3GCSE or equiv           HEdQual3No Qual 
 ##                     -0.64                     -0.84</code></pre>
 <p>It is beyond the remit of this guide to describe the full output of <code>glm()</code>. Please refer to the package documentation for more detailed explanations.</p>
 <p>Raw logistic regression coefficients measure the effect of variables on the probability of the outcome such as log(betaX)=P(y). It is common practice to convert these into odd ratios by exponentiating them, such as that betaX=exp(P(y)). The following code does this in R:</p>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="regression-analysis.html#cb263-1" tabindex="-1"></a>          <span class="fu">cbind</span>(</span>
-<span id="cb263-2"><a href="regression-analysis.html#cb263-2" tabindex="-1"></a>            <span class="fu">exp</span>(<span class="fu">coef</span>(fit2)),<span class="fu">exp</span>(<span class="fu">confint</span>(fit2))</span>
-<span id="cb263-3"><a href="regression-analysis.html#cb263-3" tabindex="-1"></a>                ) </span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="regression-analysis.html#cb270-1" tabindex="-1"></a>          <span class="fu">cbind</span>(</span>
+<span id="cb270-2"><a href="regression-analysis.html#cb270-2" tabindex="-1"></a>            <span class="fu">exp</span>(<span class="fu">coef</span>(fit2)),<span class="fu">exp</span>(<span class="fu">confint</span>(fit2))</span>
+<span id="cb270-3"><a href="regression-analysis.html#cb270-3" tabindex="-1"></a>                ) </span></code></pre></div>
 <pre><code>## Waiting for profiling to be done...</code></pre>
 <pre><code>##                                   2.5 %  97.5 %
 ## (Intercept)               3.0420 2.0618  4.5277
@@ -413,24 +417,25 @@ We can also examine the content of fit1 and fit2 more in detail and requests a s
 We can visualise the odd ratios and their confidence intervals using the <code>plot.model()</code> function from the ‘sjPlot’ package.
 The ’sjPlot’ package needs to be installed and loaded</p>
 <pre><code>install.packages(&#39;sjPlot&#39;)</code></pre>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="regression-analysis.html#cb267-1" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
-<span id="cb267-2"><a href="regression-analysis.html#cb267-2" tabindex="-1"></a><span class="fu">set_theme</span>(<span class="at">base =</span> <span class="fu">theme_minimal</span>())           <span class="do">### Default sets of options </span></span>
-<span id="cb267-3"><a href="regression-analysis.html#cb267-3" tabindex="-1"></a><span class="fu">plot_model</span>(fit2,</span>
-<span id="cb267-4"><a href="regression-analysis.html#cb267-4" tabindex="-1"></a>           <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;#702082&quot;</span>, <span class="st">&quot;#008755&quot;</span>) <span class="do">### Added for accessibility reasons</span></span>
-<span id="cb267-5"><a href="regression-analysis.html#cb267-5" tabindex="-1"></a>           ) </span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="regression-analysis.html#cb274-1" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span></code></pre></div>
+<pre><code>## Install package &quot;strengejacke&quot; from GitHub (`devtools::install_github(&quot;strengejacke/strengejacke&quot;)`) to load all sj-packages at once!</code></pre>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="regression-analysis.html#cb276-1" tabindex="-1"></a><span class="fu">set_theme</span>(<span class="at">base =</span> <span class="fu">theme_minimal</span>())           <span class="do">### Default sets of options </span></span>
+<span id="cb276-2"><a href="regression-analysis.html#cb276-2" tabindex="-1"></a><span class="fu">plot_model</span>(fit2,</span>
+<span id="cb276-3"><a href="regression-analysis.html#cb276-3" tabindex="-1"></a>           <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">&quot;#702082&quot;</span>, <span class="st">&quot;#008755&quot;</span>) <span class="do">### Added for accessibility reasons</span></span>
+<span id="cb276-4"><a href="regression-analysis.html#cb276-4" tabindex="-1"></a>           ) </span></code></pre></div>
 <p><img src="UKDS-intro-to-R_files/figure-html/9.10-1.png" alt="Horizontal line plot for the odds ratios of the regression of voting behaviour by qualification, age categories and gender together with their confidence intervals" width="672" /></p>
 <p><strong>Assessing model fit</strong>
 The Akaike Information Criterion (AIC) is a measure of relative fit for maximum likelihood fitted models. It is used to compare the improvement in how several models fit some data relative to each other, allowing for the different number of parameters or degrees of freedom. The smaller the AIC, the better the fit. In order for the comparison to be valid, we need to ensure that the models were run with the same number of observations each time. As it is likely that the second model was run on a smaller sample, due to missing values for the Age and Sex variables, we will need to re-run the first one without .</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="regression-analysis.html#cb268-1" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Voted2 <span class="sc">~</span> HEdQual3, <span class="at">data=</span>bsa<span class="sc">%&gt;%</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Rsex) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(RAgeCat)), <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span>logit))</span>
-<span id="cb268-2"><a href="regression-analysis.html#cb268-2" tabindex="-1"></a></span>
-<span id="cb268-3"><a href="regression-analysis.html#cb268-3" tabindex="-1"></a><span class="fu">c</span>(fit1<span class="sc">$</span>aic,fit2<span class="sc">$</span>aic)</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="regression-analysis.html#cb277-1" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Voted2 <span class="sc">~</span> HEdQual3, <span class="at">data=</span>bsa<span class="sc">%&gt;%</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Rsex) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(RAgeCat)), <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span>logit))</span>
+<span id="cb277-2"><a href="regression-analysis.html#cb277-2" tabindex="-1"></a></span>
+<span id="cb277-3"><a href="regression-analysis.html#cb277-3" tabindex="-1"></a><span class="fu">c</span>(fit1<span class="sc">$</span>aic,fit2<span class="sc">$</span>aic)</span></code></pre></div>
 <pre><code>## [1] 3245 2945</code></pre>
 <p>We can see that the model controlling for gender and sex is a better fit to the data than the one without controls as it has an AIC of 2944.5 against 3244.5 for fit1.</p>
 <p>With the information about the deviance from fit1 and fit2, we can also compute the overall significance of the model, that is whether the difference between the deviance (a likelihood-based measure of fit) for the fitted model is significantly different from that of the empty or null model. This is usually carried by conducting a chi square test, accounting for the differences in the number of parameters (ie degrees of freedom) between the two models. As with other R code, this can achieved step by step or in one go:</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="regression-analysis.html#cb270-1" tabindex="-1"></a>dev.d<span class="ot">&lt;-</span>fit2<span class="sc">$</span>null.deviance <span class="sc">-</span> fit2<span class="sc">$</span>deviance </span>
-<span id="cb270-2"><a href="regression-analysis.html#cb270-2" tabindex="-1"></a>df.d<span class="ot">&lt;-</span>fit2<span class="sc">$</span>df.null <span class="sc">-</span> fit2<span class="sc">$</span>df.residual</span>
-<span id="cb270-3"><a href="regression-analysis.html#cb270-3" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(dev.d, df.d)</span>
-<span id="cb270-4"><a href="regression-analysis.html#cb270-4" tabindex="-1"></a><span class="fu">c</span>(dev.d,df.d,p)</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="regression-analysis.html#cb279-1" tabindex="-1"></a>dev.d<span class="ot">&lt;-</span>fit2<span class="sc">$</span>null.deviance <span class="sc">-</span> fit2<span class="sc">$</span>deviance </span>
+<span id="cb279-2"><a href="regression-analysis.html#cb279-2" tabindex="-1"></a>df.d<span class="ot">&lt;-</span>fit2<span class="sc">$</span>df.null <span class="sc">-</span> fit2<span class="sc">$</span>df.residual</span>
+<span id="cb279-3"><a href="regression-analysis.html#cb279-3" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(dev.d, df.d)</span>
+<span id="cb279-4"><a href="regression-analysis.html#cb279-4" tabindex="-1"></a><span class="fu">c</span>(dev.d,df.d,p)</span></code></pre></div>
 <pre><code>## [1] 370.5  10.0   0.0</code></pre>
 <p>The Chi square test indicates that a difference in deviance of 370.5 with 10 degrees of freedom is highly significant (P&lt;.001)
 </p>
