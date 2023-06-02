@@ -74,7 +74,7 @@ commercial packages. The existence of a vast number of user written packages
 Users who want to contribute should be aware that in order to be part of the R
 archive, a minimum set of rules need nonetheless to be followed.
 
-Although R can perform most of the analyses  available in generalist  software
+Although R can perform most of the analyses available in generalist  software
 such as Stata, SPSS, or SAS, it has a broader potential since it can also be
 used for mapping, data mining or machine learning. Being a language also means
 that there are often several ways to carry out analyses in R, each one with its
@@ -111,7 +111,7 @@ c("",""),
 
 There are several (sometimes many) ways of achieving a particular result in R.
 This can be confusing for novice researchers, but at the same time will allow  users to
-tightly adjust their programmes to their needs
+tightly adjust their programmes to their needs.
 \newpage
 
 <!--chapter:end:01-Introduction.Rmd-->
@@ -267,10 +267,10 @@ For example, to install the ‘foreign’ package one need to type:
 install.packages("foreign",repos = "https://cloud.r-project.org")
 ```
 
-This  only needs to be done once. 
-If the address of the  package repository is not specified via the  `repos` option, a pull-down menu will appear, asking for  one. Choosing `https://cloud.r-project.org` will automatically select the closest mirror site. 
+Installation only needs to be done once. 
+If the address of the  package repository is not specified via the  `repos` option, a pull-down menu will appear, asking for one. Choosing `https://cloud.r-project.org` will automatically select the closest mirror site. 
 
-Originally, `Foreign`  enabled  users to import  Stata (version 12 or older)  or SPSS datasets. For  Stata datasets saved under version 13 and above, the `haven` or `readstata13` package are required. 
+Originally, `Foreign`  enabled  users to import Stata (version 12 or older) or SPSS datasets. For  Stata datasets saved under version 13 and above, the `haven` or `readstata13` package are required. 
 
 ```
 install.packages("haven",repos = "https://cloud.r-project.org")
@@ -866,7 +866,7 @@ max(bsa$leftrigh, na.rm = T)
 min(bsa$leftrigh, na.rm = T)
 ```
 
-We could  combine the output from the above commands into a single ligne using the `c()` function:
+We could  combine the output from the above commands into a single line using the `c()` function:
 ```{r}
 c(
 mean(bsa$leftrigh, na.rm = T),
@@ -900,7 +900,7 @@ round(mean(bsa$leftrigh,na.rm=T),2)
 would produce the same results using just one line of code .
 
 ## Bivariate association between continuous variables
-R provides a wide range of bivariate statistics under its base packages    The cor() and  cov() functions provide basic measures of association between two variables. For instance, in order to measure the correlation between the leftright scale and the libertarian-authoritarian scale: The later variable is a numeric variable that details how far someone sits on the libartrian – authoritarian scale from 1 to 5
+R provides a wide range of bivariate statistics under its base packages. The cor() and  cov() functions provide basic measures of association between two variables. For instance, in order to measure the correlation between the leftright scale and the libertarian-authoritarian scale: The later variable is a numeric variable that details how far someone sits on the libartrian – authoritarian scale from 1 to 5
 
 ```{r}
 cor(bsa$leftrigh, bsa$libauth, use='complete.obs')
@@ -979,7 +979,7 @@ round(100*prop.table(b,2),1)       ### Option 2 for column percentages
 ```
 Similar proportions of men voted Conservative and Labour (36-37%), whereas women were clearly more likely to vote Labour.
 
-For some reason, there is not a straightforward way to easily  percentages in three-way contingency tables  with either `xtabs()` or `table()`. This is where `ftable()` comes handy.
+For some reason, there is not a straightforward way to obtain percentages in three-way contingency tables with either `xtabs()` or `table()`. This is where `ftable()` comes handy.
 ```{r}
 round(100*prop.table(
   ftable(RAgeCat~PartyId2 +Rsex,data=bsa)
@@ -1008,7 +1008,7 @@ mnscore=sd(libauth,na.rm=T) ,mdscore=median(libauth,na.rm=T))
 
 When further broken down by gender, we can see that overall the same trends remain valid, with some nuances: male Green supporters are markedly more liberal than their female counterpart, the opposite being true among Conservative supporters. 
 
-Instead of directly tables of summary statistics, we may want to have them computed as variables that will be added to the current dataset for each corresponding gender/political affiliation group. This is straighforward to do with dplyr, we just need to use the `mutate()` command.  
+Instead of tables of summary statistics, we may want to have summary statistics computed as variables that will be added to the current dataset for each corresponding gender/political affiliation group. This is straightforward to do with dplyr, we just need to use the `mutate()` command.  
 
 ```{r,echo=T,message=F}
 

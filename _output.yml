@@ -1,3 +1,9 @@
+bookdown::html_document2:
+ toc: true
+ toc_float: true
+ latex_engine: lualatex
+ pandoc_args: "--variable=papersize:a4"
+
 bookdown::gitbook:
   css: style.css
   config:
@@ -17,4 +23,3 @@ bookdown::pdf_book:
   citation_package: natbib
   keep_tex: yes
 
-bookdown::html_book: default
