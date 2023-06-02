@@ -149,10 +149,10 @@ For example, to install the ‘foreign’ package one need to type:
 install.packages("foreign",repos = "https://cloud.r-project.org")
 ```
 
-This  only needs to be done once. 
-If the address of the  package repository is not specified via the  `repos` option, a pull-down menu will appear, asking for  one. Choosing `https://cloud.r-project.org` will automatically select the closest mirror site. 
+Installation only needs to be done once. 
+If the address of the  package repository is not specified via the  `repos` option, a pull-down menu will appear, asking for one. Choosing `https://cloud.r-project.org` will automatically select the closest mirror site. 
 
-Originally, `Foreign`  enabled  users to import  Stata (version 12 or older)  or SPSS datasets. For  Stata datasets saved under version 13 and above, the `haven` or `readstata13` package are required. 
+Originally, `Foreign`  enabled  users to import Stata (version 12 or older) or SPSS datasets. For  Stata datasets saved under version 13 and above, the `haven` or `readstata13` package are required. 
 
 ```
 install.packages("haven",repos = "https://cloud.r-project.org")
