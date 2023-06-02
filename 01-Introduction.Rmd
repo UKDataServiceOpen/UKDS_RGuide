@@ -51,7 +51,7 @@ commercial packages. The existence of a vast number of user written packages
 Users who want to contribute should be aware that in order to be part of the R
 archive, a minimum set of rules need nonetheless to be followed.
 
-Although R can perform most of the analyses  available in generalist  software
+Although R can perform most of the analyses available in generalist  software
 such as Stata, SPSS, or SAS, it has a broader potential since it can also be
 used for mapping, data mining or machine learning. Being a language also means
 that there are often several ways to carry out analyses in R, each one with its
@@ -88,5 +88,5 @@ c("",""),
 
 There are several (sometimes many) ways of achieving a particular result in R.
 This can be confusing for novice researchers, but at the same time will allow  users to
-tightly adjust their programmes to their needs
+tightly adjust their programmes to their needs.
 \newpage
