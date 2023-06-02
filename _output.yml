@@ -1,9 +1,3 @@
-bookdown::html_document2:
- toc: true
- toc_float: true
- latex_engine: lualatex
- pandoc_args: "--variable=papersize:a4"
-
 bookdown::gitbook:
   css: style.css
   config:
@@ -15,6 +9,12 @@ bookdown::gitbook:
   edit: https://github.com/PierreWal/UKDS_RGuide/main/%s
   download: ["pdf", "epub"]
   over-image: pics/UKDS_Logos_Col_Grey_300dpi.png
+
+bookdown::html_document2:
+ toc: true
+ toc_float: true
+ latex_engine: lualatex
+ pandoc_args: "--variable=papersize:a4"
 
 bookdown::pdf_book:
   includes:

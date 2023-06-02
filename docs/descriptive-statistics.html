@@ -24,7 +24,6 @@ Analysing survey data using R</p>" />
 <meta name="author" content="Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service" />
 
 
-<meta name="date" content="2023-05-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -265,7 +264,7 @@ Analysing survey data using R</p></a>
 <pre><code>## [1] 5</code></pre>
 <div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="descriptive-statistics.html#cb145-1" tabindex="-1"></a><span class="fu">min</span>(bsa<span class="sc">$</span>leftrigh, <span class="at">na.rm =</span> T)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<p>We could combine the output from the above commands into a single ligne using the <code>c()</code> function:</p>
+<p>We could combine the output from the above commands into a single line using the <code>c()</code> function:</p>
 <div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="descriptive-statistics.html#cb147-1" tabindex="-1"></a><span class="fu">c</span>(</span>
 <span id="cb147-2"><a href="descriptive-statistics.html#cb147-2" tabindex="-1"></a><span class="fu">mean</span>(bsa<span class="sc">$</span>leftrigh, <span class="at">na.rm =</span> T),</span>
 <span id="cb147-3"><a href="descriptive-statistics.html#cb147-3" tabindex="-1"></a><span class="fu">sd</span>(bsa<span class="sc">$</span>leftrigh, <span class="at">na.rm =</span> T),</span>
@@ -288,7 +287,7 @@ Analysing survey data using R</p></a>
 </div>
 <div id="bivariate-association-between-continuous-variables" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Bivariate association between continuous variables<a href="descriptive-statistics.html#bivariate-association-between-continuous-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>R provides a wide range of bivariate statistics under its base packages The cor() and cov() functions provide basic measures of association between two variables. For instance, in order to measure the correlation between the leftright scale and the libertarian-authoritarian scale: The later variable is a numeric variable that details how far someone sits on the libartrian – authoritarian scale from 1 to 5</p>
+<p>R provides a wide range of bivariate statistics under its base packages. The cor() and cov() functions provide basic measures of association between two variables. For instance, in order to measure the correlation between the leftright scale and the libertarian-authoritarian scale: The later variable is a numeric variable that details how far someone sits on the libartrian – authoritarian scale from 1 to 5</p>
 <div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="descriptive-statistics.html#cb155-1" tabindex="-1"></a><span class="fu">cor</span>(bsa<span class="sc">$</span>leftrigh, bsa<span class="sc">$</span>libauth, <span class="at">use=</span><span class="st">&#39;complete.obs&#39;</span>)</span></code></pre></div>
 <pre><code>## [1] 0.009626</code></pre>
 <p>A correlation of 0.009 indicates an positive but very small relationship. It can be translated to mean ’an increase in authoritarianism is associated with a marginal increase in rightwing views.</p>
@@ -389,7 +388,7 @@ Either:</p>
 ##   None             11.6   15.4
 ##   Green Party       1.8    2.3</code></pre>
 <p>Similar proportions of men voted Conservative and Labour (36-37%), whereas women were clearly more likely to vote Labour.</p>
-<p>For some reason, there is not a straightforward way to easily percentages in three-way contingency tables with either <code>xtabs()</code> or <code>table()</code>. This is where <code>ftable()</code> comes handy.</p>
+<p>For some reason, there is not a straightforward way to obtain percentages in three-way contingency tables with either <code>xtabs()</code> or <code>table()</code>. This is where <code>ftable()</code> comes handy.</p>
 <div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="descriptive-statistics.html#cb174-1" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(</span>
 <span id="cb174-2"><a href="descriptive-statistics.html#cb174-2" tabindex="-1"></a>  <span class="fu">ftable</span>(RAgeCat<span class="sc">~</span>PartyId2 <span class="sc">+</span>Rsex,<span class="at">data=</span>bsa)</span>
 <span id="cb174-3"><a href="descriptive-statistics.html#cb174-3" tabindex="-1"></a>  ,<span class="dv">1</span>),<span class="dv">1</span>)       <span class="do">### Option 2 for column percentages</span></span></code></pre></div>
@@ -448,7 +447,7 @@ Either:</p>
 ## 13 Female Green Party        0.744    3   
 ## 14 Female &lt;NA&gt;               0.540    3.67</code></pre>
 <p>When further broken down by gender, we can see that overall the same trends remain valid, with some nuances: male Green supporters are markedly more liberal than their female counterpart, the opposite being true among Conservative supporters.</p>
-<p>Instead of directly tables of summary statistics, we may want to have them computed as variables that will be added to the current dataset for each corresponding gender/political affiliation group. This is straighforward to do with dplyr, we just need to use the <code>mutate()</code> command.</p>
+<p>Instead of tables of summary statistics, we may want to have summary statistics computed as variables that will be added to the current dataset for each corresponding gender/political affiliation group. This is straightforward to do with dplyr, we just need to use the <code>mutate()</code> command.</p>
 <div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="descriptive-statistics.html#cb180-1" tabindex="-1"></a>bsa<span class="ot">&lt;-</span></span>
 <span id="cb180-2"><a href="descriptive-statistics.html#cb180-2" tabindex="-1"></a>bsa<span class="sc">%&gt;%</span><span class="fu">group_by</span>(Rsex,PartyId2)<span class="sc">%&gt;%</span><span class="fu">mutate</span>(</span>
 <span id="cb180-3"><a href="descriptive-statistics.html#cb180-3" tabindex="-1"></a><span class="at">msscore=</span><span class="fu">sd</span>(libauth,<span class="at">na.rm=</span>T) ,<span class="at">mdscore=</span><span class="fu">median</span>(libauth,<span class="at">na.rm=</span>T))</span></code></pre></div>

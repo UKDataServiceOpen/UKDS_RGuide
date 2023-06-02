@@ -24,7 +24,6 @@ Analysing survey data using R</p>" />
 <meta name="author" content="Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service" />
 
 
-<meta name="date" content="2023-05-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -275,7 +274,15 @@ using value labels as levels, which may be an issue for categorical variables wi
 <p>We can see that there are 3,988 observations and 25 variables in the BSA dataset.</p>
 <p>Typing:</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="opening-ukds-datasets-in-r.html#cb69-1" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;bsa&quot;     &quot;datadir&quot; &quot;mydata&quot;</code></pre>
+<pre><code>##  [1] &quot;a&quot;               &quot;b&quot;              
+##  [3] &quot;bsa&quot;             &quot;bsa.design&quot;     
+##  [5] &quot;bsa.young&quot;       &quot;bsa.young.males&quot;
+##  [7] &quot;datadir&quot;         &quot;dev.d&quot;          
+##  [9] &quot;df.d&quot;            &quot;fit1&quot;           
+## [11] &quot;fit2&quot;            &quot;m&quot;              
+## [13] &quot;mydata&quot;          &quot;p&quot;              
+## [15] &quot;pa&quot;              &quot;party.tab&quot;      
+## [17] &quot;rm&quot;</code></pre>
 <p>will show us that the object ‘bsa’ has appeared, but what if we want to get the list of all variables in the dataset? We need to type:</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="opening-ukds-datasets-in-r.html#cb71-1" tabindex="-1"></a><span class="fu">ls</span>(bsa)</span></code></pre></div>
 <pre><code>##  [1] &quot;actchar&quot;          &quot;actpol&quot;          

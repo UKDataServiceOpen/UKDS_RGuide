@@ -24,7 +24,6 @@ Analysing survey data using R</p>" />
 <meta name="author" content="Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service" />
 
 
-<meta name="date" content="2023-05-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -295,29 +294,18 @@ Analysing survey data using R</p></a>
 <p>The weighting procedures described above could be described as ‘quick and dirty’ in that they mostly compute point estimates – ie a single value – and do not provide a reliable idea of their precision. Computing the precision of survey data estimates – usually via their standard error – usually requires more than just adding weights to a command. Information about the survey design, its primary sampling units, strata and clusters is requires so that robust standard errors, statistical tests and/or confidence interval are computed.</p>
 <p>The <code>Survey</code> package was designed in order to deal with this set of issues. It provides functions for integrating survey design into R as well as computing common estimates. We describe below the most important features. In order to use survey fonctions consist one first needs to create a svydesign object, in essence a version of the data that incorporates the sample design information available, then to compute the estimate using the svydesign object.</p>
 <p>An common issue with survey datasets available in the UK is that sampling information is often only available in secure lab version of the data, restricting its access to authorised users. Although it is sometimes possible to use available variables to account for aspects of the sample design – region as a strata in the case of stratified samples – in most cases users are left with computing standard errors without sample design information, which amounts to assuming that the sample was drawn purely at random. Even if this is the case however, using the <code>survey</code> package is recommended, as it provides a coherent framework for computing survey parameters.</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="producing-weighted-estimates.html#cb197-1" tabindex="-1"></a><span class="fu">library</span>(survey) <span class="do">### Loading the package in memory</span></span></code></pre></div>
-<pre><code>## Loading required package: grid</code></pre>
-<pre><code>## Loading required package: Matrix</code></pre>
-<pre><code>## Loading required package: survival</code></pre>
-<pre><code>## 
-## Attaching package: &#39;survey&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:Hmisc&#39;:
-## 
-##     deff</code></pre>
-<pre><code>## The following object is masked from &#39;package:graphics&#39;:
-## 
-##     dotchart</code></pre>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="producing-weighted-estimates.html#cb204-1" tabindex="-1"></a>bsa.design<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">ids =</span><span class="sc">~</span><span class="dv">1</span>,<span class="at">weights=</span><span class="sc">~</span>WtFactor,<span class="at">data=</span>bsa) </span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="producing-weighted-estimates.html#cb197-1" tabindex="-1"></a><span class="fu">library</span>(survey) <span class="do">### Loading the package in memory</span></span>
+<span id="cb197-2"><a href="producing-weighted-estimates.html#cb197-2" tabindex="-1"></a>bsa.design<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">ids =</span><span class="sc">~</span><span class="dv">1</span>,<span class="at">weights=</span><span class="sc">~</span>WtFactor,<span class="at">data=</span>bsa) </span></code></pre></div>
 <p>The code above simply declares the survey design by creating the <code>bsa.design</code> object (the name is arbitrary). The <code>ids=</code> parameter is where primary sampling units are declared, as well as any clustering information as a formula ie <code>~PSU+cluster2id...</code>. When PSU information is unavailable <code>ids</code> is given the value 1 or 0. A <code>strata=</code> and <code>fpc=</code> are available in order to declare the sampling strata and the variable used for finite population correction. None of these are available in the bsa dataset, and estimation commands will therefore rely on the assumption of simple random sampling.</p>
 <p>We can now compute estimates similar estimates as in the previous sections. The code below provides the mean of the left vs right political orientation indicator, as well as its 95% confidence interval:</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="producing-weighted-estimates.html#cb205-1" tabindex="-1"></a><span class="fu">svymean</span>(<span class="sc">~</span>leftrigh,bsa.design,<span class="at">na.rm =</span> T)  <span class="do">### Computes the mean and its standard error...</span></span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="producing-weighted-estimates.html#cb198-1" tabindex="-1"></a><span class="fu">svymean</span>(<span class="sc">~</span>leftrigh,bsa.design,<span class="at">na.rm =</span> T)  <span class="do">### Computes the mean and its standard error...</span></span></code></pre></div>
 <pre><code>##          mean   SE
 ## leftrigh 2.52 0.02</code></pre>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="producing-weighted-estimates.html#cb207-1" tabindex="-1"></a><span class="fu">confint</span>(<span class="fu">svymean</span>(<span class="sc">~</span>leftrigh,bsa.design,<span class="at">na.rm =</span> T)) <span class="do">### ... and confidence interval</span></span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="producing-weighted-estimates.html#cb200-1" tabindex="-1"></a><span class="fu">confint</span>(<span class="fu">svymean</span>(<span class="sc">~</span>leftrigh,bsa.design,<span class="at">na.rm =</span> T)) <span class="do">### ... and confidence interval</span></span></code></pre></div>
 <pre><code>##          2.5 % 97.5 %
 ## leftrigh 2.491  2.552</code></pre>
 <p>And now for the median:</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="producing-weighted-estimates.html#cb209-1" tabindex="-1"></a><span class="fu">svyquantile</span>(<span class="sc">~</span>leftrigh,bsa.design,<span class="at">quantiles=</span>.<span class="dv">5</span>,<span class="at">na.rm =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="producing-weighted-estimates.html#cb202-1" tabindex="-1"></a><span class="fu">svyquantile</span>(<span class="sc">~</span>leftrigh,bsa.design,<span class="at">quantiles=</span>.<span class="dv">5</span>,<span class="at">na.rm =</span> T)</span></code></pre></div>
 <pre><code>## $leftrigh
 ##     quantile ci.2.5 ci.97.5    se
 ## 0.5      2.4    2.4     2.6 0.051
@@ -327,20 +315,20 @@ Analysing survey data using R</p></a>
 ## attr(,&quot;class&quot;)
 ## [1] &quot;newsvyquantile&quot;</code></pre>
 <p>Frequency and contingency tables are computed using <code>svytable()</code>, which follows the same syntax as <code>xtabs()</code></p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="producing-weighted-estimates.html#cb211-1" tabindex="-1"></a><span class="do">### A frequency table...</span></span>
-<span id="cb211-2"><a href="producing-weighted-estimates.html#cb211-2" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span></span>
-<span id="cb211-3"><a href="producing-weighted-estimates.html#cb211-3" tabindex="-1"></a>      <span class="fu">prop.table</span>(</span>
-<span id="cb211-4"><a href="producing-weighted-estimates.html#cb211-4" tabindex="-1"></a>        <span class="fu">svytable</span>(<span class="sc">~</span>RAgeCat,bsa.design)</span>
-<span id="cb211-5"><a href="producing-weighted-estimates.html#cb211-5" tabindex="-1"></a>        ),<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="producing-weighted-estimates.html#cb204-1" tabindex="-1"></a><span class="do">### A frequency table...</span></span>
+<span id="cb204-2"><a href="producing-weighted-estimates.html#cb204-2" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span></span>
+<span id="cb204-3"><a href="producing-weighted-estimates.html#cb204-3" tabindex="-1"></a>      <span class="fu">prop.table</span>(</span>
+<span id="cb204-4"><a href="producing-weighted-estimates.html#cb204-4" tabindex="-1"></a>        <span class="fu">svytable</span>(<span class="sc">~</span>RAgeCat,bsa.design)</span>
+<span id="cb204-5"><a href="producing-weighted-estimates.html#cb204-5" tabindex="-1"></a>        ),<span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## RAgeCat
 ## 18-24 25-34 35-44 45-54 55-59 60-64   65+ 
 ##  11.2  17.2  16.1  17.9   7.9   6.8  22.8</code></pre>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="producing-weighted-estimates.html#cb213-1" tabindex="-1"></a><span class="do">### And a two-way contingency table:</span></span>
-<span id="cb213-2"><a href="producing-weighted-estimates.html#cb213-2" tabindex="-1"></a></span>
-<span id="cb213-3"><a href="producing-weighted-estimates.html#cb213-3" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span></span>
-<span id="cb213-4"><a href="producing-weighted-estimates.html#cb213-4" tabindex="-1"></a>      <span class="fu">prop.table</span>(</span>
-<span id="cb213-5"><a href="producing-weighted-estimates.html#cb213-5" tabindex="-1"></a>        <span class="fu">svytable</span>(<span class="sc">~</span>RAgeCat<span class="sc">+</span>Rsex,bsa.design)</span>
-<span id="cb213-6"><a href="producing-weighted-estimates.html#cb213-6" tabindex="-1"></a>        ,<span class="dv">1</span>),<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="producing-weighted-estimates.html#cb206-1" tabindex="-1"></a><span class="do">### And a two-way contingency table:</span></span>
+<span id="cb206-2"><a href="producing-weighted-estimates.html#cb206-2" tabindex="-1"></a></span>
+<span id="cb206-3"><a href="producing-weighted-estimates.html#cb206-3" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span></span>
+<span id="cb206-4"><a href="producing-weighted-estimates.html#cb206-4" tabindex="-1"></a>      <span class="fu">prop.table</span>(</span>
+<span id="cb206-5"><a href="producing-weighted-estimates.html#cb206-5" tabindex="-1"></a>        <span class="fu">svytable</span>(<span class="sc">~</span>RAgeCat<span class="sc">+</span>Rsex,bsa.design)</span>
+<span id="cb206-6"><a href="producing-weighted-estimates.html#cb206-6" tabindex="-1"></a>        ,<span class="dv">1</span>),<span class="dv">1</span>)</span></code></pre></div>
 <pre><code>##        Rsex
 ## RAgeCat Male Female
 ##   18-24 51.1   48.9

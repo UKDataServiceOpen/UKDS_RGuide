@@ -24,7 +24,6 @@ Analysing survey data using R</p>" />
 <meta name="author" content="Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service" />
 
 
-<meta name="date" content="2023-05-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -356,7 +355,7 @@ statistical software.</p>
 <p>Apart from a basic set of commands and functions, most of the tools offered by R are available in packages that are not provided during the main installation and need to be installed and downloaded separately from within R.
 For example, to install the ‘foreign’ package one need to type:</p>
 <pre><code>install.packages(&quot;foreign&quot;,repos = &quot;https://cloud.r-project.org&quot;)</code></pre>
-<p>This only needs to be done once.
+<p>Installation only needs to be done once.
 If the address of the package repository is not specified via the <code>repos</code> option, a pull-down menu will appear, asking for one. Choosing <code>https://cloud.r-project.org</code> will automatically select the closest mirror site.</p>
 <p>Originally, <code>Foreign</code> enabled users to import Stata (version 12 or older) or SPSS datasets. For Stata datasets saved under version 13 and above, the <code>haven</code> or <code>readstata13</code> package are required.</p>
 <pre><code>install.packages(&quot;haven&quot;,repos = &quot;https://cloud.r-project.org&quot;)</code></pre>
@@ -400,13 +399,29 @@ Typing:</p>
 <span id="cb24-2"><a href="using-r-essential-information.html#cb24-2" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="using-r-essential-information.html#cb26-1" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;x&quot;</code></pre>
+<pre><code>##  [1] &quot;a&quot;               &quot;b&quot;              
+##  [3] &quot;bsa&quot;             &quot;bsa.design&quot;     
+##  [5] &quot;bsa.young&quot;       &quot;bsa.young.males&quot;
+##  [7] &quot;datadir&quot;         &quot;dev.d&quot;          
+##  [9] &quot;df.d&quot;            &quot;fit1&quot;           
+## [11] &quot;fit2&quot;            &quot;m&quot;              
+## [13] &quot;mydata&quot;          &quot;p&quot;              
+## [15] &quot;pa&quot;              &quot;party.tab&quot;      
+## [17] &quot;rm&quot;              &quot;x&quot;</code></pre>
 <div id="deleting-objects" class="section level4 unnumbered hasAnchor">
 <h4>Deleting objects<a href="using-r-essential-information.html#deleting-objects" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The rm() function can be used to remove objects from the environment (session). These objects can be variables, lists, datasets, etc. For instance, to remove the object ‘x’, or the fictitious dataset called ‘mydata’: </p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="using-r-essential-information.html#cb28-1" tabindex="-1"></a><span class="fu">rm</span>(x)   </span>
 <span id="cb28-2"><a href="using-r-essential-information.html#cb28-2" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code>## character(0)</code></pre>
+<pre><code>##  [1] &quot;a&quot;               &quot;b&quot;              
+##  [3] &quot;bsa&quot;             &quot;bsa.design&quot;     
+##  [5] &quot;bsa.young&quot;       &quot;bsa.young.males&quot;
+##  [7] &quot;datadir&quot;         &quot;dev.d&quot;          
+##  [9] &quot;df.d&quot;            &quot;fit1&quot;           
+## [11] &quot;fit2&quot;            &quot;m&quot;              
+## [13] &quot;mydata&quot;          &quot;p&quot;              
+## [15] &quot;pa&quot;              &quot;party.tab&quot;      
+## [17] &quot;rm&quot;</code></pre>
 <pre><code>&gt; rm(mydata)</code></pre>
 <!-- The rm() function only works with R objects; but if you want to delete a specific variable of a dataset, you need a different function. For example, to delete the variable ‘age’ of the dataset ‘mydata’, an option is to set the variable to NULL:  -->
 <!-- > mydata$age<-NULL  -->
