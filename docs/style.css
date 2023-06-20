@@ -12,3 +12,15 @@ pre {
 pre code {
   white-space: inherit;
 }
+body {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+h1 {
+  color: #702082;
+  font-size: 20px; 
+}
+h2 {
+  color: #702082;
+  font-size: 18px;
+}
