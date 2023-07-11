@@ -1,4 +1,4 @@
-<a href="pics/UKDS_Logos_Col_Grey_300dpi.png" width=256px /a>
+<img src="pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UK Data Service Logo" style="width:256px;">
 # UKDS R Guide
 This is the GitHub repository for the UK Data Service R Guide to analysing survey data source files.
 This guide consist of a step by step introduction to common statistical analysis procedures 
