@@ -24,6 +24,7 @@ Analysing survey data using R</p>" />
 <meta name="author" content="Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service" />
 
 
+<meta name="date" content="2023-06-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -238,8 +239,8 @@ Analysing survey data using R</p></a>
 <p>Two common ways of conducting statistical testing with means in samples consist in testing whether they are significantly different from 0 (one sample t-test), or whether they differ between two groups (two samples t test). In the latter case, one can further distinguish between independent samples (where means come from different groups), or paired samples (when the same measure is taken at several point in time). Given that it is the most widely used in social science, we will only cover the former here.</p>
 <p>Several R packages provide functions for conducting t tests. We will be using <code>t.test()</code>, part the <code>stats</code> package. Suppose we would like to test whether <code>libauth</code> significantly differs between men and women. A two sided test is the default (with H_0 that there is no differences between groups), and H_1 that the group means do indeed differ. The test is specified with a formula with on the left hand side the quantity to be tested and on the right hand side the grouping variable.</p>
 <p>One sided tests can be conducted by specifying that the alternative hypothesis (H_1) is either <strong>greater</strong> or <strong>less</strong>. <code>t.test()</code> assumes that by default the variances are unequal. this can be changed with the <code>var.equal=T</code> option.</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="statistical-testing.html#cb223-1" tabindex="-1"></a><span class="co"># Testing for significant differences in liberal vs authoritarian score</span></span>
-<span id="cb223-2"><a href="statistical-testing.html#cb223-2" tabindex="-1"></a><span class="fu">t.test</span>(libauth<span class="sc">~</span>Rsex,<span class="at">data=</span>bsa)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="statistical-testing.html#cb230-1" tabindex="-1"></a><span class="co"># Testing for significant differences in liberal vs authoritarian score</span></span>
+<span id="cb230-2"><a href="statistical-testing.html#cb230-2" tabindex="-1"></a><span class="fu">t.test</span>(libauth<span class="sc">~</span>Rsex,<span class="at">data=</span>bsa)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -252,8 +253,8 @@ Analysing survey data using R</p></a>
 ##   mean in group Male mean in group Female 
 ##                3.528                3.498</code></pre>
 <p>No significant differences (ie the difference in <code>libauth</code> between men and women is not significantly different from zero)</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="statistical-testing.html#cb225-1" tabindex="-1"></a><span class="co"># Testing for whether men have a lower (ie more left-wing)  score</span></span>
-<span id="cb225-2"><a href="statistical-testing.html#cb225-2" tabindex="-1"></a><span class="fu">t.test</span>(leftrigh<span class="sc">~</span>Rsex,<span class="at">data=</span>bsa, <span class="at">alternative=</span><span class="st">&quot;less&quot;</span>)      </span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="statistical-testing.html#cb232-1" tabindex="-1"></a><span class="co"># Testing for whether men have a lower (ie more left-wing)  score</span></span>
+<span id="cb232-2"><a href="statistical-testing.html#cb232-2" tabindex="-1"></a><span class="fu">t.test</span>(leftrigh<span class="sc">~</span>Rsex,<span class="at">data=</span>bsa, <span class="at">alternative=</span><span class="st">&quot;less&quot;</span>)      </span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -271,8 +272,8 @@ Analysing survey data using R</p></a>
 <h2><span class="header-section-number">8.2</span> Differences in variance<a href="statistical-testing.html#differences-in-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Another common significance test in social science is the <strong>variance test</strong> which consists of testing whether the variances of the same variable across two groups are equal. This is usually achieved by testing whether the ratio of the variance between the two groups is significantly different from zero. With the BSA data, this amounts to testing whether men and women are more homogenous with regard to their political views.</p>
 <p>The syntax for the variance test <code>var.test()</code> also included in <code>stats</code> is almost identical to that of <code>t.test()</code></p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="statistical-testing.html#cb227-1" tabindex="-1"></a><span class="co"># Testing for gender differences in liberal vs authoritarian score</span></span>
-<span id="cb227-2"><a href="statistical-testing.html#cb227-2" tabindex="-1"></a><span class="fu">var.test</span>(libauth<span class="sc">~</span>Rsex,<span class="at">data=</span>bsa)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="statistical-testing.html#cb234-1" tabindex="-1"></a><span class="co"># Testing for gender differences in liberal vs authoritarian score</span></span>
+<span id="cb234-2"><a href="statistical-testing.html#cb234-2" tabindex="-1"></a><span class="fu">var.test</span>(libauth<span class="sc">~</span>Rsex,<span class="at">data=</span>bsa)</span></code></pre></div>
 <pre><code>## 
 ##  F test to compare two variances
 ## 
@@ -286,8 +287,8 @@ Analysing survey data using R</p></a>
 ## ratio of variances 
 ##              1.089</code></pre>
 <p>Significant differences in the variance between men and women, but only at the .1 threshold.</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="statistical-testing.html#cb229-1" tabindex="-1"></a><span class="co"># Testing for whether men have a lower (ie more left-wing)  score</span></span>
-<span id="cb229-2"><a href="statistical-testing.html#cb229-2" tabindex="-1"></a><span class="fu">var.test</span>(leftrigh<span class="sc">~</span>Rsex,<span class="at">data=</span>bsa,<span class="at">alternative=</span><span class="st">&quot;greater&quot;</span>)      </span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="statistical-testing.html#cb236-1" tabindex="-1"></a><span class="co"># Testing for whether men have a lower (ie more left-wing)  score</span></span>
+<span id="cb236-2"><a href="statistical-testing.html#cb236-2" tabindex="-1"></a><span class="fu">var.test</span>(leftrigh<span class="sc">~</span>Rsex,<span class="at">data=</span>bsa,<span class="at">alternative=</span><span class="st">&quot;greater&quot;</span>)      </span></code></pre></div>
 <pre><code>## 
 ##  F test to compare two variances
 ## 
@@ -306,7 +307,7 @@ Analysing survey data using R</p></a>
 <h2><span class="header-section-number">8.3</span> Significance of measures of association<a href="statistical-testing.html#significance-of-measures-of-association" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Between continuous variables</strong></p>
 <p>Another type of common statistical test in social science is about examining whether a coefficient of correlation is significantly different from 0 (alternative hypothesis).</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="statistical-testing.html#cb231-1" tabindex="-1"></a><span class="fu">cor.test</span>(bsa<span class="sc">$</span>leftrigh, bsa<span class="sc">$</span>libauth, <span class="at">use=</span><span class="st">&#39;complete.obs&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="statistical-testing.html#cb238-1" tabindex="-1"></a><span class="fu">cor.test</span>(bsa<span class="sc">$</span>leftrigh, bsa<span class="sc">$</span>libauth, <span class="at">use=</span><span class="st">&#39;complete.obs&#39;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
@@ -323,7 +324,7 @@ Analysing survey data using R</p></a>
 <p>The chi-square test of independence is a very common test of association between categorical variables. It consists in examining whether the association between two variables is likely to be due to chance or not, in other words whether the variability observed in a contingency table is significantly different from what would be expected were it due to chance.</p>
 <p>We will be using <code>chisq.test()</code>, also from the <code>stats</code> package. By contrast with the test of correlation, the <code>chisq.test()</code> needs to be applied to contingency tables that have already been computed.
 Let us go back to an earlier example, and attempt to test whether the gender differences in political affiliations are due to chance or not.</p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="statistical-testing.html#cb233-1" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>PartyId2 <span class="sc">+</span>Rsex,bsa))</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="statistical-testing.html#cb240-1" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>PartyId2 <span class="sc">+</span>Rsex,bsa))</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
