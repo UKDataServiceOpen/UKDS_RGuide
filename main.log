@@ -1,0 +1,247 @@
+ 
+Below the categories of activity_1 - the original activity var - included in each of the 58 main activities
+ 
+* MAIN 1: Imputed personal or household care
+No activities in this category
+ 
+* MAIN 2: Sleep and naps
+11 Sleep/in bed
+12 Sick in bed
+ 
+* MAIN 3: Imputed sleep
+No activities in this category
+ 
+* MAIN 4: Wash, dress, care for self
+30 Unspecified personal care
+31 self-care
+39 Other self care
+ 
+* MAIN 5: Meals at work or school
+21 Eating
+ 
+* MAIN 6: Meals or snacks in other places
+21 Eating
+ 
+* MAIN 7: Paid work - main job (not at home)
+111 Working in main job
+ 
+* MAIN 8: Paid work at home (main, second or other job)
+No activities in this category
+ 
+* MAIN 9: Second or other job not at home
+121 Working in second job
+ 
+* MAIN 10: Unpaid work to generate household income
+No activities in this category
+ 
+* MAIN 11: Travel as a part of work
+No activities in this category
+ 
+* MAIN 12: Work breaks
+112 Coffee and other breaks in main job
+122 Coffee and other breaks in second job
+131 Lunch break
+ 
+* MAIN 13: Other time at workplace
+100 Unspecified employment
+130 Unspecified activities related to employment
+139 Other activities related to employment
+ 
+* MAIN 14: Look for work
+No activities in this category
+ 
+* MAIN 15: Regular schooling, education
+200 Unspecified study
+210 Unspecified activities related to school /uni
+211 Classes and lectures
+219 Other activities related to school/uni
+ 
+* MAIN 16: Homework
+212 Homework
+ 
+* MAIN 17: Leisure course or other education or training
+221 Free time study
+ 
+* MAIN 18: Food preparation, cooking
+310 Unspecified food management
+311 Food preparation
+312 Baking
+314 Preserving
+319 Other food management
+ 
+* MAIN 19: Set table, wash/put away dishes
+No activities in this category
+ 
+* MAIN 20: Cleaning
+313 Dish washing
+321 Cleaning dwelling
+322 Cleaning yard
+325 washing carpets
+ 
+* MAIN 21: Laundry, ironing, clothing repair
+326 washing wool for blanket
+330 Unspecified making/care for textiles
+331 Laundry
+332 Ironing
+333 Handicraft and producing textiles
+339 Other specified making and care for textiles
+ 
+* MAIN 22: Home/vehicle maintenance/improvement, collect fuel
+300 Unspecified hh and family care
+320 Unspecified household upkeep
+323 Heating and water supplying for hh
+350 Unspecified construction and repairs
+351 House construction and renovation
+352 Repairs of dwelling
+353 Making, repairing, maintaining equipment not for sale
+354 Vehicle maintenance
+359 Other specified construction and repairs
+ 
+* MAIN 23: Other domestic work
+324 Various arrangements
+329 Other household upkeep
+371 Household management
+ 
+* MAIN 24: Purchase goods
+360 Unspecified shopping and services
+361 Shopping
+369 Other specified shopping and services
+ 
+* MAIN 25: Consume personal care services
+363 Personal services (visiting a doctor, barber)
+ 
+* MAIN 26: Consume other services
+362 Commercial and administrative services
+ 
+* MAIN 27: Pet care (other than walk dog)
+343 Caring for pets
+349 Other specified gardening and pet care
+ 
+* MAIN 28: Physical or medical child care
+380 Unspecified childcare
+381 Physical child care and supervision
+389 Other specified childcare
+ 
+* MAIN 29: Teach child a skill, help with homework
+382 Teaching the child
+ 
+* MAIN 30: Read to, talk or play with child
+383 Reading, playing and talking with child
+ 
+* MAIN 31: Supervise, accompany, other child care
+384 Accompanying child
+ 
+* MAIN 32: Adult care
+391 Help to an elderly family member
+ 
+* MAIN 33: Voluntary work, civic or organisational activity
+420 Unspecified informal help
+421 Food management as help
+422 Household upkeep as help
+423 Gardening and pet care as help
+424 Construction and repairs as help
+425 Shopping and services as help
+426 Help in employment and farming (unpaid)
+427 Childcare as help
+428 Help to an elderly of another household
+429 Other specified informal help
+431 Meeting
+439 Other specified participatory activities
+995 Filling in the time use diary
+ 
+* MAIN 34: Worship and religious activity
+432 Religious activities
+ 
+* MAIN 35: General out-of-home leisure
+500 Unspecified social life and entertainment
+520 Entertainment and culture(cinema,library, sports events)
+ 
+* MAIN 36: Attend sporting event
+No activities in this category
+ 
+* MAIN 37: Cinema, theatre, opera, concert
+520 Entertainment and culture(cinema,library, sports events)
+ 
+* MAIN 38: Other public event, venue
+No activities in this category
+ 
+* MAIN 39: Restaurant, café, bar, pub
+21 Eating
+ 
+* MAIN 40: Party, reception, social event, gambling
+No activities in this category
+ 
+* MAIN 41: Imputed time away from home
+No activities in this category
+ 
+* MAIN 42: General sport or exercise
+600 Unspecified sports and outdoor activities
+610 Physical exercise
+611 Physical exercise
+ 
+* MAIN 43: Walking
+342 Tending domestic animals not for sale
+510 Social life (communication with family, phone etc)
+511 conversation with family members
+512 conversation with neighbors
+530 Resting- time out
+710 Arts (painting,photography,playing,singing)
+ 
+* MAIN 44: Cycling
+No activities in this category
+ 
+* MAIN 45: Other out-of-doors recreation
+No activities in this category
+ 
+* MAIN 46: Gardening/forage (pick mushrooms), hunt/fish
+341 Gardening, vegetables, harvesting, not for sale
+342 Tending domestic animals not for sale
+620 Unspecified productive exercise (fishing,picking berries)
+ 
+* MAIN 47: Walk dogs
+344 Walking the dog
+ 
+* MAIN 48: Receive or visit friends
+510 Social life (communication with family, phone etc)
+ 
+* MAIN 49: Conversation (in person, phone)
+511 conversation with family members
+512 conversation with neighbors
+ 
+* MAIN 50: Games (social or solitary), other in-home social
+700 Unspecified hobbies and games
+730 Games
+731 playing national game nardi
+ 
+* MAIN 51: General indoor leisure
+No activities in this category
+ 
+* MAIN 52: Artistic or musical activity
+710 Arts (painting,photography,playing,singing)
+ 
+* MAIN 53: Written correspondence
+No activities in this category
+ 
+* MAIN 54: Knit, crafts or hobbies
+720 Hobbies (collecting things, writing, reading)
+ 
+* MAIN 55: Relax, think, do nothing
+530 Resting- time out
+ 
+* MAIN 56: Read
+810 Unspecified reading
+811 Reading periodicals
+812 Reading books
+819 Other specified reading
+ 
+* MAIN 57: Listen to music, ipod, cd, audio book
+No activities in this category
+ 
+* MAIN 58: Listen to radio
+830 Radio and music
+ 
+      name:  <unnamed>
+       log:  /home/piet/Dropbox/work/UKDS/RGuide/UKDS_RGuide/main.log
+  log type:  text
+ closed on:   4 Jun 2023, 16:21:17
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
