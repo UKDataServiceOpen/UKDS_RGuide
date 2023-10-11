@@ -7,6 +7,9 @@ date: "`r paste0(substr(date(), 9,11),substr(date(), 5,8),substr(date(), 21,24))
 knit: "bookdown::render_book"
 fontsize: 12pt
 site: bookdown::bookdown_site
+mainfont: Arial
+monofont: "Courier New"
+monofontoptions: 'Scale=0.8'
 ---
 
 ```{r setup, include=FALSE}

@@ -8,7 +8,7 @@ the standard and rather minimalist R interface that appears when the programme
 is launched is shown below.
 
 <div class="figure">
-<img src="pics/screen2.1.png" alt="Screenshot of the standard R Windows interface" width="800" />
+<img src="pics/screen2.1.png" alt="Screenshot of the standard R Windows interface" />
 <p class="caption">(\#fig:2.1)The standard R interface</p>
 </div>
 

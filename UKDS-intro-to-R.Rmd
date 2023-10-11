@@ -7,6 +7,9 @@ date: "`r paste0(substr(date(), 9,11),substr(date(), 5,8),substr(date(), 21,24))
 knit: "bookdown::render_book"
 fontsize: 12pt
 site: bookdown::bookdown_site
+mainfont: Arial
+monofont: "Courier New"
+monofontoptions: 'Scale=0.8'
 ---
 
 ```{r setup, include=FALSE}
@@ -125,7 +128,7 @@ application. Versions for Mac and Linux are also available.  After installation,
 the standard and rather minimalist R interface that appears when the programme
 is launched is shown below.
 
-```{r 2.1, echo=FALSE,fig.cap="The standard R interface",fig.pos="H",out.width = "800", fig.alt="Screenshot of the standard R Windows interface"} 
+```{r 2.1, echo=FALSE,fig.cap="The standard R interface",fig.pos="H",out.width = "500pt", fig.alt="Screenshot of the standard R Windows interface"} 
 knitr::include_graphics("pics/screen2.1.jpg")
 ``` 
 
@@ -164,7 +167,7 @@ known as the script editor (top left panel), the console (bottom left panel),
 the Environment (top right panel) and the File/Directory/Help (bottom right
 panel).
 
-```{r 2.2,echo=FALSE, fig.cap="The R Studio default interface",out.width = "900", fig.alt="Screenshot of the standard RStudio interface with four panes: top left: script; bottom left: console; top right: global environment; bottom right: files or help" }
+```{r 2.2,echo=FALSE, fig.cap="The R Studio default interface",out.width = "500pt", fig.alt="Screenshot of the standard RStudio interface with four panes: top left: script; bottom left: console; top right: global environment; bottom right: files or help" }
 knitr::include_graphics("pics/screen2.2.png")
 ```
 As such a complex interface can be visually overwhelming for some users and is
@@ -174,7 +177,7 @@ window and dragging right to the edge of the screen. This way, only the script
 and console  panels remain visible.   The tiling of the panels can be customised
 in `Tools>Global Options>Pane Layout`. For instance, Script can be moved to the
 bottom of the window and Console to the top: 
-```{r 2.3,echo=FALSE, fig.cap="A customised R Studio interface",out.width = "900", fig.alt="Screenshot of the customised R Studio interface, with the console pane at the top and the script pane at the bottom" }
+```{r 2.3,echo=FALSE, fig.cap="A customised R Studio interface",out.width = "500pt", fig.alt="Screenshot of the customised R Studio interface, with the console pane at the top and the script pane at the bottom" }
 knitr::include_graphics("pics/screen2.3.png")
 ```
 

@@ -1,0 +1,3152 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{Arial}
+  \setmonofont[Scale=0.8]{Courier New}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\usepackage{float}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={ Analysing survey data using R},
+  pdfauthor={Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{\includegraphics[width=6cm,height=\textheight]{./pics/UKDS_Logos_Col_Grey_300dpi.png}\\
+Analysing survey data using R}
+\author{Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service}
+\date{15 Sep 2023}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+This guide provides an introduction to analysing large scale social survey
+dataset using R with examples from the British Social Attitudes Survey 2020. It
+is aimed at two categories of users:~
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Those outside higher education, or who do not have access to one commonly used commercial statistical software such as Stata, SPSS or SAS but who would like to conduct their own analysis beyond what is usually published by data producers such as the Office for National Statistics (for example statistics
+  for specific groups of the population). This guide provides this group of users with a range of procedures that will help them produce straightforward and robust
+  analyses tailored to their needs without spending unnecessary time on learning the inner workings of R.~
+\item
+  More advanced users who are already familiar with other data analysis tools but who would like to learn how to carry out their analyses in R.
+  The guide therefore focuses on providing succinct examples of common operations that most users carry out in the course of their research, including how to:~
+\end{enumerate}
+
+\begin{itemize}
+\item
+  read in and open datasets.~
+\item
+  do common data manipulation operations.~
+\item
+  produce simple descriptive statistics or tabulations.~
+\item
+  use survey weights.~
+\end{itemize}
+
+By contrast with other statistical software, the R interface is rather minimal
+and consist merely of a terminal. In line with programming languages such a
+Python or C, R users tend to access it via an interface, or Integrated
+Development Environment (IDE). This guide uses the R Studio development
+environment, one of the most common IDE for R. The data used in this guide is
+the \href{https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8849}{British Social Attitudes Survey, 2017, Environment and Politics: Open
+Access Teaching
+Dataset},
+which can be downloaded from the UK Data Service website without registration.
+The website also has instructions on how to acquire and download large-scale
+survey datasets. Links and further information about the other training
+resources available online are provided at the end of this document.
+
+\hypertarget{what-is-r}{%
+\subsection{What is R ?}\label{what-is-r}}
+
+R is a free, user developed, object-oriented statistical programming language
+that originates in the `S' and `S Plus' languages developed during the 1970s
+and 1980s. It has a large audience in the science and statistics communities and
+is increasingly used in the social sciences for teaching and research purposes.
+
+Anyone can install and use R without charge, and to some extent contribute to
+and amend the existing program itself. R can be downloaded from the
+\href{https://cran.r-project.org/}{Comprehensive R Archive Network (CRAN)} website.
+Installation instructions as well as guides, tutorials and FAQ are available on
+the CRAN website.
+
+R is particularly favoured by users who want to develop their own statistical
+functions or implement technical advances that are not yet available in
+commercial packages. The existence of a vast number of user written packages
+(17,672 at the time of writing this guide) is one of the great strengths of R.
+Users who want to contribute should be aware that in order to be part of the R
+archive, a minimum set of rules need nonetheless to be followed.
+
+Although R can perform most of the analyses available in generalist software
+such as Stata, SPSS, or SAS, it has a broader potential since it can also be
+used for mapping, data mining or machine learning. Being a language also means
+that there are often several ways to carry out analyses in R, each one with its
+advantages and inconvenient. Users can also easily produce publication quality
+output from R thanks to its integration with the Markdown LaTeX document
+presentation system, and R graphs can also be imported into MS Word or
+LibreOffice documents.
+
+Although R has advantages over other statistical analysis software, it also has
+a few downsides, both of which are summarised below. Users should be reminded
+that as open-source software, R and its packages are developed by volunteers,
+which makes it a very flexible and dynamic project, but at the same time reliant
+on developers' free time and goodwill.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4220}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5780}}@{}}
+\caption{\label{tab:table}Advantages and inconvenients of R}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Pros
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Cons
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Pros
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Cons
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+R is free and allows users to perform almost any analysis they want. & The learning curve may be steep for users who do not have a prior background in statistics or programming. \\
+R puts statistical analysis closer to the reach of individual citizens rather than specialists. & \\
+& \\
+Transparency of use and programming of the software and its routines, which improves the peer-reviewing and quality control of the software in many cases. & \\
+Very flexible. & Problem solving (for both advanced users and beginners) may be time-consuming, depending on how common the problem encountered, and may lead to more time spent solving technical rather than substantive issues. \\
+& \\
+Availability of a wide range of advanced techniques not provided in other statistical software & Many people who design R packages are, or will become busy academics. Packages can stop being maintained without notice. \\
+& \\
+A very large user base provides abundant documentation, tutorials, and web pages. & \\
+\end{longtable}
+
+There are several (sometimes many) ways of achieving a particular result in R.
+This can be confusing for novice researchers, but at the same time will allow users to
+tightly adjust their programmes to their needs.
+\newpage
+
+\hypertarget{using-r-essential-information}{%
+\section{Using R: essential information}\label{using-r-essential-information}}
+
+\hypertarget{download-and-installation}{%
+\subsection{Download and installation}\label{download-and-installation}}
+
+R can be downloaded for free from the \href{https://cran.r-project.org/}{CRAN
+website} and run like any other Windows
+application. Versions for Mac and Linux are also available. After installation,
+the standard and rather minimalist R interface that appears when the programme
+is launched is shown below.
+
+\begin{figure}[H]
+\includegraphics[width=500pt]{pics/screen2.1} \caption{The standard R interface}(\#fig:2.1)
+\end{figure}
+
+This interface merely allows the user to type in commands one by one in the
+console, and to install packages via pull-down menus. However, this basic
+installation, although fully functional, is rather minimal, not very ergonomic
+or user friendly. As with other statistical software, the primary way of
+interacting with R for most is to write programs, even basic ones in a syntax
+file (also called script file) that is saved and run whenever needed, which is
+not directly feasible with the standard R GUI.
+
+It is therefore highly recommended to use R via an Integrated Development
+Environment (ie a more sophisticated user interface) such as
+\href{https://www.rstudio.com/products/rstudio/download/}{RStudio} for beginners to
+intermediate users or the \href{https://www.eclipse.org/statet/news/}{StatEt module}
+for \href{https://www.eclipse.org/downloads/}{Eclipse} for more advanced
+programmers. Both are free, available for Windows, MacOS and Linux and offer
+users a large number of additional functionalities, such as syntax
+highlighting, integration with Github. Given that it probably has the largest
+number of users RStudio will be used to demonstrate examplkes of R syntax in
+the remainder of this document. In order for this guide to remain as universal
+as possible, we will not rely on the advanced features of RStudio, instead using
+it merely as an interface to the R engine.
+
+\hypertarget{installing-and-setting-up-rstudio}{%
+\subsection{Installing and setting up RStudio}\label{installing-and-setting-up-rstudio}}
+
+RStudio needs to be installed separately from R. The program can be downloaded
+from \href{https://www.rstudio.com/products/rstudio/download/}{the RStudio website}.
+The site will automatically generate a link to the version most compatible with
+the computer used to access it. Once downloaded double click on the file and
+follow the installation instructions.
+
+By default, the R Studio interface consists of four main panels, respectively
+known as the script editor (top left panel), the console (bottom left panel),
+the Environment (top right panel) and the File/Directory/Help (bottom right
+panel).
+
+\begin{figure}
+\includegraphics[width=500pt]{pics/screen2.2} \caption{The R Studio default interface}(\#fig:2.2)
+\end{figure}
+
+As such a complex interface can be visually overwhelming for some users and is
+not required for the purpose of this guide, we will minimise the Global
+Environment and Files/Directory/Help panels by clicking in the center of the
+window and dragging right to the edge of the screen. This way, only the script
+and console panels remain visible. The tiling of the panels can be customised
+in \texttt{Tools\textgreater{}Global\ Options\textgreater{}Pane\ Layout}. For instance, Script can be moved to the
+bottom of the window and Console to the top:
+
+\begin{figure}
+\includegraphics[width=500pt]{pics/screen2.3} \caption{A customised R Studio interface}(\#fig:2.3)
+\end{figure}
+
+\hypertarget{interacting-with-r}{%
+\subsection{Interacting with R}\label{interacting-with-r}}
+
+As already mentioned, one can type R commands directly in the console of RStudio
+and/or by typing sequences of commands in a script file.
+
+Most R commands adopt the following syntax:~
+
+\begin{verbatim}
+> command(parameter1, parameter2, ...) 
+\end{verbatim}
+
+\texttt{All} R commands are followed by brackets, even if there are no parameters.
+
+In the following example we are going to set up the default working directory, that is the default location for opening and storing files, by using the \texttt{getwd()} and \texttt{setwd()} commands. First, let us visualise the current default working directory.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{getwd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "/home/piet/Dropbox/work/UKDS/RGuide/UKDS_RGuide"
+\end{verbatim}
+
+Let us say we would like the code from this guide to be all in a folder called `R\_UKDS', to be located in `My Documents'. To tell R to use the folder 'R\_UKDS, we can either create it from within Windows or ask R to do it for us. So type:~
+
+For Windows:~
+
+\begin{verbatim}
+> setwd("C:/Documents and Settings/<INSERT YOUR USERNAME HERE>/My Documents/R_UKDS") 
+\end{verbatim}
+
+For Mac:
+
+\begin{verbatim}
+> setwd("/Users/<INSERT YOUR USERNAME HERE>/Documents/R_UKDS") 
+\end{verbatim}
+
+For Linux:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dir.create}\NormalTok{(}\StringTok{"\textasciitilde{}/Documents/R\_UKDS"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in dir.create("~/Documents/R_UKDS"):
+## '/home/piet/Documents/R_UKDS' already exists
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{setwd}\NormalTok{(}\StringTok{"\textasciitilde{}/Documents/R\_UKDS"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Typing \texttt{getwd()} confirms that the change has been recorded.~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{getwd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "/home/piet/Dropbox/work/UKDS/RGuide/UKDS_RGuide"
+\end{verbatim}
+
+\textbf{Notes:}
+
+\begin{itemize}
+\item
+  Any character string that is neither a command or the name of an object (such
+  as a variable name) needs to be put between inverted commas or quotation
+  marks, otherwise it will be interpreted as the name of an object
+
+  \begin{itemize}
+  \tightlist
+  \item
+    see the example below about loading user-created packages;
+  \end{itemize}
+\item
+  Even when no parameters are specified for a command, brackets are compulsory
+  as shown in the \texttt{getwd()} example above;
+\item
+  R uses forward slashes rather than backslashes (unlike most other
+  Windows applications) to separate directories. Using backlashes will return an
+  error message;
+\item
+  Although most R commands accept a large number of options to be specified,
+  in many cases default values have been `factory set' so that only the
+  essential parameters need specifying.
+\end{itemize}
+
+The output of most R commands can be either directly displayed on the screen (as
+in the above example) or stored in objects that can be subsequently reused in
+further commands. This object-oriented feature separates R from traditional
+statistical software.
+
+For instance, typing:~
+
+\begin{verbatim}
+>   a<-getwd()
+\end{verbatim}
+
+will store the output of \texttt{getwd()} (that is, the name of the current default directory)~ into an object called `a'. In order to view the content of a, one can just type its name:~
+
+\begin{verbatim}
+>   a
+\end{verbatim}
+
+\hypertarget{writing-r-scripts-via-r-studio}{%
+\paragraph*{Writing R scripts via R Studio~}\label{writing-r-scripts-via-r-studio}}
+\addcontentsline{toc}{paragraph}{Writing R scripts via R Studio~}
+
+Most users will want to write their code in a script file, similar to the `do' file in Stata or syntax file in SPSS. R script files end with the .R suffix. To open an existing R script in RStudio select \texttt{File\textgreater{}Open\ File} then the relevant script file. To create a new script select \texttt{File\textgreater{}New\ File\textgreater{}Open\ File} (shortcut: Control+Shift+N) this will open a new script window in which to type commands.
+
+\hypertarget{installing-and-loading-packages}{%
+\subsection{Installing and loading packages}\label{installing-and-loading-packages}}
+
+Apart from a basic set of commands and functions, most of the tools offered by R are available in packages that are not provided during the main installation and need to be installed and downloaded separately from within R.
+For example, to install the `foreign' package one need to type:
+
+\begin{verbatim}
+install.packages("foreign",repos = "https://cloud.r-project.org")
+\end{verbatim}
+
+Installation only needs to be done once.
+If the address of the package repository is not specified via the \texttt{repos} option, a pull-down menu will appear, asking for one. Choosing \texttt{https://cloud.r-project.org} will automatically select the closest mirror site.
+
+Originally, \texttt{Foreign} enabled users to import Stata (version 12 or older) or SPSS datasets. For Stata datasets saved under version 13 and above, the \texttt{haven} or \texttt{readstata13} package are required.
+
+\begin{verbatim}
+install.packages("haven",repos = "https://cloud.r-project.org")
+\end{verbatim}
+
+To use a package already installed in the local R library, the \texttt{library()} command is needed:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(foreign)}
+\end{Highlighting}
+\end{Shaded}
+
+Simply typing:~
+
+\begin{verbatim}
+> library()
+\end{verbatim}
+
+Will list all libraries installed on the computer that can be loaded in memory. This can be a rather long list!
+
+Besides a full archive of R packages, the CRAN website provides a series of manuals, including \href{https://cran.r-project.org/doc/manuals/R-exts.html}{Writing R Extensions}, which describes how users can write their own packages and submit them to CRAN.~
+
+Once a package is installed, it will be permanently stored in the local R library on the computer, unless deleted it with the \texttt{remove.packages()} command (not advised as this can break dependencies between packages!).
+
+\begin{verbatim}
+> remove.packages("name of the package")
+\end{verbatim}
+
+Packages required for an analysis have to be loaded every time a new R session is started (But not every time a syntax file is run!).
+
+\hypertarget{getting-help}{%
+\subsection{Getting help}\label{getting-help}}
+
+Within R, the most straightforward way to request help with a command consists of a question mark followed by the command name, without a space in between. The standard help system in R (unless using RStudio or Eclipse) relies on the default web browser installed on your computer (ie Chrome, Firefox or Edge in most cases) to display pages.
+Typing:
+
+\begin{verbatim}
+> ?getwd 
+\end{verbatim}
+
+Is equivalent of:
+
+\begin{verbatim}
+help('getwd')
+\end{verbatim}
+
+and will open the help page for the \texttt{getwd()} command in the default web browser. If you are using RStudio or Eclipse, the help will most likely open in a new tab within the program.
+
+This will work for any command directly available in the \texttt{Base} package that is loaded at startup or in other packages loaded via the \texttt{library()} command. Otherwise, R will return an error message.
+
+Typing two question marks followed by a keyword will search all of R for the available documentation for that keyword:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ ??foreign}
+\end{Highlighting}
+\end{Shaded}
+
+An index of all commands and functions in the foreign package can be obtained by typing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{help}\NormalTok{(}\AttributeTok{package=}\StringTok{\textquotesingle{}foreign\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Note: this command only works because the `foreign' package was previously loaded in memory with the \texttt{library()} command. More information about where to find help when using R is provided at the end of this document.
+
+\hypertarget{objects}{%
+\subsection{Objects}\label{objects}}
+
+R is an object oriented language, which means that almost any information it uses is stored as `objects' (i.e.~containers) that can be manipulated independently. During an R session, multiple objects are available simultaneously (for instance datasets, but also summary tables or new variables produced from it).
+Typing:
+
+\begin{verbatim}
+> ls()
+\end{verbatim}
+
+will list all the objects that are currently in memory.
+
+Objects belong to \texttt{classes} or types which have distinct \texttt{properties}. There are many classes of objects in R. By comparison, Stata has only macros, variables and scalars that are directly available to most users. Common object classes include factors (these are equivalent to categorical variables), vectors (numerical variables -- whether continuous or ordinal), data frames (datasets), matrices, etc. Not all operations are possible with all objects in R. More advanced users can also create their own object classes. Describing R objects and their properties is well beyond the purpose of this guide and users interested should consult the \href{https://cran.r-project.org/doc/manuals/r-release/R-lang.html\#Objects}{online documentation} for further explanations.~
+
+To create or assign a value to an object, one uses the assignment operator (\textless-). For example:
+
+\begin{verbatim}
+> x <- 5 
+\end{verbatim}
+
+In this example we have assigned the value 5 to an object called x. If you type the letter x, the value `5' will be returned in your console. The object x will appear in the R environment after the ls() command.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{5}  
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ls}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "a"               "b"              
+##  [3] "bsa"             "bsa.design"     
+##  [5] "bsa.young"       "bsa.young.males"
+##  [7] "datadir"         "dev.d"          
+##  [9] "df.d"            "fit1"           
+## [11] "fit2"            "m"              
+## [13] "mydata"          "p"              
+## [15] "pa"              "party.tab"      
+## [17] "rm"              "x"
+\end{verbatim}
+
+\hypertarget{deleting-objects}{%
+\paragraph*{Deleting objects}\label{deleting-objects}}
+\addcontentsline{toc}{paragraph}{Deleting objects}
+
+The rm() function can be used to remove objects from the environment (session). These objects can be variables, lists, datasets, etc. For instance, to remove the object `x', or the fictitious dataset called `mydata':~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rm}\NormalTok{(x)   }
+\FunctionTok{ls}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "a"               "b"              
+##  [3] "bsa"             "bsa.design"     
+##  [5] "bsa.young"       "bsa.young.males"
+##  [7] "datadir"         "dev.d"          
+##  [9] "df.d"            "fit1"           
+## [11] "fit2"            "m"              
+## [13] "mydata"          "p"              
+## [15] "pa"              "party.tab"      
+## [17] "rm"
+\end{verbatim}
+
+\begin{verbatim}
+> rm(mydata)
+\end{verbatim}
+
+\hypertarget{data-frames}{%
+\paragraph*{Data frames}\label{data-frames}}
+\addcontentsline{toc}{paragraph}{Data frames}
+
+Among the various classes of objects one may use in R, a few are essential to understand when analysing survey data. Their characteristics are briefly listed below;
+
+Data frames are objects that come closest to datasets or excel sheets in traditional statistical software. They are objects that have indexed rows and columns, both of which may have names. Data frames columns can be seen as variables and lines or rows as observations. Each cell in the data frame can be uniquely identified by its position. Data frames are typically the object in which survey datasets are stored.
+
+Let's assume that we have a small data frame called `mydata'. Here are a few basic commands to examine it:
+
+\textbf{Determining the size of a data frame:}
+the \texttt{dim()} command returns the number of rows and columns of a data frame
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(mydata)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 50  6
+\end{verbatim}
+
+R tells us that our data is made of 50 rows and 6 columns, in other words of 50 observations and 6 variables. What if I want a quick overview of the dataset?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(mydata)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     RSex skipmeal                   Married
+## 1 Female       NA Married/living as married
+## 2 Female        1        Separated/divorced
+## 3 Female       NA Married/living as married
+## 4   Male       NA             Never married
+## 5   Male        1             Never married
+## 6   Male       NA Married/living as married
+##         Poverty1                         HEdQual3
+## 1        Was not Higher educ below degree/A level
+## 2        Was not Higher educ below degree/A level
+## 3        Was not             O level or equiv/CSE
+## 4        Was not Higher educ below degree/A level
+## 5        Was not                 No qualification
+## 6 Was in poverty                             <NA>
+##   NatFrEst
+## 1        5
+## 2       30
+## 3       50
+## 4       50
+## 5       50
+## 6       10
+\end{verbatim}
+
+The \texttt{head()} command displays the first six lines of the dataset. Depending on the number of variables the output of \texttt{head()} can become quickly overwhelming, as the size of the lines on most screens is limited!
+
+\textbf{Obtaining the names of variables (or columns) in the dataset:}
+This can be done using either \texttt{ls()} which we already have used, or the \texttt{names()} commands. \texttt{ls()} returns the variables names, sorted alphabetically, whereas \texttt{names()} returns them in their actual order in the data frame.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ls}\NormalTok{(mydata)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "HEdQual3" "Married"  "NatFrEst" "Poverty1"
+## [5] "RSex"     "skipmeal"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(mydata)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "RSex"     "skipmeal" "Married"  "Poverty1"
+## [5] "HEdQual3" "NatFrEst"
+\end{verbatim}
+
+We can see that in the data frame, the ``RSex'' column comes in fact before ``Poverty1''.
+
+\textbf{Accessing variables:}
+
+Each column of a data frame, or variable, can be accessed by its name preceded by the \$ sign:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{NatFrEst}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  5 30 50 50 50 10  1 NA  5 50 60 25 30  3 25 10 80
+## [18]  5 50 50 40 45  2 82 60 40 10 10 40 15 30 30  2 10
+## [35] 75 99 70 50 10 30  1 10 85 45 70 25 40 30 10 25
+## attr(,"value.labels")
+## named numeric(0)
+\end{verbatim}
+
+Alternatively, columns/variables and rows can be identified numerically by their position in the data frame using square brackets:
+
+\begin{verbatim}
+dataframe[row number,column number]
+\end{verbatim}
+
+Given that \texttt{RSex} is the first column of our dataset
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata[,}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] Female Female Female Male   Male   Male   Male  
+##  [8] Female Male   Male   Male   Female Female Male  
+## [15] Female Female Female Female Female Female Male  
+## [22] Female Female Male   Male   Female Female Female
+## [29] Female Male   Female Female Female Female Male  
+## [36] Male   Female Female Male   Female Male   Male  
+## [43] Female Male   Female Male   Female Female Female
+## [50] Male  
+## Levels: Male Female
+\end{verbatim}
+
+Returns the same output as previously. Not specifying a row or column name within the square brackets tells R to display them all.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata[}\DecValTok{6}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   RSex skipmeal                   Married
+## 6 Male       NA Married/living as married
+##         Poverty1 HEdQual3 NatFrEst
+## 6 Was in poverty     <NA>       10
+\end{verbatim}
+
+Returns the values of all the variables for the sixth row of the data frame. Specifying both a row and column number, will return a unique observation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata[}\DecValTok{6}\NormalTok{,}\DecValTok{6}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10
+\end{verbatim}
+
+which in this case is 10.
+Finally, more than one column or row can be displayed by concatenating their number using the \texttt{c()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata[}\FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{9}\NormalTok{),}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{6}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   RSex NatFrEst
+## 6 Male       10
+## 9 Male        5
+\end{verbatim}
+
+The above command returns respectively the sixth and 9th observations for the sixth column. Please note that columns names can also be used instead of their number, provided that they are put between inverted commas:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata[}\FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{9}\NormalTok{),}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}RSex\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}NatFrEst\textquotesingle{}}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   RSex NatFrEst
+## 6 Male       10
+## 9 Male        5
+\end{verbatim}
+
+Returns the same result as previously.
+Having a data frame to hand allows us to explore other types of objects commonly found in R. The type of a variable can be displayed by simply using the \texttt{class()} function.
+
+\hypertarget{numeric}{%
+\paragraph*{Numeric}\label{numeric}}
+\addcontentsline{toc}{paragraph}{Numeric}
+
+\texttt{Numeric} objects are simple numerical vectors (ie a single or a list of numbers). Here this is the case for \texttt{NatFrEst}, the estimated proportion of people making wrong benefits claims, according to respondents to the survey.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{NatFrEst)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+\hypertarget{character}{%
+\paragraph*{Character}\label{character}}
+\addcontentsline{toc}{paragraph}{Character}
+
+Character objects are alphanumeric vectors, that is variables which consist of text string(s).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{Married)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+\hypertarget{factors}{%
+\paragraph*{Factors}\label{factors}}
+\addcontentsline{toc}{paragraph}{Factors}
+
+An important feature of R is that categorical variables whether ordinal or polynomial are stored in objects known as \textbf{factors}. The main difference between factors and traditional categorical variables in Stata or SPSS is that they do \textbf{not} consist of discrete numerical values with which value labels are associated. They should be thought of instead as a special type of character variable with a discrete set of values, which are known as \texttt{levels}. In our data, \texttt{Rsex} (Gender of the respondent) is such an object:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{RSex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "factor"
+\end{verbatim}
+
+Let's further examine this factor.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{RSex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Male"   "Female"
+\end{verbatim}
+
+returns the levels (ie the values) of \texttt{RSex}. Even if `Male' is the first level of \texttt{Rsex},
+and female the second one, these do not correspond to underlying numbers in the
+data. Please also note that it is possible to change the ordering of factor
+levels with the \texttt{factor()} function. It is always a good idea to check the ordering of factor levels in a newly created variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mydata}\SpecialCharTok{$}\NormalTok{RSex.New}\OtherTok{\textless{}{-}}\FunctionTok{factor}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{RSex,}\AttributeTok{levels =} \FunctionTok{levels}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{RSex)[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{)])}
+\FunctionTok{levels}\NormalTok{(mydata}\SpecialCharTok{$}\NormalTok{RSex.New)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Female" "Male"
+\end{verbatim}
+
+The above code tells R to create a new factor variable -\texttt{RSex.New} - whose levels are the same as the initial \texttt{RSex}, but with `Female' coming first, and ``Male'', second. The name of the new variable is arbitrary.
+
+\newpage
+
+\hypertarget{opening-ukds-datasets-in-r}{%
+\section{Opening UKDS datasets in R}\label{opening-ukds-datasets-in-r}}
+
+\hypertarget{essential-information}{%
+\subsection{Essential information}\label{essential-information}}
+
+In principle, any dataset whether in CSV, SPSS, SAS, or Stata format can be opened by R. There are a number of issues to consider however:
+
+\begin{itemize}
+\item
+  The \texttt{foreign} package has been traditionally used to import SPSS and Stata datasets into R:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{read.spss()} and \texttt{write.spss()} respectively open and write .sav files. Given that both were developed from older versions of SPSS, it is therefore advised to check that their outcome is as expected. In addition
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{read.spss()} does not store the data in a R data frame by default and will require the option \texttt{to.data.frame=T} to be specified.
+    \item
+      \texttt{read.spss()} may sometimes struggle with some numeric format and wrongly attempt to convert them as factor, which will result in error messages. It is therefore advised to limit the maximum number of levels that will be considered when converting factors by using the option \texttt{max.value.labels=}
+    \end{itemize}
+  \item
+    \texttt{read.dta()} and \texttt{write.dta()} respectively open and write Stata files up to version 12. An option to watch for is \texttt{convert.factor=T/F} which either will import Stata categorical variable as their underlying numeric value or instead will convert them into factors,
+    using value labels as levels, which may be an issue for categorical variables with a large number of levels. Users have to bear in mind that the labels will by default sorted alphabetically, .
+  \end{itemize}
+\item
+  The \texttt{readstata13} package opens Stata datasets from version 13 onwards with the \texttt{read.dta13()} function and offers a more comprehensive set of options. \texttt{convert.factor=T/F} has the same effect as in \texttt{read.dta()} from \texttt{foreign}.
+\item
+  Data frames created with either \texttt{read.dta()} or \texttt{read.dta13()} have extra information stored as attributes, which maybe useful to retrieve. For instance:
+\end{itemize}
+
+\begin{verbatim}
+> mydata<-read.dta("Some_Stata_dataset.dta")
+> attributes(mydata)$var.labels   ### Retrieves the original Stata variable labels
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Finally the \texttt{haven} package opens SPSS, Stata and SAS files with respectively \texttt{read\_spss()}, \texttt{read\_dta()} and \texttt{read\_sas()}. By contrast with the other two packages, it relies on ad hoc data formats and data structures for converting labelled categorical variables and attempts to mimic Stata's value and variable labels. More information is available \href{https://haven.tidyverse.org/reference/read_dta.html}{here}.
+\end{itemize}
+
+In order not to overcomplicate their initial exploration of R we recommend new users to use \texttt{read.spss()} or \texttt{read.dta13()} when importing datasets from either SPSS or Stata, rather than the more elaborate functions available in \texttt{haven}.
+
+\hypertarget{the-2017-british-social-attitudes-survey}{%
+\subsection{The 2017 British Social Attitudes Survey}\label{the-2017-british-social-attitudes-survey}}
+
+For the rest of this guide, we will use the \texttt{British\ Social\ Attitudes\ Survey,\ 2017,\ Environment\ and\ Politics:\ Open\ Access\ Teaching\ Dataset}, which can be downloaded from the \href{https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8849}{UK Data Service website}. We will use the SPSS version of the dataset, which will be assumed to be saved in a \texttt{UKDS} folder created inside \texttt{Documents} folder. \texttt{C:\textbackslash{}\textbackslash{}Users\textbackslash{}\textbackslash{}Your\_User\_Name\_Here\textbackslash{}\textbackslash{}Documents} We will set this as default working directory. This way, we won't have to specify the full path of files that we will be opening or saving.
+
+We can finally open the file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ bsa}\OtherTok{\textless{}{-}}\FunctionTok{read.spss}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(datadir,}\StringTok{"8849spss\_73589506FAA92AEFC9646C684CD2427012F90FA9F6541F3BE46E4BE1A047987C\_V1/bsa2017\_open\_enviropol.sav"}\NormalTok{), }\AttributeTok{to.data.frame =} \ConstantTok{TRUE}\NormalTok{,}
+          \AttributeTok{use.value.labels=}\ConstantTok{TRUE}\NormalTok{,}\AttributeTok{max.value.labels =} \DecValTok{9}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## re-encoding from CP1252
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(bsa)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3988   25
+\end{verbatim}
+
+\hypertarget{understanding-the-dataset}{%
+\subsection{Understanding the dataset}\label{understanding-the-dataset}}
+
+As previously, we can find the number of observations and variables in the dataset by typing the following:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(bsa)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3988   25
+\end{verbatim}
+
+We can see that there are 3,988 observations and 25 variables in the BSA dataset.
+
+Typing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ls}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "a"               "b"              
+##  [3] "bsa"             "bsa.design"     
+##  [5] "bsa.young"       "bsa.young.males"
+##  [7] "datadir"         "dev.d"          
+##  [9] "df.d"            "fit1"           
+## [11] "fit2"            "m"              
+## [13] "mydata"          "p"              
+## [15] "pa"              "party.tab"      
+## [17] "rm"
+\end{verbatim}
+
+will show us that the object `bsa' has appeared, but what if we want to get the list of all variables in the dataset? We need to type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ls}\NormalTok{(bsa)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "actchar"          "actpol"          
+##  [3] "carallow"         "carenvdc"        
+##  [5] "carnod2"          "carreduc"        
+##  [7] "cartaxhi"         "CCBELIEV"        
+##  [9] "ChildHh"          "eq_inc_quintiles"
+## [11] "govnosa2"         "HEdQual3"        
+## [13] "leftrigh"         "libauth"         
+## [15] "Married"          "PartyId2"        
+## [17] "plnenvt"          "plnuppri"        
+## [19] "Politics"         "RAgeCat"         
+## [21] "RClassGp"         "Rsex"            
+## [23] "Sserial"          "Voted"           
+## [25] "WtFactor"
+\end{verbatim}
+
+If we want to get a better sense of the data, we use the \texttt{head()} function which will return the first six rows.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(bsa)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Sserial   Rsex RAgeCat                   Married
+## 1  290001   Male   35-44 Married/living as married
+## 2  290002 Female     65+        Separated/divorced
+## 3  290003 Female   45-54 Married/living as married
+## 4  290004 Female   45-54 Married/living as married
+## 5  290005   Male     65+             Never married
+## 6  290006 Female   25-34             Never married
+##   ChildHh                         HEdQual3
+## 1     Yes             O level or equiv/CSE
+## 2      No Higher educ below degree/A level
+## 3     Yes                           Degree
+## 4     Yes                           Degree
+## 5      No Higher educ below degree/A level
+## 6     Yes Higher educ below degree/A level
+##                            eq_inc_quintiles
+## 1 3rd quintile - More than £292, up to £404
+## 2                                      <NA>
+## 3 3rd quintile - More than £292, up to £404
+## 4 3rd quintile - More than £292, up to £404
+## 5 4th quintile - More than £404, up to £577
+## 6              Lowest quintile - Up to £175
+##                                    RClassGp
+## 1 Lower supervisory & technical occupations
+## 2        Semi-routine & routine occupations
+## 3          Managerial & professional occups
+## 4          Managerial & professional occups
+## 5          Managerial & professional occups
+## 6          Managerial & professional occups
+##                                                                                           CCBELIEV
+## 1               I believe that climate change is taking place but not as a result of human actions
+## 2 I believe that climate change is taking place and is, at least partly, a result of human actions
+## 3                                                                                             <NA>
+## 4                                                                                             <NA>
+## 5                                                                                             <NA>
+## 6                                                                                             <NA>
+##   carallow carreduc carnod2 cartaxhi carenvdc plnenvt
+## 1     <NA>     <NA>    <NA>     <NA>     <NA>    <NA>
+## 2     <NA>     <NA>    <NA>     <NA>     <NA>    <NA>
+## 3     <NA>     <NA>    <NA>     <NA>     <NA>    <NA>
+## 4     <NA>     <NA>    <NA>     <NA>     <NA>    <NA>
+## 5     <NA>     <NA>    <NA>     <NA>     <NA>    <NA>
+## 6     <NA>     <NA>    <NA>     <NA>     <NA>    <NA>
+##   plnuppri          Politics Voted
+## 1     <NA>             some,   Yes
+## 2     <NA> ... a great deal,   Yes
+## 3     <NA>             some,   Yes
+## 4     <NA> ... a great deal,   Yes
+## 5     <NA>    not very much,   Yes
+## 6     <NA>    not very much,   Yes
+##                 actchar                actpol
+## 1                 never                 never
+## 2                  <NA>                  <NA>
+## 3                  <NA>                  <NA>
+## 4 once in the past year once in the past year
+## 5                  <NA>                  <NA>
+## 6                  <NA>                  <NA>
+##                     govnosa2         PartyId2 leftrigh
+## 1                      agree           Labour      1.0
+## 2                   disagree           Labour      1.8
+## 3                       <NA>           Labour       NA
+## 4                      agree           Labour      1.5
+## 5                       <NA> Liberal Democrat      2.0
+## 6 neither agree nor disagree             <NA>      3.0
+##   libauth WtFactor
+## 1   4.500   0.9381
+## 2   4.333   0.6844
+## 3      NA   0.9061
+## 4   2.500   1.3086
+## 5   3.167   0.4393
+## 6   3.000   0.5696
+\end{verbatim}
+
+Single variables for example, \texttt{Rsex} (gender of respondents) may be also summarised with \texttt{head()}, which returns as previously the first six observations of the gender variable, whereas typing
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Rsex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] Male   Female Female Female Male   Female
+## Levels: Male Female
+\end{verbatim}
+
+Simply typing the name of a variable as in:
+
+\begin{verbatim}
+bsa$Rsex
+\end{verbatim}
+
+will list the first 1000 observations of the variable. Other commands provide more useful information, such as \texttt{summary()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Rsex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Male Female 
+##   1806   2182
+\end{verbatim}
+
+Summary is a generic function that tailors the most appropriate output to an object class. As Rsex is a categorical variable. The output of summary() is identical to what we would have obtained with the default tabulation fuction \texttt{table()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Rsex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##   Male Female 
+##   1806   2182
+\end{verbatim}
+
+When encountering a continuous variable, \texttt{summary()} will compute basic descriptive statistics (mean, median, quartiles, maximum and minimum). For example, in the case of the libertarian-authoritarian scale \texttt{libauth}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{libauth)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     1.2     3.0     3.5     3.5     4.0     5.0 
+##    NA's 
+##     775
+\end{verbatim}
+
+\hypertarget{identifying-and-selecting-variables}{%
+\subsection{Identifying and selecting variables}\label{identifying-and-selecting-variables}}
+
+As we have already seen, variables are objects. R automatically stores variables using the appropriate object class. Categorical variables are `Factors' with `Levels' as categories within these, while continuous variables are `Numeric' types of objects.
+The \texttt{class()} displays the type of an object:.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Rsex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "factor"
+\end{verbatim}
+
+The levels() function returns the categories of the variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Rsex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Male"   "Female"
+\end{verbatim}
+
+\newpage
+
+\hypertarget{essentials-of-data-manipulation}{%
+\section{Essentials of Data Manipulation}\label{essentials-of-data-manipulation}}
+
+In this section we will cover how to recode variables and deal with missing data.
+
+\hypertarget{creating-and-transforming-numerical-variables}{%
+\subsection{Creating and transforming numerical variables}\label{creating-and-transforming-numerical-variables}}
+
+Let's say we would like to transform our numerical political orientation variable: \texttt{leftrigh} into a logarithmic scale. We can use the \texttt{log()} function which is directly available in R Base package and simply returns the natural logarithm (base-e). We will use the assignment operator ( \textless- ) to create a new variable called `leftright\_log' from the original variable
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bsa}\SpecialCharTok{$}\NormalTok{lnleftrigh\_log }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh)}
+\end{Highlighting}
+\end{Shaded}
+
+Note that if we had not specified \texttt{bsa\$} the command would have created a transformed variable outside of the BSA data frame. We can now check the results with \texttt{summary()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{lnleftrigh,bsa}\SpecialCharTok{$}\NormalTok{leftrigh))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        V1            V2     
+##  Min.   :0.0   Min.   :1.0  
+##  1st Qu.:0.7   1st Qu.:2.0  
+##  Median :0.9   Median :2.4  
+##  Mean   :0.9   Mean   :2.5  
+##  3rd Qu.:1.1   3rd Qu.:3.0  
+##  Max.   :1.6   Max.   :5.0  
+##  NA's   :782   NA's   :782
+\end{verbatim}
+
+Please note that it is not possible to pass several variables names directly to \texttt{summary()}. We need to group them first into a temporary object using \texttt{cbind()}. In the output \texttt{V1} refers to the first variable, \texttt{lnleftrigh}.
+
+What if we - hypothetically - wanted to do the same with level of agreement to the statement ``People like me don\texttt{t\ have\ any\ say\ about\ what\ the\ government\ does",\ a\ categorical\ variable,\ originally\ ranging\ from\ \ 1\ (}Agree strongly\texttt{)\ to\ 5\ (}Disagree strongly`)? If we try to repeat what we did before:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bsa}\SpecialCharTok{$}\NormalTok{lngovnosa2 }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{govnosa2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in Math.factor(bsa$govnosa2): 'log' not meaningful for factors
+\end{verbatim}
+
+\ldots{} we get an error, due to the fact that \texttt{govnosa2} was imported as a factor, and that \texttt{log()} can only be applied to numeric objects.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{govnosa2)                       }\CommentTok{\#check to see if it is numeric}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "factor"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bsa}\SpecialCharTok{$}\NormalTok{govnosa2.n }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{govnosa2)  }\CommentTok{\#convert to numeric }
+\FunctionTok{class}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{govnosa2.n)                       }\CommentTok{\#check again}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bsa}\SpecialCharTok{$}\NormalTok{lngovnosa2 }\OtherTok{\textless{}{-}} \FunctionTok{log}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{govnosa2.n) }\CommentTok{\#create new log of the leftright      variable }
+\FunctionTok{summary}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{lngovnosa2,bsa}\SpecialCharTok{$}\NormalTok{govnosa2.n))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        V1             V2      
+##  Min.   :0.0    Min.   :1.0   
+##  1st Qu.:0.7    1st Qu.:2.0   
+##  Median :1.1    Median :3.0   
+##  Mean   :0.9    Mean   :2.7   
+##  3rd Qu.:1.4    3rd Qu.:4.0   
+##  Max.   :1.6    Max.   :5.0   
+##  NA's   :2447   NA's   :2447
+\end{verbatim}
+
+We can also create a completely new variable in the dataset. For instance, the following will create \texttt{test} with a constant value of 1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bsa}\SpecialCharTok{$}\NormalTok{test }\OtherTok{\textless{}{-}} \DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{categorical-variables}{%
+\subsection{Categorical variables}\label{categorical-variables}}
+
+We saw in Section 3 that categorical variables are objects called \textbf{factors} in R, with a fixed set of possible numerical or alphanumerical values (levels) which can be accessed with the \texttt{levels()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Married) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Married/living as married"
+## [2] "Separated/divorced"       
+## [3] "Widowed"                  
+## [4] "Never married"
+\end{verbatim}
+
+The number in the output does not refer to underlying numerical values to which labels are added as with other statistical packages, but instead to the position of a given level in the list returned by \texttt{level()}.
+
+\hypertarget{recoding-variables}{%
+\subsection{Recoding variables}\label{recoding-variables}}
+
+The following commands will create a new variable called \texttt{Married2} where respondents are categorised into two new categories: `Not partnered' and `Partnered'. The ``separated/divorced'' and ``Never married'' categories of the ``Married'' variable are recoded as ``Not partnered''. It is always advised to create new variables when recoding old ones so the original data is not tampered with.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bsa}\SpecialCharTok{$}\NormalTok{Married2 }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Married}\SpecialCharTok{==}\StringTok{"Married/living as married"}\NormalTok{,}\StringTok{"Partnered"}\NormalTok{,bsa}\SpecialCharTok{$}\NormalTok{Married)}
+\NormalTok{bsa}\SpecialCharTok{$}\NormalTok{Married2 }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Married}\SpecialCharTok{==}\StringTok{"Widowed"} \SpecialCharTok{|} 
+\NormalTok{                       bsa}\SpecialCharTok{$}\NormalTok{Married}\SpecialCharTok{==}\StringTok{"Never married"} \SpecialCharTok{|} 
+\NormalTok{                      bsa}\SpecialCharTok{$}\NormalTok{Married}\SpecialCharTok{==}\StringTok{"Separated/divorced"}\NormalTok{,}\StringTok{"Not partnered"}\NormalTok{,bsa}\SpecialCharTok{$}\NormalTok{Married2)}
+
+\FunctionTok{table}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Married2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Not partnered     Partnered 
+##          1778          2209
+\end{verbatim}
+
+The second and fourth categories have been renamed to `Not partnered'. Now we
+have two levels
+* Partnered
+*Not partnered
+
+\texttt{ifelse()} is a convenient tool to use when it is required to work with Base R or when the variables have a limited number of categories. More complex cases may require a more advanced function. The \texttt{dplyr} library provides a comprehensive set of data manipulation tools.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\NormalTok{bsa}\OtherTok{\textless{}{-}}\NormalTok{bsa}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{Married3=}\FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{                    Married }\SpecialCharTok{==} \StringTok{"Married/living as married"} \SpecialCharTok{\textasciitilde{}} \StringTok{"Partnered"}\NormalTok{,  }
+\NormalTok{                    Married }\SpecialCharTok{==} \StringTok{"Separated/divorced"} \SpecialCharTok{|}\NormalTok{ Married }\SpecialCharTok{==} \StringTok{"Widowed"} \SpecialCharTok{\textasciitilde{}} \StringTok{"Not Partnered"}\NormalTok{,}
+\NormalTok{                    Married }\SpecialCharTok{==} \StringTok{"Never married"} \SpecialCharTok{\textasciitilde{}} \StringTok{"Not Partnered"}
+\NormalTok{)}
+\NormalTok{)}
+\NormalTok{bsa}\SpecialCharTok{$}\NormalTok{Married3}\OtherTok{\textless{}{-}}\FunctionTok{as.factor}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Married3)}
+\FunctionTok{summary}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Married3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Not Partnered     Partnered          NA's 
+##          1778          2209             1
+\end{verbatim}
+
+We just created the \texttt{Married3} variable, which is identical to \texttt{Married2} above, but using the more powerful syntax made available by \texttt{dplyr}. Let's decompose it:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{dplyr} use the \texttt{pipe} symbol ie \texttt{\%\textgreater{}\%} which enables to sequentially combine functions. We will come back to this later in this guide.
+\item
+  \texttt{mutate()} is the generic variable creation/alteration command, and can handle complex combinations of conditions as well as multiple simultaneous variable creation operations.
+\item
+  \texttt{case\_when()} is the function that allows recoding numerical, character, or factor variables. On the left hand side of the tilde \texttt{\textasciitilde{}} are the condition or the values that need to be matched in the original variable , and on the right hand side, the attributed ie recoded values in the new variable. Note that in this case, the recoded variable is by default a character object and needs to be converted into a factor for easier manipulation.
+\end{itemize}
+
+\textbf{Extra tips:}
+
+\begin{itemize}
+\tightlist
+\item
+  As with any data manipulation exercise, caution is required, and it is recommended to create new variables with the recoded value rather than alter an original variable when handling missing values.
+\item
+  The standard value attribution command in R is \texttt{\textless{}-}. However, \texttt{=} will also work in many cases.
+\item
+  Unless explicitly specified (in our case, by adding the bsa\$ prefix to variable name), the objects created are not included in the data frame from which they were computed.
+\end{itemize}
+
+\hypertarget{missing-values}{%
+\subsection{Missing Values}\label{missing-values}}
+
+Explicit missing values in R (ie values that R itself considers as missing) are represented as \texttt{NA} for factors and numerical variables. For character variables, missing values are simply empty strings, ie \texttt{""}. R has a series of functions specifically designed to handle NAs.
+
+R has fewer safety nets than other packages for handling missing values. Most function won't issue warn users about whether or how many how many observations with missing values have been dropped. On the other hand, some commands will return error messages and won't run when missing values are present. This is the case of \texttt{mean()} for example.
+
+\hypertarget{inspecting-missing-data}{%
+\subsubsection{Inspecting missing data}\label{inspecting-missing-data}}
+
+The logical function \texttt{is.na()} assesses each observation in variables and identifies whether cases are valid or missing. The result will appear as a boolean TRUE/FALSE vector for each observation. \texttt{is.na()} can be combined with other functions:
+
+\begin{itemize}
+\item
+  With \texttt{table()} in order to get the frequencies of missing values of a specific variable.
+\item
+  With sum() in order to count the number of missing observations of variables or whole datasets.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh))  }\CommentTok{\#of missing values in the leftright variable }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## FALSE  TRUE 
+##  3206   782
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(bsa))           }\CommentTok{\# of missing values in the whole dataset}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 41486
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh)) }\CommentTok{\#returns the proportion of NAs...}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1961
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(bsa)) }\CommentTok{\# returns the proportion in the dataset}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3356
+\end{verbatim}
+
+\hypertarget{recoding-missing-values-as-na-continuous-variables}{%
+\subsubsection{Recoding missing values as NA (continuous variables)}\label{recoding-missing-values-as-na-continuous-variables}}
+
+It may sometimes be useful to recode implicit missing values (ie considered by the data producer as missing, but not by R) of either numeric objects or factors into \texttt{\textless{}NA\textgreater{}}, in order to simplify case selection when conducting analyses. This can either be done with Base R code or the more advanced data manipulation functions from the dplyr package that we explored earlier.
+
+Let's assume for a moment that we would like to get rid of respondents aged under 25 for our analysis. A safe way to proceed is by creating a new variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bsa}\SpecialCharTok{$}\NormalTok{RAgeCat2 }\OtherTok{\textless{}{-}}\NormalTok{ bsa}\SpecialCharTok{$}\NormalTok{RAgeCat           }\CommentTok{\#duplicate variable}
+\FunctionTok{table}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{RAgeCat2)                      }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 18-24 25-34 35-44 45-54 55-59 60-64   65+ 
+##   223   591   650   729   320   333  1138
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bsa}\SpecialCharTok{$}\NormalTok{RAgeCat2[bsa}\SpecialCharTok{$}\NormalTok{RAgeCat2}\SpecialCharTok{==}\StringTok{"18{-}24"}\NormalTok{ ] }\OtherTok{\textless{}{-}} \ConstantTok{NA}   \CommentTok{\#convert responses “18{-}24”  to NA}
+\FunctionTok{table}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{RAgeCat2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 18-24 25-34 35-44 45-54 55-59 60-64   65+ 
+##     0   591   650   729   320   333  1138
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{RAgeCat2))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## FALSE  TRUE 
+##  3761   227
+\end{verbatim}
+
+Why is the number of missing values 227 and not 223 as the original number of respondents aged 18-24? Because there were already 3 missing values for the RAgeCat variable.
+
+We can also notice that although there are now no observation left in the 18-24 category, it is still displayed by \texttt{table()}. This is because levels are attributes of factors and are not deleted with observations. We can remove unused levels permanently with \texttt{droplevels()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bsa}\SpecialCharTok{$}\NormalTok{RAgeCat2}\OtherTok{\textless{}{-}}\FunctionTok{droplevels}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{RAgeCat2)}
+\FunctionTok{table}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{RAgeCat2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 25-34 35-44 45-54 55-59 60-64   65+ 
+##   591   650   729   320   333  1138
+\end{verbatim}
+
+\hypertarget{working-with-missing-values}{%
+\subsubsection{Working with missing values}\label{working-with-missing-values}}
+
+Explicit missing values (coded as NA) can be taken care of by R's own missing values functions. For instance using the \texttt{na.rm=T} or \texttt{na.rm=TRUE} option will remove missing values from an analysis (typing \texttt{?na.rm} will provide more information). Below is a summary of how NAs are dealt with by common R commands:
+
+\begin{table}
+
+\caption{(\#tab:4.11)Treatment of missing values by R commands}
+\centering
+\begin{tabular}[t]{lll}
+\toprule
+Command & Default action & Parameter\\
+\midrule
+*mean(), sd(),median()* & Includes NA (may return an error) & na.rm=T\\
+*cor(),cov()* & Includes NA (may return an error) & *use="complete.obs"*\\
+*table()* & Excludes NA & *useNA = "always"* to display NAs\\
+*xtabs()* & Excludes NA & *addNA = T* to display NAs\\
+lm(),glm() & Excludes NA & *na.action=NULL*\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\hypertarget{subsetting-datasets}{%
+\subsection{Subsetting datasets}\label{subsetting-datasets}}
+
+When analysis survey data. it is often necessary to limit the scope of computation to specific groups or subset of the data we may be interested in. There are many ways of subsetting datasets in R. We will review the most common here.
+
+\textbf{Using Base R}
+
+Most subsetting commands involve some form of conditions whereby the characteristics of a subsample of interest are specified. Suppose we would like to examine the interest for politics among people aged 18-24.
+
+We can either create an adhoc data frame:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Politics)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ... a great deal,      quite a lot,             some, 
+##               739               982              1179 
+##    not very much,  or, none at all? 
+##               708               379
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bsa.young}\OtherTok{\textless{}{-}}\NormalTok{bsa[bsa}\SpecialCharTok{$}\NormalTok{RAgeCat}\SpecialCharTok{==}\StringTok{"18{-}24"}\NormalTok{,]  }
+\FunctionTok{table}\NormalTok{(bsa.young}\SpecialCharTok{$}\NormalTok{Politics)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ... a great deal,      quite a lot,             some, 
+##                29                41                72 
+##    not very much,  or, none at all? 
+##                56                25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bsa.young}\OtherTok{\textless{}{-}}\NormalTok{bsa[bsa}\SpecialCharTok{$}\NormalTok{RAgeCat}\SpecialCharTok{==}\StringTok{"18{-}24"}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+Or we can directly limit the extent of the analysis on the go:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{table}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Politics[bsa}\SpecialCharTok{$}\NormalTok{RAgeCat}\SpecialCharTok{==}\StringTok{"18{-}24"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ... a great deal,      quite a lot,             some, 
+##                29                41                72 
+##    not very much,  or, none at all? 
+##                56                25
+\end{verbatim}
+
+In the first example it was necessary to include a comma after specg the condition. This is meant to indicate that we want to retain all variables ie columns in the dataset. The comma is not necessary in the second example as we are already working with a single variable.
+
+\textbf{Using dplyr}*
+
+Now suppose we want to further restrict the analysis to people identifying as Males. We could use the same Base R syntax as above, but with more than one condition coding tends to become cumbersome. We could instead use the more convenient syntax from the \texttt{dplyr} package. Either:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bsa.young.males}\OtherTok{\textless{}{-}}\NormalTok{bsa}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{filter}\NormalTok{(RAgeCat}\SpecialCharTok{==}\StringTok{"18{-}24"} \SpecialCharTok{\&}\NormalTok{ Rsex}\SpecialCharTok{==}\StringTok{"Male"}\NormalTok{)  }
+\FunctionTok{table}\NormalTok{(bsa.young.males}\SpecialCharTok{$}\NormalTok{Politics)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ... a great deal,      quite a lot,             some, 
+##                15                22                30 
+##    not very much,  or, none at all? 
+##                18                 9
+\end{verbatim}
+
+Or. as before embed it as a condition within \texttt{table()} :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{table}\NormalTok{(bsa}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{filter}\NormalTok{(RAgeCat}\SpecialCharTok{==}\StringTok{"18{-}24"} \SpecialCharTok{\&}\NormalTok{ Rsex}\SpecialCharTok{==}\StringTok{"Male"}\NormalTok{)}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{select}\NormalTok{(Politics) )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Politics
+## ... a great deal,      quite a lot,             some, 
+##                15                22                30 
+##    not very much,  or, none at all? 
+##                18                 9
+\end{verbatim}
+
+We are now equipped with the necessary information to move to the next stage and carry out basic analysis using R.
+
+\newpage
+
+\hypertarget{descriptive-statistics}{%
+\section{Descriptive statistics}\label{descriptive-statistics}}
+
+\hypertarget{continuous-variables}{%
+\subsection{Continuous variables}\label{continuous-variables}}
+
+Producing descriptive statistics in R is relatively straightforward, as key functions are included by default in the Base package. We have already seen above that the \texttt{summary()} command provides essential information about a variable. For instance,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     1.0     2.0     2.4     2.5     3.0     5.0 
+##    NA's 
+##     782
+\end{verbatim}
+
+provides information about the mean, median and quartiles of the political scale of respondents.
+
+The \texttt{describe()} command from the \texttt{Hmisc} package provides a more detailed set of summary statistics.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{describe}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## bsa$leftrigh 
+##        n  missing distinct     Info     Mean      Gmd 
+##     3206      782       30    0.993     2.52   0.8831 
+##      .05      .10      .25      .50      .75      .90 
+##      1.2      1.4      2.0      2.4      3.0      3.6 
+##      .95 
+##      4.0 
+## 
+## lowest : 1    1.2  1.4  1.5  1.6 , highest: 4.4  4.6  4.75 4.8  5
+\end{verbatim}
+
+\texttt{describe()} also provides the number of observations (including missing and unique observations), deciles as well as the five largest and smallest values.
+
+Commands producing single statistics are also available:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh, }\AttributeTok{na.rm =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.52
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sd}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh, }\AttributeTok{na.rm =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7853
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh, }\AttributeTok{na.rm =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{max}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh, }\AttributeTok{na.rm =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{min}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh, }\AttributeTok{na.rm =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+We could combine the output from the above commands into a single line using the \texttt{c()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{c}\NormalTok{(}
+\FunctionTok{mean}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh, }\AttributeTok{na.rm =}\NormalTok{ T),}
+\FunctionTok{sd}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh, }\AttributeTok{na.rm =}\NormalTok{ T),}
+\FunctionTok{median}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh, }\AttributeTok{na.rm =}\NormalTok{ T),}
+\FunctionTok{max}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh, }\AttributeTok{na.rm =}\NormalTok{ T),}
+\FunctionTok{min}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh, }\AttributeTok{na.rm =}\NormalTok{ T)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.5199 0.7853 2.4000 5.0000 1.0000
+\end{verbatim}
+
+As we saw previously, the \texttt{na.rm\ =\ T} option prevents missing values from being taken into account (in which case the output would have been NA, as this is the default behaviour of these functions). Using these individual commands may come in handy, for instance when further processing of the result is needed:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh, }\AttributeTok{na.rm=}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+Let's round the results to two decimal places:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rm }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(m,}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We can see the final results by typing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.52
+\end{verbatim}
+
+Note:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh,}\AttributeTok{na.rm=}\NormalTok{T),}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.52
+\end{verbatim}
+
+would produce the same results using just one line of code .
+
+\hypertarget{bivariate-association-between-continuous-variables}{%
+\subsection{Bivariate association between continuous variables}\label{bivariate-association-between-continuous-variables}}
+
+R provides a wide range of bivariate statistics under its base packages. The cor() and cov() functions provide basic measures of association between two variables. For instance, in order to measure the correlation between the leftright scale and the libertarian-authoritarian scale: The later variable is a numeric variable that details how far someone sits on the libartrian -- authoritarian scale from 1 to 5
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh, bsa}\SpecialCharTok{$}\NormalTok{libauth, }\AttributeTok{use=}\StringTok{\textquotesingle{}complete.obs\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.009626
+\end{verbatim}
+
+A correlation of 0.009 indicates an positive but very small relationship. It can be translated to mean 'an increase in authoritarianism is associated with a marginal increase in rightwing views.
+
+Note: When using the cor() and cov() functions missing values are dealt with the `use=' ``everything'', ``all.obs'', ``complete.obs'', ``na.or.complete'', or ``pairwise.complete.obs'' options. See `?cor' for additional information.
+
+\hypertarget{categorical-variables-1}{%
+\subsection{Categorical Variables}\label{categorical-variables-1}}
+
+As with continuous variables, R offers several tools that can be used to describe the distribution of categorical variables. One- and two-way contingency tables are the most commonly used.
+
+\hypertarget{one-way-frequency-tables}{%
+\subsubsection{One way frequency tables}\label{one-way-frequency-tables}}
+
+There are several R commands that we can use to create frequency tables. The most common ones \texttt{table()},\texttt{xtabs()} or \texttt{ftable()} which return the frequencies of observations within each level of a factor. For example, in order to obtain the political affiliation of BSA respondents in 2017:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{PartyId2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##     Conservative           Labour Liberal Democrat 
+##             1263             1479              241 
+##      Other party             None      Green Party 
+##              193              515               79
+\end{verbatim}
+
+As with any other R functions, the outcome of \texttt{table()} can be stored as an object for further processing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a}\OtherTok{\textless{}{-}}\FunctionTok{table}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{PartyId2)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{table()} does not compute proportions or percentages. Proportions are obtained using the \texttt{prop.table()} function which in turn does not produce percentages. It is also a good idea to round the results for greater readability.
+Either:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}\FunctionTok{prop.table}\NormalTok{(a),}\DecValTok{1}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##     Conservative           Labour Liberal Democrat 
+##             33.5             39.2              6.4 
+##      Other party             None      Green Party 
+##              5.1             13.7              2.1
+\end{verbatim}
+
+\ldots{} or:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}
+  \FunctionTok{prop.table}\NormalTok{(}
+    \FunctionTok{table}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{PartyId2)}
+\NormalTok{    ),}
+  \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##     Conservative           Labour Liberal Democrat 
+##             33.5             39.2              6.4 
+##      Other party             None      Green Party 
+##              5.1             13.7              2.1
+\end{verbatim}
+
+\hypertarget{two-way-or-more-contingency-table}{%
+\subsubsection{Two way or more contingency table}\label{two-way-or-more-contingency-table}}
+
+The simplest way to produce a two-way contingency table is to pass another variable to \texttt{table()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{PartyId2, bsa}\SpecialCharTok{$}\NormalTok{Rsex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                   
+##                    Male Female
+##   Conservative      627    636
+##   Labour            644    835
+##   Liberal Democrat  124    117
+##   Other party        97     96
+##   None              199    316
+##   Green Party        31     48
+\end{verbatim}
+
+However, when dealing with more than one variable it is recommended to use xtabs() instead as it has a number of desirable functions directly available as option. The syntax is slightly different as it relies on a formula ie a R object consisting of elements separated by a tilde `\textasciitilde{}'. The variables to be tabulated are specified on the right hand side of the formula.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{xtabs}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{PartyId2 }\SpecialCharTok{+}\NormalTok{Rsex,}
+      \AttributeTok{data =}\NormalTok{ bsa)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                   Rsex
+## PartyId2           Male Female
+##   Conservative      627    636
+##   Labour            644    835
+##   Liberal Democrat  124    117
+##   Other party        97     96
+##   None              199    316
+##   Green Party        31     48
+\end{verbatim}
+
+The \texttt{data=} parameter does not have to be explicitly specified as simply using ´\texttt{bsa}' will work. Other useful options are:
+
+\begin{itemize}
+\tightlist
+\item
+  subset=, which allows direct specification of a subpopulation from which to derive the table;
+\item
+  drop.unused.levels=T to remove empty levels (categories with zero observations) from being displayed;
+\item
+  weights\textasciitilde{} variables on the right hand side of the formula will be treated as weights, a useful feature for survey analysis.
+\end{itemize}
+
+As previously \texttt{prop.table()} is necessary in order to obtain proportions:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{b}\OtherTok{\textless{}{-}}\FunctionTok{xtabs}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{PartyId2 }\SpecialCharTok{+}\NormalTok{Rsex,bsa)}
+\FunctionTok{round}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}\FunctionTok{prop.table}\NormalTok{(b),}\DecValTok{1}\NormalTok{)         }\DocumentationTok{\#\#\# Cell percentages}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                   Rsex
+## PartyId2           Male Female
+##   Conservative     16.6   16.9
+##   Labour           17.1   22.1
+##   Liberal Democrat  3.3    3.1
+##   Other party       2.6    2.5
+##   None              5.3    8.4
+##   Green Party       0.8    1.3
+\end{verbatim}
+
+The largest group in the sample (22.1\%) is made of labour-voting females, the smallest of green-voting males.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}\FunctionTok{prop.table}\NormalTok{(b,}\DecValTok{1}\NormalTok{),}\DecValTok{1}\NormalTok{)       }\DocumentationTok{\#\#\# Option 1 for row percentages}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                   Rsex
+## PartyId2           Male Female
+##   Conservative     49.6   50.4
+##   Labour           43.5   56.5
+##   Liberal Democrat 51.5   48.5
+##   Other party      50.3   49.7
+##   None             38.6   61.4
+##   Green Party      39.2   60.8
+\end{verbatim}
+
+Conservative voters are more or less evenly split between men and women, whereas Labour and Green voters are more likely to be women.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}\FunctionTok{prop.table}\NormalTok{(b,}\DecValTok{2}\NormalTok{),}\DecValTok{1}\NormalTok{)       }\DocumentationTok{\#\#\# Option 2 for column percentages}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                   Rsex
+## PartyId2           Male Female
+##   Conservative     36.4   31.1
+##   Labour           37.4   40.8
+##   Liberal Democrat  7.2    5.7
+##   Other party       5.6    4.7
+##   None             11.6   15.4
+##   Green Party       1.8    2.3
+\end{verbatim}
+
+Similar proportions of men voted Conservative and Labour (36-37\%), whereas women were clearly more likely to vote Labour.
+
+For some reason, there is not a straightforward way to obtain percentages in three-way contingency tables with either \texttt{xtabs()} or \texttt{table()}. This is where \texttt{ftable()} comes handy.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}\FunctionTok{prop.table}\NormalTok{(}
+  \FunctionTok{ftable}\NormalTok{(RAgeCat}\SpecialCharTok{\textasciitilde{}}\NormalTok{PartyId2 }\SpecialCharTok{+}\NormalTok{Rsex,}\AttributeTok{data=}\NormalTok{bsa)}
+\NormalTok{  ,}\DecValTok{1}\NormalTok{),}\DecValTok{1}\NormalTok{)       }\DocumentationTok{\#\#\# Option 2 for column percentages}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                         RAgeCat 18-24 25-34 35-44 45-54 55-59 60-64  65+
+## PartyId2         Rsex                                                   
+## Conservative     Male             3.0   7.8  13.9  15.0   8.6   9.3 42.4
+##                  Female           2.7   7.1   8.8  18.6   8.8   8.7 45.4
+## Labour           Male             7.6  16.1  14.3  21.3   7.5   9.3 23.9
+##                  Female           7.9  20.2  19.2  18.8   7.1   7.1 19.7
+## Liberal Democrat Male             0.8  13.7  19.4  15.3   9.7   8.9 32.3
+##                  Female           4.3   9.4  26.5   6.0   6.0   9.4 38.5
+## Other party      Male             3.1  14.4  11.3  17.5  11.3  16.5 25.8
+##                  Female           5.2  14.6  15.6  16.7  11.5   8.3 28.1
+## None             Male             7.5  22.1  20.6  17.1  11.1   6.0 15.6
+##                  Female           8.5  22.5  20.6  21.8   7.3   6.3 13.0
+## Green Party      Male             6.5  32.3  16.1  29.0   6.5   3.2  6.5
+##                  Female           6.2  18.8  25.0  20.8   6.2  10.4 12.5
+\end{verbatim}
+
+The tables gives the relative age breakdown for each gender/political affiliation combination (ie row percentages).
+
+\hypertarget{grouped-summary-statistics-for-continuous-variables}{%
+\subsection{Grouped summary statistics for continuous variables}\label{grouped-summary-statistics-for-continuous-variables}}
+
+A common requirement in survey analysis consist in being able to compare descriptive statistics across subgroups of the data. There are different ways to do this in R. We demonstrate below the most straightforward one, which is obtained by using some of the functions available in the \texttt{dplyr} package.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bsa}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{group\_by}\NormalTok{(PartyId2)}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{summarise}\NormalTok{(}
+\AttributeTok{mdscore=}\FunctionTok{median}\NormalTok{(libauth,}\AttributeTok{na.rm=}\NormalTok{T),}
+\AttributeTok{sdscore=}\FunctionTok{sd}\NormalTok{(libauth,}\AttributeTok{na.rm=}\NormalTok{T))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 7 x 3
+##   PartyId2         mdscore sdscore
+##   <fct>              <dbl>   <dbl>
+## 1 Conservative        3.67   0.587
+## 2 Labour              3.33   0.774
+## 3 Liberal Democrat    3.17   0.726
+## 4 Other party         3.67   0.739
+## 5 None                3.67   0.584
+## 6 Green Party         2.83   0.872
+## 7 <NA>                3.67   0.564
+\end{verbatim}
+
+The above command produces a table of summary values (median and standard deviations) of the Liberal vs authoritarian scale. We can see from the first one that Green party voters are the most liberal, followed by Labour, whereas non voters and Conservatives are the most authoritarian. Liberal Democrats are the most cohesive group (ie with the smallest standard deviation).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bsa}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{group\_by}\NormalTok{(Rsex,PartyId2)}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{summarise}\NormalTok{(}
+\AttributeTok{mnscore=}\FunctionTok{sd}\NormalTok{(libauth,}\AttributeTok{na.rm=}\NormalTok{T) ,}\AttributeTok{mdscore=}\FunctionTok{median}\NormalTok{(libauth,}\AttributeTok{na.rm=}\NormalTok{T))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 14 x 4
+## # Groups:   Rsex [2]
+##    Rsex   PartyId2         mnscore mdscore
+##    <fct>  <fct>              <dbl>   <dbl>
+##  1 Male   Conservative       0.607    3.67
+##  2 Male   Labour             0.765    3.33
+##  3 Male   Liberal Democrat   0.766    3.17
+##  4 Male   Other party        0.703    3.83
+##  5 Male   None               0.616    3.67
+##  6 Male   Green Party        1.04     2.67
+##  7 Male   <NA>               0.603    3.67
+##  8 Female Conservative       0.565    3.67
+##  9 Female Labour             0.781    3.33
+## 10 Female Liberal Democrat   0.688    3.17
+## 11 Female Other party        0.773    3.67
+## 12 Female None               0.565    3.67
+## 13 Female Green Party        0.744    3   
+## 14 Female <NA>               0.540    3.67
+\end{verbatim}
+
+When further broken down by gender, we can see that overall the same trends remain valid, with some nuances: male Green supporters are markedly more liberal than their female counterpart, the opposite being true among Conservative supporters.
+
+Instead of tables of summary statistics, we may want to have summary statistics computed as variables that will be added to the current dataset for each corresponding gender/political affiliation group. This is straightforward to do with dplyr, we just need to use the \texttt{mutate()} command.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bsa}\OtherTok{\textless{}{-}}
+\NormalTok{bsa}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{group\_by}\NormalTok{(Rsex,PartyId2)}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{mutate}\NormalTok{(}
+\AttributeTok{msscore=}\FunctionTok{sd}\NormalTok{(libauth,}\AttributeTok{na.rm=}\NormalTok{T) ,}\AttributeTok{mdscore=}\FunctionTok{median}\NormalTok{(libauth,}\AttributeTok{na.rm=}\NormalTok{T))}
+\end{Highlighting}
+\end{Shaded}
+
+However, we also need to add the newly created variables into the existing bsa dataset, which the first line of the syntax above does. We can check that the variables have been created and that the correct values have been allocated to each sex/affiliation category.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(bsa)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Sserial"          "Rsex"            
+##  [3] "RAgeCat"          "Married"         
+##  [5] "ChildHh"          "HEdQual3"        
+##  [7] "eq_inc_quintiles" "RClassGp"        
+##  [9] "CCBELIEV"         "carallow"        
+## [11] "carreduc"         "carnod2"         
+## [13] "cartaxhi"         "carenvdc"        
+## [15] "plnenvt"          "plnuppri"        
+## [17] "Politics"         "Voted"           
+## [19] "actchar"          "actpol"          
+## [21] "govnosa2"         "PartyId2"        
+## [23] "leftrigh"         "libauth"         
+## [25] "WtFactor"         "lnleftrigh_log"  
+## [27] "govnosa2.n"       "lngovnosa2"      
+## [29] "test"             "Married2"        
+## [31] "Married3"         "RAgeCat2"        
+## [33] "msscore"          "mdscore"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bsa[}\DecValTok{4}\SpecialCharTok{:}\DecValTok{8}\NormalTok{,}\FunctionTok{c}\NormalTok{(}\StringTok{"Rsex"}\NormalTok{,}\StringTok{"PartyId2"}\NormalTok{,}\StringTok{"mdscore"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 3
+## # Groups:   Rsex, PartyId2 [4]
+##   Rsex   PartyId2         mdscore
+##   <fct>  <fct>              <dbl>
+## 1 Female Labour              3.33
+## 2 Male   Liberal Democrat    3.17
+## 3 Female <NA>                3.67
+## 4 Male   Liberal Democrat    3.17
+## 5 Female Green Party         3
+\end{verbatim}
+
+\newpage
+
+\hypertarget{producing-weighted-estimates}{%
+\section{Producing weighted estimates}\label{producing-weighted-estimates}}
+
+Most users of social surveys are interested at some point in inferring nationally representative estimates and/or compensate for bias involved in the sampling process when conducting analyses: sampling and non-response bias. These are often tackled with sampling weights, which are meant to correct estimates for the under/over representation of certain groups in the sample and adjusts standard errors accordingly.
+
+However, robust inference usually relies not just on weighting estimates but also on factoring in the survey design when conducting analyses -- which can be done with the \texttt{survey} package in R, but is a topic that goes beyond the present guide. At the same time for users who are concerned with reducing bias rather than producing publication-quality estimates, it may be useful to be aware how common R commands and operations can be used with weights.
+
+Some of the most common ones are mentioned below:
+
+\hypertarget{central-tendency-and-dispersion-continuous-variables}{%
+\subsection{Central tendency and dispersion (continuous variables)}\label{central-tendency-and-dispersion-continuous-variables}}
+
+The \texttt{stats} packages which comes with the installation of Base R includes \texttt{weighted.mean()} which, as indicated by its name, computes weighted estimates of the mean of a variable when weights are provided. However the Hmisc package includes a more comprehensive set of functions that can be used when weighting estimates. The code below provides an illustration of weighted means, variance and median of the left-right score used before, each time comparing it with the unweighted estimate:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Mean}
+\FunctionTok{c}\NormalTok{(}\FunctionTok{mean}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh,}\AttributeTok{na.rm=}\NormalTok{T),}\FunctionTok{wtd.mean}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh,bsa}\SpecialCharTok{$}\NormalTok{WtFactor))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.520 2.522
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Variance}
+\FunctionTok{c}\NormalTok{(}\FunctionTok{var}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh,}\AttributeTok{na.rm=}\NormalTok{T),}\FunctionTok{wtd.var}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh,bsa}\SpecialCharTok{$}\NormalTok{WtFactor))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6167 0.6195
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Median and quartiles}
+\FunctionTok{c}\NormalTok{(}\FunctionTok{quantile}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh,}\AttributeTok{na.rm=}\NormalTok{T,}\AttributeTok{probs=}\FunctionTok{c}\NormalTok{(.}\DecValTok{25}\NormalTok{,.}\DecValTok{5}\NormalTok{,.}\DecValTok{75}\NormalTok{)),}\FunctionTok{wtd.quantile}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh,bsa}\SpecialCharTok{$}\NormalTok{WtFactor,}\AttributeTok{probs=}\FunctionTok{c}\NormalTok{(.}\DecValTok{25}\NormalTok{,.}\DecValTok{5}\NormalTok{,.}\DecValTok{75}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 25% 50% 75% 25% 50% 75% 
+## 2.0 2.4 3.0 2.0 2.4 3.0
+\end{verbatim}
+
+The above functions can be used in conjunction with \texttt{group\_by()} and \texttt{summarise()} in order to compute weighted estimates of continuous variables by groups of categorical variables:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bsa}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(RAgeCat))}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{group\_by}\NormalTok{(RAgeCat)}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{summarise}\NormalTok{(}\AttributeTok{Mean=}\FunctionTok{wtd.mean}\NormalTok{(leftrigh,WtFactor),}
+                                     \AttributeTok{Var=}\FunctionTok{wtd.var}\NormalTok{(leftrigh,WtFactor),}
+                                     \AttributeTok{Median=}\FunctionTok{wtd.quantile}\NormalTok{(leftrigh,WtFactor,}\AttributeTok{probs=}\FunctionTok{c}\NormalTok{(.}\DecValTok{5}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 7 x 4
+##   RAgeCat  Mean   Var Median
+##   <fct>   <dbl> <dbl>  <dbl>
+## 1 18-24    2.49 0.556    2.4
+## 2 25-34    2.56 0.577    2.6
+## 3 35-44    2.52 0.615    2.4
+## 4 45-54    2.53 0.671    2.6
+## 5 55-59    2.54 0.653    2.4
+## 6 60-64    2.46 0.685    2.4
+## 7 65+      2.52 0.613    2.4
+\end{verbatim}
+
+\hypertarget{frequencies-and-contingency-tables}{%
+\subsection{Frequencies and contingency tables}\label{frequencies-and-contingency-tables}}
+
+Neither \texttt{ftable()} or \texttt{table()} used above allow for using weights. And although the \texttt{Hmisc} packages includes the \texttt{wtd.table()} function for single frequency tables, we recommend using \texttt{xtabs()} as previously, as it it more versatile:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Unweighted vs weighted frequency tables}
+\FunctionTok{cbind}\NormalTok{(}\AttributeTok{Unweighted=}\FunctionTok{round}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{xtabs}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{plnenvt,bsa)),}\DecValTok{1}\NormalTok{),}
+\AttributeTok{Weighted=}\FunctionTok{round}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{xtabs}\NormalTok{(WtFactor}\SpecialCharTok{\textasciitilde{}}\NormalTok{plnenvt,bsa)),}\DecValTok{1}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                            Unweighted Weighted
+## agree strongly                    4.6      4.8
+## agree                            16.0     15.9
+## neither agree nor disagree       33.2     33.2
+## disagree                         36.3     37.0
+## disagree strongly                10.0      9.0
+\end{verbatim}
+
+Weights are passed to \texttt{xtabs()} by specifying their name on the left hand side of the equation (or the tilde \texttt{\textasciitilde{}} )
+
+Obtaining weighted contingency tables follow the same logic:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Unweighted vs weighted contingency tables}
+\FunctionTok{cbind}\NormalTok{(}\FunctionTok{round}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{xtabs}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{plnenvt}\SpecialCharTok{+}\NormalTok{Rsex,bsa),}\DecValTok{1}\NormalTok{),}\DecValTok{1}\NormalTok{),}
+\FunctionTok{round}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{xtabs}\NormalTok{(WtFactor}\SpecialCharTok{\textasciitilde{}}\NormalTok{plnenvt}\SpecialCharTok{+}\NormalTok{Rsex,bsa),}\DecValTok{1}\NormalTok{),}\DecValTok{1}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                            Male Female Male Female
+## agree strongly             50.0   50.0 46.1   53.9
+## agree                      47.2   52.8 53.5   46.5
+## neither agree nor disagree 40.8   59.2 43.6   56.4
+## disagree                   47.9   52.1 52.7   47.3
+## disagree strongly          42.3   57.7 41.5   58.5
+\end{verbatim}
+
+\hypertarget{robust-inference}{%
+\subsection{Robust inference}\label{robust-inference}}
+
+The weighting procedures described above could be described as `quick and dirty' in that they mostly compute point estimates -- ie a single value -- and do not provide a reliable idea of their precision. Computing the precision of survey data estimates -- usually via their standard error -- usually requires more than just adding weights to a command. Information about the survey design, its primary sampling units, strata and clusters is requires so that robust standard errors, statistical tests and/or confidence interval are computed.
+
+The \texttt{Survey} package was designed in order to deal with this set of issues. It provides functions for integrating survey design into R as well as computing common estimates. We describe below the most important features. In order to use survey fonctions consist one first needs to create a svydesign object, in essence a version of the data that incorporates the sample design information available, then to compute the estimate using the svydesign object.
+
+An common issue with survey datasets available in the UK is that sampling information is often only available in secure lab version of the data, restricting its access to authorised users. Although it is sometimes possible to use available variables to account for aspects of the sample design -- region as a strata in the case of stratified samples -- in most cases users are left with computing standard errors without sample design information, which amounts to assuming that the sample was drawn purely at random. Even if this is the case however, using the \texttt{survey} package is recommended, as it provides a coherent framework for computing survey parameters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(survey) }\DocumentationTok{\#\#\# Loading the package in memory}
+\NormalTok{bsa.design}\OtherTok{\textless{}{-}}\FunctionTok{svydesign}\NormalTok{(}\AttributeTok{ids =}\SpecialCharTok{\textasciitilde{}}\DecValTok{1}\NormalTok{,}\AttributeTok{weights=}\SpecialCharTok{\textasciitilde{}}\NormalTok{WtFactor,}\AttributeTok{data=}\NormalTok{bsa) }
+\end{Highlighting}
+\end{Shaded}
+
+The code above simply declares the survey design by creating the \texttt{bsa.design} object (the name is arbitrary). The \texttt{ids=} parameter is where primary sampling units are declared, as well as any clustering information as a formula ie \texttt{\textasciitilde{}PSU+cluster2id...}. When PSU information is unavailable \texttt{ids} is given the value 1 or 0. A \texttt{strata=} and \texttt{fpc=} are available in order to declare the sampling strata and the variable used for finite population correction. None of these are available in the bsa dataset, and estimation commands will therefore rely on the assumption of simple random sampling.
+
+We can now compute estimates similar estimates as in the previous sections. The code below provides the mean of the left vs right political orientation indicator, as well as its 95\% confidence interval:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{svymean}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{leftrigh,bsa.design,}\AttributeTok{na.rm =}\NormalTok{ T)  }\DocumentationTok{\#\#\# Computes the mean and its standard error...}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          mean   SE
+## leftrigh 2.52 0.02
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{confint}\NormalTok{(}\FunctionTok{svymean}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{leftrigh,bsa.design,}\AttributeTok{na.rm =}\NormalTok{ T)) }\DocumentationTok{\#\#\# ... and confidence interval}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          2.5 % 97.5 %
+## leftrigh 2.491  2.552
+\end{verbatim}
+
+And now for the median:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{svyquantile}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{leftrigh,bsa.design,}\AttributeTok{quantiles=}\NormalTok{.}\DecValTok{5}\NormalTok{,}\AttributeTok{na.rm =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $leftrigh
+##     quantile ci.2.5 ci.97.5    se
+## 0.5      2.4    2.4     2.6 0.051
+## 
+## attr(,"hasci")
+## [1] TRUE
+## attr(,"class")
+## [1] "newsvyquantile"
+\end{verbatim}
+
+Frequency and contingency tables are computed using \texttt{svytable()}, which follows the same syntax as \texttt{xtabs()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# A frequency table...}
+\FunctionTok{round}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}
+      \FunctionTok{prop.table}\NormalTok{(}
+        \FunctionTok{svytable}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{RAgeCat,bsa.design)}
+\NormalTok{        ),}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## RAgeCat
+## 18-24 25-34 35-44 45-54 55-59 60-64   65+ 
+##  11.2  17.2  16.1  17.9   7.9   6.8  22.8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# And a two{-}way contingency table:}
+
+\FunctionTok{round}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}
+      \FunctionTok{prop.table}\NormalTok{(}
+        \FunctionTok{svytable}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{RAgeCat}\SpecialCharTok{+}\NormalTok{Rsex,bsa.design)}
+\NormalTok{        ,}\DecValTok{1}\NormalTok{),}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        Rsex
+## RAgeCat Male Female
+##   18-24 51.1   48.9
+##   25-34 50.2   49.8
+##   35-44 49.7   50.3
+##   45-54 49.3   50.7
+##   55-59 48.8   51.2
+##   60-64 49.0   51.0
+##   65+   45.4   54.6
+\end{verbatim}
+
+\hypertarget{graphs-and-plots}{%
+\section{Graphs and plots}\label{graphs-and-plots}}
+
+There are two main ways to produce graphs in R: either by using the straightforward but rather basic plotting commands from the Base package, or the more complex and nicer looking functions from the \texttt{ggplot} package.
+
+\hypertarget{distributional-graphs-for-continuous-variables}{%
+\subsection{Distributional graphs for continuous variables}\label{distributional-graphs-for-continuous-variables}}
+
+Graphs such as histograms or box plots are a convenient way to gain a quick overview of the distribution of a variable and are easy to produce. Go back to the BSA data, we can plot the distribution of left-right political orientations scores with the \texttt{hist()} command.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh,}\AttributeTok{freq=}\ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{UKDS-intro-to-R_files/figure-latex/7.1-1}
+
+The graphs appear visible in the `Plot' tab on the right hand side of the R Studio window. It shows us that political orientations are slightly skewed towards the left. The \texttt{freq=FALSE} option requires the y-axis to be expressed in terms of proportions rather than frequencies.
+
+Titles and labels can easily be added:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh,}
+     \AttributeTok{freq=}\ConstantTok{FALSE}\NormalTok{,}
+     \AttributeTok{main=}\StringTok{"Histogram of political orientations"}\NormalTok{,}
+     \AttributeTok{ylab=}\StringTok{"Proportions"}\NormalTok{,}
+     \AttributeTok{xlab=}\StringTok{"Left{-}right political orientations score"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{UKDS-intro-to-R_files/figure-latex/7.2-1}
+
+Note that \texttt{main}, \texttt{ylab} and \texttt{xlab} can be used with any Base R plot commands.
+
+We can also produce a box and whisker plot of the same variable:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh,}
+    \AttributeTok{main=}\StringTok{"Box and whisker plot of political orientations"}\NormalTok{,}
+     \AttributeTok{ylab=}\StringTok{"Left{-}right political orientations score"}
+\NormalTok{        )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{UKDS-intro-to-R_files/figure-latex/7.3-1}
+
+The generic \texttt{plot()} command produces one or two-way scatterplots:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh)             }\DocumentationTok{\#\#\# One way scatter plot of left{-}right political orientations score}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{UKDS-intro-to-R_files/figure-latex/7.4.1-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh,bsa}\SpecialCharTok{$}\NormalTok{libauth) }\DocumentationTok{\#\#\# Two{-}way scatterplot of political orientations by authoritarianism score}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{UKDS-intro-to-R_files/figure-latex/7.4.2-1}
+
+The second graph shows us that there is little association between the two variables. However, slightly fewer respondents simultaneously score high on the authoritarianism and left vs right scales.
+
+\hypertarget{plotting-categorical-variables}{%
+\subsection{Plotting categorical variables}\label{plotting-categorical-variables}}
+
+The generic \texttt{plot()} function provides a quick way to produce bar plots of categorical data. For example, we can examine the distribution of political party affiliations (\texttt{Politics} variable) which is a factor (ie categorical) variable. Some preliminary abbreviating of the factor levels are required in order for them to be displayed properly.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{PartyId2) }\DocumentationTok{\#\# The third and fourth factor levels are a bit long}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Conservative"     "Labour"          
+## [3] "Liberal Democrat" "Other party"     
+## [5] "None"             "Green Party"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{PartyId2)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"Con"}\NormalTok{,}\StringTok{"Lab"}\NormalTok{,}\StringTok{"Lib Dems"}\NormalTok{,}\StringTok{"Other"}\NormalTok{,}\StringTok{"None"}\NormalTok{, }\StringTok{"Greens"}\NormalTok{) }
+\FunctionTok{plot}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{PartyId2)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{UKDS-intro-to-R_files/figure-latex/7.5-1}
+More advanced plots require the barplot() function, which can be used in conjunction with table(). Whereas table() creates the data that will be plotted, barplot() does the actual plotting. For instance, we can produce the same bar plot, but this time with percentages, by creating a frequency table as we did above in Section 5.2, then plot it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{party.tab}\OtherTok{\textless{}{-}}\FunctionTok{round}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}\FunctionTok{prop.table}\NormalTok{(}
+  \FunctionTok{table}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{PartyId2)}
+\NormalTok{),}
+\DecValTok{1}\NormalTok{)}
+
+\NormalTok{party.tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##      Con      Lab Lib Dems    Other     None   Greens 
+##     33.5     39.2      6.4      5.1     13.7      2.1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{barplot}\NormalTok{(party.tab,}
+        \AttributeTok{main=}\StringTok{"Political party affiliation"}\NormalTok{,}
+        \AttributeTok{ylab=}\StringTok{"Percent"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{UKDS-intro-to-R_files/figure-latex/7.6-1}
+
+We can go further and create plots for two way contingency tables of party affiliation by gender. This time we will do it in a single command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{barplot}\NormalTok{(}
+\FunctionTok{round}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}\FunctionTok{prop.table}\NormalTok{(}
+  \FunctionTok{table}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Rsex,bsa}\SpecialCharTok{$}\NormalTok{PartyId2),}
+\DecValTok{2}\NormalTok{),                              }\DocumentationTok{\#\# Column \% (here, gender)}
+\DecValTok{1}\NormalTok{),                               }\DocumentationTok{\#\# Rounded to 1 decimal}
+\AttributeTok{beside =}\NormalTok{ T,                     }\DocumentationTok{\#\# Side{-}by{-}side bars   }
+     \AttributeTok{main=}\StringTok{"Political party affiliation by gender"}\NormalTok{,}
+        \AttributeTok{ylab=}\StringTok{"Percent"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{UKDS-intro-to-R_files/figure-latex/7.7-1}
+
+\hypertarget{more-advanced-plots}{%
+\subsection{More advanced plots}\label{more-advanced-plots}}
+
+Social science research often requires more advanced plots in order to conduct more complex analyses, for instance comparing the mean or median value of a continuous outcome across two or more categorical variables. The \texttt{ggplot} package provides one of the most advanced set of tools for plotting data currently available. A few examples are provided below.
+
+\textbf{\emph{Political party affiliation by highest qualification and gender}}
+We would like to look at how differences in political party affiliations vary by gender and whether respondents have a degree-level education.
+
+Let us first prepare the data: we need to create the table of result, the proportion of degree vs non degree holders by gender and political party. This is a three-way contingency table, that we can obtain with \texttt{ftable()} as shown in Section 5.2, combined with \texttt{prop.table()} for the computation of proportions and \texttt{round()}.
+As they are more straightforward to handle in \texttt{ggplot}, we convert the table object created by ftable into a data frame. Although we can specify titles and axis labels in the plotting command, it is preferable to keep things simple here and have them already in the the data.\\
+Rather than using the full range of educational achievements recorded in \texttt{HEdQual3}, we would like instead to have a dichotomic variable between degree holders and non degree holders. Adding it directly in the ftable command as a boolean expression return a dichotomic variable: ``TRUE'' for Degree educated respondents, and ``FALSE'' for everyone else. We just need to change the levels of this factor variable to make them more intelligible. Finally we change the variable names in our data frame.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pa}\OtherTok{\textless{}{-}}\FunctionTok{round}\NormalTok{(}\DecValTok{100}\SpecialCharTok{*}\FunctionTok{prop.table}\NormalTok{((}\FunctionTok{ftable}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{PartyId2,bsa}\SpecialCharTok{$}\NormalTok{Rsex,(bsa}\SpecialCharTok{$}\NormalTok{HEdQual3}\SpecialCharTok{==}\StringTok{"Degree"}\NormalTok{))),}\DecValTok{1}\NormalTok{),}\DecValTok{1}\NormalTok{)}
+\NormalTok{pa}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(pa)}
+\FunctionTok{levels}\NormalTok{(pa}\SpecialCharTok{$}\NormalTok{Var3)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"Below"}\NormalTok{,}\StringTok{"Degree"}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(pa)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"Affiliation"}\NormalTok{,}\StringTok{"Gender"}\NormalTok{,}\StringTok{"Education"}\NormalTok{,}\StringTok{"Percent"}\NormalTok{)}
+\NormalTok{pa}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Affiliation Gender Education Percent
+## 1          Con   Male     Below    72.7
+## 2          Lab   Male     Below    70.1
+## 3     Lib Dems   Male     Below    50.0
+## 4        Other   Male     Below    86.5
+## 5         None   Male     Below    88.8
+## 6       Greens   Male     Below    43.3
+## 7          Con Female     Below    82.6
+## 8          Lab Female     Below    67.3
+## 9     Lib Dems Female     Below    54.4
+## 10       Other Female     Below    74.7
+## 11        None Female     Below    83.9
+## 12      Greens Female     Below    48.9
+## 13         Con   Male    Degree    27.3
+## 14         Lab   Male    Degree    29.9
+## 15    Lib Dems   Male    Degree    50.0
+## 16       Other   Male    Degree    13.5
+## 17        None   Male    Degree    11.2
+## 18      Greens   Male    Degree    56.7
+## 19         Con Female    Degree    17.4
+## 20         Lab Female    Degree    32.7
+## 21    Lib Dems Female    Degree    45.6
+## 22       Other Female    Degree    25.3
+## 23        None Female    Degree    16.1
+## 24      Greens Female    Degree    51.1
+\end{verbatim}
+
+We are now ready to plot the data. the \texttt{ggplot()} commands usually works as a succession of layers or options that are added to an initial plot specifications. Each extra layer is added after a \texttt{+} sign. In the example below, we specify the data and the aesthetic (ie the main parameters of the plot) with the first command: the x and y variables , and the first grouping variable, education). \texttt{geom\_bar()} stipulates the bar plot, with the ṕosition=``dodge'' for the bars to be located side by side (position=``stack''would have them on top of each other). Finally, facet\_wrap() splits the plot by gender.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{pa,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{Percent,}\AttributeTok{x=}\NormalTok{Affiliation,}\AttributeTok{fill=}\NormalTok{Education))}\SpecialCharTok{+}
+\FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position=}\StringTok{"dodge"}\NormalTok{,}\AttributeTok{stat=}\StringTok{"identity"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{Gender)}\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}\SpecialCharTok{+}                                  \DocumentationTok{\#\#\# Theme for visualisation}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\StringTok{"\#702082"}\NormalTok{, }\StringTok{"\#008755"}\NormalTok{)) }\DocumentationTok{\#\#\# Manually specifying the colours (optional)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{UKDS-intro-to-R_files/figure-latex/7.9-1}
+\newpage
+
+\hypertarget{statistical-testing}{%
+\section{Statistical testing}\label{statistical-testing}}
+
+This section covers how to implement common statistical tests in R with survey data. A working knowledge of these tests and their theoretical assumptions is assumed.
+
+\hypertarget{differences-in-means}{%
+\subsection{Differences in means}\label{differences-in-means}}
+
+Two common ways of conducting statistical testing with means in samples consist in testing whether they are significantly different from 0 (one sample t-test), or whether they differ between two groups (two samples t test). In the latter case, one can further distinguish between independent samples (where means come from different groups), or paired samples (when the same measure is taken at several point in time). Given that it is the most widely used in social science, we will only cover the former here.
+
+Several R packages provide functions for conducting t tests. We will be using \texttt{t.test()}, part the \texttt{stats} package. Suppose we would like to test whether \texttt{libauth} significantly differs between men and women. A two sided test is the default (with H\_0 that there is no differences between groups), and H\_1 that the group means do indeed differ. The test is specified with a formula with on the left hand side the quantity to be tested and on the right hand side the grouping variable.
+
+One sided tests can be conducted by specifying that the alternative hypothesis (H\_1) is either \textbf{greater} or \textbf{less}. \texttt{t.test()} assumes that by default the variances are unequal. this can be changed with the \texttt{var.equal=T} option.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Testing for significant differences in liberal vs authoritarian score}
+\FunctionTok{t.test}\NormalTok{(libauth}\SpecialCharTok{\textasciitilde{}}\NormalTok{Rsex,}\AttributeTok{data=}\NormalTok{bsa)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Welch Two Sample t-test
+## 
+## data:  libauth by Rsex
+## t = 1.2, df = 3012, p-value = 0.2
+## alternative hypothesis: true difference in means between group Male and group Female is not equal to 0
+## 95 percent confidence interval:
+##  -0.02035  0.07959
+## sample estimates:
+##   mean in group Male mean in group Female 
+##                3.528                3.498
+\end{verbatim}
+
+No significant differences (ie the difference in \texttt{libauth} between men and women is not significantly different from zero)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Testing for whether men have a lower (ie more left{-}wing)  score}
+\FunctionTok{t.test}\NormalTok{(leftrigh}\SpecialCharTok{\textasciitilde{}}\NormalTok{Rsex,}\AttributeTok{data=}\NormalTok{bsa, }\AttributeTok{alternative=}\StringTok{"less"}\NormalTok{)      }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Welch Two Sample t-test
+## 
+## data:  leftrigh by Rsex
+## t = -2.1, df = 2858, p-value = 0.02
+## alternative hypothesis: true difference in means between group Male and group Female is less than 0
+## 95 percent confidence interval:
+##      -Inf -0.01198
+## sample estimates:
+##   mean in group Male mean in group Female 
+##                2.488                2.546
+\end{verbatim}
+
+Men have a significantly lower score on the scale (at the .05 threshold) and are therefore on average leaning more to the left than women.
+
+\hypertarget{differences-in-variance}{%
+\subsection{Differences in variance}\label{differences-in-variance}}
+
+Another common significance test in social science is the \textbf{variance test} which consists of testing whether the variances of the same variable across two groups are equal. This is usually achieved by testing whether the ratio of the variance between the two groups is significantly different from zero. With the BSA data, this amounts to testing whether men and women are more homogenous with regard to their political views.
+
+The syntax for the variance test \texttt{var.test()} also included in \texttt{stats} is almost identical to that of \texttt{t.test()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Testing for gender differences in liberal vs authoritarian score}
+\FunctionTok{var.test}\NormalTok{(libauth}\SpecialCharTok{\textasciitilde{}}\NormalTok{Rsex,}\AttributeTok{data=}\NormalTok{bsa)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  F test to compare two variances
+## 
+## data:  libauth by Rsex
+## F = 1.1, num df = 1434, denom df = 1777, p-value
+## = 0.09
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.9874 1.2022
+## sample estimates:
+## ratio of variances 
+##              1.089
+\end{verbatim}
+
+Significant differences in the variance between men and women, but only at the .1 threshold.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Testing for whether men have a lower (ie more left{-}wing)  score}
+\FunctionTok{var.test}\NormalTok{(leftrigh}\SpecialCharTok{\textasciitilde{}}\NormalTok{Rsex,}\AttributeTok{data=}\NormalTok{bsa,}\AttributeTok{alternative=}\StringTok{"greater"}\NormalTok{)      }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  F test to compare two variances
+## 
+## data:  leftrigh by Rsex
+## F = 1.3, num df = 1433, denom df = 1771, p-value
+## = 1e-08
+## alternative hypothesis: true ratio of variances is greater than 1
+## 95 percent confidence interval:
+##  1.217   Inf
+## sample estimates:
+## ratio of variances 
+##              1.322
+\end{verbatim}
+
+The variance of left-right political leaning is larger among men than women, in other words there are more divergence between men than between women.
+
+\hypertarget{significance-of-measures-of-association}{%
+\subsection{Significance of measures of association}\label{significance-of-measures-of-association}}
+
+\textbf{Between continuous variables}
+
+Another type of common statistical test in social science is about examining whether a coefficient of correlation is significantly different from 0 (alternative hypothesis).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor.test}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{leftrigh, bsa}\SpecialCharTok{$}\NormalTok{libauth, }\AttributeTok{use=}\StringTok{\textquotesingle{}complete.obs\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  bsa$leftrigh and bsa$libauth
+## t = 0.54, df = 3202, p-value = 0.6
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.02501  0.04424
+## sample estimates:
+##      cor 
+## 0.009626
+\end{verbatim}
+
+As we could have suspected the coefficient of correlation between the two scales is so small that it cannot be said to be significantly different from zero.
+
+\textbf{Between categorical variables}
+
+The chi-square test of independence is a very common test of association between categorical variables. It consists in examining whether the association between two variables is likely to be due to chance or not, in other words whether the variability observed in a contingency table is significantly different from what would be expected were it due to chance.
+
+We will be using \texttt{chisq.test()}, also from the \texttt{stats} package. By contrast with the test of correlation, the \texttt{chisq.test()} needs to be applied to contingency tables that have already been computed.
+Let us go back to an earlier example, and attempt to test whether the gender differences in political affiliations are due to chance or not.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{chisq.test}\NormalTok{(}\FunctionTok{xtabs}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{PartyId2 }\SpecialCharTok{+}\NormalTok{Rsex,bsa))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's Chi-squared test
+## 
+## data:  xtabs(~PartyId2 + Rsex, bsa)
+## X-squared = 27, df = 5, p-value = 5e-05
+\end{verbatim}
+
+As the R output shows, there are highly significant gender differences in political affiliations (p\textless.001).
+
+\newpage
+
+\hypertarget{regression-analysis}{%
+\section{Regression analysis}\label{regression-analysis}}
+
+The \texttt{glm()} command from the R base package is used for fitting linear and non-linear models. These include logistic regression, and more generally models falling under the Generalized Linear Model framework.\\
+In this section, we will use it to investigate the association between the level of education \texttt{HEdQual3} and \texttt{Voted}, whether someone voted or not. Let's first briefly explore the variables using the \texttt{class()} and \texttt{table()} commands from the previous chapters:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Voted)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "factor"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Voted)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Yes   No 
+## 2205  776
+\end{verbatim}
+
+and
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{HEdQual3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "factor"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{HEdQual3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##                           Degree 
+##                             1050 
+## Higher educ below degree/A level 
+##                             1086 
+##             O level or equiv/CSE 
+##                             1026 
+##                 No qualification 
+##                              747
+\end{verbatim}
+
+It is a good idea to make sure that categorical variables are stored as factors. This is not absolutely necessary, but gives greater flexibility, for instance when having to change the reference category on the go.
+
+For greater readability we can also shorten the levels of \texttt{HEdQual3} using the \texttt{level()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{HEdQual3) }\DocumentationTok{\#\#\# The original level names  are a bit verbose...}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Degree"                          
+## [2] "Higher educ below degree/A level"
+## [3] "O level or equiv/CSE"            
+## [4] "No qualification"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# ... Fortunately we can shorten them easily}
+\FunctionTok{levels}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{HEdQual3) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Degree"}\NormalTok{,}\StringTok{"A level and above"}\NormalTok{,}\StringTok{"GCSE or equiv"}\NormalTok{,}\StringTok{"No Qual"}\NormalTok{)}
+
+\FunctionTok{table}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{HEdQual3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##            Degree A level and above     GCSE or equiv 
+##              1050              1086              1026 
+##           No Qual 
+##               747
+\end{verbatim}
+
+What about the levels for our dependent variable? By default, the first level of a factor will be used as the reference category. This can be also checked with the \texttt{contrasts()}. In this case, 1 is associated with `No', so the model will be predicting the probability of NOT voting. If the 1 was associated with `Yes' then the model will be predicting the probability of voting.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{levels}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Voted)     }\CommentTok{\#Note that Yes comes before No}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Yes" "No"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{contrasts}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Voted)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     No
+## Yes  0
+## No   1
+\end{verbatim}
+
+As we are interested in the latter we need to change the reference category using the \texttt{relevel()} function. We can also create a new variable named \texttt{Voted2} so as to keep a copy of the original variable intact.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Reverse the order}
+\NormalTok{bsa}\SpecialCharTok{$}\NormalTok{Voted2 }\OtherTok{\textless{}{-}} \FunctionTok{relevel}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Voted, }\AttributeTok{ref =} \StringTok{"No"}\NormalTok{)}
+
+\CommentTok{\#Check the contrasts}
+\FunctionTok{contrasts}\NormalTok{(bsa}\SpecialCharTok{$}\NormalTok{Voted2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     Yes
+## No    0
+## Yes   1
+\end{verbatim}
+
+Since the outcome variable (Voted or Voted2) has a binomial distribution, we need to specify to the glm() function that we will be fitting a logistic regression model. We will do this by setting the argument `family' to `binomial' and the link function to `logit'. We could also have used `probit' instead as a link function.
+The code below runs the model and stores the result into an object called \texttt{fit1}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit1 }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(Voted2 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ HEdQual3, }\AttributeTok{data=}\NormalTok{bsa, }\AttributeTok{family=}\FunctionTok{binomial}\NormalTok{(}\AttributeTok{link=}\NormalTok{logit))}
+\FunctionTok{summary}\NormalTok{(fit1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = Voted2 ~ HEdQual3, family = binomial(link = logit), 
+##     data = bsa)
+## 
+## Coefficients:
+##                           Estimate Std. Error z value
+## (Intercept)                 1.4956     0.0919   16.28
+## HEdQual3A level and above  -0.2134     0.1251   -1.71
+## HEdQual3GCSE or equiv      -0.6406     0.1219   -5.25
+## HEdQual3No Qual            -0.8367     0.1277   -6.55
+##                           Pr(>|z|)    
+## (Intercept)                < 2e-16 ***
+## HEdQual3A level and above    0.088 .  
+## HEdQual3GCSE or equiv      1.5e-07 ***
+## HEdQual3No Qual            5.6e-11 ***
+## ---
+## Signif. codes:  
+## 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 3297.6  on 2916  degrees of freedom
+## Residual deviance: 3240.4  on 2913  degrees of freedom
+##   (1071 observations deleted due to missingness)
+## AIC: 3248
+## 
+## Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+To run a model controlling for gender `Rsex' and age `RAgeCat', one simply needs to add them on the right hand side of the formula, separated with a plus (+) sign.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit2 }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(Voted2 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ HEdQual3 }\SpecialCharTok{+}\NormalTok{ Rsex }\SpecialCharTok{+}\NormalTok{ RAgeCat, }\AttributeTok{data=}\NormalTok{bsa, }\AttributeTok{family=}\FunctionTok{binomial}\NormalTok{(}\AttributeTok{link=}\NormalTok{logit))}
+\FunctionTok{summary}\NormalTok{(fit2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = Voted2 ~ HEdQual3 + Rsex + RAgeCat, family = binomial(link = logit), 
+##     data = bsa)
+## 
+## Coefficients:
+##                           Estimate Std. Error z value
+## (Intercept)                 1.1125     0.2004    5.55
+## HEdQual3A level and above  -0.3868     0.1322   -2.93
+## HEdQual3GCSE or equiv      -0.9902     0.1311   -7.55
+## HEdQual3No Qual            -1.9063     0.1569  -12.15
+## RsexFemale                 -0.1571     0.0922   -1.70
+## RAgeCat25-34               -0.2460     0.1967   -1.25
+## RAgeCat35-44                0.2067     0.1981    1.04
+## RAgeCat45-54                0.8569     0.2000    4.28
+## RAgeCat55-59                0.8406     0.2323    3.62
+## RAgeCat60-64                1.6028     0.2527    6.34
+## RAgeCat65+                  2.1641     0.2145   10.09
+##                           Pr(>|z|)    
+## (Intercept)                2.9e-08 ***
+## HEdQual3A level and above   0.0034 ** 
+## HEdQual3GCSE or equiv      4.2e-14 ***
+## HEdQual3No Qual            < 2e-16 ***
+## RsexFemale                  0.0884 .  
+## RAgeCat25-34                0.2110    
+## RAgeCat35-44                0.2968    
+## RAgeCat45-54               1.8e-05 ***
+## RAgeCat55-59                0.0003 ***
+## RAgeCat60-64               2.3e-10 ***
+## RAgeCat65+                 < 2e-16 ***
+## ---
+## Signif. codes:  
+## 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 3293.1  on 2912  degrees of freedom
+## Residual deviance: 2922.5  on 2902  degrees of freedom
+##   (1075 observations deleted due to missingness)
+## AIC: 2945
+## 
+## Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+\textbf{Model interpretation}
+
+\texttt{Summary()} provide a broad overview of the model output, not dissimilar to other statistical software.
+We can also examine the content of fit1 and fit2 more in detail and requests a specific element, for example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ls}\NormalTok{(fit1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "aic"               "boundary"         
+##  [3] "call"              "coefficients"     
+##  [5] "contrasts"         "control"          
+##  [7] "converged"         "data"             
+##  [9] "deviance"          "df.null"          
+## [11] "df.residual"       "effects"          
+## [13] "family"            "fitted.values"    
+## [15] "formula"           "iter"             
+## [17] "linear.predictors" "method"           
+## [19] "model"             "na.action"        
+## [21] "null.deviance"     "offset"           
+## [23] "prior.weights"     "qr"               
+## [25] "R"                 "rank"             
+## [27] "residuals"         "terms"            
+## [29] "weights"           "xlevels"          
+## [31] "y"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(fit1}\SpecialCharTok{$}\NormalTok{coefficients,}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               (Intercept) HEdQual3A level and above 
+##                      1.50                     -0.21 
+##     HEdQual3GCSE or equiv           HEdQual3No Qual 
+##                     -0.64                     -0.84
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# The coef() function will give the same output:}
+\FunctionTok{round}\NormalTok{(}\FunctionTok{coef}\NormalTok{(fit1),}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##               (Intercept) HEdQual3A level and above 
+##                      1.50                     -0.21 
+##     HEdQual3GCSE or equiv           HEdQual3No Qual 
+##                     -0.64                     -0.84
+\end{verbatim}
+
+It is beyond the remit of this guide to describe the full output of \texttt{glm()}. Please refer to the package documentation for more detailed explanations.
+
+Raw logistic regression coefficients measure the effect of variables on the probability of the outcome such as log(betaX)=P(y). It is common practice to convert these into odd ratios by exponentiating them, such as that betaX=exp(P(y)). The following code does this in R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+          \FunctionTok{cbind}\NormalTok{(}
+            \FunctionTok{exp}\NormalTok{(}\FunctionTok{coef}\NormalTok{(fit2)),}\FunctionTok{exp}\NormalTok{(}\FunctionTok{confint}\NormalTok{(fit2))}
+\NormalTok{                ) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Waiting for profiling to be done...
+\end{verbatim}
+
+\begin{verbatim}
+##                                   2.5 %  97.5 %
+## (Intercept)               3.0420 2.0618  4.5277
+## HEdQual3A level and above 0.6793 0.5238  0.8795
+## HEdQual3GCSE or equiv     0.3715 0.2868  0.4796
+## HEdQual3No Qual           0.1486 0.1089  0.2016
+## RsexFemale                0.8546 0.7131  1.0236
+## RAgeCat25-34              0.7819 0.5300  1.1470
+## RAgeCat35-44              1.2296 0.8317  1.8095
+## RAgeCat45-54              2.3557 1.5886  3.4828
+## RAgeCat55-59              2.3178 1.4718  3.6622
+## RAgeCat60-64              4.9667 3.0428  8.2090
+## RAgeCat65+                8.7066 5.7183 13.2697
+\end{verbatim}
+
+Using the \texttt{coef()} and \texttt{confint()} functions, the code above respectively extracts the coefficients and associated 95\% confidence intervals from fit2 then collate them using \texttt{cbind()}.
+
+** Plotting the coefficients ** --\textgreater{}
+We can visualise the odd ratios and their confidence intervals using the \texttt{plot.model()} function from the `sjPlot' package.
+The 'sjPlot' package needs to be installed and loaded
+
+\begin{verbatim}
+install.packages('sjPlot')
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(sjPlot)}
+\FunctionTok{set\_theme}\NormalTok{(}\AttributeTok{base =} \FunctionTok{theme\_minimal}\NormalTok{())           }\DocumentationTok{\#\#\# Default sets of options }
+\FunctionTok{plot\_model}\NormalTok{(fit2,}
+           \AttributeTok{colors =} \FunctionTok{c}\NormalTok{(}\StringTok{"\#702082"}\NormalTok{, }\StringTok{"\#008755"}\NormalTok{) }\DocumentationTok{\#\#\# Added for better accessibility }
+\NormalTok{           ) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{UKDS-intro-to-R_files/figure-latex/9.10-1}
+
+\textbf{Assessing model fit}
+The Akaike Information Criterion (AIC) is a measure of relative fit for maximum likelihood fitted models. It is used to compare the improvement in how several models fit some data relative to each other, allowing for the different number of parameters or degrees of freedom. The smaller the AIC, the better the fit. In order for the comparison to be valid, we need to ensure that the models were run with the same number of observations each time. As it is likely that the second model was run on a smaller sample, due to missing values for the Age and Sex variables, we will need to re-run the first one without.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit1 }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(Voted2 }\SpecialCharTok{\textasciitilde{}}\NormalTok{ HEdQual3, }\AttributeTok{data=}\NormalTok{bsa}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Rsex) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(RAgeCat)), }\AttributeTok{family=}\FunctionTok{binomial}\NormalTok{(}\AttributeTok{link=}\NormalTok{logit))}
+
+\FunctionTok{c}\NormalTok{(fit1}\SpecialCharTok{$}\NormalTok{aic,fit2}\SpecialCharTok{$}\NormalTok{aic)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3245 2945
+\end{verbatim}
+
+We can see that the model controlling for gender and sex is a better fit to the data than the one without controls as it has an AIC of 2944.5 against 3244.5 for fit1.
+
+With the information about the deviance from fit1 and fit2, we can also compute the overall significance of the model, that is whether the difference between the deviance (another likelihood-based measure of fit) for the fitted model is significantly different from that of the empty or null model. This is usually carried by conducting a chi square test, accounting for the differences in the number of parameters (ie degrees of freedom) between the two models. As with other R code, this can achieved step by step or in one go:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dev.d}\OtherTok{\textless{}{-}}\NormalTok{fit2}\SpecialCharTok{$}\NormalTok{null.deviance }\SpecialCharTok{{-}}\NormalTok{ fit2}\SpecialCharTok{$}\NormalTok{deviance }
+\NormalTok{df.d}\OtherTok{\textless{}{-}}\NormalTok{fit2}\SpecialCharTok{$}\NormalTok{df.null }\SpecialCharTok{{-}}\NormalTok{ fit2}\SpecialCharTok{$}\NormalTok{df.residual}
+\NormalTok{p}\OtherTok{\textless{}{-}}\DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{pchisq}\NormalTok{(dev.d, df.d)}
+\FunctionTok{c}\NormalTok{(dev.d,df.d,p)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 370.5  10.0   0.0
+\end{verbatim}
+
+The Chi square test indicates that the difference in deviance of 370.5 with 10 degrees of freedom is highly significant (P\textless.001)
+\newpage
+
+\hypertarget{further-information}{%
+\section{Further information}\label{further-information}}
+
+\hypertarget{additional-commands-of-interest}{%
+\subsection{Additional commands of interest}\label{additional-commands-of-interest}}
+
+The following non exhaustive list provides a few examples of commands and packages that tackle common types of analysis which might be relevant to users of large UK surveys:
+
+\begin{itemize}
+\item
+  Further regression analysis: the \texttt{glm()} command can be used for fitting a
+  large number of regression including Poisson and multinomial models. The
+  packages `lme4' and `nlme' are used to fit respectively linear and non
+  linear multilevel models, also known as mixed models.
+\item
+  Complex survey data and analysis commands and functions can be found in the `survey' package. It includes commands for taking into account stratified and clustered samples, weights compute design effects and confidence intervals, etc..
+\item
+  For users interested in latent variable modelling the
+  \texttt{factanal()} command from the \texttt{stats} package conducts factor analysis. Other resources are available in the \texttt{poLCA} (Latent Class
+  Analysis), \texttt{ltm} (Latent Trait modelling), \texttt{sem} (Structural equation
+  modelling) packages. The \texttt{Lavaan} package aslso provides a wide range of functions for structural equation modelling
+  including with categorical outcomes.
+\item
+  Users interested in longitudinal and time series analysis will be interested in the \texttt{stats}and the `tseries' packages. The packages \texttt{survival} and \texttt{eha} deal with event history and survival analysis, whereas `grofit' and `plm' are designed for panel data and growth analyses.
+\end{itemize}
+
+\hypertarget{additional-online-resources}{%
+\subsection{Additional online resources}\label{additional-online-resources}}
+
+There are hundreds of web sites dedicated to R that users can consult, in addition to CRAN and the main R help list, R-Help with its searchable archives. A few of the most common ones are listed here:
+
+\begin{itemize}
+\item
+  As with other statistical packages, the \href{https://stats.oarc.ucla.edu/r/}{UCLA} website provides a good starting point for beginners
+\item
+  The \href{http://bayes.acs.unt.edu:8083/BayesContent/class/Jon/R_SC/}{University of North Texas} provides useful links to R resources
+\item
+  \href{https://www.r-bloggers.com}{The R Bloggers website} contains many posts about R - in particular useful \href{https://www.r-bloggers.com/r-tutorial-series-r-beginners-guide-and-r-bloggers-updates/}{introductory information}
+\item
+  \href{https://stats.stackexchange.com/}{Stackexchange} is not specific to R but contains many forum-type questions and answers raised by R users
+\item
+  \href{https://www.harding.edu/fmccown/r/}{This website} presents useful basic information about graphs in R.
+\item
+  \href{https://www.bristol.ac.uk/cmm/learning/course.html}{The Centre for Multilevel modeling at Bristol University} has several pages dedicated to R users interested in Multilevel modeling
+\end{itemize}
+
+\newpage
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\begin{itemize}
+\tightlist
+\item
+  R Core Team. (2017). R: A language and environment for statistical computing. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from \url{https://www.r-project.org/} RStudio Team. (2016).
+\item
+  RStudio: Integrated Development for R. Boston, USA: RStudio, Inc.~Retrieved from \url{http://www.rstudio.com/}
+\item
+  Tennekes, M. (2017). tmap: Thematic Maps. R package version 1.10. Retrieved from \url{https://cran.r-project.org/package=tmap}
+\item
+  Wickham, H., \& Francois, R. (2016). dplyr: A Grammar of Data Manipulation. R package version 0.5.0. Retrieved from \url{https://cran.r-project.org/package=dplyr}
+\item
+  Wickham, H. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2009. Retrieved from \url{https://cran.r-project.org/package=ggplot2}
+\end{itemize}
+
+\end{document}
