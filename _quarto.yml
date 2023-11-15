@@ -1,0 +1,75 @@
+project:
+  type: book
+  output-dir: docs
+#  render:
+#  - index.qmd
+#  - main_body.qmd
+execute:
+  echo: true
+  warning: false
+  message: false
+  cache: true
+  freeze: auto
+book:
+  title: "Analysing large scale survey data using R"
+  author: "Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service"
+  cover-image: pics/UKDS_Logos_Col_Grey_300dpi.png
+  output-file: "UKDS_R_Guide"
+  date: "15 September 2023"
+#  favicon: pics/UKDS_Logos_Col_Grey_300dpi.png 
+#  repo-url: https://github.com/UKDataServiceOpen/UKDS_RGuide
+#  repo-actions: [edit]
+  downloads: [pdf]
+  chapters:
+  - index.qmd
+  - Introduction.qmd
+  - Using.qmd
+  - Opening.qmd
+  - Manipulation.qmd
+  - Descriptives.qmd
+  - Weighted.qmd
+  - Graphs.qmd
+  - Testing.qmd
+  - Regressions.qmd
+  - Further.qmd
+  - References.qmd
+  navbar:
+   logo: pics/UKDS_Logos_Col_Grey_300dpi.png
+   search: true
+   tools: false
+    
+#bibliography: references.bib
+mainfont: Arial
+sansfont: Arial
+monofont: "Courier New"
+monofontoptions: 'Scale=0.8'
+pdf-engine: lualatex
+
+format:
+  # docx:
+  #   toc: true
+  #   page-width: 8.27
+  #   toc-depth: 3
+  #   toc-title: "Contents"
+  html:
+    theme: default
+    css: styles.css
+    toc: true
+  # titlepage-pdf:
+  #   titlepage: plain
+  #   titlepage-geometry:
+  #    - top=70mm
+  #    - left=30mm
+  #    - right=30mm
+  #    - bottom=30mm
+  #   titlepage-theme:
+  #    logo-size: 6cm
+  #    title-fontstyle: Huge
+  #   titlepage-logo: "pics/UKDS_Logos_Col_Grey_300dpi.png"  
+  #   documentclass: scrreport
+  #   papersize: A4
+  #   geometry:
+  #    - top=25mm
+  #    - left=25mm
+  #    - right=25mm
+  #    - bottom=30mm

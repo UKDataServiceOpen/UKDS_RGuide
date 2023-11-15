@@ -1,0 +1,119 @@
+# Opening datasets in R
+```{r setup4,echo=F,message=F,warning=F}
+library(dplyr)
+library(Hmisc)
+library(ggplot2)
+library(haven)
+library(foreign)
+datadir<-"/home/piet/Dropbox/work/UKDS/RGuide/data/"
+```
+## Essential information
+In principle, any  dataset whether in CSV, SPSS, SAS, or Stata format can be opened by R. There are a number of issues to consider however:
+  
+  - The `foreign` package has been traditionally used  to import SPSS and Stata datasets into R:
+  u
+  - its `read.spss()` and `write.spss()` functions respectively open and write .sav files. Given that both were developed from  older versions of SPSS, it is therefore advised  to check that their outcome is as expected. In addition:
+  - `read.spss()` does not store the data in a R data frame by default and will require the option         `to.data.frame=T` to be specified.
+- `read.spss()` may sometimes struggle with some numeric format and wrongly attempt to convert them as factor, which will result in error messages. It is therefore advised to limit the maximum number of levels that  will be considered when converting factors  by using  the option   `max.value.labels=`
+
+- `read.dta()` and `write.dta()` respectively open and write Stata files up to version 12. An option to watch for is `convert.factor=T/F` which either will import  Stata categorical variable as their underlying numeric value or instead will convert them into factors, using value labels as levels, which may be an issue for categorical variables with a large number of levels. Users have to bear in mind that the labels will by default sorted alphabetically.
+
+- The `readstata13` package opens  Stata datasets from version 13 onwards with the `read.dta13()` function and offers a more comprehensive set of options. `convert.factor=T/F` has the same effect as in  `read.dta()` from `foreign`.
+- Data frames created with either `read.dta()` or `read.dta13()` have extra information stored as attributes, which maybe useful to retrieve. For instance:
+  ```
+> mydata<-read.dta("Some_Stata_dataset.dta")
+> attributes(mydata)$var.labels ### Retrieves the original Stata variable labels
+```
+
+- Finally the `haven` package opens SPSS, Stata and SAS files with respectively `read_spss()`, `read_dta()` and `read_sas()`. By contrast with the other two packages, it relies on ad hoc data formats and data structures for converting labelled categorical variables and attempts to mimic Stata's value and variable labels. More information is available [here](https://haven.tidyverse.org/reference/read_dta.html).
+
+In order not to overcomplicate their initial exploration of R we recommend new users to use  `read.spss()` or `read.dta13()` when importing datasets from either SPSS or Stata, rather than the more elaborate functions available in `haven`.
+
+
+
+## The 2017 British Social Attitudes Survey
+For the rest of this guide, we will use the `British Social Attitudes Survey, 2017, Environment and Politics: Open Access Teaching Dataset`, which can be downloaded from the [UK Data Service website](https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8849). We will use  the   SPSS version of the dataset, which will be assumed to be  saved in a `UKDS` folder created inside `Documents` folder. `C:\\Users\\Your_User_Name_Here\\Documents` We will  set this as default working directory. This way, we won’t have to specify the full path of files that we will be opening or saving.  
+
+```{r 3.1,echo=FALSE}
+setwd("~/Dropbox/work/UKDS/RGuide/UKDS_RGuide")
+#setwd("C:/Users/qtnvpw1/Dropbox/work/UKDS/git/RGuide/data/8849spss_73589506FAA92AEFC9646C684CD2427012F90FA9F6541F3BE46E4BE1A047987C_V1")
+```
+
+We can finally open the file:
+  
+```{r 3.2}
+bsa<-read.spss(paste0(datadir,"8849spss_V1/bsa2017_open_enviropol.sav"), 
+               to.data.frame = TRUE,
+               use.value.labels=TRUE,
+               max.value.labels = 9)  
+
+dim(bsa)
+```
+##  Understanding the dataset
+As previously, we can find the number of observations and variables in the dataset by typing the following:
+  
+```{r 3.3}
+dim(bsa)
+```
+
+We can see that there are 3,988 observations and 25 variables in the BSA dataset.
+
+Typing:
+```{r 3.4}
+ls()
+```
+
+will show us that the object ‘bsa’ has appeared, but what if we want to get the list of all variables in the dataset?  We need to type:
+```{r 3.5}
+ls(bsa)
+```
+
+If we want to get a better sense of the data, we use the `head()`  function which will return the first six rows.
+```{r 3.6}
+head(bsa)
+```
+
+
+
+Single variables for example, `Rsex` (gender of respondents) may be also summarised with `head()`, which returns as previously the first six observations of the gender variable, whereas typing  
+
+
+```{r 3.7}
+head(bsa$Rsex)
+```
+Simply typing the name of a variable as in:  
+```
+bsa$Rsex
+```
+will list the first 1000 observations of the variable.  Other commands provide more useful information, such as `summary()`.  
+
+```{r 3.8}
+summary(bsa$Rsex)
+```
+
+Summary is a generic function that tailors the most appropriate output  to an object class. As Rsex is a categorical variable. The output of summary() is identical to what we would have obtained with the default tabulation fuction `table()`:
+  
+```{r 3.9}
+table(bsa$Rsex)
+```
+
+When encountering a continuous variable, `summary()` will compute  basic descriptive statistics (mean, median, quartiles, maximum and minimum). For example, in the case of the libertarian-authoritarian scale `libauth`:  
+  
+```{r 3.10}
+summary(bsa$libauth)
+```
+
+
+##  Identifying and selecting variables
+As we have already seen, variables are objects. R automatically stores variables using the appropriate object class. Categorical variables are ‘Factors’ with ‘Levels’ as categories within these, while continuous variables are ‘Numeric’ types of objects.
+The `class()` displays the type of an object:.
+
+```{r 3.11}
+class(bsa$Rsex)
+```
+
+The levels() function returns the categories of the variable.
+```{r 3.12}
+levels(bsa$Rsex)
+```
+\newpage
