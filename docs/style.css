@@ -13,6 +13,35 @@ pre code {
   white-space: inherit;
 }
 
-.p2 {
-  font-family: Arial, Helvetica, sans-serif;
+.quarto-title-block .quarto-title-banner {
+  background-image: url("pics/UKDS_logo_only.png");
+  background-size: 100px;
+  background-position: left;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  padding-bottom: 10px;
+  background-origin: content-box;
 }
+
+.cell {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+title {
+  color: #74237b;
+}
+h1 {
+  color: #74237b;
+}
+h2 {
+  color: #74237b;
+}
+h3 {
+  color: #74237b;
+}
+h4 {
+  color: #74237b;
+}
+
+
