@@ -39,8 +39,8 @@ book:
    tools: false
     
 #bibliography: references.bib
-mainfont: Arial
-sansfont: Arial
+mainfont: "Open Sans"
+#sansfont: Arial
 monofont: "Courier New"
 monofontoptions: 'Scale=0.8'
 pdf-engine: lualatex
@@ -52,8 +52,7 @@ format:
   #   toc-depth: 3
   #   toc-title: "Contents"
   html:
-    theme: default
-    css: styles.css
+    css: style.css
     toc: true
   # titlepage-pdf:
   #   titlepage: plain
