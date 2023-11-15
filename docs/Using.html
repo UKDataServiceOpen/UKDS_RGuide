@@ -259,8 +259,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="download-and-installation" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="download-and-installation"><span class="header-section-number">2.1</span> Download and installation</h2>
 <p>R can be downloaded for free from the <a href="https://cran.r-project.org/">CRAN website</a> and run like any other Windows application. Versions for Mac and Linux are also available. After installation, the standard and rather minimalist R interface that appears when the programme is launched is shown below.</p>
-<!-- ```{r 2.1, echo=FALSE,fig.cap="The standard R interface",fig.pos="H",out.width = "500pt", }  -->
-<p><!-- library(foreign) --> <!-- knitr::include_graphics("pics/screen2.1.jpg") --> <!-- ```  --> <img src="pics/screen2.1.jpg" class="img-fluid" data-fig.alt="Screenshot of the standard R Windows interface" alt="The standard R interface"></p>
+<div class="cell" data-hash="Using_cache/html/2.1_d7252451aec9d18cc5270d511bbac479">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">library</span>(foreign) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pics/screen2.1.jpg" class="img-fluid figure-img" data-fig.alt="Screenshot of the standard R Windows interface"></p>
+<figcaption class="figure-caption">The standard R interface</figcaption>
+</figure>
+</div>
 <p>This interface merely allows the user to type in commands one by one in the console, and to install packages via pull-down menus. However, this basic installation, although fully functional, is rather minimal, not very ergonomic or user friendly. As with other statistical software, the primary way of interacting with R for most is to write programs, even basic ones in a syntax file (also called script file) that is saved and run whenever needed, which is not directly feasible with the standard R GUI.</p>
 <p>It is therefore highly recommended to use R via an Integrated Development Environment (ie a more sophisticated user interface) such as <a href="https://www.rstudio.com/products/rstudio/download/">RStudio</a> for beginners to intermediate users or the <a href="https://www.eclipse.org/statet/news/">StatEt module</a> for <a href="https://www.eclipse.org/downloads/">Eclipse</a> for more advanced programmers. Both are free, available for Windows, MacOS and Linux and offer users a large number of additional functionalities, such as syntax highlighting, integration with Github. Given that it probably has the largest number of users RStudio will be used to demonstrate examplkes of R syntax in the remainder of this document. In order for this guide to remain as universal as possible, we will not rely on the advanced features of RStudio, instead using it merely as an interface to the R engine.</p>
 </section>
@@ -290,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>All</code> R commands are followed by brackets, even if there are no parameters.</p>
 <p>In the following example we are going to set up the default working directory, that is the default location for opening and storing files, by using the <code>getwd()</code> and <code>setwd()</code> commands. First, let us visualise the current default working directory.</p>
 <div class="cell" data-hash="Using_cache/html/2.4_2c2262789bc1139ccf056f0c8d0874d6">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "/home/piet/Dropbox/work/UKDS/RGuide/UKDS_RGuide"</code></pre>
 </div>
@@ -302,12 +309,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>&gt; setwd("/Users/&lt;INSERT YOUR USERNAME HERE&gt;/Documents/R_UKDS")&nbsp;</code></pre>
 <p>For Linux:</p>
 <div class="cell" data-hash="Using_cache/html/2.5_96b929f84f701ef4839b14b1a6a473c7">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"~/Documents/R_UKDS"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"~/Documents/R_UKDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"~/Documents/R_UKDS"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"~/Documents/R_UKDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Typing <code>getwd()</code> confirms that the change has been recorded.&nbsp;</p>
 <div class="cell" data-hash="Using_cache/html/2.6_19d56d014801cd27e40b0381f4d5c36b">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "/home/piet/Dropbox/work/UKDS/RGuide/UKDS_RGuide"</code></pre>
 </div>
@@ -337,7 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>install.packages("haven",repos = "https://cloud.r-project.org")</code></pre>
 <p>To use a package already installed in the local R library, the <code>library()</code> command is needed:</p>
 <div class="cell" data-hash="Using_cache/html/2.7_7b7f8ad0808f5eb0859d4ca0509e3cd6">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Simply typing:&nbsp;</p>
 <pre><code>&gt; library()</code></pre>
@@ -358,11 +365,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This will work for any command directly available in the <code>Base</code> package that is loaded at startup or in other packages loaded via the <code>library()</code> command. Otherwise, R will return an error message.</p>
 <p>Typing two question marks followed by a keyword will search all of R for the available documentation for that keyword:</p>
 <div class="cell" data-hash="Using_cache/html/2.8_7b8490f62f535a2410ab27099defda49">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a> ??foreign</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a> ??foreign</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>An index of all commands and functions in the foreign package can be obtained by typing:</p>
 <div class="cell" data-hash="Using_cache/html/2.9_965a54034ba92ff408a805d241d53037">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="at">package=</span><span class="st">'foreign'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="at">package=</span><span class="st">'foreign'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note: this command only works because the ‘foreign’ package was previously loaded in memory with the <code>library()</code> command. More information about where to find help when using R is provided at the end of this document.</p>
 </section>
@@ -376,12 +383,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>&gt; x &lt;- 5 </code></pre>
 <p>In this example we have assigned the value 5 to an object called x. If you type the letter x, the value ‘5’ will be returned in your console. The object x will appear in the R environment after the ls() command.</p>
 <div class="cell" data-hash="Using_cache/html/2.10_373c829f2b10625830e1b15ed693e132">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span>  </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span>  </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "has_annotations" "x"              </code></pre>
 </div>
@@ -390,8 +397,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="unnumbered anchored" data-anchor-id="deleting-objects">Deleting objects</h4>
 <p>The rm() function can be used to remove objects from the environment (session). These objects can be variables, lists, datasets, etc. For instance, to remove the object ‘x’, or the fictitious dataset called ‘mydata’:&nbsp;</p>
 <div class="cell" data-hash="Using_cache/html/2.11_08d0c9e76b87adafdde9c2a8da2c4b27">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)   </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)   </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "has_annotations"</code></pre>
 </div>
@@ -408,14 +415,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Let’s assume that we have a small data frame called ‘mydata’. Here are a few basic commands to examine it:</p>
 <p><strong>Determining the size of a data frame:</strong> the <code>dim()</code> command returns the number of rows and columns of a data frame</p>
 <div class="cell" data-hash="Using_cache/html/2.13_77148f55b867dbc6a979ca270d6835b4">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 50  6</code></pre>
 </div>
 </div>
 <p>R tells us that our data is made of 50 rows and 6 columns, in other words of 50 observations and 6 variables. What if I want a quick overview of the dataset?</p>
 <div class="cell" data-hash="Using_cache/html/2.14_356fcfea499cd6a2437d3aef87c70995">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    RSex skipmeal                   Married       Poverty1
 1 Female       NA Married/living as married        Was not
@@ -436,11 +443,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The <code>head()</code> command displays the first six lines of the dataset. Depending on the number of variables the output of <code>head()</code> can become quickly overwhelming, as the size of the lines on most screens is limited!</p>
 <p><strong>Obtaining the names of variables (or columns) in the dataset:</strong> This can be done using either <code>ls()</code> which we already have used, or the <code>names()</code> commands. <code>ls()</code> returns the variables names, sorted alphabetically, whereas <code>names()</code> returns them in their actual order in the data frame.</p>
 <div class="cell" data-hash="Using_cache/html/2.15_77df1dc32d3b94c799249d921b5853ba">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "HEdQual3" "Married"  "NatFrEst" "Poverty1" "RSex"     "skipmeal"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "RSex"     "skipmeal" "Married"  "Poverty1" "HEdQual3" "NatFrEst"</code></pre>
 </div>
@@ -449,7 +456,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Accessing variables:</strong></p>
 <p>Each column of a data frame, or variable, can be accessed by its name preceded by the $ sign:</p>
 <div class="cell" data-hash="Using_cache/html/2.16_a3a7c134fdc1f5836d8eb20187f3b2bb">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>NatFrEst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>NatFrEst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  5 30 50 50 50 10  1 NA  5 50 60 25 30  3 25 10 80  5 50 50 40 45  2 82 60
 [26] 40 10 10 40 15 30 30  2 10 75 99 70 50 10 30  1 10 85 45 70 25 40 30 10 25
@@ -461,7 +468,7 @@ named numeric(0)</code></pre>
 <pre><code>dataframe[row number,column number]</code></pre>
 <p>Given that <code>RSex</code> is the first column of our dataset</p>
 <div class="cell" data-hash="Using_cache/html/2.17_dd8934313428eb884024b536bc239c06">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mydata[,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mydata[,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] Female Female Female Male   Male   Male   Male   Female Male   Male  
 [11] Male   Female Female Male   Female Female Female Female Female Female
@@ -473,7 +480,7 @@ Levels: Male Female</code></pre>
 </div>
 <p>Returns the same output as previously. Not specifying a row or column name within the square brackets tells R to display them all.</p>
 <div class="cell" data-hash="Using_cache/html/2.18_d634b89b7b6b25f1bf1a2f324f9710e8">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>mydata[<span class="dv">6</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>mydata[<span class="dv">6</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  RSex skipmeal                   Married       Poverty1 HEdQual3 NatFrEst
 6 Male       NA Married/living as married Was in poverty     &lt;NA&gt;       10</code></pre>
@@ -481,14 +488,14 @@ Levels: Male Female</code></pre>
 </div>
 <p>Returns the values of all the variables for the sixth row of the data frame. Specifying both a row and column number, will return a unique observation:</p>
 <div class="cell" data-hash="Using_cache/html/2.19_1d0f22eaca4791ffcfd7b9463380e53a">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>mydata[<span class="dv">6</span>,<span class="dv">6</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>mydata[<span class="dv">6</span>,<span class="dv">6</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10</code></pre>
 </div>
 </div>
 <p>which in this case is 10. Finally, more than one column or row can be displayed by concatenating their number using the <code>c()</code> function:</p>
 <div class="cell" data-hash="Using_cache/html/2.20_d270ce668f73a3f03d11751f6eefe999">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>mydata[<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">9</span>),<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">6</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>mydata[<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">9</span>),<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">6</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  RSex NatFrEst
 6 Male       10
@@ -497,7 +504,7 @@ Levels: Male Female</code></pre>
 </div>
 <p>The above command returns respectively the sixth and 9th observations for the sixth column. Please note that columns names can also be used instead of their number, provided that they are put between inverted commas:</p>
 <div class="cell" data-hash="Using_cache/html/2.21_23aed8aa2d811f22b281b76586825360">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>mydata[<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">9</span>),<span class="fu">c</span>(<span class="st">'RSex'</span>,<span class="st">'NatFrEst'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>mydata[<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">9</span>),<span class="fu">c</span>(<span class="st">'RSex'</span>,<span class="st">'NatFrEst'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  RSex NatFrEst
 6 Male       10
@@ -510,7 +517,7 @@ Levels: Male Female</code></pre>
 <h4 class="unnumbered anchored" data-anchor-id="numeric">Numeric</h4>
 <p><code>Numeric</code> objects are simple numerical vectors (ie a single or a list of numbers). Here this is the case for <code>NatFrEst</code>, the estimated proportion of people making wrong benefits claims, according to respondents to the survey.</p>
 <div class="cell" data-hash="Using_cache/html/2.22_b6852f1f231fe0d48cd86cf3ff824f2e">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mydata<span class="sc">$</span>NatFrEst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mydata<span class="sc">$</span>NatFrEst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "numeric"</code></pre>
 </div>
@@ -520,7 +527,7 @@ Levels: Male Female</code></pre>
 <h4 class="unnumbered anchored" data-anchor-id="character">Character</h4>
 <p>Character objects are alphanumeric vectors, that is variables which consist of text string(s).</p>
 <div class="cell" data-hash="Using_cache/html/2.23_baca6c4cbb8e0790879285269d602091">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mydata<span class="sc">$</span>Married)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mydata<span class="sc">$</span>Married)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
@@ -530,22 +537,22 @@ Levels: Male Female</code></pre>
 <h4 class="unnumbered anchored" data-anchor-id="factors">Factors</h4>
 <p>An important feature of R is that categorical variables whether ordinal or polynomial are stored in objects known as <strong>factors</strong>. The main difference between factors and traditional categorical variables in Stata or SPSS is that they do <strong>not</strong> consist of discrete numerical values with which value labels are associated. They should be thought of instead as a special type of character variable with a discrete set of values, which are known as <code>levels</code>. In our data, <code>Rsex</code> (Gender of the respondent) is such an object:</p>
 <div class="cell" data-hash="Using_cache/html/2.24_617a40ae3c45ad6f6ac35290e53df2cd">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mydata<span class="sc">$</span>RSex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mydata<span class="sc">$</span>RSex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "factor"</code></pre>
 </div>
 </div>
 <p>Let’s further examine this factor.</p>
 <div class="cell" data-hash="Using_cache/html/2.25_0a7e0720e62bab0afa126e079579bd9a">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(mydata<span class="sc">$</span>RSex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(mydata<span class="sc">$</span>RSex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Male"   "Female"</code></pre>
 </div>
 </div>
 <p>returns the levels (ie the values) of <code>RSex</code>. Even if ‘Male’ is the first level of <code>Rsex</code>, and female the second one, these do not correspond to underlying numbers in the data. Please also note that it is possible to change the ordering of factor levels with the <code>factor()</code> function. It is always a good idea to check the ordering of factor levels in a newly created variable.</p>
 <div class="cell" data-hash="Using_cache/html/2.26_d63977b12cc938cec7df5464b587651e">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>RSex.New<span class="ot">&lt;-</span><span class="fu">factor</span>(mydata<span class="sc">$</span>RSex,<span class="at">levels =</span> <span class="fu">levels</span>(mydata<span class="sc">$</span>RSex)[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>)])</span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(mydata<span class="sc">$</span>RSex.New)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>RSex.New<span class="ot">&lt;-</span><span class="fu">factor</span>(mydata<span class="sc">$</span>RSex,<span class="at">levels =</span> <span class="fu">levels</span>(mydata<span class="sc">$</span>RSex)[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>)])</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(mydata<span class="sc">$</span>RSex.New)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Female" "Male"  </code></pre>
 </div>

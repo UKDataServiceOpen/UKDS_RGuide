@@ -1,33 +1,37 @@
 # Descriptive statistics
-```{r setup5,echo=F}
+```{r setup5}
 library(dplyr)
 library(Hmisc)
 library(ggplot2)
 library(haven)
 library(foreign)
-datadir<-"/home/piet/Dropbox/work/UKDS/RGuide/data/"
+datadir<-"/home/piet/Dropbox/work/UKDS/rguide/data/"
 bsa<-read.spss(paste0(datadir,"8849spss_V1/bsa2017_open_enviropol.sav"), 
                to.data.frame = TRUE,
                use.value.labels=TRUE,
                max.value.labels = 9)  
 ```
+
 ## Continuous variables 
 Producing descriptive statistics in R is relatively straightforward, as key functions are included by default in the Base package. We have already seen above that the `summary()` command provides essential information about a variable. For instance,
+
 ```{r 5.1}
 summary(bsa$leftrigh)
 ```
 provides  information about the mean, median and quartiles of the political scale of respondents.
 
 The `describe()` command from  the `Hmisc` package provides a more detailed set of summary statistics. 
+
 ```{r 5.2}
 library(Hmisc)
 describe(bsa$leftrigh)
 ```
+
 `describe()` also provides the number of observations (including missing and unique observations), deciles as well as the five largest and smallest values.
 
 Commands producing single  statistics are also available:
   
-  ```{r 5.3}
+```{r 5.3}
 mean(bsa$leftrigh, na.rm = T)
 sd(bsa$leftrigh, na.rm = T)
 median(bsa$leftrigh, na.rm = T)
@@ -36,7 +40,8 @@ min(bsa$leftrigh, na.rm = T)
 ```
 
 We could  combine the output from the above commands into a single line using the `c()` function:
-  ```{r 5.4}
+
+```{r 5.4}
 c(
   mean(bsa$leftrigh, na.rm = T),
   sd(bsa$leftrigh, na.rm = T),
@@ -48,24 +53,28 @@ c(
 
 As we saw previously, the `na.rm = T` option prevents missing values from being taken into account (in which case the output would have been NA, as this is the default behaviour of these functions). Using these individual commands may come in handy, for instance when further processing of the result is needed:
   
-  ```{r 5.5}
+```{r 5.5}
 m <- mean(bsa$leftrigh, na.rm= T)
 ```
 
 Let’s round the results to two decimal places:
-  ```{r 5.6}
+
+```{r 5.6}
 rm <- round(m,2)
 ```
 
 We can see the final results by typing:
-  ```{r 5.7}
+
+```{r 5.7}
 rm
 ```
 
 Note: 
-  ```{r 5.8}
+
+```{r 5.8}
 round(mean(bsa$leftrigh,na.rm=T),2)
 ```
+
 would produce the same results using just one line of code .
 
 ## Bivariate association between continuous variables
@@ -82,29 +91,31 @@ Note: When using the cor() and cov() functions  missing values are dealt with th
 
 
 ## Categorical Variables
-As with continuous variables, R offers several tools that can be used to describe the distribution of  categorical variables. One- and two-way contingency tables are the most commonly used.
+As with continuous variables, R offers several tools that can be used to describe the distribution of categorical variables. One- and two-way contingency tables are the most commonly used.
 
 ### One way frequency tables
-There are several R commands that we can use to create frequency tables. The most common ones   `table()`,`xtabs()` or `ftable()` which return the frequencies of observations within each level of a factor. For example, in order to obtain the political affiliation of BSA respondents in 2017:
-  ```{r 5.10}
+There are several R commands that we can use to create frequency tables. The most common ones `table()`,`xtabs()` or `ftable()` which return the frequencies of observations within each level of a factor. For example, in order to obtain the political affiliation of BSA respondents in 2017:
+
+```{r 5.10}
 table(bsa$PartyId2)
 ```
 
 As with any other R functions, the outcome of `table()` can be stored as an object for further processing:
-  ```{r 5.11}
+
+```{r 5.11}
 a<-table(bsa$PartyId2)
 ```
 
 
-`table()`  does not compute proportions or percentages. Proportions are obtained using the `prop.table()` function which in turn does not produce percentages. It is also a good idea to round the results for greater readability.
+`table()` does not compute proportions or percentages. Proportions are obtained using the `prop.table()` function which in turn does not produce percentages. It is also a good idea to round the results for greater readability.
 Either:
   
-  ```{r 5.12}
+```{r 5.12}
 round(100*prop.table(a),1) 
 ```
 ... or:
-  
-  ```{r 5.13}
+
+```{r 5.13}
 round(100*
         prop.table(
           table(bsa$PartyId2)
@@ -116,7 +127,7 @@ round(100*
 
 The simplest way to produce a two-way contingency table is to pass another variable to `table()`:
   
-  ```{r 5.14}
+```{r 5.14}
 table(bsa$PartyId2, bsa$Rsex)
 ```
 

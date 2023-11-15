@@ -11,7 +11,6 @@ datadir<-"/home/piet/Dropbox/work/UKDS/RGuide/data/"
 In principle, any  dataset whether in CSV, SPSS, SAS, or Stata format can be opened by R. There are a number of issues to consider however:
   
   - The `foreign` package has been traditionally used  to import SPSS and Stata datasets into R:
-  u
   - its `read.spss()` and `write.spss()` functions respectively open and write .sav files. Given that both were developed from  older versions of SPSS, it is therefore advised  to check that their outcome is as expected. In addition:
   - `read.spss()` does not store the data in a R data frame by default and will require the option         `to.data.frame=T` to be specified.
 - `read.spss()` may sometimes struggle with some numeric format and wrongly attempt to convert them as factor, which will result in error messages. It is therefore advised to limit the maximum number of levels that  will be considered when converting factors  by using  the option   `max.value.labels=`

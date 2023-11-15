@@ -1,4 +1,4 @@
-![](pics/UKDS_Logos_Col_Grey_300dpi.png)
+![](pics/UKDS_Logos_Col_Grey_300dpi.png){width=33%}
 
 # Introduction {.unnumbered}
 This guide provides an introduction to analysing large scale social survey

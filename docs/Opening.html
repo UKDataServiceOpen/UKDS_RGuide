@@ -258,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="3.1" class="anchored" data-anchor-id="essential-information"><span class="header-section-number">3.1</span> Essential information</h2>
 <p>In principle, any dataset whether in CSV, SPSS, SAS, or Stata format can be opened by R. There are a number of issues to consider however:</p>
 <ul>
-<li><p>The <code>foreign</code> package has been traditionally used to import SPSS and Stata datasets into R: u</p></li>
+<li><p>The <code>foreign</code> package has been traditionally used to import SPSS and Stata datasets into R:</p></li>
 <li><p>its <code>read.spss()</code> and <code>write.spss()</code> functions respectively open and write .sav files. Given that both were developed from older versions of SPSS, it is therefore advised to check that their outcome is as expected. In addition:</p></li>
 <li><p><code>read.spss()</code> does not store the data in a R data frame by default and will require the option <code>to.data.frame=T</code> to be specified.</p></li>
 <li><p><code>read.spss()</code> may sometimes struggle with some numeric format and wrongly attempt to convert them as factor, which will result in error messages. It is therefore advised to limit the maximum number of levels that will be considered when converting factors by using the option <code>max.value.labels=</code></p></li>

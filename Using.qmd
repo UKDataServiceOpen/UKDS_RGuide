@@ -16,11 +16,11 @@ the standard and rather minimalist R interface that appears when the programme
 is launched is shown below.
 
 
-<!-- ```{r 2.1, echo=FALSE,fig.cap="The standard R interface",fig.pos="H",out.width = "500pt", }  -->
-  <!-- library(foreign) -->
-  <!-- knitr::include_graphics("pics/screen2.1.jpg") -->
-  <!-- ```  -->
-  ![The standard R interface](pics/screen2.1.jpg){fig.alt="Screenshot of the standard R Windows interface"}
+```{r 2.1}  
+ library(foreign) 
+```
+  
+![The standard R interface](pics/screen2.1.jpg){fig.alt="Screenshot of the standard R Windows interface"}
 
 This interface merely allows the user to type in commands one by one in the
 console, and to install packages via pull-down menus.  However, this basic
@@ -65,7 +65,7 @@ and console  panels remain visible.   The tiling of the panels can be customised
 in `Tools>Global Options>Pane Layout`. For instance, Script can be moved to the
 bottom of the window and Console to the top: 
   
-  ![A customised R Studio interface](pics/screen2.3.png){fig.alt="Screenshot of the customised R Studio interface, with the console pane at the top and the script pane at the bottom"}
+![A customised R Studio interface](pics/screen2.3.png){fig.alt="Screenshot of the customised R Studio interface, with the console pane at the top and the script pane at the bottom"}
 
 ## Interacting with R
 
@@ -77,6 +77,7 @@ Most R commands adopt the following syntax: 
 ``` 
 > command(parameter1, parameter2, ...) 
 ```
+
 `All` R commands are followed by brackets, even if there are no parameters. 
 
 In the following example we are going to set up the default working directory, that is  the default location for opening and storing files, by using the `getwd()` and `setwd()` commands. First, let us visualise the current default working directory.
