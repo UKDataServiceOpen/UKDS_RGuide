@@ -39,8 +39,8 @@ book:
    tools: false
     
 #bibliography: references.bib
-mainfont: "Open Sans"
-#sansfont: Arial
+mainfont: "Arial"
+sansfont: Arial
 monofont: "Courier New"
 monofontoptions: 'Scale=0.8'
 pdf-engine: lualatex
