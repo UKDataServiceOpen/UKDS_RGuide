@@ -1,25 +1,9 @@
-p.caption {
-  color: #742082;
-  margin-top: 10px;
-}
-p code {
-  white-space: inherit;
-}
-pre {
-  word-break: normal;
-  word-wrap: normal;
-}
-pre code {
-  white-space: inherit;
-}
-
 .quarto-title-block .quarto-title-banner {
   background-image: url("pics/UKDS_Logos_Col_Grey_300dpi.png");
-  background-size: 100px;
+  background-size: 200px;
   background-position: left;
   background-repeat: no-repeat;
-  padding-left: 30px;
-  padding-bottom: 10px;
+  padding-left: 100px;
   background-origin: content-box;
 }
 
@@ -43,6 +27,3 @@ h3 {
 h4 {
   color: #742082;
 }
-
-
-
