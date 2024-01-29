@@ -1,5 +1,3 @@
-<!-- ![](pics/UKDS_Logos_Col_Grey_300dpi.png){width=33%} -->
-
 # Introduction {.unnumbered}
 This guide provides an introduction to analysing large scale social survey
 dataset using R with examples from the British Social Attitudes Survey 2020. It

@@ -13,10 +13,8 @@ execute:
 book:
   title: "Analysing large scale survey data using R"
   author: "Pierre Walthéry, Nadia Kennar, Rihab Dahab"
-#  cover-image: pics/UKDS_Logos_Col_Grey_300dpi.png
   output-file: "UKDS_R_Guide"
   date: "15 September 2023"
-#  favicon: pics/UKDS_Logos_Col_Grey_300dpi.png 
 #  repo-url: https://github.com/UKDataServiceOpen/UKDS_RGuide
 #  repo-actions: [edit]
   downloads: [pdf]
@@ -37,9 +35,7 @@ book:
    logo: pics/UKDS_Logos_Col_Grey_300dpi.png
    search: true
    tools: false
-title-block: "plain"
-title-block-banner: "white"
-title-block-banner-color: "#742082"
+   foreground: "#742082" 
 #bibliography: references.bib
 mainfont: "Arial"
 sansfont: Arial
@@ -54,7 +50,7 @@ format:
   #   toc-depth: 3
   #   toc-title: "Contents"
   html:
-    css: bsa.css
+    css: style.css
     toc: true
   titlepage-pdf:
      titlepage: plain
