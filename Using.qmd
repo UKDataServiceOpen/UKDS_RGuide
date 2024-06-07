@@ -8,38 +8,30 @@ options(
 library(dplyr)
 library(Hmisc)
 library(ggplot2)
+library(foreign) 
 ```
 
-R can be downloaded for free from the [CRAN website](https://cran.r-project.org/) and run like any other Windows
-application. Versions for Mac and Linux are also available.  After installation,
-the standard and rather minimalist R interface that appears when the programme
+R can be downloaded for free from the [CRAN website](https://cran.r-project.org/), installed and run like any other application. Versions for  Windows, Mac and Linux are available.  The standard and rather minimalist interface that appears when the programme
 is launched is shown below.
 
-
-```{r 2.1}  
- library(foreign) 
-```
-  
 ![The standard R interface](pics/screen2.1.jpg){fig.alt="Screenshot of the standard R Windows interface"}
 
 This interface merely allows the user to type in commands one by one in the
-console, and to install packages via pull-down menus.  However, this basic
-installation, although fully functional, is rather minimal, not very ergonomic
+console, and to install packages via pull-down menus.  This setup is however rather minimal, not very ergonomic
 or user friendly.   As with other statistical software, the primary way of
-interacting with R for most  is to write programs, even basic ones in a syntax
-file (also called script file) that is saved and run whenever needed, which is
+interacting with R for most  consist of instead writing code or syntax in files (also called scripts files) that are saved and run whenever needed, which is
 not directly feasible with the standard R GUI.
 
-It is therefore highly recommended to  use  R via an Integrated Development
-Environment (ie a more sophisticated user interface) such as
+Writing R code and running script files is made easier  via an Integrated Development
+Environment (IDE) such as
 [RStudio](https://www.rstudio.com/products/rstudio/download/) for beginners to
-intermediate users or the [StatEt module](https://www.eclipse.org/statet/news/)
+intermediate users [Sublime Text](https://www.sublimetext.com/), or the [StatEt module](https://www.eclipse.org/statet/news/)
 for  [Eclipse](https://www.eclipse.org/downloads/)  for more advanced
-programmers. Both are free, available for Windows, MacOS and Linux and offer
-users  a large number of  additional functionalities, such as syntax
-highlighting, integration with Github. Given that it probably has the largest
-number of users RStudio will be used to demonstrate examplkes of R syntax in
-the remainder of this document. In order for this guide to remain as universal
+programmers. All are free, available for Windows, MacOS and Linux and offer
+users  a large number of   functionalities, such as syntax
+highlighting, integration with Github and Markdown/Quarto, and document visualisation. Given that it probably has the largest
+number of users and its interface is straightforward for beginners, RStudio will be used in
+the remainder of this guide. In order for this guide to remain as universal
 as possible, we will not rely on the advanced features of RStudio, instead using
 it merely as an interface to the R engine. 
 
@@ -52,16 +44,16 @@ the computer used to access it. Once downloaded double click on the file  and
 follow the installation instructions. 
 
 By default, the R Studio interface consists of  four main panels, respectively
-known as the script editor (top left panel), the console (bottom left panel),
-the Environment (top right panel) and the File/Directory/Help (bottom right panel).
+known as the Script Editor (top left panel), the Console (bottom left panel),
+the Environment (top right panel) and the File/Directory/Help/Viewer (bottom right panel).
 
 ![The R Studio default interface](pics/screen2.2.png){fig.alt="Screenshot of the standard RStudio interface with four panes: top left: script; bottom left: console; top right: global environment; bottom right: files or help"}
 
-As such a complex interface can be visually overwhelming for some users and is
+As this rather complex interface can be visually overwhelming for some users and is
 not required for the purpose of  this guide, we will minimise the Global
 Environment and Files/Directory/Help panels by clicking in the center of the
 window and dragging right to the edge of the screen. This way, only the script
-and console  panels remain visible.   The tiling of the panels can be customised
+and console  panels remain visible.   The tiling of the panels can also be customised
 in `Tools>Global Options>Pane Layout`. For instance, Script can be moved to the
 bottom of the window and Console to the top: 
   
@@ -70,15 +62,16 @@ bottom of the window and Console to the top:
 ## Interacting with R
 
 As already mentioned, one can type R commands directly in the console of RStudio
-and/or by typing sequences of commands in a script file. 
+and/or by writing sequences of commands in a script file. 
 
-Most R commands adopt the following syntax: 
+Most R commands -- also known as functions in R jargon -- adopt the following syntax: 
   
-``` 
-> command(parameter1, parameter2, ...) 
+```{r} 
+#| eval: false
+> command(parameter1, parameter2, ...)
 ```
 
-`All` R commands are followed by brackets, even if there are no parameters. 
+All R commands are followed by brackets, even if some of them take no parameters. 
 
 In the following example we are going to set up the default working directory, that is  the default location for opening and storing files, by using the `getwd()` and `setwd()` commands. First, let us visualise the current default working directory.
 
@@ -269,7 +262,7 @@ Data frames are  objects that come closest to datasets or excel sheets in tradit
 
 
 ```{r 2.12,echo=F}
-datadir<-"/home/piet/Dropbox/work/UKDS/RGuide/data/"
+datadir<-"~/OneDrive/rguide/data/"
 mydata<-read.spss(paste0(datadir,"bsa_spss/bsa2019_poverty_open.sav"),to.data.frame = T,max.value.labels=5)%>%select(RSex,skipmeal,Married,Poverty1,HEdQual3,NatFrEst)%>%slice(1:50)
 mydata$Married<-as.character(mydata$Married)
 ```

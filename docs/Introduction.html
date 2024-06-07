@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -87,7 +87,7 @@ ul.task-list li input[type="checkbox"] {
     <span class="navbar-title">Analysing large scale survey data using R</span>
     </a>
   </div>
-        <div class="quarto-navbar-tools">
+        <div class="quarto-navbar-tools tools-end">
     <a href="./UKDS_R_Guide.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
           <div id="quarto-search" class="" title="Search"></div>
@@ -212,20 +212,20 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>R is a free, user developed, object-oriented statistical programming language that originates in the ‘S’ and ‘S Plus’ languages developed during the 1970s and 1980s. It has a large audience in the science and statistics communities and is increasingly used in the social sciences for teaching and research purposes.</p>
-<p>Anyone can install and use R without charge, and to some extent contribute to and amend the existing program itself. R can be downloaded from the <a href="https://cran.r-project.org/">Comprehensive R Archive Network (CRAN)</a> website. Installation instructions as well as guides, tutorials and FAQ are available on the CRAN website.</p>
-<p>R is particularly favoured by users who want to develop their own statistical functions or implement technical advances that are not yet available in commercial packages. The existence of a vast number of user written packages (17,672 at the time of writing this guide) is one of the great strengths of R. Users who want to contribute should be aware that in order to be part of the R archive, a minimum set of rules need nonetheless to be followed.</p>
-<p>Although R can perform most of the analyses available in generalist software such as Stata, SPSS, or SAS, it has a broader potential since it can also be used for mapping, data mining or machine learning. Being a language also means that there are often several ways to carry out analyses in R, each one with its advantages and inconvenient. Users can also easily produce publication quality output from R thanks to its integration with the Markdown LaTeX document presentation system, and R graphs can also be imported into MS Word or LibreOffice documents.</p>
-<p>By contrast with other statistical software, the R interface is rather minimal and consist merely of a terminal. In line with programming languages such a Python or C, R users tend to access it via an interface, or Integrated Development Environment (IDE). This guide uses the R Studio development environment, one of the most common IDE for R. The data used in this guide is the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8849">British Social Attitudes Survey, 2017, Environment and Politics: Open Access Teaching Dataset</a>, which can be downloaded from the UK Data Service website without registration. The website also has instructions on how to acquire and download large-scale survey datasets. Links and further information about the other training resources available online are provided at the end of this document.</p>
+<p>R is a free, user developed, object-oriented statistical programming language. It originates in the ‘S’ and ‘S Plus’ languages developed during the 1970s and 1980s. It has a large audience in the science and statistics communities and is increasingly used in the social and data sciences for teaching and research.</p>
+<p>Anyone can install and use R without charge, and to some extent contribute and amend the existing program itself. R can be downloaded from the <a href="https://cran.r-project.org/">Comprehensive R Archive Network (CRAN)</a> website. Installation instructions as well as guides, tutorials and FAQ are available on the CRAN website. A considerable amount of R-related resources is available online.</p>
+<p>R is particularly favoured by users who want to develop their own statistical functions or implement technical advances that are not yet available in commercial packages. The existence of a vast number of user written packages (17,672 at the time of writing this guide) is one of the strengths of R. Users who want to contribute should be aware that in order to be part of the R archive, a minimum set of rules need nonetheless to be followed.</p>
+<p>Although R can perform most of the analyses available in tradtional statistical software such as Stata, SPSS, or SAS, it has a broader potential since it can also be used for mapping, data mining or machine learning. Being a language also means that there are often several ways to carry out the same analyses in R, each one with its advantages and downsides. Users can also easily produce publication quality output from R thanks to its integration with the Markdown (now Quarto) and LaTeX document presentation systems. R graphs can also easoily be imported into html, MS Word or LibreOffice documents.</p>
+<p>By contrast with other statistical software, the R interface is rather minimal and consist merely of a terminal. In line with languages such a Python or C, R users tend to access it via an programming interface, or Integrated Development Environment (IDE). In this guide we will be using the R Studio development environment, one of the most common IDE for R. The data used in this guide is the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8849">British Social Attitudes Survey, 2017, Environment and Politics: Open Access Teaching Dataset</a>, which can be downloaded from the UK Data Service website without registration. The website also has instructions on how to acquire and download large-scale survey datasets. Links and further information about the other training resources available online are provided at the end of this document.</p>
 <!-- ## Pros and cons of R relative to other statistical software -->
-<p>Although R has advantages over other statistical analysis software, it also has a few downsides, both of which are summarised below. Users should be reminded that as open-source software, R and its packages are developed by volunteers, which makes it a very flexible and dynamic project, but at the same time reliant on developers’ free time and goodwill.</p>
-<div class="cell" data-hash="Introduction_cache/html/table_02f79c7a08d10c5275d980fd98e11b96">
+<p>Although R has advantages over other statistical analysis software, it also has a few downsides, both of which are summarised below. Users should be reminded that as open-source software, R and its packages are mainly developed by volunteers, which makes it a very flexible and dynamic project, but at the same time reliant on developers’ free time and goodwill.</p>
+<div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
-<caption>Advantages and inconvenients of R</caption>
+<caption>Advantages and downsides of R</caption>
 <colgroup>
-<col style="width: 42%">
-<col style="width: 57%">
+<col style="width: 39%">
+<col style="width: 60%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -239,7 +239,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">The learning curve may be steep for users who do not have a prior background in statistics or programming.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">R puts statistical analysis closer to the reach of individual citizens rather than specialists.</td>
+<td style="text-align: left;">R puts statistical analysis closer to the reach of lay people rather than specialists.</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
@@ -247,7 +247,7 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Transparency of use and programming of the software and its routines, which improves the peer-reviewing and quality control of the software in many cases.</td>
+<td style="text-align: left;">Transparency of use and programming of the software and its routines, which improves the peer-reviewing and quality control of the software.</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
@@ -274,7 +274,7 @@ ul.task-list li input[type="checkbox"] {
 </table>
 </div>
 </div>
-<p>There are several (sometimes many) ways of achieving a particular result in R. This can be confusing for novice researchers, but at the same time will allow users to tightly adjust their programmes to their needs. </p>
+<p>There are several (sometimes many) ways of achieving a particular result in R. This can be confusing for novice researchers, but at the same time will allow users to tightly adjust their programmes to their needs. o</p>
 
 
 
@@ -358,6 +358,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -392,7 +410,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -668,12 +690,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link  aria-label=" introduction"="">
+      <a href="./index.html" class="pagination-link" aria-label="Introduction">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Using.html" class="pagination-link" aria-label="<span class='chapter-number'>2</span>&nbsp; <span class='chapter-title'>Using R: essential information</span>">
+      <a href="./Using.html" class="pagination-link" aria-label="Using R: essential information">
         <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Using R: essential information</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
