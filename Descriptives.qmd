@@ -1,15 +1,12 @@
 # Descriptive statistics
 ```{r setup5}
+#| echo: false
 library(dplyr)
 library(Hmisc)
 library(ggplot2)
 library(haven)
-library(foreign)
-datadir<-"/home/piet/Dropbox/work/UKDS/rguide/data/"
-bsa<-read.spss(paste0(datadir,"8849spss_V1/bsa2017_open_enviropol.sav"), 
-               to.data.frame = TRUE,
-               use.value.labels=TRUE,
-               max.value.labels = 9)  
+datadir<-"~/OneDrive/data/bsa/"
+bsa<-read_spss(paste0(datadir,"8849spss_V1/bsa2017_open_enviropol.sav"))
 ```
 
 ## Continuous variables 
@@ -23,9 +20,21 @@ provides  information about the mean, median and quartiles of the political scal
 The `describe()` command from  the `Hmisc` package provides a more detailed set of summary statistics. 
 
 ```{r 5.2}
+#| error: true
 library(Hmisc)
 describe(bsa$leftrigh)
 ```
+The code above returns an error because `describe()` expects numeric values, and  *haven*-converted 'leftrigh' isn't a pure numeric variable: 
+
+```{r 5.2.1}
+class(bsa$leftrigh)
+```
+In order for `describe()` to run properly, we need to convert `leftrigh`  to numeric format, either as a new variable or as below, temporarily: 
+
+```{r 5.2.2}
+describe(as.numeric(bsa$leftrigh))
+```
+
 
 `describe()` also provides the number of observations (including missing and unique observations), deciles as well as the five largest and smallest values.
 
@@ -97,13 +106,13 @@ As with continuous variables, R offers several tools that can be used to describ
 There are several R commands that we can use to create frequency tables. The most common ones `table()`,`xtabs()` or `ftable()` which return the frequencies of observations within each level of a factor. For example, in order to obtain the political affiliation of BSA respondents in 2017:
 
 ```{r 5.10}
-table(bsa$PartyId2)
+table(as_factor(bsa$PartyId2))
 ```
 
 As with any other R functions, the outcome of `table()` can be stored as an object for further processing:
 
 ```{r 5.11}
-a<-table(bsa$PartyId2)
+a<-table(as_factor(bsa$PartyId2))
 ```
 
 
@@ -111,14 +120,17 @@ a<-table(bsa$PartyId2)
 Either:
   
 ```{r 5.12}
-round(100*prop.table(a),1) 
+round(
+  100*
+    prop.table(a),
+  1) 
 ```
 ... or:
 
 ```{r 5.13}
 round(100*
         prop.table(
-          table(bsa$PartyId2)
+          table(as_factor(bsa$PartyId2))
         ),
       1)
 ```
@@ -128,61 +140,85 @@ round(100*
 The simplest way to produce a two-way contingency table is to pass another variable to `table()`:
   
 ```{r 5.14}
-table(bsa$PartyId2, bsa$Rsex)
+table(as_factor(bsa$PartyId2), as_factor(bsa$Rsex))
 ```
 
-However, when dealing with more than one variable it is recommended to use xtabs() instead as it has a number of desirable functions directly available as option. The syntax is slightly different as it relies on a formula ie a R object consisting of elements separated by a tilde '~'. The variables to be tabulated are specified on the right hand side of the formula.
+However, when dealing with more than one variable it is recommended to use `xtabs()` instead as it has a number of desirable functions directly available as options. The syntax is slightly different as it relies on a `formula` ie a R object consisting of elements separated by a tilde '~'. The variables to be tabulated are specified on the right hand side of the formula. In order to lighten the syntax, we will also recode `PartyId2` and `Rsex` permanently into factors. 
 
 ```{r 5.15}
-xtabs(~PartyId2 +Rsex,
+bsa$PartyId2.f<-as_factor(bsa$PartyId2)
+bsa$Rsex.f<-as_factor(bsa$Rsex)
+
+xtabs(~PartyId2.f +Rsex.f,
       data = bsa)
 ```
 The `data=` parameter does not have to be explicitly specified as simply using ´`bsa`' will work. Other useful options are:
 
-- subset=, which allows direct specification of a subpopulation from which to derive the table;
-- drop.unused.levels=T to remove empty levels (categories with zero observations) from being displayed;
-- weights~ variables on the right hand side of the formula will be treated as weights, a useful feature for survey analysis. 
+- `subset=`, which allows direct specification of a subpopulation from which to derive the table;
+- `drop.unused.levels=T` to remove empty levels (categories with zero observations) from being displayed;
+- `weights~` variables on the right hand side of the formula will be treated as weights, a useful feature for survey analysis. 
 
 As previously `prop.table()` is necessary in order to obtain proportions:
 
 ```{r 5.16}
-b<-xtabs(~PartyId2 +Rsex,bsa)
-round(100*prop.table(b),1) ### Cell percentages
+b<-xtabs(~PartyId2.f +Rsex.f,
+         bsa,
+         drop.unused.levels = T)
+
+round(100*
+        prop.table(b),
+      1) ### Cell percentages
 ```
 The largest group in the sample (22.1%) is made of labour-voting females, the smallest of green-voting males.
 ```{r 5.17}
-round(100*prop.table(b,1),1) ### Option 1 for row percentages
+round(100*
+        prop.table(b,1),
+      1) ### Option 1 for row percentages
 ```
 Conservative voters are more or less evenly split between men and women, whereas Labour and Green voters are more likely to be women.
 ```{r 5.18}
-round(100*prop.table(b,2),1) ### Option 2 for column percentages
+round(100*
+        prop.table(b,2),
+      1) ### Option 2 for column percentages
 ```
 Similar proportions of men voted Conservative and Labour (36-37%), whereas women were clearly more likely to vote Labour.
 
-For some reason, there is not a straightforward way to obtain percentages in three-way contingency tables with either `xtabs()` or `table()`. This is where `ftable()` comes handy.
+There is not a straightforward way to obtain percentages in three-way contingency tables with either `xtabs()` or `table()`. This is where `ftable()` function comes handy. For convenience, we remove the non response.
+
 ```{r 5.19}
-round(100*prop.table(
-  ftable(RAgeCat~PartyId2 +Rsex,data=bsa)
-  ,1),1) ### Option 2 for column percentages
+bsa$RAgeCat.f<-as_factor(bsa$RAgeCat) # We convert RAgeCat into facto for convenience
+
+round(100*
+        prop.table(
+          ftable(RAgeCat.f~PartyId2.f+Rsex.f,
+                 data=droplevels(bsa)
+                   )
+         ,1)
+      ,1) ### Option 2 for column percentages
 ```
-The tables gives the relative age breakdown for each gender/political affiliation combination (ie row percentages).
+The tables gives the relative age breakdown for each gender/political affiliation combination (ie row percentages). Please not that we have used the `droplevels()` function when spcecifying the BSA data frame within `ftble()`. This removes unused factor levels which would otherwise be  displayed and make the table difficult to read. `droplevels()` can be applied either to entire data frames or single variables.    
+
 
 
 ## Grouped summary statistics for continuous variables
 A common requirement in survey analysis consist in being able to compare  descriptive statistics across subgroups of the data. There are different ways to do this in R. We demonstrate below the most straightforward  one, which is obtained by using some of the functions available in the `dplyr` package. 
 
 ```{r 5.20}
-bsa%>%group_by(PartyId2)%>%summarise(
-mdscore=median(libauth,na.rm=T),
-sdscore=sd(libauth,na.rm=T))
+bsa%>%
+  group_by(PartyId2.f)%>%
+  summarise(mdscore=median(libauth,na.rm=T),
+            sdscore=sd(libauth,na.rm=T))
 ```
 
-The above command produces a table of summary values (median and standard deviations) of the Liberal vs authoritarian scale. We can see from the first one that Green party voters are the most liberal, followed by Labour, whereas non voters and Conservatives are the most authoritarian. Liberal Democrats are the most cohesive group (ie with the smallest standard deviation).
+The above command produces a table of summary values (median and standard deviations) of the Liberal vs authoritarian scale. We can see from the first one that Green party voters are the most liberal, followed by Labour, whereas non voters and Conservatives are the most authoritarian. Liberal Democrats are the most cohesive group (ie with the smallest standard deviation). We chose to leave nonresponses for  `PartyId2` for this analysis. Some users might want to remove them instead before computing their results as in the table below.  We do this by using `is.na()`, which checks variables for the presence of system missing values, in conjunction with `filter()`.
 
 ```{r 5.21}
 
-bsa%>%group_by(Rsex,PartyId2)%>%summarise(
-mnscore=sd(libauth,na.rm=T) ,mdscore=median(libauth,na.rm=T))
+bsa%>%
+  filter(!is.na(PartyId2.f)) %>%                              
+  group_by(Rsex.f,PartyId2.f) %>%
+  summarise(mnscore=sd(libauth,na.rm=T),
+            mdscore=median(libauth,na.rm=T))
 
 ```
 
@@ -191,10 +227,10 @@ When further broken down by gender, we can see that overall the same trends rema
 Instead of tables of summary statistics, we may want to have summary statistics computed as variables that will be added to the current dataset for each corresponding gender/political affiliation group. This is straightforward to do with dplyr, we just need to use the `mutate()` command.  
 
 ```{r 5.22}
-
-bsa<-
-bsa%>%group_by(Rsex,PartyId2)%>%mutate(
-msscore=sd(libauth,na.rm=T) ,mdscore=median(libauth,na.rm=T))
+bsa<-bsa%>%
+  group_by(Rsex.f,PartyId2.f)%>%
+  mutate(msscore=sd(libauth,na.rm=T),
+         mdscore=median(libauth,na.rm=T))
 ```
 However, we also need to add the newly created variables into the existing bsa dataset, which the first line of the syntax above does. We can check that the variables have been created and that the correct values have been allocated to each sex/affiliation category.
 

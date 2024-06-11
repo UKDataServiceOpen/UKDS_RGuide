@@ -64,7 +64,7 @@ bottom of the window and Console to the top:
 As already mentioned, one can type R commands directly in the console of RStudio
 and/or by writing sequences of commands in a script file. 
 
-Most R commands -- also known as functions in R jargon -- adopt the following syntax: 
+Most R commands -- also known as functions in R jargon -- adopt the following syntax:
   
 ```{r} 
 #| eval: false
@@ -79,16 +79,16 @@ In the following example we are going to set up the default working directory, t
 getwd()
 ```
 
-Let us say we would like the code from this guide to be all in a folder called ‘R_UKDS’, to be located in ‘My Documents’.  To tell R to use the folder ’R_UKDS, we can either create it from within Windows or ask R to do it for us.  So type: 
+Let us say we would like the code from this guide to be all in a folder called ‘R_UKDS’, to be located in ‘My Documents’.  To tell R to use the folder ’R_UKDS, we can either create it from within Windows or ask R to do it for us.  So type:
   
-  For Windows: 
+  For Windows:
   
 ```
-> setwd("C:/Documents and Settings/<INSERT YOUR USERNAME HERE>/My Documents/R_UKDS") 
+> setwd("C:/Documents and Settings/<INSERT YOUR USERNAME HERE>/My Documents/R_UKDS")
 ```
 For Mac:
 ```
-> setwd("/Users/<INSERT YOUR USERNAME HERE>/Documents/R_UKDS") 
+> setwd("/Users/<INSERT YOUR USERNAME HERE>/Documents/R_UKDS")
 ```
 For Linux:
 
@@ -97,7 +97,7 @@ dir.create("~/Documents/R_UKDS")
 setwd("~/Documents/R_UKDS")
 ```
 
-Typing `getwd()`  confirms that the change has been recorded. 
+Typing `getwd()`  confirms that the change has been recorded.
 
 ```{r 2.6}
 getwd()
@@ -105,56 +105,51 @@ getwd()
 
 **Notes:**
   
-  - Any character string that is neither a command or the name of an object (such
-                                                                             as a variable name) needs to be put between inverted commas or quotation
-marks, otherwise it will be interpreted as the name of an object
+  - Any character string that is neither a command or the name of an object (such as a variable name) needs to be put between inverted commas or quotation
+marks, otherwise it will be interpreted as the name of an object and R will return an error.
+
 - see the example below about loading user-created packages;
 
-- Even when no parameters are specified for a command, brackets are compulsory
-as shown in the `getwd()` example above;
+- Even when no parameters are specified for a command, brackets are compulsory as shown in the `getwd()` example above;
 
-- R uses forward slashes rather than backslashes (unlike most other
-                                                  Windows applications) to separate directories. Using backlashes will return an
+- R uses forward slashes rather than backslashes (unlike Windows applications, but like Linux) to separate directories. Using backlashes will return an
 error message;
-- Although most R commands accept a large number of options to be specified,
-in many cases default values have been ‘factory set’ so that only the
+
+- Although most R commands accept a large number of options to be specified. In many cases default values have been ‘factory set’ so that only the
 essential parameters need specifying.
 
-The output of most R commands can be either directly displayed on the screen (as
-                                                                              in the above example) or stored in objects that can be subsequently reused in
-further commands. This object-oriented feature separates R from traditional
-statistical software.
+The output of most R commands can be either directly displayed on the screen (as in the above example) or stored in objects that can be subsequently reused in
+further commands. This object-oriented feature separates R from traditional statistical software.
 
-For instance, typing: 
+For instance, typing:
   
-```
->	a<-getwd()
-```
-
-will store the output of `getwd()`  (that is, the name of the current default directory)  into an object called ‘a’. In order to view the content of a, one can just type its name: 
-```
->	a
+```{r 2_pre1}
+a<-getwd()
 ```
 
+will store the output of `getwd()`  (that is, the name of the current default directory) into an object called ‘a’. In order to view the content of a, one can just type its name:
 
-<!-- Another approach to set a working directory is by creating an R Project. To learn more about why and how to set working directory in R and see how an R project is generated, see the “Setting a working directory” section in our Data Skills Module: Exploring crime surveys with R. -->
-  
-  #### Writing R scripts  via R Studio {-}
-  Most users will want to write their code in a script file, similar to the ‘do’ file in Stata or syntax file in SPSS.  R script files end with the .R suffix. To open an existing  R script in RStudio select `File>Open File` then  the relevant script file. To create a new script  select `File>New File>Open File` (shortcut: Control+Shift+N) this will open a new script window in which to type commands.
+```{r 2_pre2}
+a
+```
+
+#### Writing R scripts  via R Studio{-}
+
+Most users will want to write their code in a script file, similar to the ‘do’ file in Stata or syntax file in SPSS.  R script files can be  identified with their .R suffix. To open an existing  R script in RStudio select `File>Open File` then  the relevant script file. To create a new script  select `File>New File>Open File` (shortcut: Control+Shift+N) this will open a new script window in which to type commands.
 
 
 ## Installing and loading packages
-Apart from a basic set of commands and functions, most of the tools offered by R are available in packages that are not provided during the main installation and need to be installed and downloaded separately from within R. 
+
+Apart from a basic set of commands and functions, most of the tools offered by R are available in packages that need to be installed and downloaded separately from within R. This can also be done with the pull-down menus of RStudio.  
 For example, to install the ‘foreign’ package one need to type: 
   
 ```
 install.packages("foreign",repos = "https://cloud.r-project.org")
 ```
 
-Installation only needs to be done once. 
-If the address of the  package repository is not specified via the  `repos` option, a pull-down menu will appear, asking for one. Choosing `https://cloud.r-project.org` will automatically select the closest mirror site. 
+If the address of the  package repository is not specified via the  `repos=` option, a pull-down menu will appear, asking for one. Choosing `https://cloud.r-project.org` will automatically select the closest mirror site. Packages installation only needs to be done once. 
 
-Originally, `Foreign`  enabled  users to import Stata (version 12 or older) or SPSS datasets. For  Stata datasets saved under version 13 and above, the `haven` or `readstata13` package are required. 
+Originally, `Foreign`  enabled  users to import Stata (version 12 or older) or SPSS datasets. For Stata datasets saved under version 13 and above as well as more recent SPSS datasets, the `haven` package is  required. 
 
 ```
 install.packages("haven",repos = "https://cloud.r-project.org")
@@ -162,10 +157,10 @@ install.packages("haven",repos = "https://cloud.r-project.org")
 To use a package already  installed in  the local  R library,  the `library()` command is needed:
   
 ```{r 2.7}
-library(foreign)
+library(haven)
 ```
 
-Simply typing: 
+Simply typing:
   
 ```
 > library()
@@ -174,44 +169,57 @@ Will list all libraries installed on the computer that can be loaded in memory. 
   
   <!-- For users who feel more comfortable using ‘click-and-point', there is also the option to use ‘Install Packages’ from the Packages tab in the main R window. This will display a list of packages available in alphabetical order for the user to choose from. Next, select the desired package, double click on it and press ‘OK’ for the installation to begin. -->
 
-Besides a full archive of R packages, the CRAN website provides a series of manuals,  including [Writing R Extensions](https://cran.r-project.org/doc/manuals/R-exts.html), which describes how users can write their own packages and submit them to CRAN. 
+Besides a full archive of R packages, the CRAN website provides a series of manuals,  including [Writing R Extensions](https://cran.r-project.org/doc/manuals/R-exts.html), which describes how users can write their own packages and submit them to CRAN.
 
 Once a package is installed, it will be permanently stored in the local R library on the computer, unless  deleted it with  the `remove.packages()` command (not advised as this can break dependencies between packages!).
+
 ```
 > remove.packages("name of the package")
 ```
 Packages required  for an analysis have to be loaded every time a new R session is started (But not every time a syntax file is run!).  
 
 
-##  Getting help
+##  Using R's internal help system
+
 Within R, the most straightforward way to request help with a command consists of a question mark followed by the command name, without a space in between.  The standard help system in R (unless using RStudio or Eclipse) relies on the default web browser installed on your computer (ie Chrome, Firefox or Edge in most cases) to display pages. 
+
 Typing: 
 
 ```
 > ?getwd 
 ```
+
+
 Is equivalent of: 
+
 ```
 help('getwd')
 ```
-and will open the help page for the `getwd()` command in the default web browser. If you are using RStudio or Eclipse, the help will most likely open in a new tab within the program. 
+and will open the help page for the `getwd()` command in the default web browser or the viewer tab of RStudio. 
+
+![Help page for getwd()](pics/help_3.png){fig.alt="Screenshot of the help page for getwd() in the RStudio viewwer tab"}
 
 This will work for any command directly available in the `Base` package that is loaded at startup or  in other packages loaded via the `library()` command. Otherwise, R will return an error message.
 
-Typing two question marks followed by a keyword will search all of R for the available documentation for that keyword:
+Typing two question marks followed by a keyword will search all of R for the available documentation for that keyword in the installed packages:
 
 ```{r 2.8}
- ??foreign
+??haven
 ```
+![Results of help search for 'haven'](pics/help_2.png){fig.alt="Screenshot of the results in RStudio  of a search for 'haven' in the  help content of R "}
+
 
 An index of all commands and functions in the foreign package can be obtained by typing:
 
 ```{r 2.9}
-help(package='foreign')
+help(package='haven')
 ```
-Note: this command only works because the ‘foreign’ package was previously loaded in memory with the `library()` command. More information about where to find help when using R is provided at the end of this document.
+![Help content index for the *haven* package](pics/help_1.png){fig.alt="RStudio viewer tab screenshot of the help index for the 'haven' package"}
 
 
+Note: this command only works because the `haven` package was previously loaded in memory with the `library()` command. 
+
+More information about where to find help when using R is provided at the end of this document.
 
 
 ## Objects
@@ -222,23 +230,35 @@ Typing:
 ```
 will list all the objects that are currently in memory.
 
-Objects belong to `classes` or types which have distinct `properties`. There are many classes of objects in R. By comparison, Stata has only macros, variables and scalars that are directly  available to most users. Common object classes include factors (these are equivalent to categorical variables), vectors (numerical variables – whether continuous or ordinal), data frames (datasets), matrices, etc. Not all operations are possible with all objects in R. More advanced users can also create their own object classes. Describing R objects and their properties is well beyond the purpose of this guide and users interested should consult the [online documentation](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects) for further explanations. 
+Objects belong to `classes` or types which have distinct `properties`. There are many classes of objects in R. By comparison, Stata has only macros, variables and scalars that are directly  available to most users. Common object classes include:
+
+- factors: these are equivalent to categorical variables (see below);
+- numeric: numerical variables – whether continuous or ordinal;
+- character: alphanumeric variables;
+- vectors: a list of items that are of the same type;
+- lists: more complex list of objects, functions or datasets
+- data frames (datasets); 
+- matrices, etc. 
+
+Some operations are understandably only possible with certain types of objects. 
+
+More advanced users can also create their own object classes. Describing R objects and their properties is well beyond the purpose of this guide and users interested should consult the [online documentation](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects) for further explanations.
 
 To create or assign a value to an object, one uses the assignment operator  (<-). For example:
-```
-> x <- 5 
+
+```{r 2.10}
+x <- 5  
+
+x
+
+ls()
 ```
 
 In this example we have assigned the value 5 to an object called x. If you type the letter x,  the value ‘5’ will be returned in your console. The object x will appear in the R environment after the ls() command. 
 
-```{r 2.10}
-x <- 5  
-x
-ls()
-```
 
 #### Deleting objects  {-}
-The rm() function can be used to remove objects from the environment (session). These objects can be variables, lists, datasets, etc. For instance, to remove the object ‘x’, or the fictitious dataset called ‘mydata’: 
+The `rm()` function can be used to remove objects from the environment (session). These objects can be variables, lists, datasets, etc. For instance, to remove the object ‘x’, or the fictitious dataset called ‘mydata’:
 
 ```{r 2.11}
 rm(x)	
@@ -248,29 +268,32 @@ ls()
 ```
 > rm(mydata)
 ```
-<!-- The rm() function only works with R objects; but if you want to delete a specific variable of a dataset, you need a different function. For example, to delete the variable ‘age’ of the dataset ‘mydata’, an option is to set the variable to NULL:  -->
+<!-- The rm() function only works with R objects; but if you want to delete a specific variable of a dataset, you need a different function. For example, to delete the variable ‘age’ of the dataset ‘mydata’, an option is to set the variable to NULL: -->
 
-<!-- > mydata$age<-NULL  -->
+<!-- > mydata$age<-NULL -->
 
-<!-- There are other ways to delete variables from a dataset, but these will be looked at later on in this guide.  -->
+<!-- There are other ways to delete variables from a dataset, but these will be looked at later on in this guide. -->
 
 #### Data frames {-}
 
 Among the various classes of objects one may use in R, a few are essential to understand when analysing survey data. Their characteristics are briefly listed below;
 
-Data frames are  objects that come closest to datasets or excel sheets in traditional statistical software. They are objects that have indexed rows and columns, both of which may have names. Data frames  columns can be seen as  variables and lines or rows as observations. Each  cell in the data frame can be uniquely identified by its position. Data frames are typically the object in which survey datasets are stored.
+Data frames are  objects that come closest to datasets in traditional statistical software or worksheets in Microsoft Excel or LibreOffice Calc. They are objects that have indexed rows and columns, both of which may have names. Data frames  columns can be seen as  variables and lines or rows as observations. Each  cell in the data frame can be uniquely identified by its position. Data frames are typically the object in which survey datasets are stored.
 
 
-```{r 2.12,echo=F}
+```{r 2.12}
+#| echo: false
 datadir<-"~/OneDrive/rguide/data/"
-mydata<-read.spss(paste0(datadir,"bsa_spss/bsa2019_poverty_open.sav"),to.data.frame = T,max.value.labels=5)%>%select(RSex,skipmeal,Married,Poverty1,HEdQual3,NatFrEst)%>%slice(1:50)
+#mydata<-read.spss(paste0(datadir,"bsa_spss/bsa2019_poverty_open.sav"),to.data.frame = T,max.value.labels=5)%>%select(RSex,skipmeal,Married,Poverty1,HEdQual3,NatFrEst)%>%slice(1:50)
+mydata<-read_spss(paste0(datadir,"bsa_spss/bsa2019_poverty_open.sav"))%>%select(RSex,skipmeal,Married,Poverty1,HEdQual3,NatFrEst)%>%slice(1:50)
 mydata$Married<-as.character(mydata$Married)
 ```
 
 Let's assume that we have a  small data frame called 'mydata'. Here are  a few basic commands to examine it:
   
-  **Determining the size of a data frame:** 
-  the `dim()` command returns the number of rows and columns of a data frame
+**Determining the size of a data frame:** 
+
+the `dim()` command returns the number of rows and columns of a data frame
 
 ```{r 2.13}
 dim(mydata)
@@ -293,11 +316,12 @@ We can see that in the data frame, the "RSex" column comes in fact before "Pover
 
 **Accessing variables:**
   
-  Each column of a data frame, or variable, can be accessed by its name preceded by the $ sign: 
+  Columns of a data frame, or variables, can be accessed by their name preceded by the $ sign: 
   
 ```{r 2.16}
 mydata$NatFrEst
 ```
+Lists all values of `NatFrEst`, as well as extra technical information at the bottom.
 
 Alternatively, columns/variables and rows can be identified numerically by their position in the data frame using square brackets: 
 ```
@@ -344,25 +368,35 @@ Character objects are alphanumeric vectors, that is variables which consist of t
 class(mydata$Married)
 ```
 #### Factors {-}
-An important feature of R is that categorical variables whether ordinal or polynomial are stored in objects known as **factors**. The main difference between factors and traditional categorical variables in Stata or SPSS is that they do **not** consist of discrete numerical values with which value labels are associated. They should be thought of instead as a special type of character variable with a discrete set of values, which are known as `levels`. In our data, `Rsex` (Gender of the respondent) is such an object:   
+A distinctive feature of R is that categorical variables whether ordinal or polynomial are stored in objects known as **factors**. Factors  should be thought of  as a special type of variable with a discrete set of values, known as `levels`. Factors can be unordered or ordered. In our data, `Rsex` (Gender of the respondent) is such an object:   
 ```{r 2.24}
 class(mydata$RSex)
 ```
-Let's further examine this factor.
+The main difference between factors and traditional categorical variables in Stata or SPSS is that they do **not** consist of arbitrary numerical values with which substantive value labels are associated. 
+
+Let's further examine this factor. It is always a good idea to check the ordering of factor levels in a newly created variable with the `level()` command.o
 
 ```{r 2.25}
 levels(mydata$RSex)
 ```
-returns the levels (ie the values) of  `RSex`. Even if 'Male' is the first level of `Rsex`,
-and female the second one, these do not correspond to underlying numbers in the
-data. Please also note that it is possible to change the ordering of factor
-levels with the `factor()` function. It is always a good idea to check the ordering of factor levels in a newly created variable. 
+returns the levels (ie the values) of  `RSex`. 'Male' is the first level of `Rsex`,
+and 'Female' the second one, irrespective of the values originally assigned and described in the codebook of the  dataset. 
+It is possible to change the ordering of factor
+levels with the `factor()` function.  
 
-```{r 2.26}
-mydata$RSex.New<-factor(mydata$RSex,levels = levels(mydata$RSex)[c(2,1)])
-levels(mydata$RSex.New)
+```{r 2.26.1}
+mydata$RSex.New<-mydata$RSex     ## We first create the new variable
+mydata$RSex.New<-factor(mydata$RSex, ## Then reorder the factor levels
+                        levels = levels(mydata$RSex)[c(2,1)])
 ```
-The above code tells R to create a new factor variable -`RSex.New` - whose levels are the same as the initial `RSex`, but with  'Female' coming first, and "Male", second. The name of the new variable is arbitrary.
+The above code tells R to create a new factor variable -`RSex.New` - whose levels are the same as the initial `RSex`, but with  'Female' (level number 2 in the original variable) coming first, and "Male" (level number 1) , second. The name of the new variable is arbitrary. 
 
+We can check the outcome:
+
+```{r 2.26.2}
+levels(mydata$RSex.New)
+``` 
+
+In the next chapter an alternative approach to dealing with categorical variables imported from SPSS or Stata is presented.
 
 \newpage  

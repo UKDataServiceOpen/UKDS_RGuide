@@ -226,10 +226,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#essential-information" id="toc-essential-information" class="nav-link active" data-scroll-target="#essential-information"><span class="header-section-number">3.1</span> Essential information</a></li>
+  <li><a href="#importing-files-essential-information" id="toc-importing-files-essential-information" class="nav-link active" data-scroll-target="#importing-files-essential-information"><span class="header-section-number">3.1</span> Importing files: essential information</a>
+  <ul class="collapse">
+  <li><a href="#spreadsheet-and-text-files" id="toc-spreadsheet-and-text-files" class="nav-link" data-scroll-target="#spreadsheet-and-text-files">Spreadsheet and text files</a></li>
+  <li><a href="#sas-spss-or-stata" id="toc-sas-spss-or-stata" class="nav-link" data-scroll-target="#sas-spss-or-stata">SAS, SPSS, or Stata</a></li>
+  </ul></li>
   <li><a href="#the-2017-british-social-attitudes-survey" id="toc-the-2017-british-social-attitudes-survey" class="nav-link" data-scroll-target="#the-2017-british-social-attitudes-survey"><span class="header-section-number">3.2</span> The 2017 British Social Attitudes Survey</a></li>
   <li><a href="#understanding-the-dataset" id="toc-understanding-the-dataset" class="nav-link" data-scroll-target="#understanding-the-dataset"><span class="header-section-number">3.3</span> Understanding the dataset</a></li>
   <li><a href="#identifying-and-selecting-variables" id="toc-identifying-and-selecting-variables" class="nav-link" data-scroll-target="#identifying-and-selecting-variables"><span class="header-section-number">3.4</span> Identifying and selecting variables</a></li>
+  <li><a href="#factor-variables-in-the-haven-package" id="toc-factor-variables-in-the-haven-package" class="nav-link" data-scroll-target="#factor-variables-in-the-haven-package"><span class="header-section-number">3.5</span> Factor variables in the haven package</a></li>
   </ul>
 </nav>
     </div>
@@ -255,59 +260,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="essential-information" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="essential-information"><span class="header-section-number">3.1</span> Essential information</h2>
-<p>In principle, any dataset whether in CSV, SPSS, SAS, or Stata format can be opened by R. There are a number of issues to consider however:</p>
+<section id="importing-files-essential-information" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="importing-files-essential-information"><span class="header-section-number">3.1</span> Importing files: essential information</h2>
+<section id="spreadsheet-and-text-files" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="spreadsheet-and-text-files">Spreadsheet and text files</h3>
+<p>In principle, any dataset whether in CSV, or spreadsheet format can be imported into R:</p>
 <ul>
-<li><p>The <code>foreign</code> package has been traditionally used to import SPSS and Stata datasets into R:</p></li>
-<li><p>its <code>read.spss()</code> and <code>write.spss()</code> functions respectively open and write .sav files. Given that both were developed from older versions of SPSS, it is therefore advised to check that their outcome is as expected. In addition:</p></li>
-<li><p><code>read.spss()</code> does not store the data in a R data frame by default and will require the option <code>to.data.frame=T</code> to be specified.</p></li>
-<li><p><code>read.spss()</code> may sometimes struggle with some numeric format and wrongly attempt to convert them as factor, which will result in error messages. It is therefore advised to limit the maximum number of levels that will be considered when converting factors by using the option <code>max.value.labels=</code></p></li>
-<li><p><code>read.dta()</code> and <code>write.dta()</code> respectively open and write Stata files up to version 12. An option to watch for is <code>convert.factor=T/F</code> which either will import Stata categorical variable as their underlying numeric value or instead will convert them into factors, using value labels as levels, which may be an issue for categorical variables with a large number of levels. Users have to bear in mind that the labels will by default sorted alphabetically.</p></li>
-<li><p>The <code>readstata13</code> package opens Stata datasets from version 13 onwards with the <code>read.dta13()</code> function and offers a more comprehensive set of options. <code>convert.factor=T/F</code> has the same effect as in <code>read.dta()</code> from <code>foreign</code>.</p></li>
-<li><p>Data frames created with either <code>read.dta()</code> or <code>read.dta13()</code> have extra information stored as attributes, which maybe useful to retrieve. For instance:</p>
-<pre><code>&gt; mydata&lt;-read.dta("Some_Stata_dataset.dta")
-&gt; attributes(mydata)$var.labels ### Retrieves the original Stata variable labels</code></pre></li>
-<li><p>Finally the <code>haven</code> package opens SPSS, Stata and SAS files with respectively <code>read_spss()</code>, <code>read_dta()</code> and <code>read_sas()</code>. By contrast with the other two packages, it relies on ad hoc data formats and data structures for converting labelled categorical variables and attempts to mimic Stata’s value and variable labels. More information is available <a href="https://haven.tidyverse.org/reference/read_dta.html">here</a>.</p></li>
+<li><p>CSV files can be directly imported with read.csv() from Base R.</p></li>
+<li><p>MS Excel spreadsheets can be opened with the <code>read_excel()</code> function from the <a href="">readXL</a> package or opened/written with <code>read.xlsx()</code> and <code>write.xlsx()</code> from the <a href="https://www.rdocumentation.org/packages/xlsx/versions/0.6.5">xlsx</a> package.</p></li>
+<li><p>ODS (Open Document Spreadheets) files from LibreOffice/OpenOffice Calc can be opened and written with <code>read_ods()/write_ods()</code> from the <a href="https://docs.ropensci.org/readODS/">readODS</a> package.</p></li>
 </ul>
-<p>In order not to overcomplicate their initial exploration of R we recommend new users to use <code>read.spss()</code> or <code>read.dta13()</code> when importing datasets from either SPSS or Stata, rather than the more elaborate functions available in <code>haven</code>.</p>
+</section>
+<section id="sas-spss-or-stata" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="sas-spss-or-stata">SAS, SPSS, or Stata</h3>
+<p>Currently, the <code>haven</code> packages provides the most versatile and straightforward route to importing data from other mainstream statistical software. SPSS, Stata and SAS files can be opened with respectively <code>read_spss()</code>, <code>read_dta()</code> and <code>read_sas()</code>. The only potential downside is that it relies on ad hoc data formats and data structures for converting labelled categorical variables and attempts to mimic SPSS/Stata’s value and variable labels. More information is available <a href="https://haven.tidyverse.org/reference/read_dta.html">here</a>. We will be using it throughout this guide.</p>
+<p>For the record, the <code>foreign</code> package used to be the standard for importing MINITAB, SAS, SPSS and Stata datasets into R, but its development ceased in 2000 (Stata version 12).</p>
+</section>
 </section>
 <section id="the-2017-british-social-attitudes-survey" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="the-2017-british-social-attitudes-survey"><span class="header-section-number">3.2</span> The 2017 British Social Attitudes Survey</h2>
-<p>For the rest of this guide, we will use the <code>British Social Attitudes Survey, 2017, Environment and Politics: Open Access Teaching Dataset</code>, which can be downloaded from the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8849">UK Data Service website</a>. We will use the SPSS version of the dataset, which will be assumed to be saved in a <code>UKDS</code> folder created inside <code>Documents</code> folder. <code>C:\\Users\\Your_User_Name_Here\\Documents</code> We will set this as default working directory. This way, we won’t have to specify the full path of files that we will be opening or saving.</p>
+<p>In the remainder of this guide, we will be using the <code>British Social Attitudes Survey, 2017, Environment and Politics: Open Access Teaching Dataset</code>, which can be downloaded from the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8849">UK Data Service website</a>. We will import the SPSS version of the dataset, which will be assumed to be saved in a <code>UKDS</code> folder created inside the <code>Documents</code> folder on a Windows computer. <code>C:\\Users\\Your_User_Name_Here\\Documents</code> We will set this as default working directory. This way, we won’t have to specify the full path of files that we will be opening or saving.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">Your_User_Name_Here</span><span class="sc">\\</span><span class="st">Documents</span><span class="sc">\\</span><span class="st">UKDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>We can finally open the file:</p>
-<div class="cell" data-hash="Opening_cache/html/3.2_f72d74af29e45ef852b7852c67c2bcb2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="ot">&lt;-</span><span class="fu">read.spss</span>(<span class="fu">paste0</span>(datadir,<span class="st">"8849spss_V1/bsa2017_open_enviropol.sav"</span>), </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">to.data.frame =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">use.value.labels=</span><span class="cn">TRUE</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">max.value.labels =</span> <span class="dv">9</span>)  </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(bsa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="ot">&lt;-</span><span class="fu">read_spss</span>(<span class="st">"8849spss_V1/bsa2017_open_enviropol.sav"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>               )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Typing:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3988   25</code></pre>
+<pre><code>[1] "bsa"</code></pre>
 </div>
 </div>
+<p>will show us that the object ‘bsa’ has appeared in the environment.</p>
 </section>
 <section id="understanding-the-dataset" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="understanding-the-dataset"><span class="header-section-number">3.3</span> Understanding the dataset</h2>
 <p>As previously, we can find the number of observations and variables in the dataset by typing the following:</p>
-<div class="cell" data-hash="Opening_cache/html/3.3_b867841b9daa13b86b38a1e244fe1a75">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(bsa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(bsa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3988   25</code></pre>
 </div>
 </div>
-<p>We can see that there are 3,988 observations and 25 variables in the BSA dataset.</p>
-<p>Typing:</p>
-<div class="cell" data-hash="Opening_cache/html/3.4_32caf132a7b998622b39cbc6e6d826c1">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "bsa"             "datadir"         "has_annotations"</code></pre>
-</div>
-</div>
-<p>will show us that the object ‘bsa’ has appeared, but what if we want to get the list of all variables in the dataset? We need to type:</p>
-<div class="cell" data-hash="Opening_cache/html/3.5_7a17543517c2658a7589f251a94dc2d7">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(bsa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can see that there are 3988 observations and 25 variables in the dataset.</p>
+<p>but what if we want to get the list of all variables in the dataset? We need to type:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(bsa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "actchar"          "actpol"           "carallow"         "carenvdc"        
  [5] "carnod2"          "carreduc"         "cartaxhi"         "CCBELIEV"        
@@ -319,90 +321,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>If we want to get a better sense of the data, we use the <code>head()</code> function which will return the first six rows.</p>
-<div class="cell" data-hash="Opening_cache/html/3.6_2a138e1e03f0c44adaa37621e61b712c">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bsa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bsa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Sserial   Rsex RAgeCat                   Married ChildHh
-1  290001   Male   35-44 Married/living as married     Yes
-2  290002 Female     65+        Separated/divorced      No
-3  290003 Female   45-54 Married/living as married     Yes
-4  290004 Female   45-54 Married/living as married     Yes
-5  290005   Male     65+             Never married      No
-6  290006 Female   25-34             Never married     Yes
-                          HEdQual3                          eq_inc_quintiles
-1             O level or equiv/CSE 3rd quintile - More than £292, up to £404
-2 Higher educ below degree/A level                                      &lt;NA&gt;
-3                           Degree 3rd quintile - More than £292, up to £404
-4                           Degree 3rd quintile - More than £292, up to £404
-5 Higher educ below degree/A level 4th quintile - More than £404, up to £577
-6 Higher educ below degree/A level              Lowest quintile - Up to £175
-                                   RClassGp
-1 Lower supervisory &amp; technical occupations
-2        Semi-routine &amp; routine occupations
-3          Managerial &amp; professional occups
-4          Managerial &amp; professional occups
-5          Managerial &amp; professional occups
-6          Managerial &amp; professional occups
-                                                                                          CCBELIEV
-1               I believe that climate change is taking place but not as a result of human actions
-2 I believe that climate change is taking place and is, at least partly, a result of human actions
-3                                                                                             &lt;NA&gt;
-4                                                                                             &lt;NA&gt;
-5                                                                                             &lt;NA&gt;
-6                                                                                             &lt;NA&gt;
-  carallow carreduc carnod2 cartaxhi carenvdc plnenvt plnuppri
-1     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;
-2     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;
-3     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;
-4     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;
-5     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;
-6     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;     &lt;NA&gt;
-           Politics Voted               actchar                actpol
-1             some,   Yes                 never                 never
-2 ... a great deal,   Yes                  &lt;NA&gt;                  &lt;NA&gt;
-3             some,   Yes                  &lt;NA&gt;                  &lt;NA&gt;
-4 ... a great deal,   Yes once in the past year once in the past year
-5    not very much,   Yes                  &lt;NA&gt;                  &lt;NA&gt;
-6    not very much,   Yes                  &lt;NA&gt;                  &lt;NA&gt;
-                    govnosa2         PartyId2 leftrigh  libauth  WtFactor
-1                      agree           Labour      1.0 4.500000 0.9380587
-2                   disagree           Labour      1.8 4.333333 0.6844214
-3                       &lt;NA&gt;           Labour       NA       NA 0.9060821
-4                      agree           Labour      1.5 2.500000 1.3085513
-5                       &lt;NA&gt; Liberal Democrat      2.0 3.166667 0.4392823
-6 neither agree nor disagree             &lt;NA&gt;      3.0 3.000000 0.5695720</code></pre>
+<pre><code># A tibble: 6 × 25
+  Sserial Rsex       RAgeCat  Married ChildHh HEdQual3 eq_inc_quintiles RClassGp
+    &lt;dbl&gt; &lt;dbl+lbl&gt;  &lt;dbl+lb&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+lb&gt; &lt;dbl+lbl&gt;        &lt;dbl+lb&gt;
+1  290001 1 [Male]   3 [35-4… 1 [Mar… 1 [Yes] 3 [O le…  3 [3rd quintil… 4 [Lowe…
+2  290002 2 [Female] 7 [65+]  2 [Sep… 2 [No]  2 [High… NA               5 [Semi…
+3  290003 2 [Female] 4 [45-5… 1 [Mar… 1 [Yes] 1 [Degr…  3 [3rd quintil… 1 [Mana…
+4  290004 2 [Female] 4 [45-5… 1 [Mar… 1 [Yes] 1 [Degr…  3 [3rd quintil… 1 [Mana…
+5  290005 1 [Male]   7 [65+]  4 [Nev… 2 [No]  2 [High…  4 [4th quintil… 1 [Mana…
+6  290006 2 [Female] 2 [25-3… 4 [Nev… 1 [Yes] 2 [High…  1 [Lowest quin… 1 [Mana…
+# ℹ 17 more variables: CCBELIEV &lt;dbl+lbl&gt;, carallow &lt;dbl+lbl&gt;,
+#   carreduc &lt;dbl+lbl&gt;, carnod2 &lt;dbl+lbl&gt;, cartaxhi &lt;dbl+lbl&gt;,
+#   carenvdc &lt;dbl+lbl&gt;, plnenvt &lt;dbl+lbl&gt;, plnuppri &lt;dbl+lbl&gt;,
+#   Politics &lt;dbl+lbl&gt;, Voted &lt;dbl+lbl&gt;, actchar &lt;dbl+lbl&gt;, actpol &lt;dbl+lbl&gt;,
+#   govnosa2 &lt;dbl+lbl&gt;, PartyId2 &lt;dbl+lbl&gt;, leftrigh &lt;dbl+lbl&gt;,
+#   libauth &lt;dbl+lbl&gt;, WtFactor &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Single variables for example, <code>Rsex</code> (gender of respondents) may be also summarised with <code>head()</code>, which returns as previously the first six observations of the gender variable, whereas typing</p>
-<div class="cell" data-hash="Opening_cache/html/3.7_79fad21e92c207f522450ed6cdf8de4c">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bsa<span class="sc">$</span>Rsex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bsa<span class="sc">$</span>Rsex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] Male   Female Female Female Male   Female
-Levels: Male Female</code></pre>
+<pre><code>&lt;labelled&lt;double&gt;[6]&gt;: Person 1 SEX
+[1] 1 2 2 2 1 2
+
+Labels:
+ value         label
+    -1 skipped or na
+     1          Male
+     2        Female
+     8      Dontknow
+     9       Refusal</code></pre>
 </div>
 </div>
 <p>Simply typing the name of a variable as in:</p>
 <pre><code>bsa$Rsex</code></pre>
 <p>will list the first 1000 observations of the variable. Other commands provide more useful information, such as <code>summary()</code>.</p>
-<div class="cell" data-hash="Opening_cache/html/3.8_897c928e3b563425417a0a374a0d2ea5">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>Rsex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>Rsex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Male Female 
-  1806   2182 </code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  1.000   1.000   2.000   1.547   2.000   2.000 </code></pre>
 </div>
 </div>
 <p>Summary is a generic function that tailors the most appropriate output to an object class. As Rsex is a categorical variable. The output of summary() is identical to what we would have obtained with the default tabulation fuction <code>table()</code>:</p>
-<div class="cell" data-hash="Opening_cache/html/3.9_844ef3e1491e0ebb429ffb6110fd7aa4">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>Rsex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>Rsex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-  Male Female 
-  1806   2182 </code></pre>
+   1    2 
+1806 2182 </code></pre>
 </div>
 </div>
 <p>When encountering a continuous variable, <code>summary()</code> will compute basic descriptive statistics (mean, median, quartiles, maximum and minimum). For example, in the case of the libertarian-authoritarian scale <code>libauth</code>:</p>
-<div class="cell" data-hash="Opening_cache/html/3.10_428c02a977cc8cc262171d3ec0b4f692">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>libauth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>libauth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
   1.167   3.000   3.500   3.511   4.000   5.000     775 </code></pre>
@@ -412,17 +388,63 @@ Levels: Male Female</code></pre>
 <section id="identifying-and-selecting-variables" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="identifying-and-selecting-variables"><span class="header-section-number">3.4</span> Identifying and selecting variables</h2>
 <p>As we have already seen, variables are objects. R automatically stores variables using the appropriate object class. Categorical variables are ‘Factors’ with ‘Levels’ as categories within these, while continuous variables are ‘Numeric’ types of objects. The <code>class()</code> displays the type of an object:.</p>
-<div class="cell" data-hash="Opening_cache/html/3.11_908e0383b436f83f074b616ee35393fb">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(bsa<span class="sc">$</span>Rsex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(bsa<span class="sc">$</span>Rsex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "factor"</code></pre>
+<pre><code>[1] "haven_labelled" "vctrs_vctr"     "double"        </code></pre>
 </div>
 </div>
 <p>The levels() function returns the categories of the variable.</p>
-<div class="cell" data-hash="Opening_cache/html/3.12_b6428c29622f0da927b7e2120d8df06a">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>Rsex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>Rsex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Male"   "Female"</code></pre>
+<pre><code>NULL</code></pre>
+</div>
+</div>
+</section>
+<section id="factor-variables-in-the-haven-package" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="factor-variables-in-the-haven-package"><span class="header-section-number">3.5</span> Factor variables in the haven package</h2>
+<p>As we have seen in the previous chapter, statistical software such as SPSS or Stata treat categorical variables as numerical variables. Values labels are then ‘attached’, allocating a substantive meaning to these values. On the other hand, R records categorical variables in objects that are called <em>factors</em>. They may be ordered or not. Factors consist of limited number of integers to which correspond <em>levels</em> ie characters often describing them used when the factor is displayed. These numbers range from 1 to the number of categories or levels of the factor, and are thefore distinct from the values categorical variables are allocated in codebooks.</p>
+<p>Unfortunately, there aren’t straightforward ways to convert SPSS or Stata labelled categorical variables into R factors. The approach followed by <code>haven</code> package that we use here is preserve the numeric values of the original variables, and add <em>attributes</em> that contain the labels and can be manipulated separately. Attributes are a special type of R objects that have a name, and can be read using the <code>attr()</code> function. <code>haven</code>-converted categorical variables all have a ‘label’ and ‘labels’ attribute. The former is the variable description, the latter the value labels.</p>
+<p>These haven-imported numeric variables can be converted into R factors with their levels consisting of the SPSS or Stata value labels, but whose numeric values will simply reflect their order in the vector of levels.</p>
+<p>Let’s examine the original variable description and value labels with the <code>attr()</code> function. We can do this variable by variable…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(bsa<span class="sc">$</span>HEdQual3, <span class="st">"label"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Highest educational qual obtained - dv"</code></pre>
+</div>
+</div>
+<p>We do the same with value labels:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(bsa<span class="sc">$</span>HEdQual3, <span class="st">"labels"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                          Degree Higher educ below degree/A level 
+                               1                                2 
+            O level or equiv/CSE                 No qualification 
+                               3                                4 
+                   DK/Refusal/NA 
+                               8 </code></pre>
+</div>
+</div>
+<p>The value labels displayed above include both the text description and the original numeric value from SPSS/Stata.</p>
+<p>Finally, for easier data manipulation, these haven converted ‘labelled numeric variables’ can be converted into R factors using the <code>as_factor()</code> function. Factor levels in the converted variables can consist of either the value labels:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(<span class="fu">as_factor</span>(bsa<span class="sc">$</span>HEdQual3, <span class="at">levels=</span><span class="st">"labels"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Degree"                           "Higher educ below degree/A level"
+[3] "O level or equiv/CSE"             "No qualification"                
+[5] "DK/Refusal/NA"                   </code></pre>
+</div>
+</div>
+<p>… or, as in the earlier output, of both the original SPSS/Stata numeric values and the value labels:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(<span class="fu">as_factor</span>(bsa<span class="sc">$</span>HEdQual3, <span class="at">levels=</span><span class="st">"both"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "[1] Degree"                          
+[2] "[2] Higher educ below degree/A level"
+[3] "[3] O level or equiv/CSE"            
+[4] "[4] No qualification"                
+[5] "[8] DK/Refusal/NA"                   </code></pre>
 </div>
 </div>
 <div style="page-break-after: always;"></div>

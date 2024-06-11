@@ -14,7 +14,7 @@ the CRAN website. A considerable amount of R-related resources is available onli
 R is particularly favoured by users who want to develop their own statistical
 functions or implement technical advances that are not yet available in
 commercial packages. The existence of a vast number of user written packages
-(17,672 at the time of writing this guide)  is one of the strengths of R.
+(20,889 at the time of writing this guide)  is one of the strengths of R.
 Users who want to contribute should be aware that in order to be part of the R
 archive, a minimum set of rules need nonetheless to be followed.
 
@@ -70,4 +70,3 @@ There are several (sometimes many) ways of achieving a particular result in R.
 This can be confusing for novice researchers, but at the same time will allow  users to
 tightly adjust their programmes to their needs.
 \newpage
-o

@@ -265,44 +265,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="creating-and-transforming-numerical-variables" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="creating-and-transforming-numerical-variables"><span class="header-section-number">4.1</span> Creating and transforming numerical variables</h2>
 <p>Let’s say we would like to transform our numerical political orientation variable: <code>leftrigh</code> into a logarithmic scale. We can use the <code>log()</code> function which is directly available in R Base package and simply returns the natural logarithm (base-e). We will use the assignment operator ( &lt;- ) to create a new variable called ‘leftright_log’ from the original variable</p>
-<div class="cell" data-hash="Manipulation_cache/html/4.1_a4253b15eb81d102673576d8fa111f58">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>lnleftrigh_log <span class="ot">&lt;-</span> <span class="fu">log</span>(bsa<span class="sc">$</span>leftrigh)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that if we had not specified <code>bsa$</code> the command would have created a transformed variable outside of the BSA data frame. We can now check the results with <code>summary()</code></p>
-<div class="cell" data-hash="Manipulation_cache/html/4.2_c10df665b854a531276bb4d6d3e0dcab">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">cbind</span>(bsa<span class="sc">$</span>lnleftrigh,bsa<span class="sc">$</span>leftrigh))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       V1               V2      
- Min.   :0.0000   Min.   :1.00  
- 1st Qu.:0.6931   1st Qu.:2.00  
- Median :0.8755   Median :2.40  
- Mean   :0.8707   Mean   :2.52  
- 3rd Qu.:1.0986   3rd Qu.:3.00  
- Max.   :1.6094   Max.   :5.00  
- NA's   :782      NA's   :782   </code></pre>
+<pre><code>       V1      
+ Min.   :1.00  
+ 1st Qu.:2.00  
+ Median :2.40  
+ Mean   :2.52  
+ 3rd Qu.:3.00  
+ Max.   :5.00  
+ NA's   :782   </code></pre>
 </div>
 </div>
 <p>Please note that it is not possible to pass several variables names directly to <code>summary()</code>. We need to group them first into a temporary object using <code>cbind()</code>. In the output <code>V1</code> refers to the first variable, <code>lnleftrigh</code>.</p>
-<p>What if we - hypothetically - wanted to do the same with level of agreement to the statement “People like me don<code>t have any say about what the government does", a categorical variable, originally ranging from  1 (</code>Agree strongly<code>) to 5 (</code>Disagree strongly`)? If we try to repeat what we did before:</p>
-<div class="cell" data-hash="Manipulation_cache/html/4.3_b60a7659a96eec704f2181387f81eca8">
+<p>What if we hypothetically wanted to do the same with the level of agreement to the statement “People like me don't have any say about what the government does”, a categorical variable, originally ranging from 1 (<code>Agree strongly</code>) to 5 (<code>Disagree strongly</code>)? If we try to repeat what we did before:</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>lngovnosa2 <span class="ot">&lt;-</span> <span class="fu">log</span>(bsa<span class="sc">$</span>govnosa2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in Math.factor(bsa$govnosa2): 'log' not meaningful for factors</code></pre>
-</div>
 </div>
 <p>… we get an error, due to the fact that <code>govnosa2</code> was imported as a factor, and that <code>log()</code> can only be applied to numeric objects.</p>
-<div class="cell" data-hash="Manipulation_cache/html/4.4_cc0d78dd41e815f8bcfabf9065f60d98">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(bsa<span class="sc">$</span>govnosa2)       <span class="co">#check to see if it is numeric</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(bsa<span class="sc">$</span>govnosa2)       <span class="co">#check to see if it is numeric</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "factor"</code></pre>
+<pre><code>[1] "haven_labelled" "vctrs_vctr"     "double"        </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>govnosa2.n <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(bsa<span class="sc">$</span>govnosa2)<span class="co">#convert to numeric </span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(bsa<span class="sc">$</span>govnosa2.n)       <span class="co">#check again</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>govnosa2.n <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(bsa<span class="sc">$</span>govnosa2)<span class="co">#convert to numeric </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(bsa<span class="sc">$</span>govnosa2.n)       <span class="co">#check again</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "numeric"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>lngovnosa2 <span class="ot">&lt;-</span> <span class="fu">log</span>(bsa<span class="sc">$</span>govnosa2.n) <span class="co">#create new log of the leftright      variable </span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">cbind</span>(bsa<span class="sc">$</span>lngovnosa2,bsa<span class="sc">$</span>govnosa2.n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>lngovnosa2 <span class="ot">&lt;-</span> <span class="fu">log</span>(bsa<span class="sc">$</span>govnosa2.n) <span class="co">#create new log of the leftright      variable </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">cbind</span>(bsa<span class="sc">$</span>lngovnosa2,bsa<span class="sc">$</span>govnosa2.n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       V1               V2       
  Min.   :0.0000   Min.   :1.000  
@@ -315,18 +312,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We can also create a completely new variable in the dataset. For instance, the following will create <code>test</code> with a constant value of 1.</p>
-<div class="cell" data-hash="Manipulation_cache/html/4.5_5d9976c655108425ffa5247302cf6fbd">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>test <span class="ot">&lt;-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>test <span class="ot">&lt;-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="categorical-variables" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="categorical-variables"><span class="header-section-number">4.2</span> Categorical variables</h2>
 <p>We saw in Section 3 that categorical variables are objects called <strong>factors</strong> in R, with a fixed set of possible numerical or alphanumerical values (levels) which can be accessed with the <code>levels()</code> function.</p>
-<div class="cell" data-hash="Manipulation_cache/html/4.6_40e73b2a5eee82bfc77c1639b70bb35c">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>Married) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>Married) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Married/living as married" "Separated/divorced"       
-[3] "Widowed"                   "Never married"            </code></pre>
+<pre><code>NULL</code></pre>
 </div>
 </div>
 <p>The number in the output does not refer to underlying numerical values to which labels are added as with other statistical packages, but instead to the position of a given level in the list returned by <code>level()</code>.</p>
@@ -334,13 +330,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="recoding-variables" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="recoding-variables"><span class="header-section-number">4.3</span> Recoding variables</h2>
 <p>The following commands will create a new variable called <code>Married2</code> where respondents are categorised into two new categories: ‘Not partnered’ and ‘Partnered’. The “separated/divorced” and “Never married” categories of the “Married” variable are recoded as “Not partnered”. It is always advised to create new variables when recoding old ones so the original data is not tampered with.</p>
-<div class="cell" data-hash="Manipulation_cache/html/4.7_40af966db6dca23b66647be5b8b703bd">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(bsa<span class="sc">$</span>Married<span class="sc">==</span><span class="st">"Married/living as married"</span>,<span class="st">"Partnered"</span>,bsa<span class="sc">$</span>Married)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(bsa<span class="sc">$</span>Married<span class="sc">==</span><span class="st">"Widowed"</span> <span class="sc">|</span> </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                       bsa<span class="sc">$</span>Married<span class="sc">==</span><span class="st">"Never married"</span> <span class="sc">|</span> </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                      bsa<span class="sc">$</span>Married<span class="sc">==</span><span class="st">"Separated/divorced"</span>,<span class="st">"Not partnered"</span>,bsa<span class="sc">$</span>Married2)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>Married2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married.f<span class="ot">&lt;-</span><span class="fu">as_factor</span>(bsa<span class="sc">$</span>Married,<span class="st">"labels"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Married/living as married"</span>,<span class="st">"Partnered"</span>,bsa<span class="sc">$</span>Married)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Widowed"</span> <span class="sc">|</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                       bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Never married"</span> <span class="sc">|</span> </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                      bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Separated/divorced"</span>,<span class="st">"Not partnered"</span>,bsa<span class="sc">$</span>Married2)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>Married2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Not partnered     Partnered 
@@ -349,17 +346,17 @@ Not partnered     Partnered
 </div>
 <p>The second and fourth categories have been renamed to ‘Not partnered’. Now we have two levels * Partnered *Not partnered</p>
 <p><code>ifelse()</code> is a convenient tool to use when it is required to work with Base R or when the variables have a limited number of categories. More complex cases may require a more advanced function. The <code>dplyr</code> library provides a comprehensive set of data manipulation tools.</p>
-<div class="cell" data-hash="Manipulation_cache/html/4.8_3e9bf869469d0130666ed94083063c1d">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>bsa<span class="ot">&lt;-</span>bsa<span class="sc">%&gt;%</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">Married3=</span><span class="fu">case_when</span>(</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>               Married <span class="sc">==</span> <span class="st">"Married/living as married"</span> <span class="sc">~</span> <span class="st">"Partnered"</span>,  </span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>               Married <span class="sc">==</span> <span class="st">"Separated/divorced"</span> <span class="sc">|</span> Married <span class="sc">==</span> <span class="st">"Widowed"</span> <span class="sc">~</span> <span class="st">"Not Partnered"</span>,</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>               Married <span class="sc">==</span> <span class="st">"Never married"</span> <span class="sc">~</span> <span class="st">"Not Partnered"</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married3<span class="ot">&lt;-</span><span class="fu">as.factor</span>(bsa<span class="sc">$</span>Married3)</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>Married3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>bsa<span class="ot">&lt;-</span>bsa<span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">Married3=</span><span class="fu">case_when</span>(</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>               Married.f <span class="sc">==</span> <span class="st">"Married/living as married"</span> <span class="sc">~</span> <span class="st">"Partnered"</span>,  </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>               Married.f <span class="sc">==</span> <span class="st">"Separated/divorced"</span> <span class="sc">|</span> Married.f <span class="sc">==</span> <span class="st">"Widowed"</span> <span class="sc">~</span> <span class="st">"Not Partnered"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>               Married.f <span class="sc">==</span> <span class="st">"Never married"</span> <span class="sc">~</span> <span class="st">"Not Partnered"</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married3<span class="ot">&lt;-</span><span class="fu">as.factor</span>(bsa<span class="sc">$</span>Married3)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>Married3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Not Partnered     Partnered          NA's 
          1778          2209             1 </code></pre>
@@ -367,7 +364,7 @@ Not partnered     Partnered
 </div>
 <p>We just created the <code>Married3</code> variable, which is identical to <code>Married2</code> above, but using the more powerful syntax made available by <code>dplyr</code>. Let’s decompose it:</p>
 <ul>
-<li><code>dplyr</code> use the <code>pipe</code> symbol ie <code>%&gt;%</code> which enables to sequentially combine functions. We will come back to this later in this guide.</li>
+<li><code>dplyr</code> use the <code>pipe</code> symbol ie <code>%&gt;%</code> or <code>|&gt;</code> which enables to sequentially combine functions. We will come back to this later in this guide.</li>
 <li><code>mutate()</code> is the generic variable creation/alteration command, and can handle complex combinations of conditions as well as multiple simultaneous variable creation operations.</li>
 <li><code>case_when()</code> is the function that allows recoding numerical, character, or factor variables. On the left hand side of the tilde <code>~</code> are the condition or the values that need to be matched in the original variable , and on the right hand side, the attributed ie recoded values in the new variable. Note that in this case, the recoded variable is by default a character object and needs to be converted into a factor for easier manipulation.</li>
 </ul>
@@ -389,69 +386,67 @@ Not partnered     Partnered
 <li><p>With <code>table()</code> in order to get the frequencies of missing values of a specific variable.</p></li>
 <li><p>With sum() in order to count the number of missing observations of variables or whole datasets.</p></li>
 </ul>
-<div class="cell" data-hash="Manipulation_cache/html/unnamed-chunk-1_163dba556b955358647fd46143502874">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">is.na</span>(bsa<span class="sc">$</span>leftrigh))<span class="co">#of missing values in the leftright variable </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">is.na</span>(bsa<span class="sc">$</span>leftrigh))<span class="co">#of missing values in the leftright variable </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 FALSE  TRUE 
  3206   782 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(bsa)) <span class="co"># of missing values in the whole dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(bsa)) <span class="co"># of missing values in the whole dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 41486</code></pre>
+<pre><code>[1] 41487</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">is.na</span>(bsa<span class="sc">$</span>leftrigh)) <span class="co">#returns the proportion of NAs...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">is.na</span>(bsa<span class="sc">$</span>leftrigh)) <span class="co">#returns the proportion of NAs...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.1960883</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">is.na</span>(bsa)) <span class="co"># returns the proportion in the dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">is.na</span>(bsa)) <span class="co"># returns the proportion in the dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3355712</code></pre>
+<pre><code>[1] 0.3250925</code></pre>
 </div>
 </div>
 </section>
 <section id="recoding-missing-values-as-na-continuous-variables" class="level3" data-number="4.4.2">
 <h3 data-number="4.4.2" class="anchored" data-anchor-id="recoding-missing-values-as-na-continuous-variables"><span class="header-section-number">4.4.2</span> Recoding missing values as NA (continuous variables)</h3>
 <p>It may sometimes be useful to recode implicit missing values (ie considered by the data producer as missing, but not by R) of either numeric objects or factors into <code>&lt;NA&gt;</code>, in order to simplify case selection when conducting analyses. This can either be done with Base R code or the more advanced data manipulation functions from the dplyr package that we explored earlier.</p>
-<p>Let’s assume for a moment that we would like to get rid of respondents aged under 25 for our analysis. A safe way to proceed is by creating a new variable.</p>
-<div class="cell" data-hash="Manipulation_cache/html/4.9_7796a38b5c6de12ca47772a651b86298">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>RAgeCat2 <span class="ot">&lt;-</span> bsa<span class="sc">$</span>RAgeCat <span class="co">#duplicate variable</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>RAgeCat2)                      </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s assume for a moment that we would like to get rid of respondents aged under 25 for our analysis. A safe way to proceed is by creating a new dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>RAgeCat.f <span class="ot">&lt;-</span> <span class="fu">as_factor</span>(bsa<span class="sc">$</span>RAgeCat) <span class="co"># convert labelled numeric variable into factor</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>RAgeCat.f)                      </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-18-24 25-34 35-44 45-54 55-59 60-64   65+ 
-  223   591   650   729   320   333  1138 </code></pre>
+     18-24      25-34      35-44      45-54      55-59      60-64        65+ 
+       223        591        650        729        320        333       1138 
+DK/Refused 
+         0 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>RAgeCat2[bsa<span class="sc">$</span>RAgeCat2<span class="sc">==</span><span class="st">"18-24"</span> ] <span class="ot">&lt;-</span> <span class="cn">NA</span> <span class="co">#convert responses “18-24”  to NA</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>RAgeCat2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>bsa.adults<span class="ot">&lt;-</span>bsa[<span class="sc">!</span>bsa<span class="sc">$</span>RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span>, ] <span class="co"># retains all values except those that match the condiction  </span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa.adults<span class="sc">$</span>RAgeCat.f)                      </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-18-24 25-34 35-44 45-54 55-59 60-64   65+ 
-    0   591   650   729   320   333  1138 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">is.na</span>(bsa<span class="sc">$</span>RAgeCat2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-FALSE  TRUE 
- 3761   227 </code></pre>
+     18-24      25-34      35-44      45-54      55-59      60-64        65+ 
+         0        591        650        729        320        333       1138 
+DK/Refused 
+         0 </code></pre>
 </div>
 </div>
 <p>Why is the number of missing values 227 and not 223 as the original number of respondents aged 18-24? Because there were already 3 missing values for the RAgeCat variable.</p>
 <p>We can also notice that although there are now no observation left in the 18-24 category, it is still displayed by <code>table()</code>. This is because levels are attributes of factors and are not deleted with observations. We can remove unused levels permanently with <code>droplevels()</code></p>
-<div class="cell" data-hash="Manipulation_cache/html/4.10_e25d61526f90ef36e5b73e8eeb8e618a">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>RAgeCat2<span class="ot">&lt;-</span><span class="fu">droplevels</span>(bsa<span class="sc">$</span>RAgeCat2)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>RAgeCat2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>RAgeCat.f<span class="ot">&lt;-</span><span class="fu">droplevels</span>(bsa<span class="sc">$</span>RAgeCat.f)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>RAgeCat.f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-25-34 35-44 45-54 55-59 60-64   65+ 
-  591   650   729   320   333  1138 </code></pre>
+18-24 25-34 35-44 45-54 55-59 60-64   65+ 
+  223   591   650   729   320   333  1138 </code></pre>
 </div>
 </div>
 </section>
 <section id="working-with-missing-values" class="level3" data-number="4.4.3">
 <h3 data-number="4.4.3" class="anchored" data-anchor-id="working-with-missing-values"><span class="header-section-number">4.4.3</span> Working with missing values</h3>
 <p>Explicit missing values (coded as NA) can be taken care of by R’s own missing values functions. For instance using the <code>na.rm=T</code> or <code>na.rm=TRUE</code> option will remove missing values from an analysis (typing <code>?na.rm</code> will provide more information). Below is a summary of how NAs are dealt with by common R commands:</p>
-<div class="cell" data-hash="Manipulation_cache/html/4.11_adc51925248de386bc3a90d851d6e4b2">
+<div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <caption>Treatment of missing values by R commands</caption>
@@ -505,62 +500,64 @@ FALSE  TRUE
 <p><strong>Using Base R</strong></p>
 <p>Most subsetting commands involve some form of conditions whereby the characteristics of a subsample of interest are specified. Suppose we would like to examine the interest for politics among people aged 18-24.</p>
 <p>We can either create an adhoc data frame:</p>
-<div class="cell" data-hash="Manipulation_cache/html/4.12_306c1e17958e1bdb43c53761f67c3cec">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>Politics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>Politics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-... a great deal,      quite a lot,             some,    not very much, 
-              739               982              1179               708 
- or, none at all? 
-              379 </code></pre>
+   1    2    3    4    5 
+ 739  982 1179  708  379 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>bsa.young<span class="ot">&lt;-</span>bsa[bsa<span class="sc">$</span>RAgeCat<span class="sc">==</span><span class="st">"18-24"</span>,]  </span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa.young<span class="sc">$</span>Politics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>bsa.young<span class="ot">&lt;-</span>bsa[bsa<span class="sc">$</span>RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span>,]  </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa.young<span class="sc">$</span>Politics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-... a great deal,      quite a lot,             some,    not very much, 
-               29                41                72                56 
- or, none at all? 
-               25 </code></pre>
+ 1  2  3  4  5 
+29 41 72 56 25 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>bsa.young<span class="ot">&lt;-</span>bsa[bsa<span class="sc">$</span>RAgeCat<span class="sc">==</span><span class="st">"18-24"</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Or we can directly limit the extent of the analysis on the go:</p>
-<div class="cell" data-hash="Manipulation_cache/html/4.13_074002af50feacdc822accfb330e0dca">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(bsa<span class="sc">$</span>Politics[bsa<span class="sc">$</span>RAgeCat<span class="sc">==</span><span class="st">"18-24"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(bsa<span class="sc">$</span>Politics[bsa<span class="sc">$</span>RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-... a great deal,      quite a lot,             some,    not very much, 
-               29                41                72                56 
- or, none at all? 
-               25 </code></pre>
+ 1  2  3  4  5 
+29 41 72 56 25 </code></pre>
 </div>
 </div>
 <p>In the first example it was necessary to include a comma after specg the condition. This is meant to indicate that we want to retain all variables ie columns in the dataset. The comma is not necessary in the second example as we are already working with a single variable.</p>
 <p><strong>Using dplyr</strong>*</p>
-<p>Now suppose we want to further restrict the analysis to people identifying as Males. We could use the same Base R syntax as above, but with more than one condition coding tends to become cumbersome. We could instead use the more convenient syntax from the <code>dplyr</code> package. Either:</p>
-<div class="cell" data-hash="Manipulation_cache/html/4.14_18ef1356d456348b96255b545bc6955d">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>bsa.young.males<span class="ot">&lt;-</span>bsa<span class="sc">%&gt;%</span><span class="fu">filter</span>(RAgeCat<span class="sc">==</span><span class="st">"18-24"</span> <span class="sc">&amp;</span> Rsex<span class="sc">==</span><span class="st">"Male"</span>)  </span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa.young.males<span class="sc">$</span>Politics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now suppose we want to further restrict the analysis to people identifying as Males. We could use the same Base R syntax as above, but with more than one condition coding tends to become a bit cumbersome. We could instead use the more convenient syntax from the <code>dplyr</code> package. Either:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>bsa.young.males<span class="ot">&lt;-</span>bsa<span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span> <span class="sc">&amp;</span> <span class="fu">as_factor</span>(Rsex)<span class="sc">==</span><span class="st">"Male"</span>)  </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">as_factor</span>(bsa.young.males<span class="sc">$</span>Politics))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-... a great deal,      quite a lot,             some,    not very much, 
-               15                22                30                18 
- or, none at all? 
-                9 </code></pre>
+Item not applicable   ... a great deal,        quite a lot,               some, 
+                  0                  15                  22                  30 
+     not very much,    or, none at all?          Don`t know             Refusal 
+                 18                   9                   0                   0 </code></pre>
 </div>
 </div>
 <p>Or. as before embed it as a condition within <code>table()</code> :</p>
-<div class="cell" data-hash="Manipulation_cache/html/4.15_82642837b4dcb0edad8f95e59feba599">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(bsa<span class="sc">%&gt;%</span><span class="fu">filter</span>(RAgeCat<span class="sc">==</span><span class="st">"18-24"</span> <span class="sc">&amp;</span> Rsex<span class="sc">==</span><span class="st">"Male"</span>)<span class="sc">%&gt;%</span><span class="fu">select</span>(Politics) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">as_factor</span>(</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>          bsa<span class="sc">%&gt;%</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">filter</span>(RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span> <span class="sc">&amp;</span> <span class="fu">as_factor</span>(Rsex)<span class="sc">==</span><span class="st">"Male"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>          <span class="fu">select</span>(Politics)</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Politics
-... a great deal,      quite a lot,             some,    not very much, 
-               15                22                30                18 
- or, none at all? 
-                9 </code></pre>
+Item not applicable   ... a great deal,        quite a lot,               some, 
+                  0                  15                  22                  30 
+     not very much,    or, none at all?          Don`t know             Refusal 
+                 18                   9                   0                   0 </code></pre>
 </div>
 </div>
+<p><code>Filter()</code> and <code>select()</code> are the functions that specify respectively rows and columns to be kept/removed. They can be combined or used independently and used in any order.</p>
 <p>We are now equipped with the necessary information to move to the next stage and carry out basic analysis using R.</p>
 <div style="page-break-after: always;"></div>
 

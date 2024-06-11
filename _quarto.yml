@@ -8,11 +8,11 @@ execute:
   echo: true
   warning: false
   message: false
-  cache: true
+  cache: false
   freeze: auto
 book:
   title: "Analysing large scale survey data using R"
-  author: "Pierre Walthéry, Nadia Kennar, Rihab Dahab"
+  author: Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service
   output-file: "UKDS_R_Guide"
   date: "15 September 2023"
 #  repo-url: https://github.com/UKDataServiceOpen/UKDS_RGuide
@@ -37,7 +37,7 @@ book:
    tools: false
    foreground: "#742082" 
 #bibliography: references.bib
-mainfont: "Arial"
+mainfont: Arial
 sansfont: Arial
 monofont: "Courier New"
 monofontoptions: 'Scale=0.8'
