@@ -135,7 +135,7 @@ a<-svymean(~leftrigh,
         bsa.design,
         na.rm = T)### Computes the mean and its standard error...
 
-# confint(a) ### ... and confidence interval
+confint(a) ### ... and confidence interval
 
 ```
 And now for the median:
