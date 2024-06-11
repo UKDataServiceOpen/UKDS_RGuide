@@ -441,7 +441,7 @@ For example, to install the ‘foreign’ package one need to type:</p>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)   </span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>character(0)</code></pre>
+<pre><code>[1] "a"</code></pre>
 </div>
 </div>
 <pre><code>&gt; rm(mydata)</code></pre>
@@ -466,20 +466,27 @@ For example, to install the ‘foreign’ package one need to type:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    RSex skipmeal                   Married       Poverty1
-1 Female       NA Married/living as married        Was not
-2 Female        1        Separated/divorced        Was not
-3 Female       NA Married/living as married        Was not
-4   Male       NA             Never married        Was not
-5   Male        1             Never married        Was not
-6   Male       NA Married/living as married Was in poverty
-                          HEdQual3 NatFrEst
-1 Higher educ below degree/A level        5
-2 Higher educ below degree/A level       30
-3             O level or equiv/CSE       50
-4 Higher educ below degree/A level       50
-5                 No qualification       50
-6                             &lt;NA&gt;       10</code></pre>
+<pre><code>    RSex skipmeal                   Married
+1 Female       NA Married/living as married
+2 Female        1        Separated/divorced
+3 Female       NA Married/living as married
+4   Male       NA             Never married
+5   Male        1             Never married
+6   Male       NA Married/living as married
+        Poverty1                         HEdQual3
+1        Was not Higher educ below degree/A level
+2        Was not Higher educ below degree/A level
+3        Was not             O level or equiv/CSE
+4        Was not Higher educ below degree/A level
+5        Was not                 No qualification
+6 Was in poverty                             &lt;NA&gt;
+  NatFrEst
+1        5
+2       30
+3       50
+4       50
+5       50
+6       10</code></pre>
 </div>
 </div>
 <p>The <code>head()</code> command displays the first six lines of the dataset. Depending on the number of variables the output of <code>head()</code> can become quickly overwhelming, as the size of the lines on most screens is limited!</p>
@@ -487,11 +494,13 @@ For example, to install the ‘foreign’ package one need to type:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "HEdQual3" "Married"  "NatFrEst" "Poverty1" "RSex"     "skipmeal"</code></pre>
+<pre><code>[1] "HEdQual3" "Married"  "NatFrEst" "Poverty1"
+[5] "RSex"     "skipmeal"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "RSex"     "skipmeal" "Married"  "Poverty1" "HEdQual3" "NatFrEst"</code></pre>
+<pre><code>[1] "RSex"     "skipmeal" "Married"  "Poverty1"
+[5] "HEdQual3" "NatFrEst"</code></pre>
 </div>
 </div>
 <p>We can see that in the data frame, the “RSex” column comes in fact before “Poverty1”.</p>
@@ -500,8 +509,9 @@ For example, to install the ‘foreign’ package one need to type:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>NatFrEst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  5 30 50 50 50 10  1 NA  5 50 60 25 30  3 25 10 80  5 50 50 40 45  2 82 60
-[26] 40 10 10 40 15 30 30  2 10 75 99 70 50 10 30  1 10 85 45 70 25 40 30 10 25
+<pre><code> [1]  5 30 50 50 50 10  1 NA  5 50 60 25 30  3 25 10 80
+[18]  5 50 50 40 45  2 82 60 40 10 10 40 15 30 30  2 10
+[35] 75 99 70 50 10 30  1 10 85 45 70 25 40 30 10 25
 attr(,"value.labels")
 named numeric(0)</code></pre>
 </div>
@@ -513,11 +523,14 @@ named numeric(0)</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mydata[,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] Female Female Female Male   Male   Male   Male   Female Male   Male  
-[11] Male   Female Female Male   Female Female Female Female Female Female
-[21] Male   Female Female Male   Male   Female Female Female Female Male  
-[31] Female Female Female Female Male   Male   Female Female Male   Female
-[41] Male   Male   Female Male   Female Male   Female Female Female Male  
+<pre><code> [1] Female Female Female Male   Male   Male   Male  
+ [8] Female Male   Male   Male   Female Female Male  
+[15] Female Female Female Female Female Female Male  
+[22] Female Female Male   Male   Female Female Female
+[29] Female Male   Female Female Female Female Male  
+[36] Male   Female Female Male   Female Male   Male  
+[43] Female Male   Female Male   Female Female Female
+[50] Male  
 Levels: Male Female</code></pre>
 </div>
 </div>
@@ -525,8 +538,10 @@ Levels: Male Female</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>mydata[<span class="dv">6</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  RSex skipmeal                   Married       Poverty1 HEdQual3 NatFrEst
-6 Male       NA Married/living as married Was in poverty     &lt;NA&gt;       10</code></pre>
+<pre><code>  RSex skipmeal                   Married
+6 Male       NA Married/living as married
+        Poverty1 HEdQual3 NatFrEst
+6 Was in poverty     &lt;NA&gt;       10</code></pre>
 </div>
 </div>
 <p>Returns the values of all the variables for the sixth row of the data frame. Specifying both a row and column number, will return a unique observation:</p>
@@ -574,37 +589,39 @@ Levels: Male Female</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mydata<span class="sc">$</span>Married) <span class="do">### Let's look at the first five rows of Married</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Married/living as married"
+[2] "Separated/divorced"       
+[3] "Married/living as married"
+[4] "Never married"            
+[5] "Never married"            
+[6] "Married/living as married"</code></pre>
+</div>
 </div>
 </section>
 <section id="factors" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="factors">Factors</h4>
 <p>A distinctive feature of R is that categorical variables whether ordinal or polynomial are stored in objects known as <strong>factors</strong>. Factors should be thought of as a special type of variable with a discrete set of values, known as <code>levels</code>. Factors can be unordered or ordered. In our data, <code>Rsex</code> (Gender of the respondent) is such an object:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mydata<span class="sc">$</span>RSex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mydata<span class="sc">$</span>RSex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "factor"</code></pre>
 </div>
 </div>
 <p>The main difference between factors and traditional categorical variables in Stata or SPSS is that they do <strong>not</strong> consist of arbitrary numerical values with which substantive value labels are associated.</p>
-<p>Let’s further examine this factor. It is always a good idea to check the ordering of factor levels in a newly created variable with the <code>level()</code> command.o</p>
+<p>Let’s further examine this factor. It is always a good idea to check the ordering of factor levels in a newly created variable with the <code>level()</code> command</p>
+<p><code>{r 2.25}</code> returns the levels (ie the values) of <code>RSex</code>. ‘Male’ is the first level of <code>Rsex</code>, and ‘Female’ the second one, irrespective of the values originally assigned and described in the codebook of the dataset. It is possible to change the ordering of factor levels with the <code>factor()</code> function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(mydata<span class="sc">$</span>RSex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Male"   "Female"</code></pre>
-</div>
-</div>
-<p>returns the levels (ie the values) of <code>RSex</code>. ‘Male’ is the first level of <code>Rsex</code>, and ‘Female’ the second one, irrespective of the values originally assigned and described in the codebook of the dataset. It is possible to change the ordering of factor levels with the <code>factor()</code> function.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>RSex.New<span class="ot">&lt;-</span>mydata<span class="sc">$</span>RSex     <span class="do">## We first create the new variable</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>RSex.New<span class="ot">&lt;-</span><span class="fu">factor</span>(mydata<span class="sc">$</span>RSex, <span class="do">## Then reorder the factor levels</span></span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> <span class="fu">levels</span>(mydata<span class="sc">$</span>RSex)[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>RSex<span class="ot">&lt;-</span><span class="fu">factor</span>(mydata<span class="sc">$</span>RSex, <span class="co"># We re-use the existing factor levels from Rsex</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">levels =</span> <span class="fu">levels</span>(mydata<span class="sc">$</span>RSex)[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>)]) <span class="co"># and reorder them</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The above code tells R to create a new factor variable -<code>RSex.New</code> - whose levels are the same as the initial <code>RSex</code>, but with ‘Female’ (level number 2 in the original variable) coming first, and “Male” (level number 1) , second. The name of the new variable is arbitrary.</p>
 <p>We can check the outcome:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(mydata<span class="sc">$</span>RSex.New)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(mydata<span class="sc">$</span>RSex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>character(0)</code></pre>
+<pre><code>[1] "Female" "Male"  </code></pre>
 </div>
 </div>
 <p>In the next chapter an alternative approach to dealing with categorical variables imported from SPSS or Stata is presented.</p>

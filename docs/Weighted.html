@@ -226,8 +226,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#frequencies-and-contingency-tables" id="toc-frequencies-and-contingency-tables" class="nav-link active" data-scroll-target="#frequencies-and-contingency-tables"><span class="header-section-number">6.1</span> Frequencies and contingency tables</a></li>
-  <li><a href="#robust-inference" id="toc-robust-inference" class="nav-link" data-scroll-target="#robust-inference"><span class="header-section-number">6.2</span> Robust inference</a></li>
+  <li><a href="#central-tendency-and-dispersion-continuous-variables" id="toc-central-tendency-and-dispersion-continuous-variables" class="nav-link active" data-scroll-target="#central-tendency-and-dispersion-continuous-variables"><span class="header-section-number">6.1</span> Central tendency and dispersion (continuous variables)</a></li>
+  <li><a href="#frequencies-and-contingency-tables" id="toc-frequencies-and-contingency-tables" class="nav-link" data-scroll-target="#frequencies-and-contingency-tables"><span class="header-section-number">6.2</span> Frequencies and contingency tables</a></li>
+  <li><a href="#inference-using-survey-procedures" id="toc-inference-using-survey-procedures" class="nav-link" data-scroll-target="#inference-using-survey-procedures"><span class="header-section-number">6.3</span> Inference using survey procedures</a></li>
   </ul>
 </nav>
     </div>
@@ -253,19 +254,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Most users of social surveys are interested at some point in inferring nationally representative estimates and/or compensate for bias involved in the sampling process when conducting analyses: sampling and non-response bias. These are often tackled with sampling weights, which are meant to correct estimates for the under/over representation of certain groups in the sample and adjusts standard errors accordingly.</p>
-<p>However, robust inference usually relies not just on weighting estimates but also on factoring in the survey design when conducting analyses – which can be done with the <code>survey</code> package in R, but is a topic that goes beyond the present guide. At the same time for users who are concerned with reducing bias rather than producing publication-quality estimates, it may be useful to be aware how common R commands and operations can be used with weights.</p>
-<p>Some of the most common ones are mentioned below:</p>
-<p>## Central tendency and dispersion (continuous variables)</p>
-<p>The <code>stats</code> packages which comes with the installation of Base R includes <code>weighted.mean()</code> which, as indicated by its name, computes weighted estimates of the mean of a variable when weights are provided. However the Hmisc package includes a more comprehensive set of functions that can be used when weighting estimates. The code below provides an illustration of weighted means, variance and median of the left-right score used before, each time comparing it with the unweighted estimate:</p>
-<div class="cell" data-hash="Weighted_cache/html/6.1_04a47359f7ef8a9f912046220a442c01">
+<p>Most users of social surveys will be looking to infer nationally representative estimates when conducting analyses. These entail using weights, which are meant to correct estimates for the under/over representation of certain groups in the sample due to the sampling process or non response. Conducting sound inference relies not just on weighting estimates but also on computing adequate standard errors or conference intervals, which are measure of the precision of the estimates.</p>
+<p>The recommended approach to inferring confidence intervals and standard errors involves accounting for the survey design (ie the way sampling was carried out) when conducting analyses – which can be done with the <code>survey</code> package in R, a topic described in Section 6.3. At the same time, for users who are concerned with quickly computing reasonably accurate, rather than publication-quality estimates, it may be useful to be aware which common R commands and operations can be used with weights.</p>
+<section id="central-tendency-and-dispersion-continuous-variables" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="central-tendency-and-dispersion-continuous-variables"><span class="header-section-number">6.1</span> Central tendency and dispersion (continuous variables)</h2>
+<p>The <code>Stats</code> packages which comes with the installation of Base R includes <code>weighted.mean()</code> which, as indicated by its name, computes weighted estimates of the mean of a variable when weights are provided. However the <code>Hmisc</code> package includes a more comprehensive set of functions that can be used when weighting estimates. The code below provides an illustration of weighted means, variance and median of the left-right political attitudes score used in previous chapters, each time comparing it with the unweighted estimates:</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Mean</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">mean</span>(bsa<span class="sc">$</span>leftrigh,<span class="at">na.rm=</span>T),<span class="fu">wtd.mean</span>(bsa<span class="sc">$</span>leftrigh,bsa<span class="sc">$</span>WtFactor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">mean</span>(bsa<span class="sc">$</span>leftrigh,<span class="at">na.rm=</span>T),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wtd.mean</span>(bsa<span class="sc">$</span>leftrigh,bsa<span class="sc">$</span>WtFactor)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.519911 2.521589</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Variance</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">var</span>(bsa<span class="sc">$</span>leftrigh,<span class="at">na.rm=</span>T),<span class="fu">wtd.var</span>(bsa<span class="sc">$</span>leftrigh,bsa<span class="sc">$</span>WtFactor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">var</span>(bsa<span class="sc">$</span>leftrigh,<span class="at">na.rm=</span>T),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wtd.var</span>(bsa<span class="sc">$</span>leftrigh,bsa<span class="sc">$</span>WtFactor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.6166894 0.6195378</code></pre>
 </div>
@@ -278,33 +282,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The above functions can be used in conjunction with <code>group_by()</code> and <code>summarise()</code> in order to compute weighted estimates of continuous variables by groups of categorical variables:</p>
-<div class="cell" data-messages="false" data-hash="Weighted_cache/html/6.2_0ea38ee86fa4b4739314cd290921c15c">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(RAgeCat))<span class="sc">%&gt;%</span><span class="fu">group_by</span>(RAgeCat)<span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean=</span><span class="fu">wtd.mean</span>(leftrigh,WtFactor),</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Var=</span><span class="fu">wtd.var</span>(leftrigh,WtFactor),</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Median=</span><span class="fu">wtd.quantile</span>(leftrigh,WtFactor,<span class="at">probs=</span><span class="fu">c</span>(.<span class="dv">5</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(RAgeCat))<span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(RAgeCat.f)<span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean=</span><span class="fu">wtd.mean</span>(leftrigh,WtFactor),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Var=</span><span class="fu">wtd.var</span>(leftrigh,WtFactor),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">Median=</span><span class="fu">wtd.quantile</span>(leftrigh,WtFactor,<span class="at">probs=</span><span class="fu">c</span>(.<span class="dv">5</span>))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>            )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 4
-  RAgeCat  Mean   Var Median
-  &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-1 18-24    2.49 0.556    2.4
-2 25-34    2.56 0.577    2.6
-3 35-44    2.52 0.615    2.4
-4 45-54    2.53 0.671    2.6
-5 55-59    2.54 0.653    2.4
-6 60-64    2.46 0.685    2.4
-7 65+      2.52 0.613    2.4</code></pre>
+  RAgeCat.f  Mean   Var Median
+  &lt;fct&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+1 18-24      2.49 0.556    2.4
+2 25-34      2.56 0.577    2.6
+3 35-44      2.52 0.615    2.4
+4 45-54      2.53 0.671    2.6
+5 55-59      2.54 0.653    2.4
+6 60-64      2.46 0.685    2.4
+7 65+        2.52 0.613    2.4</code></pre>
 </div>
 </div>
-<section id="frequencies-and-contingency-tables" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="frequencies-and-contingency-tables"><span class="header-section-number">6.1</span> Frequencies and contingency tables</h2>
-<p>Neither <code>ftable()</code> or <code>table()</code> used above allow for using weights. And although the <code>Hmisc</code> packages includes the <code>wtd.table()</code> function for single frequency tables, we recommend using <code>xtabs()</code> as previously, as it it more versatile:</p>
-<div class="cell" data-messages="false" data-hash="Weighted_cache/html/6.3_bce1f8e4ffd974ce8137804d635d0340">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Unweighted vs weighted frequency tables</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">Unweighted=</span><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>plnenvt,bsa)),<span class="dv">1</span>),</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">Weighted=</span><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(<span class="fu">xtabs</span>(WtFactor<span class="sc">~</span>plnenvt,bsa)),<span class="dv">1</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="frequencies-and-contingency-tables" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="frequencies-and-contingency-tables"><span class="header-section-number">6.2</span> Frequencies and contingency tables</h2>
+<p>Neither <code>ftable()</code> or <code>table()</code> that were used in previous chapter allow weights. And although the <code>Hmisc</code> packages includes the <code>wtd.table()</code> function for one-way frequency tables, we recommend using <code>xtabs()</code> as previously, as it it more versatile. Indeed, as variables used with <code>xtabs()</code> are specified on the right hand side of a formula:</p>
+<pre><code>&gt; xtabs(~var1, data=mydata)</code></pre>
+<p>or</p>
+<pre><code>&gt; xtabs(~var1 + var2, data=mydata)</code></pre>
+<p>… The variable containing the weights is passed to <code>xtabs()</code> by specifying its name on the left hand side of the equation (or the tilde <code>~</code> )</p>
+<pre><code>&gt; xtabs(weights~var1 + var2, data=mydata)</code></pre>
+<p>Let’s apply this technique to investigate respondents’ agreement with the sentence: <em>People should be able to travel by plane as much as they like, even if this harms the environment</em> as recorded in the <code>plnenvt</code> variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>plnenvt.f<span class="ot">&lt;-</span><span class="fu">as_factor</span>(bsa<span class="sc">$</span>plnenvt) <span class="co"># Converts the original variable into a factor</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Unweighted vs weighted frequency tables</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Unweighted=</span><span class="fu">round</span>(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">xtabs</span>(<span class="sc">~</span>plnenvt.f,bsa,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">drop.unused.levels =</span> T)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>),</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Weighted=</span><span class="fu">round</span>(</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">xtabs</span>(WtFactor<span class="sc">~</span>plnenvt.f,bsa,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">drop.unused.levels =</span> T)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                           Unweighted Weighted
 agree strongly                    4.6      4.8
@@ -314,13 +340,23 @@ disagree                         36.3     37.0
 disagree strongly                10.0      9.0</code></pre>
 </div>
 </div>
-<p>Weights are passed to <code>xtabs()</code> by specifying their name on the left hand side of the equation (or the tilde <code>~</code> )</p>
 <p>Obtaining weighted contingency tables follow the same logic:</p>
-<div class="cell" data-messages="false" data-hash="Weighted_cache/html/6.4_152e97a11eefedab00912825cd73259d">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Unweighted vs weighted contingency tables</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>plnenvt<span class="sc">+</span>Rsex,bsa),<span class="dv">1</span>),<span class="dv">1</span>),</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(<span class="fu">xtabs</span>(WtFactor<span class="sc">~</span>plnenvt<span class="sc">+</span>Rsex,bsa),<span class="dv">1</span>),<span class="dv">1</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Unweighted vs weighted contingency tables</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">xtabs</span>(<span class="sc">~</span>plnenvt.f<span class="sc">+</span>Rsex.f,bsa,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">drop.unused.levels =</span> T),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>      <span class="dv">1</span>),</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>),</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">xtabs</span>(WtFactor<span class="sc">~</span>plnenvt.f<span class="sc">+</span>Rsex.f,bsa,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">drop.unused.levels =</span> T),</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>      <span class="dv">1</span>),</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                           Male Female Male Female
 agree strongly             50.0   50.0 46.1   53.9
@@ -331,52 +367,47 @@ disagree strongly          42.3   57.7 41.5   58.5</code></pre>
 </div>
 </div>
 </section>
-<section id="robust-inference" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="robust-inference"><span class="header-section-number">6.2</span> Robust inference</h2>
-<p>The weighting procedures described above could be described as ‘quick and dirty’ in that they mostly compute point estimates – ie a single value – and do not provide a reliable idea of their precision. Computing the precision of survey data estimates – usually via their standard error – usually requires more than just adding weights to a command. Information about the survey design, its primary sampling units, strata and clusters is requires so that robust standard errors, statistical tests and/or confidence interval are computed.</p>
-<p>The <code>Survey</code> package was designed in order to deal with this set of issues. It provides functions for integrating survey design into R as well as computing common estimates. We describe below the most important features. In order to use survey fonctions consist one first needs to create a svydesign object, in essence a version of the data that incorporates the sample design information available, then to compute the estimate using the svydesign object.</p>
-<p>An common issue with survey datasets available in the UK is that sampling information is often only available in secure lab version of the data, restricting its access to authorised users. Although it is sometimes possible to use available variables to account for aspects of the sample design – region as a strata in the case of stratified samples – in most cases users are left with computing standard errors without sample design information, which amounts to assuming that the sample was drawn purely at random. Even if this is the case however, using the <code>survey</code> package is recommended, as it provides a coherent framework for computing survey parameters.</p>
-<div class="cell" data-messages="false" data-hash="Weighted_cache/html/6.5_8c39f299b0370b949f20c5c8300db642">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey) <span class="do">### Loading the package in memory</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>bsa.design<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">ids =</span><span class="sc">~</span><span class="dv">1</span>,<span class="at">weights=</span><span class="sc">~</span>WtFactor,<span class="at">data=</span>bsa) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="inference-using-survey-procedures" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="inference-using-survey-procedures"><span class="header-section-number">6.3</span> Inference using survey procedures</h2>
+<p>The weighting procedures described above could be described as ‘quick and dirty’ in that they compute representative point estimates – ie a single value. Computing the precision of survey data estimates – for example via their standard error – requires more than just adding weights to a command. Information about the survey design, its primary sampling units, strata and clusters is required so that robust standard errors, statistical tests and/or confidence interval can be computed. The <code>Survey</code> package was designed in order to deal with this set of issues. It provides functions for integrating survey design into R as well as computing common estimates. Its most important features are described below.</p>
+<p>In order to use survey fonctions one first needs to create a <code>svydesign</code> object, in essence a version of the data that incorporates the sample design information available, then compute the required estimate using the <code>svydesign</code> object.</p>
+<p>An common issue with survey datasets available in the UK is that sampling information is often only available in secured version of the data, restricting its access to authorised users in a secure lab. Although it is sometimes possible to use available variables to account for aspects of the sample design – region as a strata in the case of stratified samples – in most cases users are left with computing standard errors without sample design information, which amounts to assuming that the sample was drawn purely at random. Even if this is the case however, using the <code>survey</code> package is recommended, as it provides a coherent framework for computing survey parameters.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey) <span class="do">### Loading the package in memory</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>bsa.design<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">ids =</span><span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">weights=</span><span class="sc">~</span>WtFactor,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data=</span>bsa) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The code above simply declares the survey design by creating the <code>bsa.design</code> object (the name is arbitrary). The <code>ids=</code> parameter is where primary sampling units are declared, as well as any clustering information as a formula ie <code>~PSU+cluster2id...</code>. When PSU information is unavailable <code>ids</code> is given the value 1 or 0. A <code>strata=</code> and <code>fpc=</code> are available in order to declare the sampling strata and the variable used for finite population correction. None of these are available in the bsa dataset, and estimation commands will therefore rely on the assumption of simple random sampling.</p>
 <p>We can now compute estimates similar estimates as in the previous sections. The code below provides the mean of the left vs right political orientation indicator, as well as its 95% confidence interval:</p>
-<div class="cell" data-messages="false" data-hash="Weighted_cache/html/6.6_651ccb0a5531647cad6a1582c70e1d35">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svymean</span>(<span class="sc">~</span>leftrigh,bsa.design,<span class="at">na.rm =</span> T)<span class="do">### Computes the mean and its standard error...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>           mean     SE
-leftrigh 2.5216 0.0155</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(<span class="fu">svymean</span>(<span class="sc">~</span>leftrigh,bsa.design,<span class="at">na.rm =</span> T)) <span class="do">### ... and confidence interval</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            2.5 %   97.5 %
-leftrigh 2.491277 2.551902</code></pre>
-</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fu">svymean</span>(<span class="sc">~</span>leftrigh,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>        bsa.design,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">na.rm =</span> T)<span class="do">### Computes the mean and its standard error...</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># confint(a) </span><span class="al">###</span><span class="co"> ... and confidence interval</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And now for the median:</p>
-<div class="cell" data-messages="false" data-hash="Weighted_cache/html/6.7_e36ffe0f559dac79deeb7f544a09d8ea">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svyquantile</span>(<span class="sc">~</span>leftrigh,bsa.design,<span class="at">quantiles=</span>.<span class="dv">5</span>,<span class="at">na.rm =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$leftrigh
-    quantile ci.2.5 ci.97.5         se
-0.5      2.4    2.4     2.6 0.05100208
-
-attr(,"hasci")
-[1] TRUE
-attr(,"class")
-[1] "newsvyquantile"</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svyquantile</span>(<span class="sc">~</span>leftrigh,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>            bsa.design,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">quantiles=</span>.<span class="dv">5</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">na.rm =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in (function (cond) : error in evaluating the argument 'x' in selecting a method for function 't': Can't merge the outer name `ci` with a vector of length &gt; 1.
+Please supply a `.name_spec` specification.</code></pre>
 </div>
 </div>
-<p>Frequency and contingency tables are computed using <code>svytable()</code>, which follows the same syntax as <code>xtabs()</code></p>
-<div class="cell" data-messages="false" data-hash="Weighted_cache/html/6.8_ae0e418f8e273ca0e53cc3e1ce725008">
+<p>Frequency and contingency tables are computed using <code>svytable()</code>, whose syntax relies on formulas similarly to <code>xtabs()</code> in the previous chapter.</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">### A frequency table...</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">prop.table</span>(</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">svytable</span>(<span class="sc">~</span>RAgeCat,bsa.design)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        ),<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">svytable</span>(<span class="sc">~</span>RAgeCat.f,bsa.design)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>      <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>RAgeCat
+<pre><code>RAgeCat.f
 18-24 25-34 35-44 45-54 55-59 60-64   65+ 
  11.2  17.2  16.1  17.9   7.9   6.8  22.8 </code></pre>
 </div>
@@ -384,18 +415,19 @@ attr(,"class")
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">prop.table</span>(</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>          <span class="fu">svytable</span>(<span class="sc">~</span>RAgeCat<span class="sc">+</span>Rsex,bsa.design)</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>          ,<span class="dv">1</span>),<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>          <span class="fu">svytable</span>(<span class="sc">~</span>RAgeCat.f<span class="sc">+</span>Rsex.f,bsa.design),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>          <span class="dv">1</span>),</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>      <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       Rsex
-RAgeCat Male Female
-  18-24 51.1   48.9
-  25-34 50.2   49.8
-  35-44 49.7   50.3
-  45-54 49.3   50.7
-  55-59 48.8   51.2
-  60-64 49.0   51.0
-  65+   45.4   54.6</code></pre>
+<pre><code>         Rsex.f
+RAgeCat.f Male Female
+    18-24 51.1   48.9
+    25-34 50.2   49.8
+    35-44 49.7   50.3
+    45-54 49.3   50.7
+    55-59 48.8   51.2
+    60-64 49.0   51.0
+    65+   45.4   54.6</code></pre>
 </div>
 </div>
 

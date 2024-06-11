@@ -1,6 +1,9 @@
 # Descriptive statistics
 ```{r setup5}
 #| echo: false
+#| message: false
+#| warning: false
+
 library(dplyr)
 library(Hmisc)
 library(ggplot2)

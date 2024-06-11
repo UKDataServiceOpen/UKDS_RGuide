@@ -284,9 +284,11 @@ Data frames are  objects that come closest to datasets in traditional statistica
 ```{r 2.12}
 #| echo: false
 datadir<-"~/OneDrive/rguide/data/"
-#mydata<-read.spss(paste0(datadir,"bsa_spss/bsa2019_poverty_open.sav"),to.data.frame = T,max.value.labels=5)%>%select(RSex,skipmeal,Married,Poverty1,HEdQual3,NatFrEst)%>%slice(1:50)
-mydata<-read_spss(paste0(datadir,"bsa_spss/bsa2019_poverty_open.sav"))%>%select(RSex,skipmeal,Married,Poverty1,HEdQual3,NatFrEst)%>%slice(1:50)
+mydata<-read.spss(paste0(datadir,"bsa_spss/bsa2019_poverty_open.sav"),to.data.frame = T,max.value.labels=5)%>%select(RSex,skipmeal,Married,Poverty1,HEdQual3,NatFrEst)%>%slice(1:50)
+#mydata<-droplevels(read_spss(paste0(datadir,"bsa_spss/bsa2019_poverty_open.sav"))%>%select(RSex,skipmeal,Married,Poverty1,HEdQual3,NatFrEst)%>%slice(1:50))
 mydata$Married<-as.character(mydata$Married)
+mydata$RSex<-as_factor(mydata$RSex)
+
 ```
 
 Let's assume that we have a  small data frame called 'mydata'. Here are  a few basic commands to examine it:
@@ -366,6 +368,8 @@ class(mydata$NatFrEst)
 Character objects are alphanumeric vectors, that is variables which consist of text string(s).
 ```{r 2.23}
 class(mydata$Married)
+
+head(mydata$Married) ### Let's look at the first five rows of Married
 ```
 #### Factors {-}
 A distinctive feature of R is that categorical variables whether ordinal or polynomial are stored in objects known as **factors**. Factors  should be thought of  as a special type of variable with a discrete set of values, known as `levels`. Factors can be unordered or ordered. In our data, `Rsex` (Gender of the respondent) is such an object:   
@@ -374,27 +378,23 @@ class(mydata$RSex)
 ```
 The main difference between factors and traditional categorical variables in Stata or SPSS is that they do **not** consist of arbitrary numerical values with which substantive value labels are associated. 
 
-Let's further examine this factor. It is always a good idea to check the ordering of factor levels in a newly created variable with the `level()` command.o
+Let's further examine this factor. It is always a good idea to check the ordering of factor levels in a newly created variable with the `level()` command
 
-```{r 2.25}
-levels(mydata$RSex)
-```
+```{r 2.25}```
 returns the levels (ie the values) of  `RSex`. 'Male' is the first level of `Rsex`,
 and 'Female' the second one, irrespective of the values originally assigned and described in the codebook of the  dataset. 
-It is possible to change the ordering of factor
-levels with the `factor()` function.  
+It is possible to change the ordering of factor levels with the `factor()` function.  
 
 ```{r 2.26.1}
-mydata$RSex.New<-mydata$RSex     ## We first create the new variable
-mydata$RSex.New<-factor(mydata$RSex, ## Then reorder the factor levels
-                        levels = levels(mydata$RSex)[c(2,1)])
+mydata$RSex<-factor(mydata$RSex, # We re-use the existing factor levels from Rsex
+                    levels = levels(mydata$RSex)[c(2,1)]) # and reorder them
 ```
 The above code tells R to create a new factor variable -`RSex.New` - whose levels are the same as the initial `RSex`, but with  'Female' (level number 2 in the original variable) coming first, and "Male" (level number 1) , second. The name of the new variable is arbitrary. 
 
 We can check the outcome:
 
 ```{r 2.26.2}
-levels(mydata$RSex.New)
+levels(mydata$RSex)
 ``` 
 
 In the next chapter an alternative approach to dealing with categorical variables imported from SPSS or Stata is presented.
