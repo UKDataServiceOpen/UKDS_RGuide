@@ -228,7 +228,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#differences-between-means" id="toc-differences-between-means" class="nav-link active" data-scroll-target="#differences-between-means"><span class="header-section-number">8.1</span> Differences between means</a></li>
   <li><a href="#differences-in-variance" id="toc-differences-in-variance" class="nav-link" data-scroll-target="#differences-in-variance"><span class="header-section-number">8.2</span> Differences in variance</a></li>
-  <li><a href="#significance-of-measures-of-association" id="toc-significance-of-measures-of-association" class="nav-link" data-scroll-target="#significance-of-measures-of-association"><span class="header-section-number">8.3</span> Significance of measures of association</a></li>
+  <li><a href="#significance-of-measures-of-association" id="toc-significance-of-measures-of-association" class="nav-link" data-scroll-target="#significance-of-measures-of-association"><span class="header-section-number">8.3</span> Significance of measures of association</a>
+  <ul class="collapse">
+  <li><a href="#between-continuous-variables" id="toc-between-continuous-variables" class="nav-link" data-scroll-target="#between-continuous-variables"><span class="header-section-number">8.3.1</span> Between continuous variables</a></li>
+  <li><a href="#between-categorical-variables" id="toc-between-categorical-variables" class="nav-link" data-scroll-target="#between-categorical-variables"><span class="header-section-number">8.3.2</span> Between categorical variables</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -254,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This section covers how to implement common statistical tests with survey data in R. A working knowledge of these tests and their theoretical assumptions is assumed.</p>
+<p>This section covers how to implement common statistical tests in R both without and with survey data . A working knowledge of these tests and their theoretical assumptions is assumed.</p>
 <section id="differences-between-means" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="differences-between-means"><span class="header-section-number">8.1</span> Differences between means</h2>
 <p>Two common ways of conducting statistical testing with means in samples consist in testing whether they are significantly different from 0 (one sample t-test), or whether they differ between two groups (two samples t test). In the latter case, one can further distinguish between independent samples (where means come from different groups), or paired samples (when the same measure is taken at several point in time). Given that it is probably one of the most widely used statistical tests in social sciences, we will only cover the former here. Several R packages provide functions for conducting t tests. We will be using <code>t.test()</code>, provided by the <code>stats</code> package (R Base).</p>
@@ -299,15 +303,52 @@ sample estimates:
 </div>
 </div>
 <p>Men have a significantly lower score on the scale (at the .05 threshold) and are therefore on average leaning more to the left than women.</p>
+<p>The result of the above tests may be biased as they do not account for bias from eithersample design or non response. When results representative of the British population are required, a survey designed informed version of the t test should be used. The <code>survey</code> package that we used earlier in Chapter 6 includes such a function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>bsa.design<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">ids =</span><span class="sc">~</span><span class="dv">1</span>,           <span class="co"># Declaring the survey design</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">weights=</span><span class="sc">~</span>WtFactor,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data=</span>bsa) </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">svyttest</span>(libauth<span class="sc">~</span>Rsex.f,bsa.design)   <span class="co"># SD informed t-test of libauth by gender</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Design-based t-test
+
+data:  libauth ~ Rsex.f
+t = 0.10069, df = 3211, p-value = 0.9198
+alternative hypothesis: true difference in mean is not equal to 0
+95 percent confidence interval:
+ -0.05411275  0.05997165
+sample estimates:
+difference in mean 
+       0.002929454 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svyttest</span>(leftrigh<span class="sc">~</span>Rsex.f,bsa.design) <span class="co"># SD informed t-test of leftrigh by gender</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Design-based t-test
+
+data:  leftrigh ~ Rsex.f
+t = 2.308, df = 3204, p-value = 0.02106
+alternative hypothesis: true difference in mean is not equal to 0
+95 percent confidence interval:
+ 0.01085242 0.13337485
+sample estimates:
+difference in mean 
+        0.07211364 </code></pre>
+</div>
+</div>
+<p>In this case the output of <code>svyttest()</code> does not lead to different conclusion than those we drew above. We can however notice that the significance of differences in political affiliation has decreased.</p>
 </section>
 <section id="differences-in-variance" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="differences-in-variance"><span class="header-section-number">8.2</span> Differences in variance</h2>
 <p>Another common significance test in social science is the <strong>variance test</strong> which consists of testing whether the variances of the same variable across two groups are equal. This is usually achieved by testing whether the ratio of the variance between the two groups is significantly different from zero. With the BSA data, this amounts to testing whether men and women are more homogenous with regard to their political views.</p>
 <p>The syntax for the variance test <code>var.test()</code> also included in <code>stats</code> is almost identical to that of <code>t.test()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing for gender differences in liberal vs authoritarian score</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(libauth<span class="sc">~</span>Rsex.f,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">data=</span>bsa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing for gender differences in liberal vs authoritarian score</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(libauth<span class="sc">~</span>Rsex.f,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">data=</span>bsa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     F test to compare two variances
@@ -324,10 +365,10 @@ ratio of variances
 </div>
 <p>Significant differences in the variance between men and women, but only at the .1 threshold.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing for whether men have a lower (ie more left-wing)  score</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(leftrigh<span class="sc">~</span>Rsex.f,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">data=</span>bsa,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">alternative=</span><span class="st">"greater"</span>)      </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing for whether men have a lower (ie more left-wing)  score</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(leftrigh<span class="sc">~</span>Rsex.f,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">data=</span>bsa,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">alternative=</span><span class="st">"greater"</span>)      </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     F test to compare two variances
@@ -346,10 +387,12 @@ ratio of variances
 </section>
 <section id="significance-of-measures-of-association" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="significance-of-measures-of-association"><span class="header-section-number">8.3</span> Significance of measures of association</h2>
-<p><strong>Between continuous variables</strong></p>
+<section id="between-continuous-variables" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="between-continuous-variables"><span class="header-section-number">8.3.1</span> Between continuous variables</h3>
 <p>Another type of common statistical test in social science is about examining whether a coefficient of correlation is significantly different from 0 (alternative hypothesis).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(bsa<span class="sc">$</span>leftrigh, bsa<span class="sc">$</span>libauth, <span class="at">use=</span><span class="st">'complete.obs'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(bsa<span class="sc">$</span>leftrigh, bsa<span class="sc">$</span>libauth, </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">use=</span><span class="st">'complete.obs'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's product-moment correlation
@@ -365,23 +408,41 @@ sample estimates:
 </div>
 </div>
 <p>As we could have suspected the coefficient of correlation between the two scales is so small that it cannot be said to be significantly different from zero.</p>
-<p><strong>Between categorical variables</strong></p>
+</section>
+<section id="between-categorical-variables" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="between-categorical-variables"><span class="header-section-number">8.3.2</span> Between categorical variables</h3>
 <p>The chi-square test of independence is a very common test of association between categorical variables. It consists in examining whether the association between two variables is likely to be due to chance or not, in other words whether the variability observed in a contingency table is significantly different from what would be expected were it due to chance.</p>
 <p>We will be using <code>chisq.test()</code>, also from the <code>stats</code> package. By contrast with the test of correlation, the <code>chisq.test()</code> needs to be applied to contingency tables that have already been computed. Let us go back to an earlier example, and attempt to test whether the gender differences in political affiliations are due to chance or not.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>PartyId2 <span class="sc">+</span>Rsex.f,bsa))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>PartyId2.f <span class="sc">+</span>Rsex.f,bsa))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
 
-data:  xtabs(~PartyId2 + Rsex.f, bsa)
+data:  xtabs(~PartyId2.f + Rsex.f, bsa)
 X-squared = 27.191, df = 5, p-value = 5.236e-05</code></pre>
 </div>
 </div>
 <p>As the R output shows, there are highly significant gender differences in political affiliations (p&lt;.001).</p>
+<p>Does this remain true if we account for the survey design, as we did above for the t test? The <code>survey</code> package also has a survey design version of the chi square test:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svychisq</span>(<span class="sc">~</span>PartyId2.f <span class="sc">+</span>Rsex.f, <span class="co"># We directly specify the contingency table here</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>         bsa.design,        </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">statistic =</span> <span class="st">"Chisq"</span> <span class="co"># And we specify the kind of test we would like</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>         )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's X^2: Rao &amp; Scott adjustment
+
+data:  svychisq(~PartyId2.f + Rsex.f, bsa.design, statistic = "Chisq")
+X-squared = 12.069, df = 5, p-value = 0.1126</code></pre>
+</div>
+</div>
+<p>Interestingly this time, when accounting for survey design, sampling and non response, gender differences in political affiliations are not significant anymore.</p>
 <div style="page-break-after: always;"></div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

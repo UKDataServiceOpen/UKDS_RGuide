@@ -121,7 +121,7 @@ library(vcd)                # Loading the vcd package
 mosaic(~Rsex.f+PartyId2.f,                            # Variables specified as
        data=bsa,                                      # in xtabs()
        highlighting = "Rsex.f",                       # What variable to contrast
-       highlighting_fill = c("lightblue", "#742082"), # Colours for contrasting
+       highlighting_fill = c("#702082", "#008755"), # Colours for contrasting
        direction = c("h", "v"),                       # Orientation of the bars
        labeling= labeling_border(varnames = F,
                                  abbreviate_labs = T, 

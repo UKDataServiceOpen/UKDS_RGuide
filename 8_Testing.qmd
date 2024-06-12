@@ -13,9 +13,10 @@ datadir<-"~/OneDrive/data/bsa/"
 bsa<-read_spss(paste0(datadir,"8849spss_V1/bsa2017_open_enviropol.sav"))
 bsa$RAgeCat.f<-droplevels(as_factor(bsa$RAgeCat))
 bsa$Rsex.f<-droplevels(as_factor(bsa$Rsex))
+bsa$PartyId2.f<-droplevels(as_factor(bsa$PartyId2))
 ```
 
-This section covers how to implement common statistical tests with survey data in R. A working knowledge of these tests and their theoretical assumptions is assumed.
+This section covers how to implement common statistical tests in R both without and with survey data . A working knowledge of these tests and their theoretical assumptions is assumed.
 
 ## Differences between means
 
@@ -40,6 +41,21 @@ t.test(leftrigh~Rsex.f,
 ```
 Men have a significantly lower  score on the scale (at the .05 threshold)  and are therefore on average leaning more to the left than women.
 
+The result of the above  tests may be biased as they do not account for bias from eithersample design or non response. When results representative of the British population are required, a survey designed informed version of the t test should be used. The `survey` package that we used earlier in Chapter 6 includes such a function. 
+
+```{r 8.3}
+library(survey)
+bsa.design<-svydesign(ids =~1,           # Declaring the survey design
+                      weights=~WtFactor,
+                      data=bsa) 
+
+svyttest(libauth~Rsex.f,bsa.design)   # SD informed t-test of libauth by gender
+
+svyttest(leftrigh~Rsex.f,bsa.design) # SD informed t-test of leftrigh by gender
+```
+In this case the output of `svyttest()` does not lead to different conclusion than those we drew above. We can however notice that the significance of differences in political affiliation has decreased.
+
+
 
 ## Differences in variance
 
@@ -47,13 +63,13 @@ Another common significance test in social science is the **variance test** whic
 
 The syntax for the variance test `var.test()` also included in `stats` is almost identical to that of `t.test()`
 
-```{r 8.3}
+```{r 8.4}
 # Testing for gender differences in liberal vs authoritarian score
 var.test(libauth~Rsex.f,
          data=bsa)
 ```
 Significant differences in the variance  between men and women, but only at the .1 threshold.
-```{r 8.4}
+```{r 8.5}
 
 # Testing for whether men have a lower (ie more left-wing)  score
 var.test(leftrigh~Rsex.f,
@@ -62,30 +78,44 @@ var.test(leftrigh~Rsex.f,
 ```
 The variance of left-right political leaning is larger among men than women, in other words there are more divergence between men than between women.
 
+
+
 ## Significance of measures of association
 
-**Between continuous variables**
+### Between continuous variables
   
   Another type of  common statistical   test in social science is about examining whether a coefficient of correlation is significantly different from 0 (alternative hypothesis).
 
-```{r 8.5}
-cor.test(bsa$leftrigh, bsa$libauth, use='complete.obs')
+```{r 8.6}
+cor.test(bsa$leftrigh, bsa$libauth, 
+         use='complete.obs')
 ```
 
 As we could have suspected the coefficient of correlation between the two scales is so small that it cannot be said to be  significantly  different from zero.
 
-**Between categorical variables**
+### Between categorical variables
   
   The chi-square test of independence is a very common  test of association between categorical variables. It consists in examining whether the association between two variables is likely to be due to chance or not, in other words whether the variability observed in a contingency table is significantly different from what would be expected were it due to chance.
 
 We will be using `chisq.test()`, also  from the `stats` package. By contrast with the test of correlation, the `chisq.test()` needs to be applied to  contingency tables that have already been computed.
 Let us go back to an earlier example, and attempt to test whether the gender differences in political affiliations are due to chance or not. 
 
-```{r 8.6}
-chisq.test(xtabs(~PartyId2 +Rsex.f,bsa))
+```{r 8.7}
+chisq.test(xtabs(~PartyId2.f +Rsex.f,bsa))
 ```
 
 As the R output shows, there are highly significant gender differences in political affiliations (p<.001).
+
+Does this remain true if we account for the survey design, as we did above for the t test? The `survey` package also has a survey design version of the chi square test:
+
+```{r 8.8}
+svychisq(~PartyId2.f +Rsex.f, # We directly specify the contingency table here
+         bsa.design,        
+          statistic = "Chisq" # And we specify the kind of test we would like
+         )
+```
+
+Interestingly this time, when accounting for survey design, sampling and non response, gender differences in political affiliations are not significant anymore.
 
 \newpage
 

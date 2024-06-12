@@ -49,7 +49,7 @@ What about the levels for our dependent variable? By default, the first level of
 
 ```{r 9.4}
 bsa$Voted.f<-droplevels(as_factor(bsa$Voted)) # As before, factor conversion
-levels(bsa$Voted.f) #Note that Yes comes before No
+levels(bsa$Voted.f) # Note that Yes comes before No
 
 contrasts(bsa$Voted.f)
 ```
@@ -75,7 +75,7 @@ summary(fit1)
 To run a model  controlling for gender `Rsex`and age `RAgeCat`, one  simply needs to add them on the right hand side of the formula, separated with a plus (+) sign. 
 
 ```{r 9.7}
-fit2 <- glm(Voted2 ~ HEdQual3.f + Rsex.f + RAgeCat, data=bsa, family=binomial(link=logit))
+fit2 <- glm(Voted2 ~ HEdQual3.f + Rsex.f + RAgeCat.f, data=bsa, family=binomial(link=logit))
 summary(fit2)
 ```
 
@@ -124,7 +124,7 @@ plot_model(fit2,
 
 ```{r 9.11}
 fit1 <- glm(Voted2 ~ HEdQual3.f, data=bsa%>%
-              filter(!is.na(Rsex.f) & !is.na(RAgeCat)), family=binomial(link=logit))
+              filter(!is.na(Rsex.f) & !is.na(RAgeCat.f)), family=binomial(link=logit))
 
 c(fit1$aic,fit2$aic)
 ```

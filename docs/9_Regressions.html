@@ -296,7 +296,7 @@ In this section, we will use it to investigate the association between the level
 <p>What about the levels for our dependent variable? By default, the first level of a factor will be used as the reference category. This can be also checked with the <code>contrasts()</code>. In this case, 1 is associated with ‘No’, so the model will be predicting the probability of NOT voting. If the 1 was associated with ‘Yes’ then the model will be predicting the probability of voting.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Voted.f<span class="ot">&lt;-</span><span class="fu">droplevels</span>(<span class="fu">as_factor</span>(bsa<span class="sc">$</span>Voted)) <span class="co"># As before, factor conversion</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>Voted.f) <span class="co">#Note that Yes comes before No</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>Voted.f) <span class="co"># Note that Yes comes before No</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Yes" "No" </code></pre>
 </div>
@@ -351,31 +351,36 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 <p>To run a model controlling for gender <code>Rsex</code>and age <code>RAgeCat</code>, one simply needs to add them on the right hand side of the formula, separated with a plus (+) sign.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Voted2 <span class="sc">~</span> HEdQual3.f <span class="sc">+</span> Rsex.f <span class="sc">+</span> RAgeCat, <span class="at">data=</span>bsa, <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span>logit))</span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Voted2 <span class="sc">~</span> HEdQual3.f <span class="sc">+</span> Rsex.f <span class="sc">+</span> RAgeCat.f, <span class="at">data=</span>bsa, <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span>logit))</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-glm(formula = Voted2 ~ HEdQual3.f + Rsex.f + RAgeCat, family = binomial(link = logit), 
+glm(formula = Voted2 ~ HEdQual3.f + Rsex.f + RAgeCat.f, family = binomial(link = logit), 
     data = bsa)
 
 Coefficients:
                             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)                  0.12856    0.13766   0.934   0.3503    
-HEdQual3.fA level and above -0.31803    0.13048  -2.437   0.0148 *  
-HEdQual3.fGCSE or equiv     -0.95674    0.12957  -7.384 1.54e-13 ***
-HEdQual3.fNo Qual           -1.80091    0.15132 -11.901  &lt; 2e-16 ***
-Rsex.fFemale                -0.15466    0.09184  -1.684   0.0922 .  
-RAgeCat                      0.42244    0.02689  15.711  &lt; 2e-16 ***
+(Intercept)                  1.11251    0.20044   5.550 2.85e-08 ***
+HEdQual3.fA level and above -0.38676    0.13215  -2.927 0.003427 ** 
+HEdQual3.fGCSE or equiv     -0.99023    0.13109  -7.554 4.23e-14 ***
+HEdQual3.fNo Qual           -1.90625    0.15687 -12.152  &lt; 2e-16 ***
+Rsex.fFemale                -0.15708    0.09218  -1.704 0.088363 .  
+RAgeCat.f25-34              -0.24604    0.19670  -1.251 0.210996    
+RAgeCat.f35-44               0.20668    0.19808   1.043 0.296764    
+RAgeCat.f45-54               0.85685    0.20000   4.284 1.83e-05 ***
+RAgeCat.f55-59               0.84062    0.23225   3.619 0.000295 ***
+RAgeCat.f60-64               1.60276    0.25272   6.342 2.27e-10 ***
+RAgeCat.f65+                 2.16408    0.21450  10.089  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
     Null deviance: 3293.1  on 2912  degrees of freedom
-Residual deviance: 2942.5  on 2907  degrees of freedom
+Residual deviance: 2922.5  on 2902  degrees of freedom
   (1075 observations deleted due to missingness)
-AIC: 2954.5
+AIC: 2944.5
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
@@ -420,13 +425,18 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>(<span class="fu">coef</span>(fit2)),<span class="fu">exp</span>(<span class="fu">confint</span>(fit2))</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                                          2.5 %    97.5 %
-(Intercept)                 1.1371944 0.8692232 1.4914236
-HEdQual3.fA level and above 0.7275821 0.5629348 0.9391238
-HEdQual3.fGCSE or equiv     0.3841450 0.2975038 0.4945177
-HEdQual3.fNo Qual           0.1651479 0.1224296 0.2216252
-Rsex.fFemale                0.8567100 0.7152786 1.0253678
-RAgeCat                     1.5256799 1.4482259 1.6092702</code></pre>
+<pre><code>                                          2.5 %     97.5 %
+(Intercept)                 3.0419750 2.0618311  4.5276614
+HEdQual3.fA level and above 0.6792550 0.5237628  0.8795335
+HEdQual3.fGCSE or equiv     0.3714919 0.2868078  0.4796010
+HEdQual3.fNo Qual           0.1486366 0.1089442  0.2015607
+Rsex.fFemale                0.8546343 0.7130680  1.0235515
+RAgeCat.f25-34              0.7818917 0.5300310  1.1469983
+RAgeCat.f35-44              1.2295882 0.8316608  1.8095457
+RAgeCat.f45-54              2.3557310 1.5886305  3.4827615
+RAgeCat.f55-59              2.3178122 1.4718049  3.6621685
+RAgeCat.f60-64              4.9667132 3.0428167  8.2090111
+RAgeCat.f65+                8.7065916 5.7183039 13.2696921</code></pre>
 </div>
 </div>
 <p>Using the <code>coef()</code> and <code>confint()</code> functions, the code above respectively extracts the coefficients and associated 95% confidence intervals from fit2 then collate them using <code>cbind()</code>.</p>
@@ -449,11 +459,11 @@ RAgeCat                     1.5256799 1.4482259 1.6092702</code></pre>
 <p><strong>Assessing model fit</strong> The Akaike Information Criterion (AIC) is a measure of relative fit for maximum likelihood fitted models. It is used to compare the improvement in how several models fit some data relative to each other, allowing for the different number of parameters or degrees of freedom. The smaller the AIC, the better the fit. In order for the comparison to be valid, we need to ensure that the models were run with the same number of observations each time. As it is likely that the second model was run on a smaller sample, due to missing values for the Age and Sex variables, we will need to re-run the first one without.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Voted2 <span class="sc">~</span> HEdQual3.f, <span class="at">data=</span>bsa<span class="sc">%&gt;%</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>              <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Rsex.f) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(RAgeCat)), <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span>logit))</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>              <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Rsex.f) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(RAgeCat.f)), <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span>logit))</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(fit1<span class="sc">$</span>aic,fit2<span class="sc">$</span>aic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3244.507 2954.532</code></pre>
+<pre><code>[1] 3244.507 2944.535</code></pre>
 </div>
 </div>
 <p>We can see that the model controlling for gender and sex is a better fit to the data than the one without controls as it has an AIC of 2944.5 against 3244.5 for fit1.</p>
@@ -464,7 +474,7 @@ RAgeCat                     1.5256799 1.4482259 1.6092702</code></pre>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>p<span class="ot">&lt;-</span><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(dev.d, df.d)</span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(dev.d,df.d,p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 350.5509   5.0000   0.0000</code></pre>
+<pre><code>[1] 370.5486  10.0000   0.0000</code></pre>
 </div>
 </div>
 <p>The Chi square test indicates that the difference in deviance of 370.5 with 10 degrees of freedom is highly significant (P&lt;.001) </p>
