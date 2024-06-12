@@ -1,74 +1,87 @@
 # Graphs and plots
-```{r setup5,echo=F}
+```{r setup7}
+#| echo: false
+#| message: false
+#| warning: false
+
 library(dplyr)
 library(Hmisc)
 library(ggplot2)
 library(haven)
-library(foreign)
-datadir<-"/home/piet/Dropbox/work/UKDS/rguide/data/"
-bsa<-read.spss(paste0(datadir,"8849spss_V1/bsa2017_open_enviropol.sav"), 
-               to.data.frame = TRUE,
-               use.value.labels=TRUE,
-               max.value.labels = 9)  
+datadir<-"~/OneDrive/data/bsa/"
+bsa<-read_spss(paste0(datadir,"8849spss_V1/bsa2017_open_enviropol.sav"))
+bsa$RAgeCat.f<-droplevels(as_factor(bsa$RAgeCat))
+bsa$Rsex.f<-droplevels(as_factor(bsa$Rsex))
 ```
-There are two main ways to produce graphs in R: either by using the straightforward but rather basic plotting commands from the Base package, or the more complex and nicer looking functions from the `ggplot` package. 
+There are two common  ways to plot data in R: either by using the straightforward but rather basic plotting commands from the Base package, or instead delve into the more complex but much  nicer looking functionalities of the `ggplot` package. 
 
 ## Distributional graphs for continuous variables
-Graphs such as histograms or box plots are a convenient way to gain a quick overview of the distribution of a variable and are easy  to produce. Go back to the BSA data, we can plot the distribution of left-right political orientations scores with the `hist()` command. 
 
-```{r 7.1, fig.alt="Unformatted histogram of left-right political orientations scores"}
+Plots such as histograms or box plots are a convenient way to gain a quick overview of the distribution of a variable and are easy  to produce. Going back to the BSA data, we can plot the distribution of left-right political orientations scores with the `hist()` command. 
+
+```{r 7.1}
+#| fig-alt: "Unformatted histogram of left-right political orientations scores"
 hist(bsa$leftrigh,freq=FALSE)
 ```
 
-The graphs appear  visible in the ‘Plot’ tab on the right hand side of the R Studio window. It shows us that political orientations are slightly skewed towards the left. The `freq=FALSE` option requires the y-axis to be expressed in terms of proportions rather than frequencies.
+The histogram should appear in the ‘Plot’ tab on the right hand side of the R Studio window. It shows us that political orientations are slightly skewed towards the left. The `freq=FALSE` option requires the y-axis to be expressed in terms of proportions rather than number of observations.
 
 Titles and labels can easily be added:
   
-```{r 7.2,fig.alt="Histogram of left vs right political orientations, with title and y axis labels"}
+```{r 7.2}
+#| fig-alt: "Histogram of left vs right political orientations, with title and y axis labels"
 hist(bsa$leftrigh,
      freq=FALSE,
-     main="Histogram of political orientations",
+     main="Histogram of political orientations, 2017",
      ylab="Proportions",
      xlab="Left-right political orientations score")
 ```
 
 Note that `main`, `ylab` and `xlab` can be used with any Base R plot commands. 
 
-We can also produce a box and whisker plot of the same variable:
-```{r 7.3, fig.alt="Box and whisker plot of left vs right political orientations, with title and y axis labels"}
+We can also produce a box and whisker plot of the same variable in order to get a better sense of the distribution of outliers:
+```{r 7.3}
+#| fig-alt: "Box and whisker plot of left vs right political orientations, with title and y axis labels"
 boxplot(bsa$leftrigh,
-        main="Box and whisker plot of political orientations",
+        # main="Box and whisker plot of political orientations",
         ylab="Left-right political orientations score"
 )
 ```
 
-The generic `plot()` command produces one or two-way scatterplots:
+The generic `plot()` command produces scatterplots. Let's try it with our left-right political orientations score, in conjunction  with `libauth`, a libertarian vs authoritarian scale.
   
-```{r 7.4.1, fig.alt="Raw scatterplot of left-right political orientations"}
-plot(bsa$leftrigh) ### One way scatter plot of left-right political orientations score
+```{r 7.4.1}
+#| fig-alt: "scatterplot of left-right political orientations vs authoritarianism score"
+
+plot(bsa$leftrigh,bsa$libauth) ### Scatterplot of left-right political orientations score
 ```
 
-```{r 7.4.2, fig.alt="Raw scatterplot of left-right political orientations vs authoritarianism score"}
-plot(bsa$leftrigh,bsa$libauth) 
-```
-
-The second graph shows us that there is little association between the two variables. However,  slightly fewer respondents simultaneously score  high on the authoritarianism and left vs right scales.  
+The scatterplot shows us that there is little association between the two variables. However,  slightly fewer respondents simultaneously score  high on the 'authoritarianism' and 'right' scales, perhaps unsurprisingly.  
 
 ## Plotting categorical variables
 
-The generic `plot()` function provides a quick way to produce bar plots of categorical data. For example, we can examine the distribution of political party affiliations (`Politics` variable) which is a factor (ie categorical) variable. Some preliminary abbreviating of the factor levels are required in order for them to be displayed properly. 
+The generic `plot()` function provides a quick way to produce bar plots of categorical data. For example, we can examine the distribution of political party affiliations (`Politics` variable). In order to do this we convert it into a factor (ie categorical) variable as previously. Some preliminary abbreviating of the factor levels are also required in order for them to be displayed properly. 
 
-```{r 7.5, fig.alt="Default frequency bar plot of political party affiliation using the plot command"}
-levels(bsa$PartyId2) ## The third and fourth factor levels are a bit long
-levels(bsa$PartyId2)<-c("Con","Lab","Lib Dems","Other","None", "Greens") 
-plot(bsa$PartyId2)
+```{r 7.5}
+#| fig-alt: "Default frequency bar plot of political party affiliation using the plot command"
+
+bsa$PartyId2.f<-droplevels( # Getting rid of unused factor levels for neater output
+  as_factor(bsa$PartyId2)   # Converting haven labelled variable to factor
+)
+levels(bsa$PartyId2.f)<-c(
+  "Con","Lab","Lib Dems","Other","None", "Greens" # Shorter level names
+  ) 
+
+plot(bsa$PartyId2.f)
 ```
 
 More advanced plots require the barplot() function, which can be used in conjunction with table(). Whereas table() creates the data that will be plotted, barplot() does the actual plotting. For instance, we can produce the same bar plot, but this time with percentages, by creating a frequency table as we did above in Section 5.2, then plot it.
 
-```{r 7.6, fig.alt="Neater frequency bar plot of political party affiliation using the barplot command" }
+```{r 7.6}
+#| fig-alt: "Neater frequency bar plot of political party affiliation using the barplot command" 
+
 party.tab<-round(100*prop.table(
-  table(bsa$PartyId2)
+  table(bsa$PartyId2.f)
 ),
 1)
 
@@ -81,11 +94,14 @@ barplot(party.tab,
 
 We can go further and create plots for two-way contingency tables of party affiliation by gender. This time we will do it in a single command:
   
-```{r 7.7, fig.alt="Two-way frequency bar plot of political party affiliation by gender using the barplot command"}
+```{r 7.7}
+#| fig-alt: "Two-way frequency bar plot of political party affiliation by gender using the barplot command"
+
+#t<-xtabs(~PartyId2.f+Rsex.f,bsa)       # First, let's get the contingency table
+t<-xtabs(~Rsex.f+PartyId2.f,bsa)       # First, let's get the contingency table
 barplot(
-  round(100*prop.table(
-    table(bsa$Rsex,bsa$PartyId2),
-    2),              ## Column % (here, gender)
+  round(100*
+          prop.table(t,2),              ## Column % (here, gender)
     1),               ## Rounded to 1 decimal
   beside = T,     ## Side-by-side bars   
   main="Political party affiliation by gender",
@@ -95,24 +111,56 @@ barplot(
 ## More advanced plots
 Social science research often requires more advanced plots in order to conduct more complex analyses, for instance comparing the mean or median value of a continuous outcome across two or more categorical variables. The `ggplot` package  provides one of the most advanced set of tools for plotting data  currently available. A few examples are provided below.
 
+#### Mosaic plot{-}
+Mosaic plots provide a visualisation tool for two-way or more contingency tables. The surface of each rectangle, or bar represents the number of observations of the corresponding cells in the contingency table; whereas their length map the relative frequency of the second variable for each category of the first one equivalent to column percentages in a contingency table. In this example below, we will be using the `mosaic()` function from the `vcd` package.
 
-***Political party affiliation by highest qualification and gender***
+```{r 7.8}
+#| fig-alt: "Mosaic plot of political party affiliation by gender "
+library(vcd)                # Loading the vcd package
+
+mosaic(~Rsex.f+PartyId2.f,                            # Variables specified as
+       data=bsa,                                      # in xtabs()
+       highlighting = "Rsex.f",                       # What variable to contrast
+       highlighting_fill = c("lightblue", "#742082"), # Colours for contrasting
+       direction = c("h", "v"),                       # Orientation of the bars
+       labeling= labeling_border(varnames = F,
+                                 abbreviate_labs = T, 
+                                 rot_labels = c(0,0,0,0), 
+                                 just_labels = c("left", 
+                                                 "left", 
+                                                 "left", 
+                                                 "left")
+                                ) # labelling functions from mosaic. See 
+       )                          # help(labeling_border) for more detail   
+
+```
+
+#### Three way contingency tables using ggplot2 {-}
+
   We would like to look at how differences in political party affiliations vary by gender and whether respondents have a degree-level education.
 
 Let us first prepare the data: we need to create the table of result, the proportion of degree vs non degree holders by gender and political party. This is a three-way contingency table, that we can obtain with `ftable()` as shown in Section 5.2, combined with `prop.table()` for the computation of proportions and `round()`.
 As they are more straightforward to handle in `ggplot`, we convert the table object created by ftable into a data frame. Although we can specify titles and axis labels  in the plotting command, it is preferable  to keep things simple here and have them already in the the data.   
 Rather than using the full range of educational achievements recorded in `HEdQual3`, we would like instead to have a dichotomic variable between degree holders and non degree holders. Adding it directly in the ftable command as a boolean expression return a dichotomic variable: "TRUE" for Degree educated respondents, and "FALSE" for everyone else. We just need to change the levels of this factor variable to make them more intelligible. Finally we change the variable names in our data frame. 
 
-```{r 7.8}
+```{r 7.9}
+bsa$HEdQual3.f<-droplevels(as_factor(bsa$HEdQual3))
+pa<-round(100*
+            prop.table(
+              ftable(bsa$PartyId2.f,bsa$Rsex.f,(bsa$HEdQual3.f=="Degree")
+                     ),
+              1),
+          1)
 
-pa<-round(100*prop.table((ftable(bsa$PartyId2,bsa$Rsex,(bsa$HEdQual3=="Degree"))),1),1)
 pa<-data.frame(pa)
 levels(pa$Var3)<-c("Below","Degree")
 names(pa)<-c("Affiliation","Gender","Education","Percent")
 pa
 ```
 We are now ready to plot the data.  the `ggplot()` commands usually works as a succession of layers or  options that are added to an initial plot specifications. Each extra layer is added after a `+` sign. In the example below, we specify the data and the aesthetic (ie the main parameters of the plot) with the first command: the x and y variables , and the first grouping variable, education). `geom_bar()` stipulates the bar plot, with the ṕosition="dodge" for the bars to be located side by side (position="stack"would have them on top of each other). Finally, facet_wrap() splits the plot by gender.
-```{r 7.9, fig.alt="Bar plot of political party affiliation by gender and qualification using ggplot"}
+```{r 7.10}
+#| fig-alt: "Bar plot of political party affiliation by gender and qualification using ggplot"
+
 ggplot(data=pa,aes(y=Percent,x=Affiliation,fill=Education))+
   geom_bar(position="dodge",stat="identity")+
   facet_wrap(~Gender)+

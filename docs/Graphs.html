@@ -254,11 +254,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>There are two main ways to produce graphs in R: either by using the straightforward but rather basic plotting commands from the Base package, or the more complex and nicer looking functions from the <code>ggplot</code> package.</p>
+<p>There are two common ways to plot data in R: either by using the straightforward but rather basic plotting commands from the Base package, or instead delve into the more complex but much nicer looking functionalities of the <code>ggplot</code> package.</p>
 <section id="distributional-graphs-for-continuous-variables" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="distributional-graphs-for-continuous-variables"><span class="header-section-number">7.1</span> Distributional graphs for continuous variables</h2>
-<p>Graphs such as histograms or box plots are a convenient way to gain a quick overview of the distribution of a variable and are easy to produce. Go back to the BSA data, we can plot the distribution of left-right political orientations scores with the <code>hist()</code> command.</p>
-<div class="cell" data-hash="Graphs_cache/html/7.1_3efc5671a6e1280cbe06acc556c6fbbd">
+<p>Plots such as histograms or box plots are a convenient way to gain a quick overview of the distribution of a variable and are easy to produce. Going back to the BSA data, we can plot the distribution of left-right political orientations scores with the <code>hist()</code> command.</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(bsa<span class="sc">$</span>leftrigh,<span class="at">freq=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
@@ -268,12 +268,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>The graphs appear visible in the ‘Plot’ tab on the right hand side of the R Studio window. It shows us that political orientations are slightly skewed towards the left. The <code>freq=FALSE</code> option requires the y-axis to be expressed in terms of proportions rather than frequencies.</p>
+<p>The histogram should appear in the ‘Plot’ tab on the right hand side of the R Studio window. It shows us that political orientations are slightly skewed towards the left. The <code>freq=FALSE</code> option requires the y-axis to be expressed in terms of proportions rather than number of observations.</p>
 <p>Titles and labels can easily be added:</p>
-<div class="cell" data-hash="Graphs_cache/html/7.2_0aac5eeea97ddff437cef471db5a49e9">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(bsa<span class="sc">$</span>leftrigh,</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">freq=</span><span class="cn">FALSE</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Histogram of political orientations"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Histogram of political orientations, 2017"</span>,</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Proportions"</span>,</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Left-right political orientations score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -285,10 +285,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Note that <code>main</code>, <code>ylab</code> and <code>xlab</code> can be used with any Base R plot commands.</p>
-<p>We can also produce a box and whisker plot of the same variable:</p>
-<div class="cell" data-hash="Graphs_cache/html/7.3_b9359acd02c55d4edef0245e9b42fbf3">
+<p>We can also produce a box and whisker plot of the same variable in order to get a better sense of the distribution of outliers:</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(bsa<span class="sc">$</span>leftrigh,</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">"Box and whisker plot of political orientations"</span>,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># main="Box and whisker plot of political orientations",</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">"Left-right political orientations score"</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -299,40 +299,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>The generic <code>plot()</code> command produces one or two-way scatterplots:</p>
-<div class="cell" data-hash="Graphs_cache/html/7.4.1_f7e98be05578157585cdeb074de96b0b">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bsa<span class="sc">$</span>leftrigh) <span class="do">### One way scatter plot of left-right political orientations score</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The generic <code>plot()</code> command produces scatterplots. Let’s try it with our left-right political orientations score, in conjunction with <code>libauth</code>, a libertarian vs authoritarian scale.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bsa<span class="sc">$</span>leftrigh,bsa<span class="sc">$</span>libauth) <span class="do">### Scatterplot of left-right political orientations score</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Graphs_files/figure-html/7.4.1-1.png" class="img-fluid figure-img" alt="Raw scatterplot of left-right political orientations" width="672"></p>
+<p><img src="Graphs_files/figure-html/7.4.1-1.png" class="img-fluid figure-img" alt="scatterplot of left-right political orientations vs authoritarianism score" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-hash="Graphs_cache/html/7.4.2_126697892633c40d1978fa4c934af68d">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bsa<span class="sc">$</span>leftrigh,bsa<span class="sc">$</span>libauth) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Graphs_files/figure-html/7.4.2-1.png" class="img-fluid figure-img" alt="Raw scatterplot of left-right political orientations vs authoritarianism score" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>The second graph shows us that there is little association between the two variables. However, slightly fewer respondents simultaneously score high on the authoritarianism and left vs right scales.</p>
+<p>The scatterplot shows us that there is little association between the two variables. However, slightly fewer respondents simultaneously score high on the ‘authoritarianism’ and ‘right’ scales, perhaps unsurprisingly.</p>
 </section>
 <section id="plotting-categorical-variables" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="plotting-categorical-variables"><span class="header-section-number">7.2</span> Plotting categorical variables</h2>
-<p>The generic <code>plot()</code> function provides a quick way to produce bar plots of categorical data. For example, we can examine the distribution of political party affiliations (<code>Politics</code> variable) which is a factor (ie categorical) variable. Some preliminary abbreviating of the factor levels are required in order for them to be displayed properly.</p>
-<div class="cell" data-hash="Graphs_cache/html/7.5_3f614ef83bcd52a834ac07c219358d0e">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>PartyId2) <span class="do">## The third and fourth factor levels are a bit long</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Conservative"     "Labour"           "Liberal Democrat" "Other party"     
-[5] "None"             "Green Party"     </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>PartyId2)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Con"</span>,<span class="st">"Lab"</span>,<span class="st">"Lib Dems"</span>,<span class="st">"Other"</span>,<span class="st">"None"</span>, <span class="st">"Greens"</span>) </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bsa<span class="sc">$</span>PartyId2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The generic <code>plot()</code> function provides a quick way to produce bar plots of categorical data. For example, we can examine the distribution of political party affiliations (<code>Politics</code> variable). In order to do this we convert it into a factor (ie categorical) variable as previously. Some preliminary abbreviating of the factor levels are also required in order for them to be displayed properly.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>PartyId2.f<span class="ot">&lt;-</span><span class="fu">droplevels</span>( <span class="co"># Getting rid of unused factor levels for neater output</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_factor</span>(bsa<span class="sc">$</span>PartyId2)   <span class="co"># Converting haven labelled variable to factor</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>PartyId2.f)<span class="ot">&lt;-</span><span class="fu">c</span>(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Con"</span>,<span class="st">"Lab"</span>,<span class="st">"Lib Dems"</span>,<span class="st">"Other"</span>,<span class="st">"None"</span>, <span class="st">"Greens"</span> <span class="co"># Shorter level names</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  ) </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bsa<span class="sc">$</span>PartyId2.f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -342,21 +333,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>More advanced plots require the barplot() function, which can be used in conjunction with table(). Whereas table() creates the data that will be plotted, barplot() does the actual plotting. For instance, we can produce the same bar plot, but this time with percentages, by creating a frequency table as we did above in Section 5.2, then plot it.</p>
-<div class="cell" data-hash="Graphs_cache/html/7.6_36bf17db600e152bf3280e718e5aa72f">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>party.tab<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(bsa<span class="sc">$</span>PartyId2)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>),</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>party.tab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>party.tab<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(bsa<span class="sc">$</span>PartyId2.f)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>party.tab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      Con      Lab Lib Dems    Other     None   Greens 
     33.5     39.2      6.4      5.1     13.7      2.1 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(party.tab,</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">"Political party affiliation"</span>,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">"Percent"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(party.tab,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">"Political party affiliation"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab=</span><span class="st">"Percent"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -366,15 +357,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We can go further and create plots for two-way contingency tables of party affiliation by gender. This time we will do it in a single command:</p>
-<div class="cell" data-hash="Graphs_cache/html/7.7_50e7180794bc8094cebe0fa6e79d43e4">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">table</span>(bsa<span class="sc">$</span>Rsex,bsa<span class="sc">$</span>PartyId2),</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>),              <span class="do">## Column % (here, gender)</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>),               <span class="do">## Rounded to 1 decimal</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">beside =</span> T,     <span class="do">## Side-by-side bars   </span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main=</span><span class="st">"Political party affiliation by gender"</span>,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">"Percent"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#t&lt;-xtabs(~PartyId2.f+Rsex.f,bsa)       # First, let's get the contingency table</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>t<span class="ot">&lt;-</span><span class="fu">xtabs</span>(<span class="sc">~</span>Rsex.f<span class="sc">+</span>PartyId2.f,bsa)       <span class="co"># First, let's get the contingency table</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>          <span class="fu">prop.table</span>(t,<span class="dv">2</span>),              <span class="do">## Column % (here, gender)</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>),               <span class="do">## Rounded to 1 decimal</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">beside =</span> T,     <span class="do">## Side-by-side bars   </span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">main=</span><span class="st">"Political party affiliation by gender"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">"Percent"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -387,15 +379,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="more-advanced-plots" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="more-advanced-plots"><span class="header-section-number">7.3</span> More advanced plots</h2>
 <p>Social science research often requires more advanced plots in order to conduct more complex analyses, for instance comparing the mean or median value of a continuous outcome across two or more categorical variables. The <code>ggplot</code> package provides one of the most advanced set of tools for plotting data currently available. A few examples are provided below.</p>
-<p><strong><em>Political party affiliation by highest qualification and gender</em></strong> We would like to look at how differences in political party affiliations vary by gender and whether respondents have a degree-level education.</p>
+<section id="mosaic-plot" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="mosaic-plot">Mosaic plot</h4>
+<p>Mosaic plots provide a visualisation tool for two-way or more contingency tables. The surface of each rectangle, or bar represents the number of observations of the corresponding cells in the contingency table; whereas their length map the relative frequency of the second variable for each category of the first one equivalent to column percentages in a contingency table. In this example below, we will be using the <code>mosaic()</code> function from the <code>vcd</code> package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vcd)                <span class="co"># Loading the vcd package</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaic</span>(<span class="sc">~</span>Rsex.f<span class="sc">+</span>PartyId2.f,                            <span class="co"># Variables specified as</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>bsa,                                      <span class="co"># in xtabs()</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">highlighting =</span> <span class="st">"Rsex.f"</span>,                       <span class="co"># What variable to contrast</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">highlighting_fill =</span> <span class="fu">c</span>(<span class="st">"lightblue"</span>, <span class="st">"#742082"</span>), <span class="co"># Colours for contrasting</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">direction =</span> <span class="fu">c</span>(<span class="st">"h"</span>, <span class="st">"v"</span>),                       <span class="co"># Orientation of the bars</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">labeling=</span> <span class="fu">labeling_border</span>(<span class="at">varnames =</span> F,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">abbreviate_labs =</span> T, </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">rot_labels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">just_labels =</span> <span class="fu">c</span>(<span class="st">"left"</span>, </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">"left"</span>, </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">"left"</span>, </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">"left"</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>                                ) <span class="co"># labelling functions from mosaic. See </span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>       )                          <span class="co"># help(labeling_border) for more detail   </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Graphs_files/figure-html/7.8-1.png" class="img-fluid figure-img" alt="Mosaic plot of political party affiliation by gender " width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="three-way-contingency-tables-using-ggplot2" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="three-way-contingency-tables-using-ggplot2">Three way contingency tables using ggplot2</h4>
+<p>We would like to look at how differences in political party affiliations vary by gender and whether respondents have a degree-level education.</p>
 <p>Let us first prepare the data: we need to create the table of result, the proportion of degree vs non degree holders by gender and political party. This is a three-way contingency table, that we can obtain with <code>ftable()</code> as shown in Section 5.2, combined with <code>prop.table()</code> for the computation of proportions and <code>round()</code>. As they are more straightforward to handle in <code>ggplot</code>, we convert the table object created by ftable into a data frame. Although we can specify titles and axis labels in the plotting command, it is preferable to keep things simple here and have them already in the the data.<br>
 Rather than using the full range of educational achievements recorded in <code>HEdQual3</code>, we would like instead to have a dichotomic variable between degree holders and non degree holders. Adding it directly in the ftable command as a boolean expression return a dichotomic variable: “TRUE” for Degree educated respondents, and “FALSE” for everyone else. We just need to change the levels of this factor variable to make them more intelligible. Finally we change the variable names in our data frame.</p>
-<div class="cell" data-hash="Graphs_cache/html/7.8_fc4a2b7fc7aff91ae7462fa90f6a11ee">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pa<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>((<span class="fu">ftable</span>(bsa<span class="sc">$</span>PartyId2,bsa<span class="sc">$</span>Rsex,(bsa<span class="sc">$</span>HEdQual3<span class="sc">==</span><span class="st">"Degree"</span>))),<span class="dv">1</span>),<span class="dv">1</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pa<span class="ot">&lt;-</span><span class="fu">data.frame</span>(pa)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(pa<span class="sc">$</span>Var3)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Below"</span>,<span class="st">"Degree"</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pa)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Affiliation"</span>,<span class="st">"Gender"</span>,<span class="st">"Education"</span>,<span class="st">"Percent"</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>pa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>HEdQual3.f<span class="ot">&lt;-</span><span class="fu">droplevels</span>(<span class="fu">as_factor</span>(bsa<span class="sc">$</span>HEdQual3))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>pa<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">prop.table</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ftable</span>(bsa<span class="sc">$</span>PartyId2.f,bsa<span class="sc">$</span>Rsex.f,(bsa<span class="sc">$</span>HEdQual3.f<span class="sc">==</span><span class="st">"Degree"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                     ),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>              <span class="dv">1</span>),</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>          <span class="dv">1</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>pa<span class="ot">&lt;-</span><span class="fu">data.frame</span>(pa)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(pa<span class="sc">$</span>Var3)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Below"</span>,<span class="st">"Degree"</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pa)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Affiliation"</span>,<span class="st">"Gender"</span>,<span class="st">"Education"</span>,<span class="st">"Percent"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>pa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Affiliation Gender Education Percent
 1          Con   Male     Below    72.7
@@ -425,17 +455,17 @@ Rather than using the full range of educational achievements recorded in <code>H
 </div>
 </div>
 <p>We are now ready to plot the data. the <code>ggplot()</code> commands usually works as a succession of layers or options that are added to an initial plot specifications. Each extra layer is added after a <code>+</code> sign. In the example below, we specify the data and the aesthetic (ie the main parameters of the plot) with the first command: the x and y variables , and the first grouping variable, education). <code>geom_bar()</code> stipulates the bar plot, with the ṕosition=“dodge” for the bars to be located side by side (position=“stack”would have them on top of each other). Finally, facet_wrap() splits the plot by gender.</p>
-<div class="cell" data-hash="Graphs_cache/html/7.9_ad9e1ec5e9cbdf2357bd4f2a7e688411">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>pa,<span class="fu">aes</span>(<span class="at">y=</span>Percent,<span class="at">x=</span>Affiliation,<span class="at">fill=</span>Education))<span class="sc">+</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"dodge"</span>,<span class="at">stat=</span><span class="st">"identity"</span>)<span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Gender)<span class="sc">+</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span>                  <span class="do">### Theme for visualisation</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"#702082"</span>, <span class="st">"#008755"</span>))<span class="sc">+</span> <span class="do">### Custom colours (optional)</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>pa,<span class="fu">aes</span>(<span class="at">y=</span>Percent,<span class="at">x=</span>Affiliation,<span class="at">fill=</span>Education))<span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"dodge"</span>,<span class="at">stat=</span><span class="st">"identity"</span>)<span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Gender)<span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span>                  <span class="do">### Theme for visualisation</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"#702082"</span>, <span class="st">"#008755"</span>))<span class="sc">+</span> <span class="do">### Custom colours (optional)</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Graphs_files/figure-html/7.9-1.png" class="img-fluid figure-img" alt="Bar plot of political party affiliation by gender and qualification using ggplot" width="672"></p>
+<p><img src="Graphs_files/figure-html/7.10-1.png" class="img-fluid figure-img" alt="Bar plot of political party affiliation by gender and qualification using ggplot" width="672"></p>
 </figure>
 </div>
 </div>
@@ -443,6 +473,7 @@ Rather than using the full range of educational achievements recorded in <code>H
 <div style="page-break-after: always;"></div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
