@@ -1,7 +1,0 @@
-book_filename: "UKDS-intro-to-R"
-delete_merged_file: false
-new_session: no
-language:
-  ui:
-    chapter_name: ""
-output_dir: "docs"
