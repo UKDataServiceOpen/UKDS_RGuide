@@ -1,0 +1,197 @@
+# Essentials of Data Manipulation
+In this section we will cover  how to recode variables and deal with missing data.
+
+## Creating and transforming numerical variables
+Let's say we would like to transform  our numerical political orientation variable: `leftrigh` into a logarithmic scale. We can use the `log()` function  which is directly available in R Base package and simply  returns the natural logarithm (base-e). We will  use the assignment operator ( <- ) to create a new variable called ‘leftright_log’ from the original variable
+
+```{r 4.1}
+bsa$lnleftrigh_log <- log(bsa$leftrigh)
+```
+
+Note that if we had not specified `bsa$` the command would have created a transformed variable outside of the BSA data frame. We can now check the results with `summary()`
+
+```{r 4.2}
+summary(cbind(bsa$lnleftrigh,bsa$leftrigh))
+
+```
+Please note that it is not possible to pass several variables names directly to `summary()`. We need to group them first into a temporary object using `cbind()`. In the output `V1` refers to the first variable, `lnleftrigh`.
+
+What if we - hypothetically - wanted to do the same with level of agreement to the statement "People like me don`t have any say about what the government does", a categorical variable, originally ranging from  1 (`Agree strongly`) to 5 (`Disagree strongly`)? If we try to repeat what we did before:
+
+```{r 4.3, error=T}
+bsa$lngovnosa2 <- log(bsa$govnosa2)
+```
+... we get an error, due to the fact that `govnosa2` was imported as a factor, and that `log()` can only be applied to numeric objects.
+
+
+```{r 4.4}
+class(bsa$govnosa2)                       #check to see if it is numeric
+bsa$govnosa2.n <- as.numeric(bsa$govnosa2)  #convert to numeric 
+class(bsa$govnosa2.n)                       #check again
+bsa$lngovnosa2 <- log(bsa$govnosa2.n) #create new log of the leftright      variable 
+summary(cbind(bsa$lngovnosa2,bsa$govnosa2.n))
+```
+
+  We can also create a completely new variable in the dataset. For instance, the following will create  `test` with a constant value of 1.
+
+```{r 4.5}
+bsa$test <- 1
+
+```
+
+## Categorical variables
+We saw in Section 3 that  categorical variables are objects called **factors** in R, with a fixed set of possible  numerical or alphanumerical values (levels) which  can be  accessed with the `levels()` function.
+
+```{r 4.6}
+levels(bsa$Married) 
+```
+The number in the output does not refer to  underlying numerical values to which  labels are added as with other statistical packages, but instead to the position of a given level in the list returned by `level()`.
+
+
+## Recoding variables
+ The following commands will create a new variable called `Married2` where respondents  are categorised into two new categories: 'Not partnered' and 'Partnered'. The "separated/divorced” and “Never married”  categories of the “Married” variable are recoded as  “Not partnered”. It is always advised to create new variables when recoding old ones so the original data is not tampered with.
+ 
+```{r 4.7}
+bsa$Married2 <- ifelse(bsa$Married=="Married/living as married","Partnered",bsa$Married)
+bsa$Married2 <- ifelse(bsa$Married=="Widowed" | 
+                       bsa$Married=="Never married" | 
+                      bsa$Married=="Separated/divorced","Not partnered",bsa$Married2)
+
+table(bsa$Married2)
+
+```
+The second and fourth categories have been renamed to ‘Not partnered’. Now we
+have two levels
+    * Partnered
+    *Not partnered
+
+`ifelse()` is  a convenient tool to use when it is required to work with Base R or when the variables have a limited number of categories. More complex cases may require a more advanced function. The `dplyr` library provides a comprehensive set of data manipulation tools.
+
+
+```{r 4.8}
+library(dplyr)
+bsa<-bsa%>%mutate(Married3=case_when(
+                    Married == "Married/living as married" ~ "Partnered",  
+                    Married == "Separated/divorced" | Married == "Widowed" ~ "Not Partnered",
+                    Married == "Never married" ~ "Not Partnered"
+)
+)
+bsa$Married3<-as.factor(bsa$Married3)
+summary(bsa$Married3)
+
+```
+We just created the `Married3` variable, which is identical to `Married2` above, but using the more powerful syntax made available by `dplyr`. Let's decompose it:
+
+- `dplyr` use the `pipe` symbol ie `%>%` which enables to sequentially combine functions. We will come back to this later in this guide. 
+- `mutate()` is the generic variable creation/alteration command, and can handle complex combinations of conditions as well as multiple simultaneous variable creation operations.
+- `case_when()` is the function that allows recoding numerical, character, or factor variables. On the left hand side of the tilde `~` are the condition or the  values that need to be matched in the original variable , and on the right hand side, the  attributed ie recoded values in the new variable. Note that in this case, the recoded variable is by default a character object and needs to be converted into a factor for easier manipulation. 
+
+**Extra tips:**
+
+- As with any data manipulation exercise, caution is required, and it is recommended to create new variables with the recoded value rather than alter an original variable when handling missing values.
+- The standard value attribution command in R is `<-`. However, `=` will also work in many cases.
+- Unless explicitly specified (in our case, by adding the bsa$ prefix to variable name), the objects created are not included in the data frame from which they were computed. 
+
+## Missing Values
+Explicit missing values in R (ie values that R itself considers as missing) are represented as `NA` for factors and numerical variables. For character variables, missing values are simply empty strings, ie `""`. R has a series of functions specifically designed to handle NAs.
+
+R has fewer safety nets than other packages for handling missing values. Most function won't issue  warn users about whether or how many how many observations with missing values have been dropped. On the other hand, some commands will return error messages and won't run when  missing values are present. This is the case of `mean()` for example.  
+
+### Inspecting missing data
+
+The logical function `is.na()` assesses each observation in variables and identifies whether  cases are valid or missing. The result will appear as a boolean  TRUE/FALSE vector for each observation. `is.na()` can be  combined  with other functions:
+
+- With `table()` in order to get the frequencies of missing values of a specific variable.   
+
+- With sum() in order to count the number of missing observations of variables or whole datasets.  
+
+```{r}
+
+table(is.na(bsa$leftrigh))  #of missing values in the leftright variable 
+
+sum(is.na(bsa))           # of missing values in the whole dataset
+
+mean(is.na(bsa$leftrigh)) #returns the proportion of NAs...
+
+mean(is.na(bsa)) # returns the proportion in the dataset
+```
+
+### Recoding missing values as NA (continuous variables)
+It may sometimes be useful to  recode implicit  missing values (ie  considered by the data producer as missing, but not by R)  of either numeric objects or factors into  `<NA>`,  in order to simplify case selection when conducting analyses.  This can either be done with Base R code or  the more advanced data manipulation functions from the dplyr package that we explored earlier.
+
+Let's assume for a moment  that we would like to get rid of respondents aged under 25 for our analysis. A safe way to proceed is by creating a new variable. 
+
+```{r 4.9}
+bsa$RAgeCat2 <- bsa$RAgeCat           #duplicate variable
+table(bsa$RAgeCat2)                      
+bsa$RAgeCat2[bsa$RAgeCat2=="18-24" ] <- NA   #convert responses “18-24”  to NA
+table(bsa$RAgeCat2)
+table(is.na(bsa$RAgeCat2))
+```
+Why is the number of missing values 227 and not 223 as the original number of respondents aged 18-24? Because there were already 3 missing values for the RAgeCat variable.  
+
+We can also notice that although there are now no observation left in the 18-24 category, it is still displayed by `table()`. This is because  levels are attributes of factors and are not deleted with observations. We can remove unused levels permanently with `droplevels()`   
+
+```{r 4.10}
+bsa$RAgeCat2<-droplevels(bsa$RAgeCat2)
+table(bsa$RAgeCat2)
+```
+### Working with missing values
+Explicit missing values (coded as NA) can be taken care of by R’s own missing values functions. For instance using the `na.rm=T` or `na.rm=TRUE` option will remove  missing values from an analysis (typing `?na.rm` will provide more information). Below is a summary of how NAs are dealt with by common R commands:
+
+
+```{r 4.11,echo=F}
+knitr::kable(col.names=c("Command","Default action","Parameter"),
+rbind(
+cbind("*mean(), sd(),median()*","Includes NA (may return an error)","na.rm=T"),
+cbind("*cor(),cov()*","Includes NA (may return an error)","*use=\"complete.obs\"*"),
+cbind("*table()*","Excludes NA","*useNA = \"always\"* to display NAs"),
+cbind("*xtabs()*","Excludes NA","*addNA = T* to display NAs"),
+cbind("lm(),glm()","Excludes NA","*na.action=NULL*")
+)
+,booktabs = TRUE,
+  caption = 'Treatment of missing values by R commands'
+)
+```
+
+
+## Subsetting datasets
+When analysis survey data. it is often necessary to limit the scope of computation to specific groups or subset of the data we may be interested in. There are many ways of subsetting datasets in R. We will review the most common here.  
+
+**Using Base R**
+
+Most subsetting commands involve some form of conditions whereby the characteristics of a subsample of interest are specified. Suppose we would like to examine  the interest for politics among people aged 18-24. 
+
+We can either create an adhoc data frame:
+
+```{r 4.12}
+table(bsa$Politics)
+bsa.young<-bsa[bsa$RAgeCat=="18-24",]  
+table(bsa.young$Politics)
+
+bsa.young<-bsa[bsa$RAgeCat=="18-24",]
+```
+Or we can directly limit the extent of the analysis on the go:
+
+```{r 4.13}
+  table(bsa$Politics[bsa$RAgeCat=="18-24"])
+```
+In the first example it was necessary to include a comma after specg the condition. This is meant to indicate that we want to retain all variables ie columns in the dataset. The comma is not necessary in the second example as we are already working with a single variable.
+
+**Using dplyr***
+
+Now suppose we want to further restrict the analysis to people  identifying as Males. We could use the same Base R syntax as above, but with more than one condition coding tends to become cumbersome. We could instead use the more convenient syntax from the `dplyr` package. Either: 
+
+```{r 4.14}
+bsa.young.males<-bsa%>%filter(RAgeCat=="18-24" & Rsex=="Male")  
+table(bsa.young.males$Politics)
+```
+
+Or. as before embed it as a condition within `table()` :
+```{r 4.15}
+  table(bsa%>%filter(RAgeCat=="18-24" & Rsex=="Male")%>%select(Politics) )
+```
+
+We are now equipped with the necessary information to move to the next stage and carry out basic analysis using R.
+
+\newpage

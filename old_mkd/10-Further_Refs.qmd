@@ -1,0 +1,43 @@
+# Further information
+## Additional commands of interest
+The following non exhaustive list provides a few examples of commands and packages that tackle common types of analysis which might be relevant to users of large UK surveys:
+
+- Further regression analysis: the `glm()` command  can be used for fitting a
+  large number of regression including Poisson and multinomial models. The
+  packages ‘lme4’ and  ‘nlme’  are used to fit respectively linear and non
+  linear multilevel models, also known as mixed models.
+
+- Complex survey data and analysis commands and functions can be found in the ‘survey’ package. It includes commands for taking into account stratified and clustered samples, weights compute design effects and confidence intervals, etc.. 
+
+- For users interested in latent variable modelling the
+  `factanal()` command from the `stats` package conducts factor analysis. Other resources are available in the `poLCA` (Latent Class
+  Analysis), `ltm` (Latent Trait modelling), `sem` (Structural equation
+  modelling) packages. The  `Lavaan` package aslso provides a wide range of functions for structural equation modelling
+  including with categorical outcomes.
+
+- Users interested in longitudinal and time series analysis will be interested in the  `stats`and the ‘tseries’ packages. The packages `survival` and `eha` deal with event history and survival analysis, whereas ‘grofit’ and ‘plm’ are designed for panel data and growth analyses.
+
+
+## Additional online resources
+There are hundreds of web sites dedicated to R that users can consult, in addition to CRAN and the main R help list, R-Help with its searchable archives. A few of the most common ones are listed here: 
+
+- As with other statistical packages, the [UCLA](https://stats.oarc.ucla.edu/r/) website provides a good starting point for beginners 
+
+- The [University of North Texas](http://bayes.acs.unt.edu:8083/BayesContent/class/Jon/R_SC/) provides useful links to R resources 
+- [The R Bloggers website](https://www.r-bloggers.com) contains many posts about R - in particular useful [introductory information](https://www.r-bloggers.com/r-tutorial-series-r-beginners-guide-and-r-bloggers-updates/)
+
+- [Stackexchange](https://stats.stackexchange.com/) is not specific to R but contains many forum-type questions and answers raised by R users 
+
+- [This website](https://www.harding.edu/fmccown/r/) presents useful basic information about graphs in R.
+
+- [The Centre for Multilevel modeling at Bristol University](https://www.bristol.ac.uk/cmm/learning/course.html)  has several pages dedicated to R users interested in Multilevel modeling
+
+
+\newpage
+
+# References
+- R Core Team. (2017). R: A language and environment for statistical computing. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from https://www.r-project.org/ RStudio Team. (2016). 
+- RStudio: Integrated Development for R. Boston, USA: RStudio, Inc. Retrieved from http://www.rstudio.com/ 
+- Tennekes, M. (2017). tmap: Thematic Maps. R package version 1.10. Retrieved from https://cran.r-project.org/package=tmap 
+- Wickham, H., & Francois, R. (2016). dplyr: A Grammar of Data Manipulation. R package version 0.5.0. Retrieved from https://cran.r-project.org/package=dplyr 
+- Wickham, H. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2009. Retrieved from https://cran.r-project.org/package=ggplot2

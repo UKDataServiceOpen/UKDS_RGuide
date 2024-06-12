@@ -1,0 +1,23 @@
+---
+title: |
+  ![](./pics/UKDS_Logos_Col_Grey_300dpi.png){width=6cm}  
+  Analysing survey data using R
+author: Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service
+date: "`r paste0(substr(date(), 9,11),substr(date(), 5,8),substr(date(), 21,24))`"
+knit: "bookdown::render_book"
+fontsize: 12pt
+site: bookdown::bookdown_site
+mainfont: Arial
+monofont: "Courier New"
+monofontoptions: 'Scale=0.8'
+---
+
+```{r setup, include=FALSE}
+options(
+  htmltools.dir.version = FALSE, formatR.indent = 2,
+  width = 55, digits = 4, warnPartialMatchAttr = FALSE, warnPartialMatchDollar = FALSE
+)
+library(dplyr)
+library(Hmisc)
+library(ggplot2)
+```

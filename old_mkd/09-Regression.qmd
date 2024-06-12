@@ -1,0 +1,123 @@
+# Regression analysis
+The `glm()` command from the R base package is  used for fitting linear and non-linear models. These include logistic regression, and more generally models falling under the Generalized Linear Model framework.  
+In this section, we will use it to investigate the association between the level of education `HEdQual3` and `Voted`, whether someone voted or not. Let’s first briefly explore the variables using the `class()` and `table()` commands from the previous chapters:
+
+```{r 9.1}
+class(bsa$Voted)
+
+table(bsa$Voted)
+```
+and 
+
+```{r 9.2}
+class(bsa$HEdQual3)
+
+table(bsa$HEdQual3)
+```
+
+It is a good idea to make sure that  categorical variables are stored as factors. This is not absolutely necessary, but gives greater flexibility, for instance when having to change the reference category on the go.
+
+For greater readability we can also shorten the levels of `HEdQual3`  using the `level()` function:
+
+```{r 9.3}
+levels(bsa$HEdQual3) ### The original level names  are a bit verbose...
+
+### ... Fortunately we can shorten them easily
+levels(bsa$HEdQual3) <- c("Degree","A level and above","GCSE or equiv","No Qual")
+
+table(bsa$HEdQual3)
+```
+
+What about the levels for our dependent variable? By default, the first level of a factor will be used as the reference category. This can be also checked with the `contrasts()`. In this case,  1 is associated with ‘No’, so the model will be predicting the probability of NOT voting. If the 1 was associated with ‘Yes’ then the model will be predicting the probability of voting.
+
+```{r 9.4}
+levels(bsa$Voted)     #Note that Yes comes before No
+
+contrasts(bsa$Voted)
+```
+
+As we are interested in the latter we need to change the reference category using the `relevel()` function. We can also create a new variable named `Voted2` so as to keep a copy of the original variable intact. 
+
+```{r 9.5}
+# Reverse the order
+bsa$Voted2 <- relevel(bsa$Voted, ref = "No")
+
+#Check the contrasts
+contrasts(bsa$Voted2)
+```
+Since the outcome  variable (Voted or Voted2) has a binomial distribution, we need to specify to the glm() function that we will be fitting a logistic regression model. We will do this by setting the argument 'family'  to 'binomial' and the link function to 'logit'. We could  also have used 'probit' instead as a link function.
+The code below runs the model and stores the result into an object called `fit1`:
+
+
+```{r 9.6}
+fit1 <- glm(Voted2 ~ HEdQual3, data=bsa, family=binomial(link=logit))
+summary(fit1)
+```
+
+To run a model  controlling for gender ‘Rsex’ and age ‘RAgeCat’, one  simply needs to add them on the right hand side of the formula, separated with a plus (+) sign. 
+
+```{r 9.7}
+fit2 <- glm(Voted2 ~ HEdQual3 + Rsex + RAgeCat, data=bsa, family=binomial(link=logit))
+summary(fit2)
+```
+
+**Model interpretation**
+
+`Summary()` provide a broad overview of the model output, not dissimilar to other statistical software. 
+We can also examine  the content of fit1 and fit2  more in detail and requests a specific element, for example:
+
+```{r 9.8}
+ls(fit1)
+round(fit1$coefficients,2)
+### The coef() function will give the same output:
+round(coef(fit1),2)
+```
+It is beyond the remit of this guide to describe the full output of `glm()`. Please refer to the package documentation for more detailed explanations.
+
+Raw logistic regression coefficients measure the effect of variables on the probability of the outcome such as log(betaX)=P(y). It is common practice to  convert these into odd ratios  by exponentiating them, such as that betaX=exp(P(y)). The following code does this in R: 
+
+```{r 9.9}
+          cbind(
+            exp(coef(fit2)),exp(confint(fit2))
+                ) 
+```
+Using the `coef()` and `confint()` functions, the code above respectively extracts the coefficients and associated 95% confidence intervals from fit2 then collate them using `cbind()`.
+
+** Plotting the coefficients ** -->
+We can visualise the odd ratios and their confidence intervals using the `plot.model()` function from the ‘sjPlot’ package.
+The ’sjPlot’ package needs to be installed and loaded
+
+```
+install.packages('sjPlot')
+```
+
+```{r 9.10, fig.alt="Horizontal line plot for the odds ratios of the regression of voting behaviour by qualification, age categories and gender together with their confidence intervals"} 
+library(sjPlot)
+set_theme(base = theme_minimal())           ### Default sets of options 
+plot_model(fit2,
+           colors = c("#702082", "#008755") ### Added for better accessibility 
+           ) 
+```
+
+
+**Assessing model fit**
+The  Akaike Information Criterion (AIC) is a measure of relative fit for  maximum likelihood fitted models. It is used to compare the improvement in how several models fit some data relative to each other, allowing for the different number of parameters or degrees of freedom. The smaller the AIC, the better the fit. In order for the comparison to be valid, we need to ensure that the models were run with the same number of observations each time. As it is likely that the second model was run on a smaller sample, due to missing values for the Age and Sex variables, we will need to re-run the first one without.
+
+
+```{r 9.11}
+fit1 <- glm(Voted2 ~ HEdQual3, data=bsa%>%filter(!is.na(Rsex) & !is.na(RAgeCat)), family=binomial(link=logit))
+
+c(fit1$aic,fit2$aic)
+```
+We can see that the model controlling for gender and sex is a better fit to the data than the one without controls as it has an AIC of 2944.5 against 3244.5 for fit1.
+
+With the information about the deviance from fit1 and fit2, we can also compute the overall significance of the model, that is whether the difference between the deviance (another  likelihood-based measure of fit) for the fitted model is significantly different from that of the empty or null model. This is usually carried by conducting a chi square test, accounting for the differences in the number of parameters (ie degrees of freedom) between the two models. As with other R code, this can achieved step by step or in one go:
+
+```{r 9.12}
+dev.d<-fit2$null.deviance - fit2$deviance 
+df.d<-fit2$df.null - fit2$df.residual
+p<-1 - pchisq(dev.d, df.d)
+c(dev.d,df.d,p)
+```
+The Chi square test indicates that the  difference in deviance of 370.5 with 10 degrees of freedom is highly significant (P<.001) 
+\newpage
