@@ -20,17 +20,17 @@ book:
   downloads: [pdf]
   chapters:
   - index.qmd
-  - Introduction.qmd
-  - Using.qmd
-  - Opening.qmd
-  - Manipulation.qmd
-  - Descriptives.qmd
-  - Weighted.qmd
-  - Graphs.qmd
-  - Testing.qmd
-  - Regressions.qmd
-  - Further.qmd
-  - References.qmd
+  - 1_Introduction.qmd
+  - 2_Using.qmd
+  - 3_Opening.qmd
+  - 4_Manipulation.qmd
+  - 5_Descriptives.qmd
+  - 6_Weighted.qmd
+  - 7_Graphs.qmd
+  - 8_Testing.qmd
+  - 9_Regressions.qmd
+  - 10_Further.qmd
+  - 11_References.qmd
   navbar:
    logo: pics/UKDS_Logos_Col_Grey_300dpi.png
    search: true
