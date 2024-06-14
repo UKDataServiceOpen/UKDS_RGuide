@@ -10,7 +10,7 @@ library(ggplot2)
 library(haven)
 datadir<-"~/OneDrive/data/bsa/"
 bsa<-read_spss(paste0(datadir,"8849spss_V1/bsa2017_open_enviropol.sav"))
-# bsa$RAgeCat.f<-droplevels(as_factor(bsa$RAgeCat))
+ bsa$RAgeCat.f<-droplevels(as_factor(bsa$RAgeCat))
 bsa$Rsex.f<-droplevels(as_factor(bsa$Rsex))
 ```
 Most users of social surveys will be looking to produce representative estimates when conducting analyses. Conducting such population inference entail using weights, which are meant to correct estimates for the under/over representation of certain groups in the sample due to the sampling process or non response. Producing sound results relies not just on weighting estimates but also on computing adequate standard errors or conference intervals, which  measure the precision of the estimates. 
@@ -41,7 +41,7 @@ The above functions can be used in conjunction with `group_by()` and `summarise(
   
 ```{r 6.2}
 bsa%>%
-  filter(!is.na(RAgeCat))%>%
+  filter(!is.na(RAgeCat.f))%>%
   group_by(RAgeCat.f)%>%
   summarise(Mean=wtd.mean(leftrigh,WtFactor),
             Var=wtd.var(leftrigh,WtFactor),
@@ -139,7 +139,7 @@ a
 confint(a) ### ... and confidence interval
 
 ```
-And now for the median:
+We can similarly 
   
 ```{r 6.7,error=T}
 #| error: true

@@ -111,31 +111,13 @@ barplot(
 ## More advanced plots
 Social science research often requires more advanced plots in order to conduct more complex analyses, for instance comparing the mean or median value of a continuous outcome across two or more categorical variables. The `ggplot` package  provides one of the most advanced set of tools for plotting data  currently available. A few examples are provided below.
 
-#### Mosaic plot{-}
-Mosaic plots provide a visualisation tool for two-way or more contingency tables. The surface of each rectangle, or bar represents the number of observations of the corresponding cells in the contingency table; whereas their length map the relative frequency of the second variable for each category of the first one equivalent to column percentages in a contingency table. In this example below, we will be using the `mosaic()` function from the `vcd` package.
 
-```{r 7.8}
-#| fig.height: 6
-#| fig-alt: "Mosaic plot of political party affiliation by gender "
-library(vcd)                # Loading the vcd package
+#### Three way barplots using ggplot2 {-}
 
-mosaic(~PartyId2.f+Rsex.f,                            # Variables specified as
-       data=bsa,                                      # in xtabs()
-       highlighting = "Rsex.f",                       # What variable to contrast
-       highlighting_fill = c("#702082", "#008755"), # Colours for contrasting
-       direction = c("h", "v"),                       # Orientation of the bars
-       labeling= labeling_border(varnames = F,
-                                 rot_labels = c(0,0,0,0), 
-                                ) # labelling functions from mosaic. See 
-       )                          # help(labeling_border) for more detail   
-
-```
-
-#### Three way contingency tables using ggplot2 {-}
-
-  We would like to look at how differences in political party affiliations vary by gender and whether respondents have a degree-level education.
+Say we would like to explore how differences in political party affiliations vary by gender and whether respondents have a degree-level education.
 
 Let us first prepare the data: we need to create the table of result, the proportion of degree vs non degree holders by gender and political party. This is a three-way contingency table, that we can obtain with `ftable()` as shown in Section 5.2, combined with `prop.table()` for the computation of proportions and `round()`.
+
 As they are more straightforward to handle in `ggplot`, we convert the table object created by ftable into a data frame. Although we can specify titles and axis labels  in the plotting command, it is preferable  to keep things simple here and have them already in the the data.   
 Rather than using the full range of educational achievements recorded in `HEdQual3`, we would like instead to have a dichotomic variable between degree holders and non degree holders. Adding it directly in the ftable command as a boolean expression return a dichotomic variable: "TRUE" for Degree educated respondents, and "FALSE" for everyone else. We just need to change the levels of this factor variable to make them more intelligible. Finally we change the variable names in our data frame. 
 
@@ -164,5 +146,35 @@ ggplot(data=pa,aes(y=Percent,x=Affiliation,fill=Education))+
   scale_fill_manual(values=c("#702082", "#008755"))+ ### Custom colours (optional)
   theme(legend.position = "bottom")
 ```
+
+#### Mosaic plots{-}
+Mosaic plots provide a visualisation tool for two-way or more contingency tables. Table cells  are plotted as rectangles whose surface is proportional to their overall number of observations whereas their length represents their frequency relative to that of the second variable for each category of the first one - this is an  equivalent to column percentages in a contingency table. In the example below, we will be using the `mosaic()` function from the `vcd` package which provides both a descriptive and model-based plots. 
+
+The basic parameters of a descriptive mosaic plot consists of:
+
+- a R formula where the row and columns variables are specified;
+- the highlighting variable, for the display of relative percentage;
+- By default the contrasting colours are shades of grey but can be customised, as are the direction of the bars.
+
+Labelling options are a bit mode arcane than Base R plot functions. They need to be specified within a `labeling= labeling_border()` statement. See `help(labeling_border)` for more detail. We used `Varnames=F` to hide the  variable names from the plot, `rot_labels`, to specify that we did not want any rotation of the value labels, and `offset_labels` to prevent them to overlap with the rectangles.
+
+
+```{r 7.8}
+#| fig.height: 6.5
+#| fig-align: center
+#| fig-alt: "Mosaic plot of political party affiliation by gender "
+library(vcd)                # Loading the vcd package
+
+mosaic(~PartyId2.f+Rsex.f,                            
+       data=bsa,                                      
+       highlighting = "Rsex.f",                       
+       labeling= labeling_border(varnames = F,            
+                                 rot_labels = c(0,0,0,0),
+                                 offset_labels = c(0, 0, 0, 1)
+                                ) # labelling functions from mosaic. See 
+       )                          # help(labeling_border) for more detail
+
+```
+
 
 \newpage

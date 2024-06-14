@@ -379,48 +379,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="more-advanced-plots" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="more-advanced-plots"><span class="header-section-number">7.3</span> More advanced plots</h2>
 <p>Social science research often requires more advanced plots in order to conduct more complex analyses, for instance comparing the mean or median value of a continuous outcome across two or more categorical variables. The <code>ggplot</code> package provides one of the most advanced set of tools for plotting data currently available. A few examples are provided below.</p>
-<section id="mosaic-plot" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="mosaic-plot">Mosaic plot</h4>
-<p>Mosaic plots provide a visualisation tool for two-way or more contingency tables. The surface of each rectangle, or bar represents the number of observations of the corresponding cells in the contingency table; whereas their length map the relative frequency of the second variable for each category of the first one equivalent to column percentages in a contingency table. In this example below, we will be using the <code>mosaic()</code> function from the <code>vcd</code> package.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vcd)                <span class="co"># Loading the vcd package</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaic</span>(<span class="sc">~</span>PartyId2.f<span class="sc">+</span>Rsex.f,                            <span class="co"># Variables specified as</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>bsa,                                      <span class="co"># in xtabs()</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">highlighting =</span> <span class="st">"Rsex.f"</span>,                       <span class="co"># What variable to contrast</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">highlighting_fill =</span> <span class="fu">c</span>(<span class="st">"#702082"</span>, <span class="st">"#008755"</span>), <span class="co"># Colours for contrasting</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">direction =</span> <span class="fu">c</span>(<span class="st">"h"</span>, <span class="st">"v"</span>),                       <span class="co"># Orientation of the bars</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">labeling=</span> <span class="fu">labeling_border</span>(<span class="at">varnames =</span> F,</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">rot_labels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), </span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                                ) <span class="co"># labelling functions from mosaic. See </span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>       )                          <span class="co"># help(labeling_border) for more detail   </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="7_Graphs_files/figure-html/7.8-1.png" class="img-fluid figure-img" alt="Mosaic plot of political party affiliation by gender " width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="three-way-contingency-tables-using-ggplot2" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="three-way-contingency-tables-using-ggplot2">Three way contingency tables using ggplot2</h4>
-<p>We would like to look at how differences in political party affiliations vary by gender and whether respondents have a degree-level education.</p>
-<p>Let us first prepare the data: we need to create the table of result, the proportion of degree vs non degree holders by gender and political party. This is a three-way contingency table, that we can obtain with <code>ftable()</code> as shown in Section 5.2, combined with <code>prop.table()</code> for the computation of proportions and <code>round()</code>. As they are more straightforward to handle in <code>ggplot</code>, we convert the table object created by ftable into a data frame. Although we can specify titles and axis labels in the plotting command, it is preferable to keep things simple here and have them already in the the data.<br>
+<section id="three-way-barplots-using-ggplot2" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="three-way-barplots-using-ggplot2">Three way barplots using ggplot2</h4>
+<p>Say we would like to explore how differences in political party affiliations vary by gender and whether respondents have a degree-level education.</p>
+<p>Let us first prepare the data: we need to create the table of result, the proportion of degree vs non degree holders by gender and political party. This is a three-way contingency table, that we can obtain with <code>ftable()</code> as shown in Section 5.2, combined with <code>prop.table()</code> for the computation of proportions and <code>round()</code>.</p>
+<p>As they are more straightforward to handle in <code>ggplot</code>, we convert the table object created by ftable into a data frame. Although we can specify titles and axis labels in the plotting command, it is preferable to keep things simple here and have them already in the the data.<br>
 Rather than using the full range of educational achievements recorded in <code>HEdQual3</code>, we would like instead to have a dichotomic variable between degree holders and non degree holders. Adding it directly in the ftable command as a boolean expression return a dichotomic variable: “TRUE” for Degree educated respondents, and “FALSE” for everyone else. We just need to change the levels of this factor variable to make them more intelligible. Finally we change the variable names in our data frame.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>HEdQual3.f<span class="ot">&lt;-</span><span class="fu">droplevels</span>(<span class="fu">as_factor</span>(bsa<span class="sc">$</span>HEdQual3))</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>pa<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">prop.table</span>(</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ftable</span>(bsa<span class="sc">$</span>PartyId2.f,bsa<span class="sc">$</span>Rsex.f,(bsa<span class="sc">$</span>HEdQual3.f<span class="sc">==</span><span class="st">"Degree"</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                     ),</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>              <span class="dv">1</span>),</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>          <span class="dv">1</span>)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>pa<span class="ot">&lt;-</span><span class="fu">data.frame</span>(pa)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(pa<span class="sc">$</span>Var3)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Below"</span>,<span class="st">"Degree"</span>)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pa)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Affiliation"</span>,<span class="st">"Gender"</span>,<span class="st">"Education"</span>,<span class="st">"Percent"</span>)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>pa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>HEdQual3.f<span class="ot">&lt;-</span><span class="fu">droplevels</span>(<span class="fu">as_factor</span>(bsa<span class="sc">$</span>HEdQual3))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>pa<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">prop.table</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">ftable</span>(bsa<span class="sc">$</span>PartyId2.f,bsa<span class="sc">$</span>Rsex.f,(bsa<span class="sc">$</span>HEdQual3.f<span class="sc">==</span><span class="st">"Degree"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                     ),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>              <span class="dv">1</span>),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>          <span class="dv">1</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>pa<span class="ot">&lt;-</span><span class="fu">data.frame</span>(pa)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(pa<span class="sc">$</span>Var3)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Below"</span>,<span class="st">"Degree"</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pa)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Affiliation"</span>,<span class="st">"Gender"</span>,<span class="st">"Education"</span>,<span class="st">"Percent"</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>pa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Affiliation Gender Education Percent
 1          Con   Male     Below    72.7
@@ -451,16 +428,46 @@ Rather than using the full range of educational achievements recorded in <code>H
 </div>
 <p>We are now ready to plot the data. the <code>ggplot()</code> commands usually works as a succession of layers or options that are added to an initial plot specifications. Each extra layer is added after a <code>+</code> sign. In the example below, we specify the data and the aesthetic (ie the main parameters of the plot) with the first command: the x and y variables , and the first grouping variable, education). <code>geom_bar()</code> stipulates the bar plot, with the ṕosition=“dodge” for the bars to be located side by side (position=“stack”would have them on top of each other). Finally, facet_wrap() splits the plot by gender.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>pa,<span class="fu">aes</span>(<span class="at">y=</span>Percent,<span class="at">x=</span>Affiliation,<span class="at">fill=</span>Education))<span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"dodge"</span>,<span class="at">stat=</span><span class="st">"identity"</span>)<span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Gender)<span class="sc">+</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span>                  <span class="do">### Theme for visualisation</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"#702082"</span>, <span class="st">"#008755"</span>))<span class="sc">+</span> <span class="do">### Custom colours (optional)</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>pa,<span class="fu">aes</span>(<span class="at">y=</span>Percent,<span class="at">x=</span>Affiliation,<span class="at">fill=</span>Education))<span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"dodge"</span>,<span class="at">stat=</span><span class="st">"identity"</span>)<span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Gender)<span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span>                  <span class="do">### Theme for visualisation</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"#702082"</span>, <span class="st">"#008755"</span>))<span class="sc">+</span> <span class="do">### Custom colours (optional)</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="7_Graphs_files/figure-html/7.10-1.png" class="img-fluid figure-img" alt="Bar plot of political party affiliation by gender and qualification using ggplot" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="mosaic-plots" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="mosaic-plots">Mosaic plots</h4>
+<p>Mosaic plots provide a visualisation tool for two-way or more contingency tables. Table cells are plotted as rectangles whose surface is proportional to their overall number of observations whereas their length represents their frequency relative to that of the second variable for each category of the first one - this is an equivalent to column percentages in a contingency table. In the example below, we will be using the <code>mosaic()</code> function from the <code>vcd</code> package which provides both a descriptive and model-based plots.</p>
+<p>The basic parameters of a descriptive mosaic plot consists of:</p>
+<ul>
+<li>a R formula where the row and columns variables are specified;</li>
+<li>the highlighting variable, for the display of relative percentage;</li>
+<li>By default the contrasting colours are shades of grey but can be customised, as are the direction of the bars.</li>
+</ul>
+<p>Labelling options are a bit mode arcane than Base R plot functions. They need to be specified within a <code>labeling= labeling_border()</code> statement. See <code>help(labeling_border)</code> for more detail. We used <code>Varnames=F</code> to hide the variable names from the plot, <code>rot_labels</code>, to specify that we did not want any rotation of the value labels, and <code>offset_labels</code> to prevent them to overlap with the rectangles.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vcd)                <span class="co"># Loading the vcd package</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaic</span>(<span class="sc">~</span>PartyId2.f<span class="sc">+</span>Rsex.f,                            </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>bsa,                                      </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">highlighting =</span> <span class="st">"Rsex.f"</span>,                       </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">labeling=</span> <span class="fu">labeling_border</span>(<span class="at">varnames =</span> F,            </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">rot_labels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>),</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">offset_labels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                                ) <span class="co"># labelling functions from mosaic. See </span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>       )                          <span class="co"># help(labeling_border) for more detail</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="7_Graphs_files/figure-html/7.8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Mosaic plot of political party affiliation by gender " width="672"></p>
 </figure>
 </div>
 </div>

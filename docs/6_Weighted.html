@@ -254,8 +254,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Most users of social surveys will be looking to infer nationally representative estimates when conducting analyses. These entail using weights, which are meant to correct estimates for the under/over representation of certain groups in the sample due to the sampling process or non response. Conducting sound inference relies not just on weighting estimates but also on computing adequate standard errors or conference intervals, which are measure of the precision of the estimates.</p>
-<p>The recommended approach to inferring confidence intervals and standard errors involves accounting for the survey design (ie the way sampling was carried out) when conducting analyses – which can be done with the <code>survey</code> package in R, a topic described in Section 6.3. At the same time, for users who are concerned with quickly computing reasonably accurate, rather than publication-quality estimates, it may be useful to be aware which common R commands and operations can be used with weights.</p>
+<p>Most users of social surveys will be looking to produce representative estimates when conducting analyses. Conducting such population inference entail using weights, which are meant to correct estimates for the under/over representation of certain groups in the sample due to the sampling process or non response. Producing sound results relies not just on weighting estimates but also on computing adequate standard errors or conference intervals, which measure the precision of the estimates.</p>
+<p>The recommended approach to inferring confidence intervals and standard errors involves accounting for the survey design (ie the way sampling was carried out) when conducting analyses – which can be done with the <code>survey</code> package in R, a topic described in Section 6.3. At the same time, for users who are concerned with quickly computing reasonably accurate point estimates, rather than publication-quality results, it may be useful to be aware which common R commands and operations can be used with weights.</p>
 <section id="central-tendency-and-dispersion-continuous-variables" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="central-tendency-and-dispersion-continuous-variables"><span class="header-section-number">6.1</span> Central tendency and dispersion (continuous variables)</h2>
 <p>The <code>Stats</code> packages which comes with the installation of Base R includes <code>weighted.mean()</code> which, as indicated by its name, computes weighted estimates of the mean of a variable when weights are provided. However the <code>Hmisc</code> package includes a more comprehensive set of functions that can be used when weighting estimates. The code below provides an illustration of weighted means, variance and median of the left-right political attitudes score used in previous chapters, each time comparing it with the unweighted estimates:</p>
@@ -284,7 +284,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The above functions can be used in conjunction with <code>group_by()</code> and <code>summarise()</code> in order to compute weighted estimates of continuous variables by groups of categorical variables:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(RAgeCat))<span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(RAgeCat.f))<span class="sc">%&gt;%</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(RAgeCat.f)<span class="sc">%&gt;%</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Mean=</span><span class="fu">wtd.mean</span>(leftrigh,WtFactor),</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Var=</span><span class="fu">wtd.var</span>(leftrigh,WtFactor),</span>
@@ -396,7 +396,7 @@ leftrigh 2.5216 0.0155</code></pre>
 leftrigh 2.491277 2.551902</code></pre>
 </div>
 </div>
-<p>And now for the median:</p>
+<p>We can similarly</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oldsvyquantile</span>(<span class="sc">~</span>leftrigh,</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>            bsa.design,</span>
