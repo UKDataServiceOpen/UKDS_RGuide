@@ -14,7 +14,7 @@ book:
   title: "Analysing large scale survey data using R"
   author: Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service
   output-file: "UKDS_R_Guide"
-  date: "15 September 2023"
+  date: "June 2024"
 #  repo-url: https://github.com/UKDataServiceOpen/UKDS_RGuide
 #  repo-actions: [edit]
   downloads: [pdf]

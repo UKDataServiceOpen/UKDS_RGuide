@@ -7,7 +7,7 @@ is aimed at two categories of users: 
 
 2. More advanced users who are already familiar with other data analysis tools but who would like to learn how to carry out their analyses in R. 
 
-A wealth of introductory content on R programming is already available online. The guide therefore focuses on providing succinct examples of common operations that most users os social surveys carry out in the course of their research, including how to:
+A wealth of introductory content on R programming is already available online. The guide therefore focuses on providing succinct examples of common operations that most users of social surveys carry out in the course of their research, including how to:
 
 - read in and open datasets.
 - do common data manipulation operations.

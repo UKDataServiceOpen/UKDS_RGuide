@@ -1,5 +1,6 @@
 # Further information
-## Additional commands of interest
+
+### Packages of interest {-}
 The following non exhaustive list provides a few examples of commands and packages that tackle common types of analysis which might be relevant to users of large UK surveys:
   
   - Further regression analysis: the `glm()` command  can be used for fitting a large number of regression including Poisson and multinomial models. The
@@ -12,7 +13,7 @@ packages `lme4` and   `nlme`  are used to fit respectively linear and non linear
 - Using R for creating maps  is  now common among social sicentists and geographers with packages such as `rmaps`, `sp`, `rgdal`,  `rgeos` and `ggmaps`
 
 
-## Additional online resources
+### Additional online resources {-}
 There are hundreds of web sites dedicated to R that users can consult, in addition to CRAN and the main R help list, R-Help with its searchable archives. A few of the most common ones are listed here: 
   
   - As with other statistical packages, the [UCLA](https://stats.oarc.ucla.edu/r/) and [Princeton University](https://libguides.princeton.edu/data-guides) websites provide a good starting point for beginners
