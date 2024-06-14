@@ -3,7 +3,7 @@
 The following non exhaustive list provides a few examples of commands and packages that tackle common types of analysis which might be relevant to users of large UK surveys:
   
   - Further regression analysis: the `glm()` command  can be used for fitting a large number of regression including Poisson and multinomial models. The
-packages ‘lme4’ and  ‘nlme’  are used to fit respectively linear and non linear multilevel models, also known as mixed models.
+packages ‘lme4’ and  ‘nlme’  are used to fit respectively linear and non linear multilevel modelinstall.pas, also known as mixed models.
 - Complex survey data and analysis commands and functions can be found in the ‘survey’ package. It includes commands for taking into account stratified and clustered samples, weights compute design effects and confidence intervals, etc.. 
 - For users interested in latent variable modelling the `factanal()` command from the `stats` package conducts factor analysis. Other resources are available in the `poLCA` (Latent Class Analysis), `ltm` (Latent Trait modelling), `sem` (Structural equation modelling) packages. The  `Lavaan` package aslso provides a wide range of functions for structural equation modelling including with categorical outcomes.
 - Users interested in longitudinal and time series analysis will be interested in the  `stats`and the ‘tseries’ packages. The packages `survival` and `eha` deal with event history and survival analysis, whereas ‘grofit’ and ‘plm’ are designed for panel data and growth analyses.

@@ -398,13 +398,13 @@ leftrigh 2.491277 2.551902</code></pre>
 </div>
 <p>And now for the median:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svyquantile</span>(<span class="sc">~</span>leftrigh,</span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oldsvyquantile</span>(<span class="sc">~</span>leftrigh,</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>            bsa.design,</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">quantiles=</span>.<span class="dv">5</span>,</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">na.rm =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in (function (cond) : error in evaluating the argument 'x' in selecting a method for function 't': Can't merge the outer name `ci` with a vector of length &gt; 1.
-Please supply a `.name_spec` specification.</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>         0.5
+leftrigh 2.4</code></pre>
 </div>
 </div>
 <p>Frequency and contingency tables are computed using <code>svytable()</code>, whose syntax relies on formulas similarly to <code>xtabs()</code> in the previous chapter.</p>

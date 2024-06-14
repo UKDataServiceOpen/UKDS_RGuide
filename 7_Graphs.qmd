@@ -115,21 +115,17 @@ Social science research often requires more advanced plots in order to conduct m
 Mosaic plots provide a visualisation tool for two-way or more contingency tables. The surface of each rectangle, or bar represents the number of observations of the corresponding cells in the contingency table; whereas their length map the relative frequency of the second variable for each category of the first one equivalent to column percentages in a contingency table. In this example below, we will be using the `mosaic()` function from the `vcd` package.
 
 ```{r 7.8}
+#| fig.height: 6
 #| fig-alt: "Mosaic plot of political party affiliation by gender "
 library(vcd)                # Loading the vcd package
 
-mosaic(~Rsex.f+PartyId2.f,                            # Variables specified as
+mosaic(~PartyId2.f+Rsex.f,                            # Variables specified as
        data=bsa,                                      # in xtabs()
        highlighting = "Rsex.f",                       # What variable to contrast
        highlighting_fill = c("#702082", "#008755"), # Colours for contrasting
        direction = c("h", "v"),                       # Orientation of the bars
        labeling= labeling_border(varnames = F,
-                                 abbreviate_labs = T, 
                                  rot_labels = c(0,0,0,0), 
-                                 just_labels = c("left", 
-                                                 "left", 
-                                                 "left", 
-                                                 "left")
                                 ) # labelling functions from mosaic. See 
        )                          # help(labeling_border) for more detail   
 

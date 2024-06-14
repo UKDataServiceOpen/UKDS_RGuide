@@ -230,8 +230,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#differences-in-variance" id="toc-differences-in-variance" class="nav-link" data-scroll-target="#differences-in-variance"><span class="header-section-number">8.2</span> Differences in variance</a></li>
   <li><a href="#significance-of-measures-of-association" id="toc-significance-of-measures-of-association" class="nav-link" data-scroll-target="#significance-of-measures-of-association"><span class="header-section-number">8.3</span> Significance of measures of association</a>
   <ul class="collapse">
-  <li><a href="#between-continuous-variables" id="toc-between-continuous-variables" class="nav-link" data-scroll-target="#between-continuous-variables"><span class="header-section-number">8.3.1</span> Between continuous variables</a></li>
-  <li><a href="#between-categorical-variables" id="toc-between-categorical-variables" class="nav-link" data-scroll-target="#between-categorical-variables"><span class="header-section-number">8.3.2</span> Between categorical variables</a></li>
+  <li><a href="#between-continuous-variables" id="toc-between-continuous-variables" class="nav-link" data-scroll-target="#between-continuous-variables">Between continuous variables</a></li>
+  <li><a href="#between-categorical-variables" id="toc-between-categorical-variables" class="nav-link" data-scroll-target="#between-categorical-variables">Between categorical variables</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -387,8 +387,8 @@ ratio of variances
 </section>
 <section id="significance-of-measures-of-association" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="significance-of-measures-of-association"><span class="header-section-number">8.3</span> Significance of measures of association</h2>
-<section id="between-continuous-variables" class="level3" data-number="8.3.1">
-<h3 data-number="8.3.1" class="anchored" data-anchor-id="between-continuous-variables"><span class="header-section-number">8.3.1</span> Between continuous variables</h3>
+<section id="between-continuous-variables" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="between-continuous-variables">Between continuous variables</h3>
 <p>Another type of common statistical test in social science is about examining whether a coefficient of correlation is significantly different from 0 (alternative hypothesis).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(bsa<span class="sc">$</span>leftrigh, bsa<span class="sc">$</span>libauth, </span>
@@ -409,33 +409,76 @@ sample estimates:
 </div>
 <p>As we could have suspected the coefficient of correlation between the two scales is so small that it cannot be said to be significantly different from zero.</p>
 </section>
-<section id="between-categorical-variables" class="level3" data-number="8.3.2">
-<h3 data-number="8.3.2" class="anchored" data-anchor-id="between-categorical-variables"><span class="header-section-number">8.3.2</span> Between categorical variables</h3>
+<section id="between-categorical-variables" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="between-categorical-variables">Between categorical variables</h3>
 <p>The chi-square test of independence is a very common test of association between categorical variables. It consists in examining whether the association between two variables is likely to be due to chance or not, in other words whether the variability observed in a contingency table is significantly different from what would be expected were it due to chance.</p>
 <p>We will be using <code>chisq.test()</code>, also from the <code>stats</code> package. By contrast with the test of correlation, the <code>chisq.test()</code> needs to be applied to contingency tables that have already been computed. Let us go back to an earlier example, and attempt to test whether the gender differences in political affiliations are due to chance or not.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="fu">xtabs</span>(<span class="sc">~</span>PartyId2.f <span class="sc">+</span>Rsex.f,bsa))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>t<span class="ot">&lt;-</span><span class="fu">xtabs</span>(<span class="sc">~</span>PartyId2.f <span class="sc">+</span>Rsex.f,bsa)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
 
-data:  xtabs(~PartyId2.f + Rsex.f, bsa)
+data:  t
 X-squared = 27.191, df = 5, p-value = 5.236e-05</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vcd)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaic</span>(t,                            <span class="co"># Variables specified as</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">shade=</span>T,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">labeling=</span><span class="fu">labeling_border</span>(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">rot_labels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">varname=</span>F,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">just_labels=</span><span class="st">"left"</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">gp_labels=</span><span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">12</span>),</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">offset_labels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8_Testing_files/figure-html/8.7.1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>As the R output shows, there are highly significant gender differences in political affiliations (p&lt;.001).</p>
 <p>Does this remain true if we account for the survey design, as we did above for the t test? The <code>survey</code> package also has a survey design version of the chi square test:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svychisq</span>(<span class="sc">~</span>PartyId2.f <span class="sc">+</span>Rsex.f, <span class="co"># We directly specify the contingency table here</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>         bsa.design,        </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">statistic =</span> <span class="st">"Chisq"</span> <span class="co"># And we specify the kind of test we would like</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>         )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svychisq</span>(<span class="sc">~</span>PartyId2.f <span class="sc">+</span>Rsex.f, <span class="co"># We directly specify the contingency table here</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>         bsa.design,        </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">statistic =</span> <span class="st">"Chisq"</span> <span class="co"># And we specify the kind of test we would like</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>         )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's X^2: Rao &amp; Scott adjustment
 
 data:  svychisq(~PartyId2.f + Rsex.f, bsa.design, statistic = "Chisq")
 X-squared = 12.069, df = 5, p-value = 0.1126</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vcd)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>t<span class="ot">&lt;-</span><span class="fu">svychisq</span>(<span class="sc">~</span>PartyId2.f<span class="sc">+</span>Rsex.f,bsa.design,<span class="at">statistic =</span> <span class="st">"Chisq"</span>)<span class="sc">$</span>observed</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaic</span>(t,                            <span class="co"># Variables specified as</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">shade=</span>T,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">labeling=</span><span class="fu">labeling_border</span>(</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">rot_labels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>),</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">varname=</span>F,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">just_labels=</span><span class="st">"left"</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">gp_labels=</span><span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">12</span>),</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">offset_labels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="8_Testing_files/figure-html/8.9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Interestingly this time, when accounting for survey design, sampling and non response, gender differences in political affiliations are not significant anymore.</p>

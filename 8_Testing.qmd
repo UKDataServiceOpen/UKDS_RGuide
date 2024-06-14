@@ -14,6 +14,9 @@ bsa<-read_spss(paste0(datadir,"8849spss_V1/bsa2017_open_enviropol.sav"))
 bsa$RAgeCat.f<-droplevels(as_factor(bsa$RAgeCat))
 bsa$Rsex.f<-droplevels(as_factor(bsa$Rsex))
 bsa$PartyId2.f<-droplevels(as_factor(bsa$PartyId2))
+levels(bsa$PartyId2.f)<-c(
+  "Con","Lab","Lib Dems","Other","None", "Greens" # Shorter level names
+  ) 
 ```
 
 This section covers how to implement common statistical tests in R both without and with survey data . A working knowledge of these tests and their theoretical assumptions is assumed.
@@ -82,7 +85,7 @@ The variance of left-right political leaning is larger among men than women, in 
 
 ## Significance of measures of association
 
-### Between continuous variables
+### Between continuous variables {-}
   
   Another type of  common statistical   test in social science is about examining whether a coefficient of correlation is significantly different from 0 (alternative hypothesis).
 
@@ -93,7 +96,7 @@ cor.test(bsa$leftrigh, bsa$libauth,
 
 As we could have suspected the coefficient of correlation between the two scales is so small that it cannot be said to be  significantly  different from zero.
 
-### Between categorical variables
+### Between categorical variables {-}
   
   The chi-square test of independence is a very common  test of association between categorical variables. It consists in examining whether the association between two variables is likely to be due to chance or not, in other words whether the variability observed in a contingency table is significantly different from what would be expected were it due to chance.
 
@@ -101,8 +104,25 @@ We will be using `chisq.test()`, also  from the `stats` package. By contrast wit
 Let us go back to an earlier example, and attempt to test whether the gender differences in political affiliations are due to chance or not. 
 
 ```{r 8.7}
-chisq.test(xtabs(~PartyId2.f +Rsex.f,bsa))
+t<-xtabs(~PartyId2.f +Rsex.f,bsa)
+chisq.test(t)
 ```
+
+```{r 8.7.1}
+#| fig.height: 6
+library(vcd)
+mosaic(t,                            # Variables specified as
+       shade=T,
+       labeling=labeling_border(
+         rot_labels = c(0,0,0,0),
+         varname=F,
+         just_labels="left",
+         gp_labels=gpar(fontsize = 12),
+         offset_labels = c(0, 0, 0, 3)
+)
+)
+```
+
 
 As the R output shows, there are highly significant gender differences in political affiliations (p<.001).
 
@@ -115,6 +135,22 @@ svychisq(~PartyId2.f +Rsex.f, # We directly specify the contingency table here
          )
 ```
 
+```{r 8.9}
+#| fig.height: 6
+library(vcd)
+t<-svychisq(~PartyId2.f+Rsex.f,bsa.design,statistic = "Chisq")$observed
+
+mosaic(t,                            # Variables specified as
+       shade=T,
+       labeling=labeling_border(
+         rot_labels = c(0,0,0,0),
+         varname=F,
+         just_labels="left",
+         gp_labels=gpar(fontsize = 12),
+         offset_labels = c(0, 0, 0, 3)
+)
+)
+```
 Interestingly this time, when accounting for survey design, sampling and non response, gender differences in political affiliations are not significant anymore.
 
 \newpage

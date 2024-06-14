@@ -10,12 +10,12 @@ library(ggplot2)
 library(haven)
 datadir<-"~/OneDrive/data/bsa/"
 bsa<-read_spss(paste0(datadir,"8849spss_V1/bsa2017_open_enviropol.sav"))
-bsa$RAgeCat.f<-droplevels(as_factor(bsa$RAgeCat))
+# bsa$RAgeCat.f<-droplevels(as_factor(bsa$RAgeCat))
 bsa$Rsex.f<-droplevels(as_factor(bsa$Rsex))
 ```
-Most users   of social surveys will be looking to  infer nationally representative estimates when conducting analyses. These entail using weights, which are meant to correct estimates for the under/over representation of certain groups in the sample due to the sampling process or  non response. Conducting sound inference relies not just on weighting estimates but also on computing adequate standard errors or conference intervals, which are measure of the precision of the estimates. 
+Most users of social surveys will be looking to produce representative estimates when conducting analyses. Conducting such population inference entail using weights, which are meant to correct estimates for the under/over representation of certain groups in the sample due to the sampling process or non response. Producing sound results relies not just on weighting estimates but also on computing adequate standard errors or conference intervals, which  measure the precision of the estimates. 
 
-The recommended approach to inferring confidence intervals and standard errors involves accounting for the survey design (ie the way  sampling was carried out) when conducting analyses -- which can be done with the `survey` package in R, a topic described in Section 6.3. At the same time, for users who are concerned with quickly computing reasonably accurate, rather than  publication-quality estimates, it may be useful to be aware which common R commands and operations can be used with weights. 
+The recommended approach to inferring confidence intervals and standard errors involves accounting for the survey design (ie the way  sampling was carried out) when conducting analyses -- which can be done with the `survey` package in R, a topic described in Section 6.3. At the same time, for users who are concerned with quickly computing reasonably accurate point estimates, rather than  publication-quality results, it may be useful to be aware which common R commands and operations can be used with weights. 
 
 ## Central tendency and dispersion (continuous variables)
   
@@ -143,7 +143,7 @@ And now for the median:
   
 ```{r 6.7,error=T}
 #| error: true
-svyquantile(~leftrigh,
+oldsvyquantile(~leftrigh,
             bsa.design,
             quantiles=.5,
             na.rm = T)
