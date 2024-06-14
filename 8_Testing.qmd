@@ -9,6 +9,7 @@ library(dplyr)
 library(Hmisc)
 library(ggplot2)
 library(haven)
+library(vcd)
 datadir<-"~/OneDrive/data/bsa/"
 bsa<-read_spss(paste0(datadir,"8849spss_V1/bsa2017_open_enviropol.sav"))
 bsa$RAgeCat.f<-droplevels(as_factor(bsa$RAgeCat))
@@ -72,7 +73,7 @@ var.test(libauth~Rsex.f,
          data=bsa)
 ```
 Significant differences in the variance  between men and women, but only at the .1 threshold.
-```{r 8.5}
+```{r 8.4.1}
 
 # Testing for whether men have a lower (ie more left-wing)  score
 var.test(leftrigh~Rsex.f,
@@ -89,7 +90,7 @@ The variance of left-right political leaning is larger among men than women, in 
   
   Another type of  common statistical   test in social science is about examining whether a coefficient of correlation is significantly different from 0 (alternative hypothesis).
 
-```{r 8.6}
+```{r 8.5}
 cor.test(bsa$leftrigh, bsa$libauth, 
          use='complete.obs')
 ```
@@ -97,30 +98,19 @@ cor.test(bsa$leftrigh, bsa$libauth,
 As we could have suspected the coefficient of correlation between the two scales is so small that it cannot be said to be  significantly  different from zero.
 
 ### Between categorical variables {-}
+
+Let us go back to an earlier example, and attempt to test whether the gender differences in political affiliations are due to chance or not using a chi-square test of independence . 
   
-  The chi-square test of independence is a very common  test of association between categorical variables. It consists in examining whether the association between two variables is likely to be due to chance or not, in other words whether the variability observed in a contingency table is significantly different from what would be expected were it due to chance.
+The chi-square is a very common  test of association between categorical variables. It consists in examining whether the pattern of association between two variables is likely to be random or not, in other words whether the variability observed in a contingency table is significantly different from what could be expected were it due to chance.
 
-We will be using `chisq.test()`, also  from the `stats` package. By contrast with the test of correlation, the `chisq.test()` needs to be applied to  contingency tables that have already been computed.
-Let us go back to an earlier example, and attempt to test whether the gender differences in political affiliations are due to chance or not. 
+We will be using `chisq.test()`, also  from the `stats` package. By contrast with the test of correlation, the `chisq.test()` needs to be applied to  contingency tables that have already been computed separately.
 
-```{r 8.7}
+
+
+
+```{r 8.6}
 t<-xtabs(~PartyId2.f +Rsex.f,bsa)
 chisq.test(t)
-```
-
-```{r 8.7.1}
-#| fig.height: 6
-library(vcd)
-mosaic(t,                            # Variables specified as
-       shade=T,
-       labeling=labeling_border(
-         rot_labels = c(0,0,0,0),
-         varname=F,
-         just_labels="left",
-         gp_labels=gpar(fontsize = 12),
-         offset_labels = c(0, 0, 0, 3)
-)
-)
 ```
 
 
@@ -128,30 +118,71 @@ As the R output shows, there are highly significant gender differences in politi
 
 Does this remain true if we account for the survey design, as we did above for the t test? The `survey` package also has a survey design version of the chi square test:
 
-```{r 8.8}
+```{r 8.7}
 svychisq(~PartyId2.f +Rsex.f, # We directly specify the contingency table here
          bsa.design,        
           statistic = "Chisq" # And we specify the kind of test we would like
          )
 ```
+Interestingly this time, when accounting for survey design, sampling and non response, gender differences in political affiliations are not significant anymore.
+
+#### Visualising association in contingency tables with mosaic plots {-}
+
+
+In the previous chapter we used mosaic plots for representing contingency tables of political party affiliation by gender. A nice feature of these plots is that they can also  be used to  visualise significant deviations between observed and expected values. 
+
+This relies on  function specified with the `gp=` option which defines the  shading the colours of the respective cells according to the size of these deviation, also known as residuals. Thresholds for shading can be customised as required.
+
+
+
+```{r 8.8}
+#| fig.height: 6
+mosaic(t,                            
+       shade=T,
+       gp = shading_hsv,               # shading function
+       labeling=labeling_border(
+         rot_labels = c(0,0,0,0),      # no label rotation on any plot facet
+         varname=F,                    # no  variable names on the plot
+         just_labels="left",           # labels left justified
+         gp_labels=gpar(fontsize = 12),# label font size
+         offset_labels = c(0, 0, 0, 3) # margins between label and plot facet
+),
+main = "Unweighted mosaic plot of party affiliation by gender" # Plot title
+)
+```
+The red and blue shaded rectangles in the figure above denote respectively  lower and higher numbers of observations than expected if the two variables were independent from each other.
+
+Another convenient  feature of `mosaic()` is that it readily accepts weighted contingency tables produced by the `survey` package. If we repeat what we did in Chapter 6, namely, declare the survey design, and perform a survey design-informed chi square test, we can then feed the weighted  frequencies computed by `svychisq` into the mosaic plot.
 
 ```{r 8.9}
-#| fig.height: 6
-library(vcd)
+library(survey) ### Loading the package in memory
+bsa.design<-svydesign(ids =~1,
+                      weights=~WtFactor,
+                      data=bsa) 
 t<-svychisq(~PartyId2.f+Rsex.f,bsa.design,statistic = "Chisq")$observed
+```
 
-mosaic(t,                            # Variables specified as
+The plot below does not display shades of blue or red anymore, reflecting the fact that the weighted distributions of political party affiliation and gender are  weakly associated.
+
+```{r 8.10}
+#| fig.height: 6
+
+mosaic(t,                            
        shade=T,
+       gp = shading_hcl,
        labeling=labeling_border(
          rot_labels = c(0,0,0,0),
          varname=F,
          just_labels="left",
          gp_labels=gpar(fontsize = 12),
          offset_labels = c(0, 0, 0, 3)
-)
+),
+main = "Weighted mosaic plot of party affiliation by gender"
+
 )
 ```
-Interestingly this time, when accounting for survey design, sampling and non response, gender differences in political affiliations are not significant anymore.
+
+
 
 \newpage
 
