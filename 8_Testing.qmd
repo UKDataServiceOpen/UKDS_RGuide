@@ -148,9 +148,9 @@ mosaic(t,
          just_labels="left",           # labels left justified
          gp_labels=gpar(fontsize = 12),# label font size
          offset_labels = c(0, 0, 0, 3) # margins between label and plot facet
-),
+         ),
 main = "Unweighted mosaic plot of party affiliation by gender" # Plot title
-)
+         )
 ```
 The red and blue shaded rectangles in the figure above denote respectively  lower and higher numbers of observations than expected if the two variables were independent from each other.
 

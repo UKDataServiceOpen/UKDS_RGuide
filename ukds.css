@@ -1,5 +1,5 @@
 .quarto-title-block .quarto-title-banner {
-  background-size: 15%;
+#  background-size: 55%;
   background-position: left top;
   background-repeat: no-repeat;
   padding-left: 50px;
@@ -9,10 +9,10 @@
   text-align: left;
 }
 
-.cell {
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
+#.cell {
+#  margin-top: 0px;
+#  margin-bottom: 30px;
+#}
 
 title {
   color: #742082;

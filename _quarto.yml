@@ -50,12 +50,14 @@ pdf-engine: lualatex
 
 format:
   html:
-#    css: style.css
     css: ukds.css
     toc: true
     title-block-banner: "white"
     title-block-banner-color: "#742082"
-
+ 
+  docx: 
+     fig-width: 7
+     papersize: A4
 
   titlepage-pdf:
      titlepage: plain
