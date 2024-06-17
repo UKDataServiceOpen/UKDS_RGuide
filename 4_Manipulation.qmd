@@ -37,7 +37,7 @@ bsa$lngovnosa2 <- log(bsa$govnosa2)
 class(bsa$govnosa2)       #check to see if it is numeric
 bsa$govnosa2.n <- as.numeric(bsa$govnosa2)#convert to numeric 
 class(bsa$govnosa2.n)       #check again
-bsa$lngovnosa2 <- log(bsa$govnosa2.n) #create new log of the leftright      variable 
+bsa$lngovnosa2 <- log(bsa$govnosa2.n) #create new log of the LEFTRIGHT variable 
 summary(cbind(bsa$lngovnosa2,bsa$govnosa2.n))
 ```
 
@@ -58,24 +58,24 @@ The number in the output does not refer to  underlying numerical values to which
 
 
 ## Recoding variables
- The following commands will create a new variable called `Married2` where respondents  are categorised into two new categories: 'Not partnered' and 'Partnered'. The "separated/divorced” and “Never married”  categories of the “Married” variable are recoded as  “Not partnered”. It is always advised to create new variables when recoding old ones so the original data is not tampered with.
+ The following commands will create a new variable called `Married2` where respondents  are categorised into two new categories: 'Not partnered' and 'Partnered'. The "separated/divorced” and 'Never married'  categories of the 'Married' variable are recoded as  'Not partnered'. It is always advised to create new variables when recoding old ones so the original data is not tampered with.
  
 ```{r 4.7}
 bsa$Married.f<-as_factor(bsa$Married,"labels")
-bsa$Married2 <- ifelse(bsa$Married.f=="Married/living as married","Partnered",bsa$Married)
+bsa$Married2 <- ifelse(bsa$Married.f=="Married/living as married",
+                                      "Partnered",bsa$Married)
 bsa$Married2 <- ifelse(bsa$Married.f=="Widowed" | 
                        bsa$Married.f=="Never married" | 
-                      bsa$Married.f=="Separated/divorced","Not partnered",bsa$Married2)
+                      bsa$Married.f=="Separated/divorced",
+                                      "Not partnered",bsa$Married2)
 
 table(bsa$Married2)
 
 ```
 The second and fourth categories have been renamed to ‘Not partnered’. Now we
-have two levels
-    * Partnered
-    *Not partnered
+have two levels: 'Partnered' and 'Not partnered'
 
-`ifelse()` is  a convenient tool to use when it is required to work with Base R or when the variables have a limited number of categories. More complex cases may require a more advanced function. The `dplyr` library provides a comprehensive set of data manipulation tools.
+`ifelse()` is  a convenient tool when it is required to work with Base R or when the variables have a limited number of categories. More complex cases may require a more advanced function. The `dplyr` library provides a comprehensive set of data manipulation tools.
 
 
 ```{r 4.8}
@@ -83,7 +83,8 @@ library(dplyr)
 bsa<-bsa%>%
      mutate(Married3=case_when(
                Married.f == "Married/living as married" ~ "Partnered",  
-               Married.f == "Separated/divorced" | Married.f == "Widowed" ~ "Not Partnered",
+               Married.f == "Separated/divorced" | 
+               Married.f == "Widowed" ~ "Not Partnered",
                Married.f == "Never married" ~ "Not Partnered"
 )
 )
@@ -133,10 +134,12 @@ It may sometimes be useful to  recode implicit  missing values (ie  considered b
 Let's assume for a moment  that we would like to get rid of respondents aged under 25 for our analysis. A safe way to proceed is by creating a new dataset. 
 
 ```{r 4.9}
-bsa$RAgeCat.f <- as_factor(bsa$RAgeCat) # convert labelled numeric variable into factor
+# convert labelled numeric variable into factor
+bsa$RAgeCat.f <- as_factor(bsa$RAgeCat) 
 table(bsa$RAgeCat.f)                      
 
-bsa.adults<-bsa[!bsa$RAgeCat.f=="18-24", ] # retains all values except those that match the condiction  
+# retains all values except those that match the condition:  
+bsa.adults<-bsa[!bsa$RAgeCat.f=="18-24", ] 
 table(bsa.adults$RAgeCat.f)                      
 
 ```

@@ -32,8 +32,10 @@ One sided tests can be conducted by specifying that the alternative hypothesis (
 
 ```{r 8.1}
 # Testing for significant differences in liberal vs authoritarian score
+summary(
 t.test(libauth~Rsex.f,
        data=bsa)
+)
 ```
 No significant differences (ie the difference in  `libauth` between men and women is not significantly different from zero)
 ```{r 8.2}
