@@ -73,6 +73,7 @@ format:
      documentclass: scrreport
      fig-width: 7
      papersize: A4
+     include-in-header: preamble.tex
      geometry:
       - top=25mm
       - left=25mm

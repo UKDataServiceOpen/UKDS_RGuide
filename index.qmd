@@ -1,4 +1,4 @@
-# Introduction {.unnumbered}
+# Introduction {-}
 
 This guide provides an introduction to analysing large scale social survey data using R, with examples from the British Social Attitudes Survey 2017. It
 is aimed at two categories of users: 
