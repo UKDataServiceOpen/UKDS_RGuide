@@ -247,7 +247,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./6_Weighted.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted estimates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted and survey design-informed estimates</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -259,7 +259,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./8_Testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -295,8 +295,8 @@ window.Quarto = {
 
 
 
-<p>Regression is one of the most common modelling tools used in social science. The <code>glm()</code> command from the Base R installation can be used for fitting linear and non-linear models. These include OLS regression, logistic/probit regression, and more generally any model falling under the Generalized Linear Model (GLM) framework.<br>
-In this section, we will use it to investigate the association between the level of education and whether someone voted or not at the last general elections. But let’s first briefly explore the variables using the <code>class()</code> and <code>table()</code> commands:</p>
+<p>Regression is one of the most common modelling tools used in social science. The <code>glm()</code> function from Base R can be used for fitting linear and non-linear models. These include OLS regression, logistic/probit regression, and more generally any model falling under the Generalized Linear Model (GLM) framework.<br>
+In this section, we will use it to investigate the association between the level of education and whether someone voted or not at the last general elections. But let’s first briefly explore the variables using the <code>class()</code> and <code>table()</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(bsa<span class="sc">$</span>HEdQual3.f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -324,7 +324,7 @@ In this section, we will use it to investigate the association between the level
 2205  776 </code></pre>
 </div>
 </div>
-<p>We converted earlier <code>HEdQual3</code> into a factor variable, but as we can see above, <code>Voted</code> is still a labelled numeric variable. It is a good idea to convert it to a factor as well. This is not absolutely necessary, but gives greater flexibility, for instance when having to change the reference category on the go.</p>
+<p>We converted earlier <code>HEdQual3</code> into a factor variable, but as we can see above, <code>Voted</code> is still a labelled numeric variable. It is a good idea to convert it to a factor as well. This is not absolutely necessary, but gives greater flexibility, for instance if we need to change the reference category on the go in the regression model.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Voted.f<span class="ot">&lt;-</span><span class="fu">droplevels</span>(<span class="fu">as_factor</span>(bsa<span class="sc">$</span>Voted)) <span class="co"># As before, factor conversion</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>Voted.f)                           <span class="co"># Note that Yes comes before No</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -332,7 +332,7 @@ In this section, we will use it to investigate the association between the level
 <pre><code>[1] "Yes" "No" </code></pre>
 </div>
 </div>
-<p>For greater readability we can will also shorten the levels of <code>HEdQual3.f</code> using the <code>level()</code> function:</p>
+<p>For greater readability we can also shorten the levels of <code>HEdQual3.f</code> using the <code>level()</code> function:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>HEdQual3.f) <span class="do">### The original level names  are a bit verbose...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -358,7 +358,7 @@ Yes  0
 No   1</code></pre>
 </div>
 </div>
-<p>As we are interested in the latter we need to change the reference category using the <code>relevel()</code> function. We can also create a new variable named <code>Voted2</code> so as to keep a copy of the original variable intact.</p>
+<p>As we are interested in the latter, we need to change the reference category using the <code>relevel()</code> function. We will create a new variable named <code>Voted2</code> so as to keep the original variable intact.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reverse the order</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Voted2 <span class="ot">&lt;-</span> <span class="fu">relevel</span>(bsa<span class="sc">$</span>Voted.f, <span class="at">ref =</span> <span class="st">"No"</span>)</span>
@@ -404,7 +404,7 @@ AIC: 3248.4
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 </div>
-<p>To run a model controlling for gender <code>Rsex</code>and age <code>RAgeCat</code>, one simply needs to add them on the right hand side of the formula, separated with a plus (+) sign.</p>
+<p>To run a model controlling for gender <code>Rsex</code>and age <code>RAgeCat</code>, one simply needs to add them on the right-hand side of the formula, separated with a plus (+) sign.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Voted2 <span class="sc">~</span> HEdQual3.f <span class="sc">+</span> Rsex.f <span class="sc">+</span> RAgeCat.f, </span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data=</span>bsa, </span>
@@ -446,7 +446,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 <section id="model-interpretation" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="model-interpretation">Model interpretation</h4>
-<p><code>summary()</code> provide a broad overview of the model output, not dissimilar to other statistical software. But <code>fit1</code> and <code>fit2</code> contain more information than displayed by <code>summary()</code>. For an overview, one can type:</p>
+<p><code>summary()</code> provides a broad overview of the model output, comparable to other statistical software. But <code>fit1</code> and <code>fit2</code> contain more information than what is displayed by <code>summary()</code>. For an overview, one can type:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(fit1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -463,7 +463,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 [31] "y"                </code></pre>
 </div>
 </div>
-<p>… Which provides a list of all the content items stored by it. We can request specific elements, for example the regression coefficients, by specifying its name following the <code>$</code> sign:</p>
+<p>… Which displays a list of all the content items stored by it. We can request specific elements, the regression coefficients, by specifying its name following the <code>$</code> sign:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>fit1<span class="sc">$</span>coefficients <span class="co"># extracting regression coefficients</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -473,7 +473,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
                  -0.6406223                  -0.8367243 </code></pre>
 </div>
 </div>
-<p>Shortcuts to some of these contents are available as functions, for example <code>coef()</code> to extract the regression coefficients, or <code>deviance()</code> for the log-likelihood of the fitted model.</p>
+<p>Shortcuts to some of these contents are available as functions such as <code>coef()</code> to extract the regression coefficients, or <code>deviance()</code> for the log-likelihood of the fitted model.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -521,12 +521,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
                        2.16 </code></pre>
 </div>
 </div>
-<p>It is beyond the remit of this guide to describe the full output of <code>glm()</code>. Please refer to the package documentation for more detailed explanations.</p>
+<p>It is beyond the remit of this guide to describe the full output of <code>glm()</code>. See the <a href="https://stat.ethz.ch/R-manual/R-patched/library/stats/html/glm.html"><code>stats</code> package documentation</a> for more detailed explanations.</p>
 </section>
 <section id="computing-odds-ratios" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="computing-odds-ratios">Computing odds ratios</h4>
 <p>Standard logistic regression coefficients measure the logarithmic effect of variables on the probability of the outcome such as <span class="math inline">\(log(\beta_X)=P(y)\)</span>. It is common practice to convert these into odd ratios by exponentiating them, such as that <span class="math inline">\(\beta_X=exp(P(y))\)</span>.</p>
-<p>Using the <code>coef()</code> and <code>confint()</code> functions, the code above respectively extracts the coefficients and associated 95% confidence intervals from <code>fit2</code> then collate them using <code>cbind()</code>.</p>
+<p>Using the <code>coef()</code> and <code>confint()</code> functions, the code above respectively extracts the coefficients and the associated 95% confidence intervals from <code>fit2</code> then collate them using <code>cbind()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Beta_x=</span><span class="fu">exp</span>(</span>
@@ -573,7 +573,7 @@ RAgeCat.f65+                8.7065916 5.7183039 13.2696921</code></pre>
 </section>
 <section id="assessing-model-fit" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="assessing-model-fit">Assessing model fit</h4>
-<p>The Akaike Information Criterion (AIC) is a measure of relative fit for maximum likelihood fitted models. It is used to compare the improvement in how several models fit some data relative to each other, allowing for the different number of parameters or degrees of freedom. The smaller the AIC, the better the fit. In order for the comparison to be valid, we need to ensure that the models were run with the same number of observations each time. As it is likely that the second model was run on a smaller sample, due to missing values for the Age and Sex variables, we will need to re-run the first one without.</p>
+<p>The Akaike Information Criterion (AIC) is a measure of relative fit for maximum likelihood fitted models. It is used to compare the improvement in how several models fit some data relative to each other, allowing for the different number of parameters or degrees of freedom. The smaller the AIC, the better the fit. In order for the comparison to be valid, we need to ensure that the models were run with the same number of observations each time. As it is likely that the second model was run on a smaller sample, due to missing values for the Age and Sex variables, we will need to re-run the first one without these.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Voted2 <span class="sc">~</span> HEdQual3.f, </span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">data=</span>bsa<span class="sc">%&gt;%</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Rsex.f) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(RAgeCat.f)), </span>
@@ -585,7 +585,7 @@ RAgeCat.f65+                8.7065916 5.7183039 13.2696921</code></pre>
 </div>
 </div>
 <p>We can see that the model controlling for gender and sex is a better fit to the data than the one without controls as it has an AIC of 2944.5 against 3244.5 for fit1.</p>
-<p>With the information about the deviance from <code>fit1</code> and <code>fit2</code>, we can also compute the overall significance of the model, that is whether the difference between the deviance (another likelihood-based measure of fit) for the fitted model is significantly different from that of the empty or null model. This is usually carried out by conducting a chi square test, accounting for the differences in the number of parameters (ie degrees of freedom) between the two models. As with other R code, this can achieved step by step or in one go:</p>
+<p>With the information about the deviance from <code>fit1</code> and <code>fit2</code>, we can also compute the overall significance of the model, that is whether the difference between the deviance (another likelihood-based measure of fit) for the fitted model is significantly different from that of the empty or null model. This is usually carried out by conducting a chi square test, accounting for the differences in the number of parameters (ie degrees of freedom) between the two models. As with other R code, this can be achieved step by step or in one go:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>dev.d<span class="ot">&lt;-</span>fit2<span class="sc">$</span>null.deviance <span class="sc">-</span> fit2<span class="sc">$</span>deviance <span class="co"># Difference in deviance</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>df.d<span class="ot">&lt;-</span>fit2<span class="sc">$</span>df.null <span class="sc">-</span> fit2<span class="sc">$</span>df.residual     <span class="co"># ... and degrees of freedom</span></span>
@@ -1012,8 +1012,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./8_Testing.html" class="pagination-link" aria-label="Statistical testing">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical testing</span></span>
+      <a href="./8_Testing.html" class="pagination-link" aria-label="Significance testing">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

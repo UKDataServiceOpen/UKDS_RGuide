@@ -1,4 +1,4 @@
-# Producing weighted estimates
+# Producing weighted and survey design-informed estimates
 ```{r setup6}
 #| echo: false
 #| message: false
@@ -13,13 +13,13 @@ bsa<-read_spss(paste0(datadir,"8849spss_V1/bsa2017_open_enviropol.sav"))
  bsa$RAgeCat.f<-droplevels(as_factor(bsa$RAgeCat))
 bsa$Rsex.f<-droplevels(as_factor(bsa$Rsex))
 ```
-Most users of social surveys will be looking to produce representative estimates when conducting analyses. Conducting such population inference entail using weights, which are meant to correct estimates for the under/over representation of certain groups in the sample due to the sampling process or non response. Producing sound results relies not just on weighting estimates but also on computing adequate standard errors or conference intervals, which  measure the precision of the estimates. 
+Most users of social surveys will be looking to produce representative estimates when conducting analyses. Conducting such population inference entail using weights, which are meant to correct estimates for the under/over representation of certain groups in the sample due to the sampling process and non-response. Producing sound results relies not just on weighting estimates but also on computing adequate standard errors or confidence intervals, which  measure the precision of the estimates. 
 
 The recommended approach to inferring confidence intervals and standard errors involves accounting for the survey design (ie the way  sampling was carried out) when conducting analyses -- which can be done with the `survey` package in R, a topic described in Section 6.3. At the same time, for users who are concerned with quickly computing reasonably accurate point estimates, rather than  publication-quality results, it may be useful to be aware which common R commands and operations can be used with weights. 
 
 ## Central tendency and dispersion (continuous variables)
   
-The `Stats` packages which comes with the  installation of Base R includes `weighted.mean()` which, as indicated by its name, computes weighted estimates of the mean of a variable when weights are provided. However the `Hmisc` package includes a more comprehensive set of functions that can be used when weighting estimates. The code below provides an illustration of weighted means, variance and median of the left-right political attitudes score used in previous chapters, each time comparing it with the unweighted estimates:
+The `stats` package, part  of  Base R, includes `weighted.mean()` which, as indicated by its name, computes weighted estimates of the mean of a variable when weights are provided. However, the `Hmisc` package includes a more comprehensive set of functions that can be used when weighting estimates: `wtd.mean()`, `wtd.var()` and `wtd.quantile()`. The code below provides an illustration of weighted means, variance and median of the left-right political attitudes score used in previous chapters, each time comparing it with the unweighted estimates:
   
 ```{r 6.1}
 ### Mean
@@ -51,7 +51,7 @@ bsa%>%
 
 ## Frequencies and contingency tables
 
-Neither `ftable()` or `table()` that were used in previous chapter allow weights. And although the `Hmisc` packages includes the `wtd.table()` function for one-way frequency tables, we recommend using `xtabs()` as previously, as it it more versatile. Indeed, as variables used with `xtabs()` are specified on the right hand side of a formula:
+Neither `ftable()` nor `table()` that were used in previous chapter allow weights. Although the `Hmisc` packages includes a `wtd.table()` function for one-way frequency tables, we recommend using `xtabs()` as previously, as it is more versatile and allows weights. Indeed, as variables used with `xtabs()` are specified on the right hand side of a formula:
 
 ```
 > xtabs(~var1, data=mydata)
@@ -61,7 +61,7 @@ or
 ```
 > xtabs(~var1 + var2, data=mydata)
 ```
-... The variable containing the weights is  passed to `xtabs()` by specifying its name on the left hand side of the equation (or the tilde `~` ) 
+... A variable containing  weights can be  passed to `xtabs()` by specifying its name on the left hand-side of the equation (or the tilde `~` ) 
 
 ```
 > xtabs(weights~var1 + var2, data=mydata)
@@ -90,7 +90,7 @@ cbind(
 ```
 
  
-Obtaining weighted contingency tables follow the same logic:
+Obtaining a weighted contingency table of respondents' views about flying by gender follow the same logic:
 
 ```{r 6.4}
 ## Unweighted vs weighted contingency tables
@@ -112,11 +112,11 @@ cbind(
 
 ## Inference using survey procedures
 
-The weighting procedures described above could be described as 'quick and dirty' in that they compute representative point estimates -- ie a single value. Computing the precision of survey data estimates -- for example via their standard error -- requires more than just adding weights to a command. Information about the survey design, its primary sampling units, strata and clusters is required so that robust standard errors, statistical tests and/or confidence interval can be computed. The `Survey` package was designed in order to deal with this set of issues. It provides functions for integrating survey design into R as well as computing common estimates. Its  most important features are described below. 
+The weighting procedures described above could be described as 'quick and dirty' in that they compute representative point estimates -- i.e.  single values. Computing the precision of survey data estimates -- for example via their standard error -- requires more than just adding weights to a command. Information about the survey design, its primary sampling units, strata and clusters is required so that robust standard errors, statistical tests and/or confidence interval can be computed. The `Survey` package was designed in order to deal with this set of issues. It provides functions for computing common estimates while accounting for the survey design. Its  most important features are described below. 
 
-In order to  use survey fonctions one first needs to create a `svydesign` object, in essence a version of the data that incorporates the sample design information available, then  compute the required estimate using the `svydesign` object.
+In order to  use survey functions one first needs to create a `svydesign` object, in essence a version of the data that incorporates the sample design information available, then  compute the required estimate using the `svydesign` object.
 
-An common issue with survey datasets available in the UK is that  sampling information is often only available in secured version of the data, restricting its access to authorised users in a secure lab. Although it is sometimes possible to use  available variables to account for aspects of the sample design -- region as a strata in the case of stratified samples -- in most cases users are left with computing standard errors without sample design information, which amounts to assuming that the sample was drawn purely at random. Even if this is the case however, using  the `survey` package is recommended, as it provides a coherent framework for computing survey parameters.     
+A common issue with survey datasets available in the UK is that  sampling information is often only available in a secured version of the data, restricting its access to authorised users in a secure lab. Although it is sometimes possible to use  available variables to account for aspects of the sample design -- region as a strata in the case of stratified samples -- in most cases users are left with computing standard errors without sample design information, which amounts to assuming that the sample was drawn purely at random. Even if this is the case however, using  the `survey` package is recommended, as it provides a coherent framework for computing survey parameters.     
 
 
 ```{r 6.5}
@@ -128,7 +128,7 @@ bsa.design<-svydesign(ids =~1,
 
 The code above simply declares the survey design by creating the `bsa.design` object (the name is arbitrary). The `ids=` parameter is where  primary sampling units are declared, as well as any clustering information as a formula ie `~PSU+cluster2id...`. When PSU information is unavailable `ids` is given the value 1 or 0. A `strata=` and `fpc=` are available in order to declare the sampling strata and the variable used for finite population correction. None of these are available in the bsa dataset, and estimation commands will therefore rely on the assumption of simple random sampling.
 
-We can now compute estimates similar estimates as in the previous sections. The code below provides the mean of the left vs right political orientation indicator, as well as its 95% confidence interval: 
+We can now compute estimates comparable to those in the previous sections. The code below provides the mean of the left vs right political orientation indicator, as well as its 95% confidence interval: 
   
 ```{r 6.6}
 a<-svymean(~leftrigh,

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Analysing social survey data using R - 6&nbsp; Producing weighted estimates</title>
+<title>Analysing social survey data using R - 6&nbsp; Producing weighted and survey design-informed estimates</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -146,7 +146,7 @@ background: white;
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./6_Weighted.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted estimates</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./6_Weighted.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted and survey design-informed estimates</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -156,7 +156,7 @@ background: white;
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted estimates</span></h1>
+      <h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted and survey design-informed estimates</span></h1>
                       </div>
   </div>
     
@@ -218,7 +218,7 @@ background: white;
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./6_Weighted.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted estimates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted and survey design-informed estimates</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -230,7 +230,7 @@ background: white;
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./8_Testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -274,11 +274,11 @@ background: white;
 
 
 
-<p>Most users of social surveys will be looking to produce representative estimates when conducting analyses. Conducting such population inference entail using weights, which are meant to correct estimates for the under/over representation of certain groups in the sample due to the sampling process or non response. Producing sound results relies not just on weighting estimates but also on computing adequate standard errors or conference intervals, which measure the precision of the estimates.</p>
+<p>Most users of social surveys will be looking to produce representative estimates when conducting analyses. Conducting such population inference entail using weights, which are meant to correct estimates for the under/over representation of certain groups in the sample due to the sampling process and non-response. Producing sound results relies not just on weighting estimates but also on computing adequate standard errors or confidence intervals, which measure the precision of the estimates.</p>
 <p>The recommended approach to inferring confidence intervals and standard errors involves accounting for the survey design (ie the way sampling was carried out) when conducting analyses – which can be done with the <code>survey</code> package in R, a topic described in Section 6.3. At the same time, for users who are concerned with quickly computing reasonably accurate point estimates, rather than publication-quality results, it may be useful to be aware which common R commands and operations can be used with weights.</p>
 <section id="central-tendency-and-dispersion-continuous-variables" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="central-tendency-and-dispersion-continuous-variables"><span class="header-section-number">6.1</span> Central tendency and dispersion (continuous variables)</h2>
-<p>The <code>Stats</code> packages which comes with the installation of Base R includes <code>weighted.mean()</code> which, as indicated by its name, computes weighted estimates of the mean of a variable when weights are provided. However the <code>Hmisc</code> package includes a more comprehensive set of functions that can be used when weighting estimates. The code below provides an illustration of weighted means, variance and median of the left-right political attitudes score used in previous chapters, each time comparing it with the unweighted estimates:</p>
+<p>The <code>stats</code> package, part of Base R, includes <code>weighted.mean()</code> which, as indicated by its name, computes weighted estimates of the mean of a variable when weights are provided. However, the <code>Hmisc</code> package includes a more comprehensive set of functions that can be used when weighting estimates: <code>wtd.mean()</code>, <code>wtd.var()</code> and <code>wtd.quantile()</code>. The code below provides an illustration of weighted means, variance and median of the left-right political attitudes score used in previous chapters, each time comparing it with the unweighted estimates:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Mean</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">mean</span>(bsa<span class="sc">$</span>leftrigh,<span class="at">na.rm=</span>T),</span>
@@ -326,11 +326,11 @@ background: white;
 </section>
 <section id="frequencies-and-contingency-tables" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="frequencies-and-contingency-tables"><span class="header-section-number">6.2</span> Frequencies and contingency tables</h2>
-<p>Neither <code>ftable()</code> or <code>table()</code> that were used in previous chapter allow weights. And although the <code>Hmisc</code> packages includes the <code>wtd.table()</code> function for one-way frequency tables, we recommend using <code>xtabs()</code> as previously, as it it more versatile. Indeed, as variables used with <code>xtabs()</code> are specified on the right hand side of a formula:</p>
+<p>Neither <code>ftable()</code> nor <code>table()</code> that were used in previous chapter allow weights. Although the <code>Hmisc</code> packages includes a <code>wtd.table()</code> function for one-way frequency tables, we recommend using <code>xtabs()</code> as previously, as it is more versatile and allows weights. Indeed, as variables used with <code>xtabs()</code> are specified on the right hand side of a formula:</p>
 <pre><code>&gt; xtabs(~var1, data=mydata)</code></pre>
 <p>or</p>
 <pre><code>&gt; xtabs(~var1 + var2, data=mydata)</code></pre>
-<p>… The variable containing the weights is passed to <code>xtabs()</code> by specifying its name on the left hand side of the equation (or the tilde <code>~</code> )</p>
+<p>… A variable containing weights can be passed to <code>xtabs()</code> by specifying its name on the left hand-side of the equation (or the tilde <code>~</code> )</p>
 <pre><code>&gt; xtabs(weights~var1 + var2, data=mydata)</code></pre>
 <p>Let’s apply this technique to investigate respondents’ agreement with the sentence: <em>People should be able to travel by plane as much as they like, even if this harms the environment</em> as recorded in the <code>plnenvt</code> variable.</p>
 <div class="cell">
@@ -360,7 +360,7 @@ disagree                         36.3     37.0
 disagree strongly                10.0      9.0</code></pre>
 </div>
 </div>
-<p>Obtaining weighted contingency tables follow the same logic:</p>
+<p>Obtaining a weighted contingency table of respondents’ views about flying by gender follow the same logic:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Unweighted vs weighted contingency tables</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(</span>
@@ -389,9 +389,9 @@ disagree strongly          42.3   57.7 41.5   58.5</code></pre>
 </section>
 <section id="inference-using-survey-procedures" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="inference-using-survey-procedures"><span class="header-section-number">6.3</span> Inference using survey procedures</h2>
-<p>The weighting procedures described above could be described as ‘quick and dirty’ in that they compute representative point estimates – ie a single value. Computing the precision of survey data estimates – for example via their standard error – requires more than just adding weights to a command. Information about the survey design, its primary sampling units, strata and clusters is required so that robust standard errors, statistical tests and/or confidence interval can be computed. The <code>Survey</code> package was designed in order to deal with this set of issues. It provides functions for integrating survey design into R as well as computing common estimates. Its most important features are described below.</p>
-<p>In order to use survey fonctions one first needs to create a <code>svydesign</code> object, in essence a version of the data that incorporates the sample design information available, then compute the required estimate using the <code>svydesign</code> object.</p>
-<p>An common issue with survey datasets available in the UK is that sampling information is often only available in secured version of the data, restricting its access to authorised users in a secure lab. Although it is sometimes possible to use available variables to account for aspects of the sample design – region as a strata in the case of stratified samples – in most cases users are left with computing standard errors without sample design information, which amounts to assuming that the sample was drawn purely at random. Even if this is the case however, using the <code>survey</code> package is recommended, as it provides a coherent framework for computing survey parameters.</p>
+<p>The weighting procedures described above could be described as ‘quick and dirty’ in that they compute representative point estimates – i.e.&nbsp;single values. Computing the precision of survey data estimates – for example via their standard error – requires more than just adding weights to a command. Information about the survey design, its primary sampling units, strata and clusters is required so that robust standard errors, statistical tests and/or confidence interval can be computed. The <code>Survey</code> package was designed in order to deal with this set of issues. It provides functions for computing common estimates while accounting for the survey design. Its most important features are described below.</p>
+<p>In order to use survey functions one first needs to create a <code>svydesign</code> object, in essence a version of the data that incorporates the sample design information available, then compute the required estimate using the <code>svydesign</code> object.</p>
+<p>A common issue with survey datasets available in the UK is that sampling information is often only available in a secured version of the data, restricting its access to authorised users in a secure lab. Although it is sometimes possible to use available variables to account for aspects of the sample design – region as a strata in the case of stratified samples – in most cases users are left with computing standard errors without sample design information, which amounts to assuming that the sample was drawn purely at random. Even if this is the case however, using the <code>survey</code> package is recommended, as it provides a coherent framework for computing survey parameters.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey) <span class="do">### Loading the package in memory</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>bsa.design<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">ids =</span><span class="sc">~</span><span class="dv">1</span>,</span>
@@ -399,7 +399,7 @@ disagree strongly          42.3   57.7 41.5   58.5</code></pre>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data=</span>bsa) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The code above simply declares the survey design by creating the <code>bsa.design</code> object (the name is arbitrary). The <code>ids=</code> parameter is where primary sampling units are declared, as well as any clustering information as a formula ie <code>~PSU+cluster2id...</code>. When PSU information is unavailable <code>ids</code> is given the value 1 or 0. A <code>strata=</code> and <code>fpc=</code> are available in order to declare the sampling strata and the variable used for finite population correction. None of these are available in the bsa dataset, and estimation commands will therefore rely on the assumption of simple random sampling.</p>
-<p>We can now compute estimates similar estimates as in the previous sections. The code below provides the mean of the left vs right political orientation indicator, as well as its 95% confidence interval:</p>
+<p>We can now compute estimates comparable to those in the previous sections. The code below provides the mean of the left vs right political orientation indicator, as well as its 95% confidence interval:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fu">svymean</span>(<span class="sc">~</span>leftrigh,</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>        bsa.design,</span>

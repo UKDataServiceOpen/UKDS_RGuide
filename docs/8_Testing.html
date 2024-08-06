@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Analysing social survey data using R - 8&nbsp; Statistical testing</title>
+<title>Analysing social survey data using R - 8&nbsp; Significance testing</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -146,7 +146,7 @@ background: white;
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./8_Testing.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical testing</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./8_Testing.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -156,7 +156,7 @@ background: white;
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical testing</span></h1>
+      <h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></h1>
                       </div>
   </div>
     
@@ -218,7 +218,7 @@ background: white;
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./6_Weighted.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted estimates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted and survey design-informed estimates</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -230,7 +230,7 @@ background: white;
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./8_Testing.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -278,12 +278,12 @@ background: white;
 
 
 
-<p>This section covers how to implement common statistical tests in R both without and with survey data . A working knowledge of these tests and their theoretical assumptions is assumed.</p>
+<p>This section describes how to implement common statistical tests in R both without and with weights and survey design information. A working knowledge of these tests and their theoretical assumptions is assumed.</p>
 <section id="differences-between-means" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="differences-between-means"><span class="header-section-number">8.1</span> Differences between means</h2>
-<p>Two common ways of conducting statistical testing with means in samples consist in testing whether they are significantly different from 0 (one sample t-test), or whether they differ between two groups (two samples t test). In the latter case, one can further distinguish between independent samples (where means come from different groups), or paired samples (when the same measure is taken at several point in time). Given that it is probably one of the most widely used statistical tests in social sciences, we will only cover the former here. Several R packages provide functions for conducting t tests. We will be using <code>t.test()</code>, provided by the <code>stats</code> package (R Base).</p>
-<p>Suppose we would like to test whether the libertarianism vs authoritarianism score <code>libauth</code> significantly differs between men and women using a t test. A two sided test is the default, with H_0 or the null hypothesis being that there is no differences between groups, and H_1 or the alternative hypotheis that the group means do indeed differ. The test is specified with a formula with on the left hand side the quantity to be tested and on the right hand side the grouping variable.</p>
-<p>One sided tests can be conducted by specifying that the alternative hypothesis (H_1) is either <strong>greater</strong> or <strong>less</strong>. <code>t.test()</code> assumes that by default the variances are unequal. This can be changed with the <code>var.equal=T</code> option.</p>
+<p>Two common ways of conducting significance testing consist in testing whether sample means significantly differ from 0 (one sample t-test), or between two groups (two samples t test). In the latter case, one can further distinguish between independent samples (where means come from different groups), or paired samples (when the same measure is taken at several points in time). Given that it is probably one of the most widely used statistical tests in social sciences, we will only cover the former here. Several R packages provide functions for conducting t tests. We will be using <code>t.test()</code>, provided by the <code>stats</code> package (R Base).</p>
+<p>Suppose we would like to test whether the libertarianism vs authoritarianism score <code>libauth</code> significantly differs between men and women using a t test. A two sided test is the default, with H_0 or the null hypothesis being that there are no differences between groups, and H_1 or the alternative hypothesis that the group means do indeed differ. The test is specified with a formula with on the left-hand side the quantity to be tested and on the right-hand side the grouping variable.</p>
+<p>One sided tests can be conducted by specifying that the alternative hypothesis (H_1) is that quantities are either <strong>greater</strong> or <strong>smaller</strong>. <code>t.test()</code> assumes that by default the variances are unequal. This can be changed with the <code>var.equal=T</code> option.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing for significant differences in liberal vs authoritarian score</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(</span>
@@ -325,7 +325,7 @@ sample estimates:
 </div>
 </div>
 <p>Men have a significantly lower score on the scale (at the .05 threshold) and are therefore on average leaning more to the left than women.</p>
-<p>The result of the above tests may be biased as they do not account for bias from eithersample design or non response. When results representative of the British population are required, a survey designed informed version of the t test should be used. The <code>survey</code> package that we used earlier in Chapter 6 includes such a function.</p>
+<p>The result of the above tests may be biased as they do not account for bias from either sample design or non-response. When results representative of the British population are required, a survey designed informed version of the t test should be used. The <code>survey</code> package that we used earlier in Chapter 6 provides such a function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>bsa.design<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">ids =</span><span class="sc">~</span><span class="dv">1</span>,           <span class="co"># Declaring the survey design</span></span>
@@ -361,11 +361,11 @@ difference in mean
         0.07211364 </code></pre>
 </div>
 </div>
-<p>In this case the output of <code>svyttest()</code> does not lead to different conclusion than those we drew above. We can however notice that the significance of differences in political affiliation has decreased.</p>
+<p>In this case the output of <code>svyttest()</code> did not lead to a different conclusion than the one we drew above. However, we can notice that the significance of differences in political affiliation has decreased.</p>
 </section>
 <section id="differences-in-variance" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="differences-in-variance"><span class="header-section-number">8.2</span> Differences in variance</h2>
-<p>Another common significance test in social science is the <strong>variance test</strong> which consists of testing whether the variances of the same variable across two groups are equal. This is usually achieved by testing whether the ratio of the variance between the two groups is significantly different from zero. With the BSA data, this amounts to testing whether men and women are more homogenous with regard to their political views.</p>
+<p>Another common significance test in social science is the <strong>variance test</strong> which consists of testing whether the variances of the same variable across two groups are equal. This is usually achieved by testing whether the ratio of the variance between the two groups is significantly different from zero. With the BSA data, this amounts to testing whether men and women are more homogeneous with regard to their political views.</p>
 <p>The syntax for the variance test <code>var.test()</code> also included in <code>stats</code> is almost identical to that of <code>t.test()</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing for gender differences in liberal vs authoritarian score</span></span>
@@ -385,7 +385,7 @@ ratio of variances
           1.089239 </code></pre>
 </div>
 </div>
-<p>Significant differences in the variance between men and women, but only at the .1 threshold.</p>
+<p>Significant differences in the variance between men and women was observed, but only at the .1 threshold.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing for whether men have a lower (ie more left-wing)  score</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(leftrigh<span class="sc">~</span>Rsex.f,</span>
@@ -411,7 +411,7 @@ ratio of variances
 <h2 data-number="8.3" class="anchored" data-anchor-id="significance-of-measures-of-association"><span class="header-section-number">8.3</span> Significance of measures of association</h2>
 <section id="between-continuous-variables" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="between-continuous-variables">Between continuous variables</h3>
-<p>Another type of common statistical test in social science is about examining whether a coefficient of correlation is significantly different from 0 (alternative hypothesis).</p>
+<p>Another common statistical test in social science examines whether a coefficient of correlation is significantly different from 0 (alternative hypothesis).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(bsa<span class="sc">$</span>leftrigh, bsa<span class="sc">$</span>libauth, </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">use=</span><span class="st">'complete.obs'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -429,12 +429,12 @@ sample estimates:
 0.009625928 </code></pre>
 </div>
 </div>
-<p>As we could have suspected the coefficient of correlation between the two scales is so small that it cannot be said to be significantly different from zero.</p>
+<p>As we could have suspected, the correlation coefficient between the two scales is too small to be considered significantly different from zero.</p>
 </section>
 <section id="between-categorical-variables" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="between-categorical-variables">Between categorical variables</h3>
-<p>Let us go back to an earlier example, and attempt to test whether the gender differences in political affiliations are due to chance or not using a chi-square test of independence .</p>
-<p>The chi-square is a very common test of association between categorical variables. It consists in examining whether the pattern of association between two variables is likely to be random or not, in other words whether the variability observed in a contingency table is significantly different from what could be expected were it due to chance.</p>
+<p>Let us go back to an earlier example, and test whether gender differences in political affiliations are due to chance or not using a chi-squared test of independence .</p>
+<p>The chi-squared test is a very common test of association between categorical variables. It consists in examining whether a pattern of association between two variables is likely to be random or not, in other words whether the variability observed in a contingency table is significantly different from what could be expected were it due to chance.</p>
 <p>We will be using <code>chisq.test()</code>, also from the <code>stats</code> package. By contrast with the test of correlation, the <code>chisq.test()</code> needs to be applied to contingency tables that have already been computed separately.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>t<span class="ot">&lt;-</span><span class="fu">xtabs</span>(<span class="sc">~</span>PartyId2.f <span class="sc">+</span>Rsex.f,bsa)</span>
@@ -462,11 +462,11 @@ data:  svychisq(~PartyId2.f + Rsex.f, bsa.design, statistic = "Chisq")
 X-squared = 12.069, df = 5, p-value = 0.1126</code></pre>
 </div>
 </div>
-<p>Interestingly this time, when accounting for survey design, sampling and non response, gender differences in political affiliations are not significant anymore.</p>
+<p>Interestingly this time, when accounting for survey design, sampling and non-response, gender differences in political affiliations are not significant anymore.</p>
 <section id="visualising-association-in-contingency-tables-with-mosaic-plots" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="visualising-association-in-contingency-tables-with-mosaic-plots">Visualising association in contingency tables with mosaic plots</h4>
 <p>In the previous chapter we used mosaic plots for representing contingency tables of political party affiliation by gender. A nice feature of these plots is that they can also be used to visualise significant deviations between observed and expected values.</p>
-<p>This relies on function specified with the <code>gp=</code> option which defines the shading the colours of the respective cells according to the size of these deviation, also known as residuals. Thresholds for shading can be customised as required.</p>
+<p>This relies on a function specified with the <code>gp=</code> option which defines the shading of the colours of the respective cells according to the size of these deviations fom expected values, also known as residuals. Thresholds for shading can be customised as required.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaic</span>(t,                            </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">shade=</span>T,</span>

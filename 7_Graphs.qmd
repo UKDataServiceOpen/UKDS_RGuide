@@ -13,7 +13,7 @@ bsa<-read_spss(paste0(datadir,"8849spss_V1/bsa2017_open_enviropol.sav"))
 bsa$RAgeCat.f<-droplevels(as_factor(bsa$RAgeCat))
 bsa$Rsex.f<-droplevels(as_factor(bsa$Rsex))
 ```
-There are two common  ways to plot data in R: either by using the straightforward but rather basic plotting commands from the Base package, or instead delve into the more complex but much  nicer looking functionalities of the `ggplot` package. 
+There are two common  ways to visualise data in R: either by using the straightforward but rather basic plotting commands from the Base package, or instead by delving into the more complex but much  nicer looking functionalities of the `ggplot` package. 
 
 ## Distributional graphs for continuous variables
 
@@ -60,7 +60,7 @@ The scatterplot shows us that there is little association between the two variab
 
 ## Plotting categorical variables
 
-The generic `plot()` function provides a quick way to produce bar plots of categorical data. For example, we can examine the distribution of political party affiliations (`Politics` variable). In order to do this we convert it into a factor (ie categorical) variable as previously. Some preliminary abbreviating of the factor levels are also required in order for them to be displayed properly. 
+The generic `plot()` function provides a quick way to produce bar plots of categorical data. For example, we can examine the distribution of political party affiliations (`Politics` variable). In order to do this, we convert it into a factor (i.e. categorical) variable as previously. Some preliminary abbreviation of the factor levels are also required in order for them to be displayed properly. 
 
 ```{r 7.5}
 #| fig-alt: "Default frequency bar plot of political party affiliation using the plot command"
@@ -109,7 +109,7 @@ barplot(
 ```
 
 ## More advanced plots
-Social science research often requires more advanced plots in order to conduct more complex analyses, for instance comparing the mean or median value of a continuous outcome across two or more categorical variables. The `ggplot` package  provides one of the most advanced set of tools for plotting data  currently available. A few examples are provided below.
+Social science research often requires more advanced plots than just bar charts in order to conduct insightful analyses, such as for instance comparing the mean or median value of a continuous outcome across two or more categorical variables. The `ggplot` package  provides one of the most advanced set of tools for  data visualisation  currently available. A few examples are provided below.
 
 
 #### Three way barplots using ggplot2 {-}
@@ -118,8 +118,9 @@ Say we would like to explore how differences in political party affiliations var
 
 Let us first prepare the data: we need to create the table of result, the proportion of degree vs non degree holders by gender and political party. This is a three-way contingency table, that we can obtain with `ftable()` as shown in Section 5.2, combined with `prop.table()` for the computation of proportions and `round()`.
 
-As they are more straightforward to handle in `ggplot`, we convert the table object created by ftable into a data frame. Although we can specify titles and axis labels  in the plotting command, it is preferable  to keep things simple here and have them already in the the data.   
-Rather than using the full range of educational achievements recorded in `HEdQual3`, we would like instead to have a dichotomic variable between degree holders and non degree holders. Adding it directly in the ftable command as a boolean expression return a dichotomic variable: "TRUE" for Degree educated respondents, and "FALSE" for everyone else. We just need to change the levels of this factor variable to make them more intelligible. Finally we change the variable names in our data frame. 
+As they are more straightforward to handle in `ggplot`, we convert the table object created by `ftable` into a data frame. Although it is possible to specify titles and axis labels  in the plotting command, we will keep things simple and have them already in the data.  
+
+Rather than using the full range of educational achievements recorded in `HEdQual3`, we would like instead to have a dichotomic variable measuring whether  respondents are degree holders or not. Adding it directly in the `ftable` command as a boolean expression return a dichotomic variable: "TRUE" for Degree educated respondents, and "FALSE" for everyone else. We just need to change the levels of this factor variable to make them more intelligible. Finally, we change the variable names in our data frame. 
 
 ```{r 7.9}
 bsa$HEdQual3.f<-droplevels(as_factor(bsa$HEdQual3))
@@ -135,7 +136,7 @@ levels(pa$Var3)<-c("Below","Degree")
 names(pa)<-c("Affiliation","Gender","Education","Percent")
 pa
 ```
-We are now ready to plot the data.  the `ggplot()` commands usually works as a succession of layers or  options that are added to an initial plot specifications. Each extra layer is added after a `+` sign. In the example below, we specify the data and the aesthetic (ie the main parameters of the plot) with the first command: the x and y variables , and the first grouping variable, education). `geom_bar()` stipulates the bar plot, with the ṕosition="dodge" for the bars to be located side by side (position="stack"would have them on top of each other). Finally, facet_wrap() splits the plot by gender.
+We are now ready to plot the data.  `ggplot()` functions usually work as a succession of layers or  options that are added to an initial plot specification. Each extra layer is added after a `+` sign. In the example below, we specify the data and the *aesthetic* (i.e. the basic parameters of the plot) with the first command: the x and y variables as well as the first grouping variable, in our case education). `geom_bar()` stipulates the bar plot, with the `ṕosition="dodge"` option for the bars to be located side by side (position="stack"would have them on top of each other). Finally, `facet_wrap()` splits the plot by gender.
 ```{r 7.10}
 #| fig-alt: "Bar plot of political party affiliation by gender and qualification using ggplot"
 
@@ -148,13 +149,13 @@ ggplot(data=pa,aes(y=Percent,x=Affiliation,fill=Education))+
 ```
 
 #### Mosaic plots{-}
-Mosaic plots provide a visualisation tool for two-way or more contingency tables. Table cells  are plotted as rectangles whose surface is proportional to their overall number of observations whereas their length represents their frequency relative to that of the second variable for each category of the first one - this is an  equivalent to column percentages in a contingency table. In the example below, we will be using the `mosaic()` function from the `vcd` package which provides both a descriptive and model-based plots. 
+Mosaic plots provide a visualisation tool for two-way or more contingency tables. Table cells  are plotted as rectangles whose surface is proportional to their overall number of observations whereas their length represents their frequency relative to that of the second variable for each category of the first one - this is   equivalent to column percentages in a contingency table. In the example below, we are using the `mosaic()` function from the `vcd` package which provides both  descriptive and model-based plots. 
 
-The basic parameters of a descriptive mosaic plot consists of:
+The basic parameters of a descriptive mosaic plot consist of:
 
-- a R formula where the row and columns variables are specified;
-- the highlighting variable, for the display of relative percentage;
-- By default the contrasting colours are shades of grey but can be customised, as are the direction of the bars.
+- A R formula where the row and columns variables are specified;
+- The highlighting variable, for the display of relative percentage;
+- By default, the contrasting colours are shades of grey but can be customised, as can the direction of the bars.
 
 Labelling options are a bit mode arcane than Base R plot functions. They need to be specified within a `labeling= labeling_border()` statement. See `help(labeling_border)` for more detail. We used `Varnames=F` to hide the  variable names from the plot, `rot_labels`, to specify that we did not want any rotation of the value labels, and `offset_labels` to prevent them to overlap with the rectangles.
 

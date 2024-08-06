@@ -218,7 +218,7 @@ background: white;
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./6_Weighted.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted estimates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted and survey design-informed estimates</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -230,7 +230,7 @@ background: white;
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./8_Testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -274,7 +274,7 @@ background: white;
 
 
 
-<p>There are two common ways to plot data in R: either by using the straightforward but rather basic plotting commands from the Base package, or instead delve into the more complex but much nicer looking functionalities of the <code>ggplot</code> package.</p>
+<p>There are two common ways to visualise data in R: either by using the straightforward but rather basic plotting commands from the Base package, or instead by delving into the more complex but much nicer looking functionalities of the <code>ggplot</code> package.</p>
 <section id="distributional-graphs-for-continuous-variables" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="distributional-graphs-for-continuous-variables"><span class="header-section-number">7.1</span> Distributional graphs for continuous variables</h2>
 <p>Plots such as histograms or box plots are a convenient way to gain a quick overview of the distribution of a variable and are easy to produce. Going back to the BSA data, we can plot the distribution of left-right political orientations scores with the <code>hist()</code> command.</p>
@@ -334,7 +334,7 @@ background: white;
 </section>
 <section id="plotting-categorical-variables" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="plotting-categorical-variables"><span class="header-section-number">7.2</span> Plotting categorical variables</h2>
-<p>The generic <code>plot()</code> function provides a quick way to produce bar plots of categorical data. For example, we can examine the distribution of political party affiliations (<code>Politics</code> variable). In order to do this we convert it into a factor (ie categorical) variable as previously. Some preliminary abbreviating of the factor levels are also required in order for them to be displayed properly.</p>
+<p>The generic <code>plot()</code> function provides a quick way to produce bar plots of categorical data. For example, we can examine the distribution of political party affiliations (<code>Politics</code> variable). In order to do this, we convert it into a factor (i.e.&nbsp;categorical) variable as previously. Some preliminary abbreviation of the factor levels are also required in order for them to be displayed properly.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>PartyId2.f<span class="ot">&lt;-</span><span class="fu">droplevels</span>( <span class="co"># Getting rid of unused factor levels for neater output</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_factor</span>(bsa<span class="sc">$</span>PartyId2)   <span class="co"># Converting haven labelled variable to factor</span></span>
@@ -398,13 +398,13 @@ background: white;
 </section>
 <section id="more-advanced-plots" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="more-advanced-plots"><span class="header-section-number">7.3</span> More advanced plots</h2>
-<p>Social science research often requires more advanced plots in order to conduct more complex analyses, for instance comparing the mean or median value of a continuous outcome across two or more categorical variables. The <code>ggplot</code> package provides one of the most advanced set of tools for plotting data currently available. A few examples are provided below.</p>
+<p>Social science research often requires more advanced plots than just bar charts in order to conduct insightful analyses, such as for instance comparing the mean or median value of a continuous outcome across two or more categorical variables. The <code>ggplot</code> package provides one of the most advanced set of tools for data visualisation currently available. A few examples are provided below.</p>
 <section id="three-way-barplots-using-ggplot2" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="three-way-barplots-using-ggplot2">Three way barplots using ggplot2</h4>
 <p>Say we would like to explore how differences in political party affiliations vary by gender and whether respondents have a degree-level education.</p>
 <p>Let us first prepare the data: we need to create the table of result, the proportion of degree vs non degree holders by gender and political party. This is a three-way contingency table, that we can obtain with <code>ftable()</code> as shown in Section 5.2, combined with <code>prop.table()</code> for the computation of proportions and <code>round()</code>.</p>
-<p>As they are more straightforward to handle in <code>ggplot</code>, we convert the table object created by ftable into a data frame. Although we can specify titles and axis labels in the plotting command, it is preferable to keep things simple here and have them already in the the data.<br>
-Rather than using the full range of educational achievements recorded in <code>HEdQual3</code>, we would like instead to have a dichotomic variable between degree holders and non degree holders. Adding it directly in the ftable command as a boolean expression return a dichotomic variable: “TRUE” for Degree educated respondents, and “FALSE” for everyone else. We just need to change the levels of this factor variable to make them more intelligible. Finally we change the variable names in our data frame.</p>
+<p>As they are more straightforward to handle in <code>ggplot</code>, we convert the table object created by <code>ftable</code> into a data frame. Although it is possible to specify titles and axis labels in the plotting command, we will keep things simple and have them already in the data.</p>
+<p>Rather than using the full range of educational achievements recorded in <code>HEdQual3</code>, we would like instead to have a dichotomic variable measuring whether respondents are degree holders or not. Adding it directly in the <code>ftable</code> command as a boolean expression return a dichotomic variable: “TRUE” for Degree educated respondents, and “FALSE” for everyone else. We just need to change the levels of this factor variable to make them more intelligible. Finally, we change the variable names in our data frame.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>HEdQual3.f<span class="ot">&lt;-</span><span class="fu">droplevels</span>(<span class="fu">as_factor</span>(bsa<span class="sc">$</span>HEdQual3))</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>pa<span class="ot">&lt;-</span><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span></span>
@@ -446,7 +446,7 @@ Rather than using the full range of educational achievements recorded in <code>H
 24      Greens Female    Degree    51.1</code></pre>
 </div>
 </div>
-<p>We are now ready to plot the data. the <code>ggplot()</code> commands usually works as a succession of layers or options that are added to an initial plot specifications. Each extra layer is added after a <code>+</code> sign. In the example below, we specify the data and the aesthetic (ie the main parameters of the plot) with the first command: the x and y variables , and the first grouping variable, education). <code>geom_bar()</code> stipulates the bar plot, with the ṕosition=“dodge” for the bars to be located side by side (position=“stack”would have them on top of each other). Finally, facet_wrap() splits the plot by gender.</p>
+<p>We are now ready to plot the data. <code>ggplot()</code> functions usually work as a succession of layers or options that are added to an initial plot specification. Each extra layer is added after a <code>+</code> sign. In the example below, we specify the data and the <em>aesthetic</em> (i.e.&nbsp;the basic parameters of the plot) with the first command: the x and y variables as well as the first grouping variable, in our case education). <code>geom_bar()</code> stipulates the bar plot, with the <code>ṕosition="dodge"</code> option for the bars to be located side by side (position=“stack”would have them on top of each other). Finally, <code>facet_wrap()</code> splits the plot by gender.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>pa,<span class="fu">aes</span>(<span class="at">y=</span>Percent,<span class="at">x=</span>Affiliation,<span class="at">fill=</span>Education))<span class="sc">+</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"dodge"</span>,<span class="at">stat=</span><span class="st">"identity"</span>)<span class="sc">+</span></span>
@@ -465,12 +465,12 @@ Rather than using the full range of educational achievements recorded in <code>H
 </section>
 <section id="mosaic-plots" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="mosaic-plots">Mosaic plots</h4>
-<p>Mosaic plots provide a visualisation tool for two-way or more contingency tables. Table cells are plotted as rectangles whose surface is proportional to their overall number of observations whereas their length represents their frequency relative to that of the second variable for each category of the first one - this is an equivalent to column percentages in a contingency table. In the example below, we will be using the <code>mosaic()</code> function from the <code>vcd</code> package which provides both a descriptive and model-based plots.</p>
-<p>The basic parameters of a descriptive mosaic plot consists of:</p>
+<p>Mosaic plots provide a visualisation tool for two-way or more contingency tables. Table cells are plotted as rectangles whose surface is proportional to their overall number of observations whereas their length represents their frequency relative to that of the second variable for each category of the first one - this is equivalent to column percentages in a contingency table. In the example below, we are using the <code>mosaic()</code> function from the <code>vcd</code> package which provides both descriptive and model-based plots.</p>
+<p>The basic parameters of a descriptive mosaic plot consist of:</p>
 <ul>
-<li>a R formula where the row and columns variables are specified;</li>
-<li>the highlighting variable, for the display of relative percentage;</li>
-<li>By default the contrasting colours are shades of grey but can be customised, as are the direction of the bars.</li>
+<li>A R formula where the row and columns variables are specified;</li>
+<li>The highlighting variable, for the display of relative percentage;</li>
+<li>By default, the contrasting colours are shades of grey but can be customised, as can the direction of the bars.</li>
 </ul>
 <p>Labelling options are a bit mode arcane than Base R plot functions. They need to be specified within a <code>labeling= labeling_border()</code> statement. See <code>help(labeling_border)</code> for more detail. We used <code>Varnames=F</code> to hide the variable names from the plot, <code>rot_labels</code>, to specify that we did not want any rotation of the value labels, and <code>offset_labels</code> to prevent them to overlap with the rectangles.</p>
 <div class="cell" data-layout-align="center">
@@ -912,13 +912,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./6_Weighted.html" class="pagination-link" aria-label="Producing weighted estimates">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted estimates</span></span>
+      <a href="./6_Weighted.html" class="pagination-link" aria-label="Producing weighted and survey design-informed estimates">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted and survey design-informed estimates</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./8_Testing.html" class="pagination-link" aria-label="Statistical testing">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical testing</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./8_Testing.html" class="pagination-link" aria-label="Significance testing">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

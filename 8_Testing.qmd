@@ -1,4 +1,4 @@
-# Statistical testing
+# Significance testing
 
 ```{r setup8}
 #| echo: false
@@ -20,15 +20,15 @@ levels(bsa$PartyId2.f)<-c(
   ) 
 ```
 
-This section covers how to implement common statistical tests in R both without and with survey data . A working knowledge of these tests and their theoretical assumptions is assumed.
+This section describes how to implement common statistical tests in R both without and with weights and survey design information. A working knowledge of these tests and their theoretical assumptions is assumed.
 
 ## Differences between means
 
-Two common ways of conducting statistical testing with means in samples consist in testing  whether they are significantly different from 0 (one  sample t-test), or whether they differ between two  groups (two samples t test). In the latter case, one can further distinguish between independent samples (where means come from different groups), or paired  samples (when the same measure is taken at several point in time). Given that it is probably one of the most widely used statistical tests in social sciences, we will only cover the former here. Several R packages provide functions for conducting t tests. We will be using `t.test()`, provided by the `stats` package (R Base). 
+Two common ways of conducting significance testing consist in testing  whether  sample means significantly differ from 0 (one  sample t-test), or between  two  groups (two samples t test). In the latter case, one can further distinguish between independent samples (where means come from different groups), or paired  samples (when the same measure is taken at several points in time). Given that it is probably one of the most widely used statistical tests in social sciences, we will only cover the former here. Several R packages provide functions for conducting t tests. We will be using `t.test()`, provided by the `stats` package (R Base). 
 
-Suppose we would like to test whether the libertarianism vs authoritarianism score `libauth` significantly differs between men and women using a t test. A two sided test is the default, with H_0 or the null hypothesis being that there is no differences between groups, and H_1 or the alternative hypotheis that the  group means do indeed differ. The test is specified with a formula with on the left hand side the quantity to be tested and on the right  hand side the grouping variable. 
+Suppose we would like to test whether the libertarianism vs authoritarianism score `libauth` significantly differs between men and women using a t test. A two sided test is the default, with H_0 or the null hypothesis being that there are  no differences between groups, and H_1 or the alternative hypothesis that the  group means do indeed differ. The test is specified with a formula with on the left-hand side the quantity to be tested and on the right-hand side the grouping variable. 
 
-One sided tests can be conducted by specifying that the alternative hypothesis (H_1) is either **greater** or **less**. `t.test()` assumes that by default the variances are unequal. This can be changed with the `var.equal=T` option.
+One sided tests can be conducted by specifying that the alternative hypothesis (H_1) is that  quantities are  either **greater** or **smaller**. `t.test()` assumes that by default the variances are unequal. This can be changed with the `var.equal=T` option.
 
 ```{r 8.1}
 # Testing for significant differences in liberal vs authoritarian score
@@ -47,7 +47,7 @@ t.test(leftrigh~Rsex.f,
 ```
 Men have a significantly lower  score on the scale (at the .05 threshold)  and are therefore on average leaning more to the left than women.
 
-The result of the above  tests may be biased as they do not account for bias from eithersample design or non response. When results representative of the British population are required, a survey designed informed version of the t test should be used. The `survey` package that we used earlier in Chapter 6 includes such a function. 
+The result of the above  tests may be biased as they do not account for bias from either sample design or non-response. When results representative of the British population are required, a survey designed informed version of the t test should be used. The `survey` package that we used earlier in Chapter 6 provides such a function. 
 
 ```{r 8.3}
 library(survey)
@@ -59,13 +59,13 @@ svyttest(libauth~Rsex.f,bsa.design)   # SD informed t-test of libauth by gender
 
 svyttest(leftrigh~Rsex.f,bsa.design) # SD informed t-test of leftrigh by gender
 ```
-In this case the output of `svyttest()` does not lead to different conclusion than those we drew above. We can however notice that the significance of differences in political affiliation has decreased.
+In this case the output of `svyttest()` did not lead to a different conclusion than the one we drew above. However, we can notice that the significance of differences in political affiliation has decreased.
 
 
 
 ## Differences in variance
 
-Another common significance test in social science is the **variance test** which consists of  testing whether the variances of the same variable across two groups  are equal. This is usually achieved by testing whether the ratio of the variance between the two groups is significantly different from zero. With the BSA data, this amounts to testing whether men and women are more homogenous with regard to their political views.
+Another common significance test in social science is the **variance test** which consists of  testing whether the variances of the same variable across two groups  are equal. This is usually achieved by testing whether the ratio of the variance between the two groups is significantly different from zero. With the BSA data, this amounts to testing whether men and women are more homogeneous with regard to their political views.
 
 The syntax for the variance test `var.test()` also included in `stats` is almost identical to that of `t.test()`
 
@@ -74,7 +74,7 @@ The syntax for the variance test `var.test()` also included in `stats` is almost
 var.test(libauth~Rsex.f,
          data=bsa)
 ```
-Significant differences in the variance  between men and women, but only at the .1 threshold.
+Significant differences in the variance  between men and women was observed, but only at the .1 threshold.
 ```{r 8.4.1}
 
 # Testing for whether men have a lower (ie more left-wing)  score
@@ -90,20 +90,20 @@ The variance of left-right political leaning is larger among men than women, in 
 
 ### Between continuous variables {-}
   
-  Another type of  common statistical   test in social science is about examining whether a coefficient of correlation is significantly different from 0 (alternative hypothesis).
+  Another common statistical test in social science  examines whether a coefficient of correlation is significantly different from 0 (alternative hypothesis).
 
 ```{r 8.5}
 cor.test(bsa$leftrigh, bsa$libauth, 
          use='complete.obs')
 ```
 
-As we could have suspected the coefficient of correlation between the two scales is so small that it cannot be said to be  significantly  different from zero.
+As we could have suspected, the correlation coefficient   between the two scales is too small  to be considered significantly  different from zero.
 
 ### Between categorical variables {-}
 
-Let us go back to an earlier example, and attempt to test whether the gender differences in political affiliations are due to chance or not using a chi-square test of independence . 
+Let us go back to an earlier example, and test whether gender differences in political affiliations are due to chance or not using a chi-squared test of independence . 
   
-The chi-square is a very common  test of association between categorical variables. It consists in examining whether the pattern of association between two variables is likely to be random or not, in other words whether the variability observed in a contingency table is significantly different from what could be expected were it due to chance.
+The chi-squared test is a very common  test of association between categorical variables. It consists in examining whether a pattern of association between two variables is likely to be random or not, in other words whether the variability observed in a contingency table is significantly different from what could be expected were it due to chance.
 
 We will be using `chisq.test()`, also  from the `stats` package. By contrast with the test of correlation, the `chisq.test()` needs to be applied to  contingency tables that have already been computed separately.
 
@@ -126,14 +126,14 @@ svychisq(~PartyId2.f +Rsex.f, # We directly specify the contingency table here
           statistic = "Chisq" # And we specify the kind of test we would like
          )
 ```
-Interestingly this time, when accounting for survey design, sampling and non response, gender differences in political affiliations are not significant anymore.
+Interestingly this time, when accounting for survey design, sampling and non-response, gender differences in political affiliations are not significant anymore.
 
 #### Visualising association in contingency tables with mosaic plots {-}
 
 
 In the previous chapter we used mosaic plots for representing contingency tables of political party affiliation by gender. A nice feature of these plots is that they can also  be used to  visualise significant deviations between observed and expected values. 
 
-This relies on  function specified with the `gp=` option which defines the  shading the colours of the respective cells according to the size of these deviation, also known as residuals. Thresholds for shading can be customised as required.
+This relies on  a function specified with the `gp=` option which defines the  shading of the colours of the respective cells according to the size of these deviations fom expected values, also known as residuals. Thresholds for shading can be customised as required.
 
 
 
