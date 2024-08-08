@@ -27,12 +27,12 @@ The `describe()` command from  the `Hmisc` package provides a more detailed set 
 library(Hmisc)
 describe(bsa$leftrigh)
 ```
-The code above returns an error because `describe()` expects numeric values, and  *haven*-converted 'leftrigh' isn't a pure numeric variable: 
+The code above returns an error because `describe()` expects numeric values, and  'leftrigh' isn't a pure numeric variable: 
 
 ```{r 5.2.1}
 class(bsa$leftrigh)
 ```
-In order for `describe()` to run properly, we need to convert `leftrigh`  to numeric format, either as a new variable or as below, temporarily: 
+It is  a numeric variable: 'double', but with  some extra metadata, including `haven`-generated value and variable labels. In order for `describe()` to run properly, we need to convert `leftrigh`  to Base R numeric format, either as a new variable or as shown below, temporarily: 
 
 ```{r 5.2.2}
 describe(as.numeric(bsa$leftrigh))
@@ -47,9 +47,12 @@ Commands producing single  statistics are also available:
 mean(bsa$leftrigh, na.rm = T)
 sd(bsa$leftrigh, na.rm = T)
 median(bsa$leftrigh, na.rm = T)
-max(bsa$leftrigh, na.rm = T)
-min(bsa$leftrigh, na.rm = T)
+max(as.numeric(bsa$leftrigh), na.rm = T)
+min(as.numeric(bsa$leftrigh), na.rm = T)
 ```
+
+As previously, the `na.rm = T` option prevents missing values from being taken into account (in which case the output would have been NA, as this is the default behaviour of these functions). Similarly to `describe()` earlier,  `max()` and `min()` need the variable to be converted into numeric format to deliver the desired output.
+
 
 We could  combine the output from the above commands into a single line using the `c()` function:
 
@@ -58,12 +61,12 @@ c(
   mean(bsa$leftrigh, na.rm = T),
   sd(bsa$leftrigh, na.rm = T),
   median(bsa$leftrigh, na.rm = T),
-  max(bsa$leftrigh, na.rm = T),
-  min(bsa$leftrigh, na.rm = T)
+  max(as.numeric(bsa$leftrigh), na.rm = T),
+  min(as.numeric(bsa$leftrigh), na.rm = T)
 )
 ```
 
-As we saw previously, the `na.rm = T` option prevents missing values from being taken into account (in which case the output would have been NA, as this is the default behaviour of these functions). Using these individual commands may come in handy, for instance when further processing of the result is needed:
+Using these individual commands may come in handy, for instance when further processing of the result is needed:
   
 ```{r 5.5}
 m <- mean(bsa$leftrigh, na.rm= T)
@@ -90,15 +93,16 @@ round(mean(bsa$leftrigh,na.rm=T),2)
 would produce the same results using just one line of code .
 
 ## Bivariate association between continuous variables
-R provides a wide range of bivariate statistics under its base packages. The cor() and  cov() functions provide basic measures of association between two variables. For instance, in order to measure the correlation between the leftright scale and the libertarian-authoritarian scale: The later variable is a numeric variable that details how far someone sits on the libartrian – authoritarian scale from 1 to 5
+The Base R installation comes with  a wide range of bivariate statistical functions. `cor()` and  `cov()`  provide basic measures of association between two variables. For instance, in order to measure the correlation between the left-right  the libertarian-authoritarian scales: 
 
 ```{r 5.9}
 cor(bsa$leftrigh, bsa$libauth, use='complete.obs')
 ```
+The latter variable is records how far someone sits on the libertarian – authoritarian scale ranging from 1 to 5.
 
-A correlation of 0.009 indicates an positive but very small relationship. It can be translated to mean ‘an increase in authoritarianism is associated with a marginal increase  in rightwing views.
+A correlation of 0.009 indicates a positive but very small relationship. It can be interpreted as ‘an increase in authoritarianism is associated with a marginal increase  in rightwing views.
 
-Note: When using the cor() and cov() functions  missing values are dealt with the ‘use=’ "everything", "all.obs", "complete.obs", "na.or.complete", or "pairwise.complete.obs" options. See ‘?cor’  for additional information.
+Note: When using  `cor()` and `cov()`, missing values are dealt with the `use=` option, which can either take  "everything", "all.obs", "complete.obs", "na.or.complete", or "pairwise.complete.obs" values. See `?cor`  for additional information.
 
 
 
@@ -106,7 +110,7 @@ Note: When using the cor() and cov() functions  missing values are dealt with th
 As with continuous variables, R offers several tools that can be used to describe the distribution of categorical variables. One- and two-way contingency tables are the most commonly used.
 
 ### One way frequency tables
-There are several R commands that we can use to create frequency tables. The most common ones `table()`,`xtabs()` or `ftable()` which return the frequencies of observations within each level of a factor. For example, in order to obtain the political affiliation of BSA respondents in 2017:
+There are several R commands that we can use to create frequency tables. The most common ones `table()`, `xtabs()` or `ftable()` which return the frequencies of observations within each level of a factor. For example, in order to obtain the political affiliation of BSA respondents in 2017:
 
 ```{r 5.10}
 table(as_factor(bsa$PartyId2))
@@ -118,8 +122,8 @@ As with any other R functions, the outcome of `table()` can be stored as an obje
 a<-table(as_factor(bsa$PartyId2))
 ```
 
+It is not directly possible to have  proportions or percentages computed with `table()`. Proportions are obtained using the `prop.table()` function which in turn does not produce percentages. It is also a good idea to round the results for greater readability.
 
-`table()` does not compute proportions or percentages. Proportions are obtained using the `prop.table()` function which in turn does not produce percentages. It is also a good idea to round the results for greater readability.
 Either:
   
 ```{r 5.12}
@@ -140,13 +144,19 @@ round(100*
 
 ### Two way or more contingency table
 
-The simplest way to produce a two-way contingency table is to pass another variable to `table()`:
+The simplest way to produce a two-way contingency table is to pass a second variable to `table()`:
   
 ```{r 5.14}
 table(as_factor(bsa$PartyId2), as_factor(bsa$Rsex))
 ```
 
-However, when dealing with more than one variable it is recommended to use `xtabs()` instead as it has a number of desirable functions directly available as options. The syntax is slightly different as it relies on a `formula` ie a R object consisting of elements separated by a tilde '~'. The variables to be tabulated are specified on the right hand side of the formula. In order to lighten the syntax, we will also recode `PartyId2` and `Rsex` permanently into factors. 
+By default  `table` does not discard empty factor levels - (i.e. categories with no observations), which may sometimes result in slightly cumbersome result. Using `droplevels()` on each variable  resolves the issue:
+
+```{r 5.14.1}
+table(droplevels(as_factor(bsa$PartyId2)), droplevels(as_factor(bsa$Rsex)))
+``` 
+
+However, when dealing with more than one variable it is recommended to use `xtabs()` instead as it has a number of desirable functions directly available as options. The syntax is slightly different as it relies on a `formula` --  a R object consisting of elements separated by a tilde '~'. The variables to be tabulated are specified on the right hand side of the formula. In order to lighten the syntax, we will also recode `PartyId2` and `Rsex` permanently into factors. 
 
 ```{r 5.15}
 bsa$PartyId2.f<-as_factor(bsa$PartyId2)
@@ -158,7 +168,7 @@ xtabs(~PartyId2.f +Rsex.f,
 The `data=` parameter does not have to be explicitly specified as simply using ´`bsa`' will work. Other useful options are:
 
 - `subset=`, which allows direct specification of a subpopulation from which to derive the table;
-- `drop.unused.levels=T` to remove empty levels (categories with zero observations) from being displayed;
+- `drop.unused.levels=T` to remove empty levels;
 - `weights~` variables on the right hand side of the formula will be treated as weights, a useful feature for survey analysis. 
 
 As previously `prop.table()` is necessary in order to obtain proportions:
@@ -172,7 +182,7 @@ round(100*
         prop.table(b),
       1) ### Cell percentages
 ```
-The largest group in the sample (22.1%) is made of labour-voting females, the smallest of green-voting males.
+The largest group in the sample (22.1%) is made of labour-voting females and the smallest, of green-voting males.
 ```{r 5.17}
 round(100*
         prop.table(b,1),
@@ -186,10 +196,10 @@ round(100*
 ```
 Similar proportions of men voted Conservative and Labour (36-37%), whereas women were clearly more likely to vote Labour.
 
-There is not a straightforward way to obtain percentages in three-way contingency tables with either `xtabs()` or `table()`. This is where `ftable()` function comes handy. For convenience, we remove the non response.
+There is not a straightforward way to obtain percentages in three-way contingency tables with either `xtabs()` or `table()`. This is where `ftable()` function comes handy. For convenience,  we  converted `RAgeCat` into a factor.
 
 ```{r 5.19}
-bsa$RAgeCat.f<-as_factor(bsa$RAgeCat) # We convert RAgeCat into facto for convenience
+bsa$RAgeCat.f<-as_factor(bsa$RAgeCat) 
 
 round(100*
         prop.table(
@@ -197,14 +207,13 @@ round(100*
                  data=droplevels(bsa)
                    )
          ,1)
-      ,1) ### Option 2 for column percentages
+      ,1) ### Option 1 for row,  2 for column percentages
 ```
-The tables gives the relative age breakdown for each gender/political affiliation combination (ie row percentages). Please not that we have used the `droplevels()` function when spcecifying the BSA data frame within `ftble()`. This removes unused factor levels which would otherwise be  displayed and make the table difficult to read. `droplevels()` can be applied either to entire data frames or single variables.    
-
+The table gives the relative age breakdown for each gender/political affiliation combination (ie row percentages). Here again we used  `droplevels()`:  this removes unused  factor levels which would otherwise be  displayed and make the table difficult to read. `droplevels()` can be applied either to entire data frames or single variables.    
 
 
 ## Grouped summary statistics for continuous variables
-A common requirement in survey analysis consist in being able to compare  descriptive statistics across subgroups of the data. There are different ways to do this in R. We demonstrate below the most straightforward  one, which is obtained by using some of the functions available in the `dplyr` package. 
+A common requirement in survey analysis is the ability to  compare  descriptive statistics across subgroups of the data. There are different ways to do this in R. We demonstrate below the most straightforward  one, which is obtained by using some of the functions available in the `dplyr` package. 
 
 ```{r 5.20}
 bsa%>%
@@ -213,7 +222,7 @@ bsa%>%
             sdscore=sd(libauth,na.rm=T))
 ```
 
-The above command produces a table of summary values (median and standard deviations) of the Liberal vs authoritarian scale. We can see from the first one that Green party voters are the most liberal, followed by Labour, whereas non voters and Conservatives are the most authoritarian. Liberal Democrats are the most cohesive group (ie with the smallest standard deviation). We chose to leave nonresponses for  `PartyId2` for this analysis. Some users might want to remove them instead before computing their results as in the table below.  We do this by using `is.na()`, which checks variables for the presence of system missing values, in conjunction with `filter()`.
+The above command produces a table of summary values (median and standard deviations) of the Liberal vs authoritarian scale. We can see from the first one that Green party voters are the most liberal, followed by Labour, whereas non voters and Conservatives are the most authoritarian. Liberal Democrats are the most cohesive group (i.e. with the smallest standard deviation). We chose to leave non-responses for  `PartyId2` for this analysis. Some users might want to remove them instead before computing their results as in the table below.  We do this by using `is.na()`, which checks variables for the presence of system missing values, in conjunction with `filter()`.
 
 ```{r 5.21}
 
@@ -235,7 +244,7 @@ bsa<-bsa%>%
   mutate(msscore=sd(libauth,na.rm=T),
          mdscore=median(libauth,na.rm=T))
 ```
-However, we also need to add the newly created variables into the existing bsa dataset, which the first line of the syntax above does. We can check that the variables have been created and that the correct values have been allocated to each sex/affiliation category.
+However, we also need to add the newly created variables into the existing bsa dataset, which the first line of the syntax above does. We can check that the variables have been created and that the correct values have been assigned to each sex/affiliation category.
 
 ```{r 5.23}
 

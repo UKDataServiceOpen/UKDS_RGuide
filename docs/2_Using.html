@@ -279,15 +279,16 @@ background: white;
 
 <section id="download-and-installation" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="download-and-installation"><span class="header-section-number">2.1</span> Download and installation</h2>
-<p>R can be downloaded for free from the <a href="https://cran.r-project.org/">CRAN website</a>, installed and run like any other application. Versions for Windows, Mac and Linux are available. The standard and rather minimalist interface that appears when the programme is launched is shown below.</p>
+<p>R can be downloaded for free from the <a href="https://cran.r-project.org/">CRAN website</a>, installed and run like any other application. Versions for Windows, Mac and Linux are available. The standard and rather minimalist interface that appears when the programme is launched on Windows is shown below.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="pics/screen2.1.jpg" class="img-fluid figure-img" data-fig.alt="Screenshot of the standard R Windows interface"></p>
-<figcaption>The standard R interface</figcaption>
+<figcaption>The standard R Windows interface</figcaption>
 </figure>
 </div>
-<p>This interface merely allows the user to type in commands one by one in the console, and to install packages via pull-down menus. This setup is however rather minimal, not very ergonomic or user friendly. As with other statistical software, the primary way of interacting with R for most consist of instead writing code or syntax in files (also called scripts files) that are saved and run whenever needed, which is not directly feasible with the standard R GUI.</p>
-<p>Writing R code and running script files is made easier via an Integrated Development Environment (IDE) such as <a href="https://www.rstudio.com/products/rstudio/download/">RStudio</a> for beginners to intermediate users <a href="https://www.sublimetext.com/">Sublime Text</a>, or the <a href="https://www.eclipse.org/statet/news/">StatEt module</a> for <a href="https://www.eclipse.org/downloads/">Eclipse</a> for more advanced programmers. All are free, available for Windows, MacOS and Linux and offer users a large number of functionalities, such as syntax highlighting, integration with Github and Markdown/Quarto, and document visualisation. Given that it probably has the largest number of users and its interface is straightforward for beginners, RStudio will be used in the remainder of this guide. In order for this guide to remain as universal as possible, we will not rely on the advanced features of RStudio, instead using it merely as an interface to the R engine.</p>
+<p>This interface merely allows the user to type in commands one by one in the console, and to install packages via pull-down menus. This setup is however rather minimal, not very ergonomic or user friendly. As with other statistical software, the preferred way of interacting with R for most users consist in writing code in separate files (also called scripts files) that are run whenever needed, which is not directly feasible with the standard R GUI.</p>
+<p>Writing R code and running script files are made easier via an Integrated Development Environment (IDE) such as <a href="https://www.rstudio.com/products/rstudio/download/">RStudio</a> for beginners to intermediate users <a href="https://www.sublimetext.com/">Sublime Text</a>, or the <a href="https://www.eclipse.org/statet/news/">StatEt module</a> for <a href="https://www.eclipse.org/downloads/">Eclipse</a> for more advanced programmers. All are free, available for Windows, MacOS and Linux and offer users a large number of functionalities, such as syntax highlighting, integration with Github and Markdown/Quarto, and document previsualisation.</p>
+<p>Since RStudio has a large user base and is relatively easy for beginners, we will use it throughout this guide. However, in order for the guide to remain accessible to users who do not work with other IDEs, RStudio is used below as a mere interface to the R engine without relying on its advanced features.</p>
 </section>
 <section id="installing-and-setting-up-rstudio" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="installing-and-setting-up-rstudio"><span class="header-section-number">2.2</span> Installing and setting up RStudio</h2>
@@ -315,30 +316,27 @@ background: white;
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">command</span>(parameter1, parameter2, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>All R commands are followed by brackets, even if some of them take no parameters.</p>
-<p>In the following example we are going to set up the default working directory, that is the default location for opening and storing files, by using the <code>getwd()</code> and <code>setwd()</code> commands. First, let us visualise the current default working directory.</p>
+<p>In the following example we are going to set up a default working directory, that is the default location where files will be opened from and saved to in the , by using the <code>getwd()</code> and <code>setwd()</code> commands. First, let us visualise the current default working directory.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/home/mscsepw2/OneDrive/rguide/UKDS_RGuide"</code></pre>
+<pre><code>[1] "/home/mscsepw2/OneDrive/projects/rguide/UKDS_RGuide"</code></pre>
 </div>
 </div>
-<p>Let us say we would like the code from this guide to be all in a folder called ‘R_UKDS’, to be located in ‘My Documents’. To tell R to use the folder ’R_UKDS, we can either create it from within Windows or ask R to do it for us. So type:</p>
+<p>Let us say that all the files used in this guide arre going to be located in a folder called ‘R_UKDS’, inside ‘My Documents’. To tell R to use the folder ‘R_UKDS’ we type:</p>
 <p>For Windows:</p>
 <pre><code>&gt; setwd("C:/Documents and Settings/&lt;INSERT YOUR USERNAME HERE&gt;/My Documents/R_UKDS")</code></pre>
 <p>For Mac:</p>
 <pre><code>&gt; setwd("/Users/&lt;INSERT YOUR USERNAME HERE&gt;/Documents/R_UKDS")</code></pre>
 <p>For Linux:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"~/Documents/R_UKDS"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"~/Documents/R_UKDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"~/Documents/R_UKDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Typing <code>getwd()</code> confirms that the change has been recorded.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "/home/mscsepw2/OneDrive/rguide/UKDS_RGuide"</code></pre>
 </div>
-</div>
+<p><code>[1] "/home/mscsepw2/Documents/R_UKDS"</code></p>
 <p><strong>Notes:</strong></p>
 <ul>
 <li><p>Any character string that is neither a command or the name of an object (such as a variable name) needs to be put between inverted commas or quotation marks, otherwise it will be interpreted as the name of an object and R will return an error.</p></li>
@@ -347,43 +345,41 @@ background: white;
 <li><p>R uses forward slashes rather than backslashes (unlike Windows applications, but like Linux) to separate directories. Using backlashes will return an error message;</p></li>
 <li><p>Although most R commands accept a large number of options to be specified. In many cases default values have been ‘factory set’ so that only the essential parameters need specifying.</p></li>
 </ul>
-<p>The output of most R commands can be either directly displayed on the screen (as in the above example) or stored in objects that can be subsequently reused in further commands. This object-oriented feature separates R from traditional statistical software.</p>
+<p>Being object-oriented, the output of most R commands can be either directly displayed on the screen (as in the above example) or stored in objects that can be subsequently reused in further commands. This feature separates R from traditional statistical software.</p>
 <p>For instance, typing:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>will store the output of <code>getwd()</code> (that is, the name of the current default directory) into an object called ‘a’. In order to view the content of a, one can just type its name:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "/home/mscsepw2/OneDrive/rguide/UKDS_RGuide"</code></pre>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
+<p><code>[1] "/home/mscsepw2/Documents/R_UKDS"</code></p>
 <section id="writing-r-scripts-via-r-studio" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="writing-r-scripts-via-r-studio">Writing R scripts via R Studio</h4>
-<p>Most users will want to write their code in a script file, similar to the ‘do’ file in Stata or syntax file in SPSS. R script files can be identified with their .R suffix. To open an existing R script in RStudio select <code>File&gt;Open File</code> then the relevant script file. To create a new script select <code>File&gt;New File&gt;Open File</code> (shortcut: Control+Shift+N) this will open a new script window in which to type commands.</p>
+<p>Most users will want to write their code in a script file, similar to the ‘do’ file in Stata or syntax file in SPSS. R script files can be identified with their .R suffix. To open an existing R script in RStudio select <code>File&gt;Open File</code> (shortcut: Control+O) then the relevant script file. To create a new script select <code>File&gt;New File&gt;R Script</code> (shortcut: Control+Shift+N) this will open a new script window in which to type commands.</p>
 </section>
 </section>
 <section id="installing-and-loading-packages" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="installing-and-loading-packages"><span class="header-section-number">2.4</span> Installing and loading packages</h2>
-<p>Apart from a basic set of commands and functions, most of the tools offered by R are available in packages that need to be installed and downloaded separately from within R. This can also be done with the pull-down menus of RStudio.<br>
-For example, to install the ‘foreign’ package one need to type:</p>
+<p>Apart from a basic set of commands and functions, most of the tools offered by R are available in packages that need to be installed and downloaded separately from within R. This can also be done with the pull-down menus of RStudio.</p>
+<p>For example, to install the ‘foreign’ package one need to type:</p>
 <pre><code>install.packages("foreign",repos = "https://cloud.r-project.org")</code></pre>
 <p>If the address of the package repository is not specified via the <code>repos=</code> option, a pull-down menu will appear, asking for one. Choosing <code>https://cloud.r-project.org</code> will automatically select the closest mirror site. Packages installation only needs to be done once.</p>
-<p>Originally, <code>Foreign</code> enabled users to import Stata (version 12 or older) or SPSS datasets. For Stata datasets saved under version 13 and above as well as more recent SPSS datasets, the <code>haven</code> package is required.</p>
+<p>Originally, <code>foreign</code> enabled users to import Stata (version 12 or older) or SPSS datasets. For Stata datasets saved under version 13 and above as well as SPSS datasets from version 16 onwards, the <code>haven</code> package is required.</p>
 <pre><code>install.packages("haven",repos = "https://cloud.r-project.org")</code></pre>
 <p>To use a package already installed in the local R library, the <code>library()</code> command is needed:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Simply typing:</p>
 <pre><code>&gt; library()</code></pre>
-<p>Will list all libraries installed on the computer that can be loaded in memory. This can be a rather long list!</p>
+<p>Will list all packages installed on the computer that can be loaded in memory. This can be a rather long list!</p>
 <p><!-- For users who feel more comfortable using ‘click-and-point', there is also the option to use ‘Install Packages’ from the Packages tab in the main R window. This will display a list of packages available in alphabetical order for the user to choose from. Next, select the desired package, double click on it and press ‘OK’ for the installation to begin. --></p>
-<p>Besides a full archive of R packages, the CRAN website provides a series of manuals, including <a href="https://cran.r-project.org/doc/manuals/R-exts.html">Writing R Extensions</a>, which describes how users can write their own packages and submit them to CRAN.</p>
-<p>Once a package is installed, it will be permanently stored in the local R library on the computer, unless deleted it with the <code>remove.packages()</code> command (not advised as this can break dependencies between packages!).</p>
+<p>In addition to the main archive of R packages, the CRAN website provides a series of manuals, including <a href="https://cran.r-project.org/doc/manuals/R-exts.html">Writing R Extensions</a>, which describes how users can write their own packages and submit them to CRAN.</p>
+<p>Once a package is installed, it will be permanently stored in the local R library on the computer, unless it is deleted it with the <code>remove.packages()</code> command (this is not advised as this can break dependencies between packages!).</p>
 <pre><code>&gt; remove.packages("name of the package")</code></pre>
-<p>Packages required for an analysis have to be loaded every time a new R session is started (But not every time a syntax file is run!).</p>
+<p>Packages required for an analysis have to be loaded every time the programme is launched or a new R session is started (But not every time a syntax file is run!).</p>
 </section>
 <section id="using-rs-internal-help-system" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="using-rs-internal-help-system"><span class="header-section-number">2.5</span> Using R’s internal help system</h2>
@@ -402,7 +398,7 @@ For example, to install the ‘foreign’ package one need to type:</p>
 <p>This will work for any command directly available in the <code>Base</code> package that is loaded at startup or in other packages loaded via the <code>library()</code> command. Otherwise, R will return an error message.</p>
 <p>Typing two question marks followed by a keyword will search all of R for the available documentation for that keyword in the installed packages:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>??haven</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>??haven</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -410,9 +406,9 @@ For example, to install the ‘foreign’ package one need to type:</p>
 <figcaption>Results of help search for ‘haven’</figcaption>
 </figure>
 </div>
-<p>An index of all commands and functions in the foreign package can be obtained by typing:</p>
+<p>An index of all commands and functions in the <code>haven</code> package can be obtained by typing:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="at">package=</span><span class="st">'haven'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="at">package=</span><span class="st">'haven'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -425,7 +421,7 @@ For example, to install the ‘foreign’ package one need to type:</p>
 </section>
 <section id="objects" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="objects"><span class="header-section-number">2.6</span> Objects</h2>
-<p>R is an object oriented language, which means that almost any information it uses is stored as ‘objects’ (i.e.&nbsp;containers) that can be manipulated independently. During an R session, multiple objects are available simultaneously (for instance datasets, but also summary tables or new variables produced from it). Typing:</p>
+<p>R is an object oriented language, which means that almost any information it processes is stored as ‘objects’ (i.e.&nbsp;containers) that can be manipulated independently. During an R session, multiple objects are available simultaneously (for instance datasets, but also summary tables or new variables produced from it). Typing:</p>
 <pre><code>&gt; ls()</code></pre>
 <p>will list all the objects that are currently in memory.</p>
 <p>Objects belong to <code>classes</code> or types which have distinct <code>properties</code>. There are many classes of objects in R. By comparison, Stata has only macros, variables and scalars that are directly available to most users. Common object classes include:</p>
@@ -438,53 +434,58 @@ For example, to install the ‘foreign’ package one need to type:</p>
 <li>data frames (datasets);</li>
 <li>matrices, etc.</li>
 </ul>
-<p>Some operations are understandably only possible with certain types of objects.</p>
+<p>Some operations are understandably only possible with certain types of objects: for example, mathematical functions can only be used with numeric objects.</p>
 <p>More advanced users can also create their own object classes. Describing R objects and their properties is well beyond the purpose of this guide and users interested should consult the <a href="https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects">online documentation</a> for further explanations.</p>
-<p>To create or assign a value to an object, one uses the assignment operator (&lt;-). For example:</p>
+<p>To create or assign a value to an object, one uses the assignment operator (&lt;-). For example, we can assign the value 5 to an object called x.:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span>  </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you type the letter x, the value ‘5’ will be returned in the console.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The object x will appear in the R environment after the ls() command.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "a" "x"</code></pre>
+<pre><code>[1] "x"</code></pre>
 </div>
 </div>
-<p>In this example we have assigned the value 5 to an object called x. If you type the letter x, the value ‘5’ will be returned in your console. The object x will appear in the R environment after the ls() command.</p>
 <section id="deleting-objects" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="deleting-objects">Deleting objects</h4>
 <p>The <code>rm()</code> function can be used to remove objects from the environment (session). These objects can be variables, lists, datasets, etc. For instance, to remove the object ‘x’, or the fictitious dataset called ‘mydata’:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)   </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)   </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "a"</code></pre>
+<pre><code>character(0)</code></pre>
 </div>
 </div>
 <pre><code>&gt; rm(mydata)</code></pre>
 <!-- The rm() function only works with R objects; but if you want to delete a specific variable of a dataset, you need a different function. For example, to delete the variable ‘age’ of the dataset ‘mydata’, an option is to set the variable to NULL: -->
 <!-- > mydata$age<-NULL -->
 <!-- There are other ways to delete variables from a dataset, but these will be looked at later on in this guide. -->
+<p>Among the various classes of objects one may use in R, a few are essential to understand when analysing survey data. Their characteristics are briefly listed below;</p>
 </section>
 <section id="data-frames" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="data-frames">Data frames</h4>
-<p>Among the various classes of objects one may use in R, a few are essential to understand when analysing survey data. Their characteristics are briefly listed below;</p>
-<p>Data frames are objects that come closest to datasets in traditional statistical software or worksheets in Microsoft Excel or LibreOffice Calc. They are objects that have indexed rows and columns, both of which may have names. Data frames columns can be seen as variables and lines or rows as observations. Each cell in the data frame can be uniquely identified by its position. Data frames are typically the object in which survey datasets are stored.</p>
+<p>Data frames are typically the kind of objects in which survey datasets are stored. They are similar to datasets in traditional statistical software or worksheets in Microsoft Excel or LibreOffice Calc. They are objects that have indexed rows and columns, both of which may have names. Columns correspond to variables and lines or rows to observations. Any cell can be uniquely identified by its position.</p>
 <p>Let’s assume that we have a small data frame called ‘mydata’. Here are a few basic commands to examine it:</p>
 <p><strong>Determining the size of a data frame:</strong></p>
 <p>the <code>dim()</code> command returns the number of rows and columns of a data frame</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 50  6</code></pre>
 </div>
 </div>
-<p>R tells us that our data is made of 50 rows and 6 columns, in other words of 50 observations and 6 variables. What if I want a quick overview of the dataset?</p>
+<p>R tells us that our data is made of 50 rows and 6 columns, in other words of 50 observations and 6 variables.</p>
+<p>What if I wanted a quick overview of the dataset?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    RSex skipmeal                   Married
 1 Female       NA Married/living as married
@@ -512,12 +513,12 @@ For example, to install the ‘foreign’ package one need to type:</p>
 <p>The <code>head()</code> command displays the first six lines of the dataset. Depending on the number of variables the output of <code>head()</code> can become quickly overwhelming, as the size of the lines on most screens is limited!</p>
 <p><strong>Obtaining the names of variables (or columns) in the dataset:</strong> This can be done using either <code>ls()</code> which we already have used, or the <code>names()</code> commands. <code>ls()</code> returns the variables names, sorted alphabetically, whereas <code>names()</code> returns them in their actual order in the data frame.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "HEdQual3" "Married"  "NatFrEst" "Poverty1"
 [5] "RSex"     "skipmeal"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "RSex"     "skipmeal" "Married"  "Poverty1"
 [5] "HEdQual3" "NatFrEst"</code></pre>
@@ -525,9 +526,9 @@ For example, to install the ‘foreign’ package one need to type:</p>
 </div>
 <p>We can see that in the data frame, the “RSex” column comes in fact before “Poverty1”.</p>
 <p><strong>Accessing variables:</strong></p>
-<p>Columns of a data frame, or variables, can be accessed by their name preceded by the $ sign:</p>
+<p>Variables (or columns) of a data frame can be accessed by their name preceded by the $ sign. For example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>NatFrEst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>NatFrEst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  5 30 50 50 50 10  1 NA  5 50 60 25 30  3 25 10 80
 [18]  5 50 50 40 45  2 82 60 40 10 10 40 15 30 30  2 10
@@ -536,12 +537,12 @@ attr(,"value.labels")
 named numeric(0)</code></pre>
 </div>
 </div>
-<p>Lists all values of <code>NatFrEst</code>, as well as extra technical information at the bottom.</p>
-<p>Alternatively, columns/variables and rows can be identified numerically by their position in the data frame using square brackets:</p>
+<p>Lists all values of <code>NatFrEst</code>, as well as additional technical information at the bottom.</p>
+<p>Alternatively, variables (columns)and observations (rows) can be identified numerically by their position in the data frame using square brackets:</p>
 <pre><code>dataframe[row number,column number]</code></pre>
-<p>Given that <code>RSex</code> is the first column of our dataset</p>
+<p>Given that <code>RSex</code> is the first column of our dataset, typing</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mydata[,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>mydata[,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] Female Female Female Male   Male   Male   Male  
  [8] Female Male   Male   Male   Female Female Male  
@@ -554,9 +555,9 @@ named numeric(0)</code></pre>
 Levels: Male Female</code></pre>
 </div>
 </div>
-<p>Returns the same output as previously. Not specifying a row or column name within the square brackets tells R to display them all.</p>
+<p>Returns the same output as previously, that is all recorded observation of <code>NaRfEst</code>. Not specifying a row or column name within the square brackets tells R to display them all.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>mydata[<span class="dv">6</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mydata[<span class="dv">6</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  RSex skipmeal                   Married
 6 Male       NA Married/living as married
@@ -566,36 +567,33 @@ Levels: Male Female</code></pre>
 </div>
 <p>Returns the values of all the variables for the sixth row of the data frame. Specifying both a row and column number, will return a unique observation:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>mydata[<span class="dv">6</span>,<span class="dv">6</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>mydata[<span class="dv">6</span>,<span class="dv">6</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10</code></pre>
 </div>
 </div>
 <p>which in this case is 10. Finally, more than one column or row can be displayed by concatenating their number using the <code>c()</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>mydata[<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">9</span>),<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">6</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>mydata[<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">9</span>), <span class="dv">6</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  RSex NatFrEst
-6 Male       10
-9 Male        5</code></pre>
+<pre><code>[1] 10  5</code></pre>
 </div>
 </div>
-<p>The above command returns respectively the sixth and 9th observations for the sixth column. Please note that columns names can also be used instead of their number, provided that they are put between inverted commas:</p>
+<p>The above command returns respectively the sixth and 9th observations for the sixth column. Explicit columns names can be used instead of their number, provided that they are placed between inverted commas:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>mydata[<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">9</span>),<span class="fu">c</span>(<span class="st">'RSex'</span>,<span class="st">'NatFrEst'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>mydata[<span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">9</span>),<span class="st">'NatFrEst'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  RSex NatFrEst
-6 Male       10
-9 Male        5</code></pre>
+<pre><code>[1] 10  5</code></pre>
 </div>
 </div>
-<p>Returns the same result as previously. Having a data frame to hand allows us to explore other types of objects commonly found in R. The type of a variable can be displayed by simply using the <code>class()</code> function.</p>
+<p>Returns the same result as above.</p>
+<p>We can explore other types of objects commonly found in R using the same dataset. The type of a variable can be displayed by simply using the <code>class()</code> function.</p>
 </section>
 <section id="numeric" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="numeric">Numeric</h4>
-<p><code>Numeric</code> objects are simple numerical vectors (ie a single or a list of numbers). Here this is the case for <code>NatFrEst</code>, the estimated proportion of people making wrong benefits claims, according to respondents to the survey.</p>
+<p><code>Numeric</code> objects are simple numerical vectors (ie a single or a list of numbers). They can be standalone or part of a data frame. Such is for example the case of the variable <code>NatFrEst</code>, which measures the proportion of people making wrong benefits claims estimated by respondents .</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mydata<span class="sc">$</span>NatFrEst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mydata<span class="sc">$</span>NatFrEst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "numeric"</code></pre>
 </div>
@@ -605,11 +603,11 @@ Levels: Male Female</code></pre>
 <h4 class="unnumbered anchored" data-anchor-id="character">Character</h4>
 <p>Character objects are alphanumeric vectors, that is variables which consist of text string(s).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mydata<span class="sc">$</span>Married)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mydata<span class="sc">$</span>Married)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mydata<span class="sc">$</span>Married) <span class="do">### Let's look at the first five rows of Married</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mydata<span class="sc">$</span>Married) <span class="do">### Let's look at the first five rows of Married</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Married/living as married"
 [2] "Separated/divorced"       
@@ -624,22 +622,29 @@ Levels: Male Female</code></pre>
 <h4 class="unnumbered anchored" data-anchor-id="factors">Factors</h4>
 <p>A distinctive feature of R is that categorical variables whether ordinal or polynomial are stored in objects known as <strong>factors</strong>. Factors should be thought of as a special type of variable with a discrete set of values, known as <code>levels</code>. Factors can be unordered or ordered. In our data, <code>Rsex</code> (Gender of the respondent) is such an object:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mydata<span class="sc">$</span>RSex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mydata<span class="sc">$</span>RSex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "factor"</code></pre>
 </div>
 </div>
 <p>The main difference between factors and traditional categorical variables in Stata or SPSS is that they do <strong>not</strong> consist of arbitrary numerical values with which substantive value labels are associated.</p>
-<p>Let’s further examine this factor. It is always a good idea to check the ordering of factor levels in a newly created variable with the <code>level()</code> command</p>
-<p><code>{r 2.25}</code> returns the levels (ie the values) of <code>RSex</code>. ‘Male’ is the first level of <code>Rsex</code>, and ‘Female’ the second one, irrespective of the values originally assigned and described in the codebook of the dataset. It is possible to change the ordering of factor levels with the <code>factor()</code> function.</p>
+<p>It is always a good idea to check the ordering of factor levels in a newly created variable with the <code>level()</code> command</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>RSex<span class="ot">&lt;-</span><span class="fu">factor</span>(mydata<span class="sc">$</span>RSex, <span class="co"># We re-use the existing factor levels from Rsex</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">levels =</span> <span class="fu">levels</span>(mydata<span class="sc">$</span>RSex)[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>)]) <span class="co"># and reorder them</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(mydata<span class="sc">$</span>RSex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Male"   "Female"</code></pre>
 </div>
-<p>The above code tells R to create a new factor variable -<code>RSex.New</code> - whose levels are the same as the initial <code>RSex</code>, but with ‘Female’ (level number 2 in the original variable) coming first, and “Male” (level number 1) , second. The name of the new variable is arbitrary.</p>
+</div>
+<p>returns the levels of <code>RSex</code>. ‘Male’ is the first level of <code>Rsex</code>, and ‘Female’ the second one, irrespective of the values originally assigned and described in the codebook of the dataset.</p>
+<p>It is possible to change the ordering of factor levels with the <code>factor()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>mydata<span class="sc">$</span>RSex.n<span class="ot">&lt;-</span><span class="fu">factor</span>(mydata<span class="sc">$</span>RSex, <span class="co"># We re-use the existing factor levels from Rsex</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">levels =</span> <span class="fu">levels</span>(mydata<span class="sc">$</span>RSex)[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>)]) <span class="co"># and reorder them</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The above code tells R to create a new factor variable -<code>RSex.n</code> - whose levels are identical to <code>RSex</code>, but with ‘Female’ (level number 2 in the original variable) coming first, and “Male” (level number 1) , second. The name of the new variable is arbitrary.</p>
 <p>We can check the outcome:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(mydata<span class="sc">$</span>RSex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(mydata<span class="sc">$</span>RSex.n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Female" "Male"  </code></pre>
 </div>

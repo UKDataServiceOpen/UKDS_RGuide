@@ -13,28 +13,24 @@ library(foreign)
 ```
 
 R can be downloaded for free from the [CRAN website](https://cran.r-project.org/), installed and run like any other application. Versions for  Windows, Mac and Linux are available.  The standard and rather minimalist interface that appears when the programme
-is launched is shown below.
+is launched on Windows is shown below.
 
-![The standard R interface](pics/screen2.1.jpg){fig.alt="Screenshot of the standard R Windows interface"}
+![The standard R Windows interface](pics/screen2.1.jpg){fig.alt="Screenshot of the standard R Windows interface"}
 
 This interface merely allows the user to type in commands one by one in the
 console, and to install packages via pull-down menus.  This setup is however rather minimal, not very ergonomic
-or user friendly.   As with other statistical software, the primary way of
-interacting with R for most  consist of instead writing code or syntax in files (also called scripts files) that are saved and run whenever needed, which is
-not directly feasible with the standard R GUI.
+or user friendly.   As with other statistical software, the preferred way of
+interacting with R for most users consist in  writing code in separate files (also called scripts files) that are run whenever needed, which is not directly feasible with the standard R GUI.
 
-Writing R code and running script files is made easier  via an Integrated Development
-Environment (IDE) such as
+Writing R code and running script files are made easier via an Integrated Development Environment (IDE) such as
 [RStudio](https://www.rstudio.com/products/rstudio/download/) for beginners to
 intermediate users [Sublime Text](https://www.sublimetext.com/), or the [StatEt module](https://www.eclipse.org/statet/news/)
 for  [Eclipse](https://www.eclipse.org/downloads/)  for more advanced
 programmers. All are free, available for Windows, MacOS and Linux and offer
 users  a large number of   functionalities, such as syntax
-highlighting, integration with Github and Markdown/Quarto, and document visualisation. Given that it probably has the largest
-number of users and its interface is straightforward for beginners, RStudio will be used in
-the remainder of this guide. In order for this guide to remain as universal
-as possible, we will not rely on the advanced features of RStudio, instead using
-it merely as an interface to the R engine. 
+highlighting, integration with Github and Markdown/Quarto, and document previsualisation. 
+
+Since RStudio has a large user base and is relatively easy for beginners, we will use it throughout this guide. However, in order for the guide to remain accessible  to users who do not work with other IDEs,  RStudio is used below as a mere interface to the R engine without relying on its advanced features.  
 
 ## Installing and setting up RStudio
 
@@ -74,15 +70,15 @@ Most R commands -- also known as functions in R jargon -- adopt the following sy
 
 All R commands are followed by brackets, even if some of them take no parameters. 
 
-In the following example we are going to set up the default working directory, that is  the default location for opening and storing files, by using the `getwd()` and `setwd()` commands. First, let us visualise the current default working directory.
+In the following example we are going to set up a default working directory, that is  the default location where files will be opened from and saved to in the  , by using the `getwd()` and `setwd()` commands. First, let us visualise the current default working directory.
 
 ```{r 2.4}
 getwd()
 ```
 
-Let us say we would like the code from this guide to be all in a folder called ‘R_UKDS’, to be located in ‘My Documents’.  To tell R to use the folder ’R_UKDS, we can either create it from within Windows or ask R to do it for us.  So type:
+Let us say that  all the files used in this guide arre going to be located in a folder called 'R_UKDS', inside 'My Documents'.  To tell R to use the folder 'R_UKDS' we type:
   
-  For Windows:
+For Windows:
   
 ```
 > setwd("C:/Documents and Settings/<INSERT YOUR USERNAME HERE>/My Documents/R_UKDS")
@@ -94,15 +90,17 @@ For Mac:
 For Linux:
 
 ```{r 2.5}
-dir.create("~/Documents/R_UKDS")
 setwd("~/Documents/R_UKDS")
 ```
 
 Typing `getwd()`  confirms that the change has been recorded.
 
-```{r 2.6}
+```{r 2.6,eval=F}
 getwd()
 ```
+
+```[1] "/home/mscsepw2/Documents/R_UKDS"```
+
 
 **Notes:**
   
@@ -119,8 +117,7 @@ error message;
 - Although most R commands accept a large number of options to be specified. In many cases default values have been ‘factory set’ so that only the
 essential parameters need specifying.
 
-The output of most R commands can be either directly displayed on the screen (as in the above example) or stored in objects that can be subsequently reused in
-further commands. This object-oriented feature separates R from traditional statistical software.
+Being object-oriented, the output of most R commands can be either directly displayed on the screen (as in the above example) or stored in objects that can be subsequently reused in further commands. This feature separates R from traditional statistical software.
 
 For instance, typing:
   
@@ -130,18 +127,20 @@ a<-getwd()
 
 will store the output of `getwd()`  (that is, the name of the current default directory) into an object called ‘a’. In order to view the content of a, one can just type its name:
 
-```{r 2_pre2}
+```{r 2_pre2,eval=F}
 a
 ```
+```[1] "/home/mscsepw2/Documents/R_UKDS"```
 
 #### Writing R scripts  via R Studio{-}
 
-Most users will want to write their code in a script file, similar to the ‘do’ file in Stata or syntax file in SPSS.  R script files can be  identified with their .R suffix. To open an existing  R script in RStudio select `File>Open File` then  the relevant script file. To create a new script  select `File>New File>Open File` (shortcut: Control+Shift+N) this will open a new script window in which to type commands.
+Most users will want to write their code in a script file, similar to the ‘do’ file in Stata or syntax file in SPSS.  R script files can be  identified with their .R suffix. To open an existing  R script in RStudio select `File>Open File`  (shortcut: Control+O) then  the relevant script file. To create a new script  select `File>New File>R Script` (shortcut: Control+Shift+N) this will open a new script window in which to type commands.
 
 
 ## Installing and loading packages
 
 Apart from a basic set of commands and functions, most of the tools offered by R are available in packages that need to be installed and downloaded separately from within R. This can also be done with the pull-down menus of RStudio.  
+
 For example, to install the ‘foreign’ package one need to type: 
   
 ```
@@ -150,7 +149,7 @@ install.packages("foreign",repos = "https://cloud.r-project.org")
 
 If the address of the  package repository is not specified via the  `repos=` option, a pull-down menu will appear, asking for one. Choosing `https://cloud.r-project.org` will automatically select the closest mirror site. Packages installation only needs to be done once. 
 
-Originally, `Foreign`  enabled  users to import Stata (version 12 or older) or SPSS datasets. For Stata datasets saved under version 13 and above as well as more recent SPSS datasets, the `haven` package is  required. 
+Originally, `foreign`  enabled  users to import Stata (version 12 or older) or SPSS datasets. For Stata datasets saved under version 13 and above as well as SPSS datasets from version 16 onwards, the `haven` package is  required. 
 
 ```
 install.packages("haven",repos = "https://cloud.r-project.org")
@@ -166,18 +165,18 @@ Simply typing:
 ```
 > library()
 ```
-Will list all libraries installed on the computer that can be loaded in memory. This can be a rather long list!
+Will list all packages installed on the computer that can be loaded in memory. This can be a rather long list!
   
   <!-- For users who feel more comfortable using ‘click-and-point', there is also the option to use ‘Install Packages’ from the Packages tab in the main R window. This will display a list of packages available in alphabetical order for the user to choose from. Next, select the desired package, double click on it and press ‘OK’ for the installation to begin. -->
 
-Besides a full archive of R packages, the CRAN website provides a series of manuals,  including [Writing R Extensions](https://cran.r-project.org/doc/manuals/R-exts.html), which describes how users can write their own packages and submit them to CRAN.
+In addition to the main archive of R packages, the CRAN website provides a series of manuals,  including [Writing R Extensions](https://cran.r-project.org/doc/manuals/R-exts.html), which describes how users can write their own packages and submit them to CRAN.
 
-Once a package is installed, it will be permanently stored in the local R library on the computer, unless  deleted it with  the `remove.packages()` command (not advised as this can break dependencies between packages!).
+Once a package is installed, it will be permanently stored in the local R library on the computer, unless it is  deleted it with  the `remove.packages()` command (this is not advised as this can break dependencies between packages!).
 
 ```
 > remove.packages("name of the package")
 ```
-Packages required  for an analysis have to be loaded every time a new R session is started (But not every time a syntax file is run!).  
+Packages required  for an analysis have to be loaded every time the programme is launched or a new R session is started (But not every time a syntax file is run!).  
 
 
 ##  Using R's internal help system
@@ -210,7 +209,7 @@ Typing two question marks followed by a keyword will search all of R for the ava
 ![Results of help search for 'haven'](pics/help_2.png){fig.alt="Screenshot of the results in RStudio  of a search for 'haven' in the  help content of R "}
 
 
-An index of all commands and functions in the foreign package can be obtained by typing:
+An index of all commands and functions in the `haven` package can be obtained by typing:
 
 ```{r 2.9}
 help(package='haven')
@@ -224,11 +223,14 @@ More information about where to find help when using R is provided at the end of
 
 
 ## Objects
-R is an object oriented language, which means that almost any information it uses is stored as ‘objects’ (i.e. containers) that can be manipulated independently. During an R session, multiple objects are available simultaneously (for instance datasets, but also summary tables or new variables produced from it). 
+R is an object oriented language, which means that almost any information it processes is stored as 'objects' (i.e. containers) that can be manipulated independently. During an R session, multiple objects are available simultaneously (for instance datasets, but also summary tables or new variables produced from it). 
 Typing:
+
 ```
 > ls()
 ```
+
+
 will list all the objects that are currently in memory.
 
 Objects belong to `classes` or types which have distinct `properties`. There are many classes of objects in R. By comparison, Stata has only macros, variables and scalars that are directly  available to most users. Common object classes include:
@@ -241,21 +243,28 @@ Objects belong to `classes` or types which have distinct `properties`. There are
 - data frames (datasets); 
 - matrices, etc. 
 
-Some operations are understandably only possible with certain types of objects. 
+Some operations are understandably only possible with certain types of objects: for example, mathematical functions can only be used with numeric objects. 
 
 More advanced users can also create their own object classes. Describing R objects and their properties is well beyond the purpose of this guide and users interested should consult the [online documentation](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects) for further explanations.
 
-To create or assign a value to an object, one uses the assignment operator  (<-). For example:
+To create or assign a value to an object, one uses the assignment operator  (<-). For example, we can assign the value 5 to an object called x.:
 
-```{r 2.10}
+```{r 2.10,echo= c(-1)}
+rm(a)
 x <- 5  
+```
+ 
+If you type the letter x,  the value ‘5’ will be returned in the console. 
 
+```{r 2.10.1}
 x
-
-ls()
 ```
 
-In this example we have assigned the value 5 to an object called x. If you type the letter x,  the value ‘5’ will be returned in your console. The object x will appear in the R environment after the ls() command. 
+The object x will appear in the R environment after the ls() command. 
+
+```{r 2.10.2}
+ls()
+```
 
 
 #### Deleting objects  {-}
@@ -275,16 +284,17 @@ ls()
 
 <!-- There are other ways to delete variables from a dataset, but these will be looked at later on in this guide. -->
 
-#### Data frames {-}
-
 Among the various classes of objects one may use in R, a few are essential to understand when analysing survey data. Their characteristics are briefly listed below;
 
-Data frames are  objects that come closest to datasets in traditional statistical software or worksheets in Microsoft Excel or LibreOffice Calc. They are objects that have indexed rows and columns, both of which may have names. Data frames  columns can be seen as  variables and lines or rows as observations. Each  cell in the data frame can be uniquely identified by its position. Data frames are typically the object in which survey datasets are stored.
+
+#### Data frames {-}
+
+Data frames are typically the kind of objects in which survey datasets are stored. They are  similar  to datasets in traditional statistical software or worksheets in Microsoft Excel or LibreOffice Calc. They are objects that have indexed rows and columns, both of which may have names. Columns correspond to  variables and lines or rows to observations. Any cell can be uniquely identified by its position. 
 
 
 ```{r 2.12}
 #| echo: false
-datadir<-"~/OneDrive/rguide/data/"
+datadir<-"~/OneDrive/projects/rguide/data/"
 mydata<-read.spss(paste0(datadir,"bsa_spss/bsa2019_poverty_open.sav"),to.data.frame = T,max.value.labels=5)%>%select(RSex,skipmeal,Married,Poverty1,HEdQual3,NatFrEst)%>%slice(1:50)
 #mydata<-droplevels(read_spss(paste0(datadir,"bsa_spss/bsa2019_poverty_open.sav"))%>%select(RSex,skipmeal,Married,Poverty1,HEdQual3,NatFrEst)%>%slice(1:50))
 mydata$Married<-as.character(mydata$Married)
@@ -301,7 +311,9 @@ the `dim()` command returns the number of rows and columns of a data frame
 ```{r 2.13}
 dim(mydata)
 ```
-R tells us that our data is made of 50 rows and 6 columns, in other words of 50 observations and 6 variables. What if I want a quick overview of the dataset?
+R tells us that our data is made of `{r} nrow(mydata)` rows and `{r} ncol(mydata)` columns, in other words of `{r} nrow(mydata)` observations and `{r} ncol(mydata)` variables. 
+
+What if I wanted a quick overview of the dataset?
   
 ```{r 2.14}
 head(mydata)
@@ -319,23 +331,23 @@ We can see that in the data frame, the "RSex" column comes in fact before "Pover
 
 **Accessing variables:**
   
-  Columns of a data frame, or variables, can be accessed by their name preceded by the $ sign: 
+Variables (or columns) of a data frame  can be accessed by their name preceded by the $ sign. For example: 
   
 ```{r 2.16}
 mydata$NatFrEst
 ```
-Lists all values of `NatFrEst`, as well as extra technical information at the bottom.
+Lists all values of `NatFrEst`, as well as additional technical information at the bottom.
 
-Alternatively, columns/variables and rows can be identified numerically by their position in the data frame using square brackets: 
+Alternatively, variables (columns)and observations (rows)  can be identified numerically by their position in the data frame using square brackets: 
 ```
 dataframe[row number,column number]
 ```
-Given that `RSex` is the first column of our dataset
+Given that `RSex` is the first column of our dataset, typing
 
 ```{r 2.17}
 mydata[,1]
 ```
-Returns the same output as previously. Not specifying a row or column name within the square brackets tells R to display them all.   
+Returns the same output as previously, that is all recorded observation of `NaRfEst`. Not specifying a row or column name within the square brackets tells R to display them all.   
 
 ```{r 2.18}
 mydata[6,]
@@ -345,23 +357,25 @@ Returns the values of all the variables for the sixth row of the data frame. Spe
 ```{r 2.19}
 mydata[6,6]
 ```
-which in this case is 10. 
+which in this case is `{r} mydata[6,6]`. 
 Finally, more than one column or row can be displayed by concatenating their number using the `c()` function:
   
 ```{r 2.20}
-mydata[c(6,9),c(1,6)]
+mydata[c(6,9), 6]
 ```
-The above command returns respectively the sixth and 9th observations for the  sixth column. Please note that columns names can also be used instead of their number, provided that they are put between inverted commas:
+The above command returns respectively the sixth and 9th observations for the  sixth column. Explicit columns names can  be used instead of their number, provided that they are placed  between inverted commas:
   
 ```{r 2.21}
-mydata[c(6,9),c('RSex','NatFrEst')]
+mydata[c(6,9),'NatFrEst']
 ```
-Returns the same result as previously.
-Having a data frame to hand allows us to explore other types of objects commonly found in R. The type of a variable can  be displayed  by simply using the `class()` function. 
+Returns the same result as above.
+
+We can explore other types of objects commonly found in R using the same dataset. The type of a variable can  be displayed  by simply using the `class()` function. 
 
 #### Numeric {-}
 
-`Numeric` objects are simple numerical vectors (ie a single or a list of numbers). Here this is the case for `NatFrEst`, the estimated proportion of people making wrong benefits claims, according to respondents to the survey.  
+`Numeric` objects are simple numerical vectors (ie a single or a list of numbers). They can be standalone or part of a data frame.   Such is for example the case of the variable `NatFrEst`, which measures the proportion of people making wrong benefits claims estimated by respondents .
+
 ```{r 2.22}
 class(mydata$NatFrEst)
 ```
@@ -379,23 +393,26 @@ class(mydata$RSex)
 ```
 The main difference between factors and traditional categorical variables in Stata or SPSS is that they do **not** consist of arbitrary numerical values with which substantive value labels are associated. 
 
-Let's further examine this factor. It is always a good idea to check the ordering of factor levels in a newly created variable with the `level()` command
+It is always a good idea to check the ordering of factor levels in a newly created variable with the `level()` command
 
-```{r 2.25}```
-returns the levels (ie the values) of  `RSex`. 'Male' is the first level of `Rsex`,
+```{r 2.25}
+levels(mydata$RSex)
+```
+returns the levels of  `RSex`. 'Male' is the first level of `Rsex`,
 and 'Female' the second one, irrespective of the values originally assigned and described in the codebook of the  dataset. 
+
 It is possible to change the ordering of factor levels with the `factor()` function.  
 
 ```{r 2.26.1}
-mydata$RSex<-factor(mydata$RSex, # We re-use the existing factor levels from Rsex
+mydata$RSex.n<-factor(mydata$RSex, # We re-use the existing factor levels from Rsex
                     levels = levels(mydata$RSex)[c(2,1)]) # and reorder them
 ```
-The above code tells R to create a new factor variable -`RSex.New` - whose levels are the same as the initial `RSex`, but with  'Female' (level number 2 in the original variable) coming first, and "Male" (level number 1) , second. The name of the new variable is arbitrary. 
+The above code tells R to create a new factor variable -`RSex.n` - whose levels are identical to `RSex`, but with  'Female' (level number 2 in the original variable) coming first, and "Male" (level number 1) , second. The name of the new variable is arbitrary. 
 
 We can check the outcome:
 
 ```{r 2.26.2}
-levels(mydata$RSex)
+levels(mydata$RSex.n)
 ``` 
 
 In the next chapter an alternative approach to dealing with categorical variables imported from SPSS or Stata is presented.

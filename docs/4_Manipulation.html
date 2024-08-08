@@ -261,16 +261,15 @@ background: white;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#creating-and-transforming-numerical-variables" id="toc-creating-and-transforming-numerical-variables" class="nav-link active" data-scroll-target="#creating-and-transforming-numerical-variables"><span class="header-section-number">4.1</span> Creating and transforming numerical variables</a></li>
-  <li><a href="#categorical-variables" id="toc-categorical-variables" class="nav-link" data-scroll-target="#categorical-variables"><span class="header-section-number">4.2</span> Categorical variables</a></li>
-  <li><a href="#recoding-variables" id="toc-recoding-variables" class="nav-link" data-scroll-target="#recoding-variables"><span class="header-section-number">4.3</span> Recoding variables</a></li>
-  <li><a href="#missing-values" id="toc-missing-values" class="nav-link" data-scroll-target="#missing-values"><span class="header-section-number">4.4</span> Missing Values</a>
+  <li><a href="#creating-and-transforming-numeric-variables" id="toc-creating-and-transforming-numeric-variables" class="nav-link active" data-scroll-target="#creating-and-transforming-numeric-variables"><span class="header-section-number">4.1</span> Creating and transforming numeric variables</a></li>
+  <li><a href="#recoding-variables" id="toc-recoding-variables" class="nav-link" data-scroll-target="#recoding-variables"><span class="header-section-number">4.2</span> Recoding variables</a></li>
+  <li><a href="#missing-values" id="toc-missing-values" class="nav-link" data-scroll-target="#missing-values"><span class="header-section-number">4.3</span> Missing Values</a>
   <ul class="collapse">
-  <li><a href="#inspecting-missing-data" id="toc-inspecting-missing-data" class="nav-link" data-scroll-target="#inspecting-missing-data"><span class="header-section-number">4.4.1</span> Inspecting missing data</a></li>
-  <li><a href="#recoding-missing-values-as-na-continuous-variables" id="toc-recoding-missing-values-as-na-continuous-variables" class="nav-link" data-scroll-target="#recoding-missing-values-as-na-continuous-variables"><span class="header-section-number">4.4.2</span> Recoding missing values as NA (continuous variables)</a></li>
-  <li><a href="#working-with-missing-values" id="toc-working-with-missing-values" class="nav-link" data-scroll-target="#working-with-missing-values"><span class="header-section-number">4.4.3</span> Working with missing values</a></li>
+  <li><a href="#inspecting-missing-data" id="toc-inspecting-missing-data" class="nav-link" data-scroll-target="#inspecting-missing-data"><span class="header-section-number">4.3.1</span> Inspecting missing data</a></li>
+  <li><a href="#recoding-missing-values-as-na-continuous-variables" id="toc-recoding-missing-values-as-na-continuous-variables" class="nav-link" data-scroll-target="#recoding-missing-values-as-na-continuous-variables"><span class="header-section-number">4.3.2</span> Recoding missing values as NA (continuous variables)</a></li>
+  <li><a href="#working-with-missing-values" id="toc-working-with-missing-values" class="nav-link" data-scroll-target="#working-with-missing-values"><span class="header-section-number">4.3.3</span> Working with missing values</a></li>
   </ul></li>
-  <li><a href="#subsetting-datasets" id="toc-subsetting-datasets" class="nav-link" data-scroll-target="#subsetting-datasets"><span class="header-section-number">4.5</span> Subsetting datasets</a></li>
+  <li><a href="#subsetting-datasets" id="toc-subsetting-datasets" class="nav-link" data-scroll-target="#subsetting-datasets"><span class="header-section-number">4.4</span> Subsetting datasets</a></li>
   </ul>
 </nav>
     </div>
@@ -282,92 +281,111 @@ background: white;
 
 
 <p>In this section we will cover how to recode variables and deal with missing data.</p>
-<section id="creating-and-transforming-numerical-variables" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="creating-and-transforming-numerical-variables"><span class="header-section-number">4.1</span> Creating and transforming numerical variables</h2>
-<p>Let’s say we would like to transform our numerical political orientation variable: <code>leftrigh</code> into a logarithmic scale. We can use the <code>log()</code> function which is directly available in R Base package and simply returns the natural logarithm (base-e). We will use the assignment operator ( &lt;- ) to create a new variable called ‘leftright_log’ from the original variable</p>
+<section id="creating-and-transforming-numeric-variables" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="creating-and-transforming-numeric-variables"><span class="header-section-number">4.1</span> Creating and transforming numeric variables</h2>
+<p>Let’s say we would like to transform our numerical political orientation variable: <code>leftrigh</code> into a logarithmic scale. We can use the <code>log()</code> function which is available in R Base and simply returns the natural logarithm (base-e). We will use the assignment operator ( &lt;- ) to create a new variable called ‘lnleftright’ from the original variable</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>lnleftrigh_log <span class="ot">&lt;-</span> <span class="fu">log</span>(bsa<span class="sc">$</span>leftrigh)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>lnleftrigh <span class="ot">&lt;-</span> <span class="fu">log</span>(bsa<span class="sc">$</span>leftrigh)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that if we had not specified <code>bsa$</code> the command would have created a transformed variable outside of the BSA data frame. We can now check the results with <code>summary()</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">cbind</span>(bsa<span class="sc">$</span>lnleftrigh,bsa<span class="sc">$</span>leftrigh))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       V1      
- Min.   :1.00  
- 1st Qu.:2.00  
- Median :2.40  
- Mean   :2.52  
- 3rd Qu.:3.00  
- Max.   :5.00  
- NA's   :782   </code></pre>
+<pre><code>       V1               V2      
+ Min.   :0.0000   Min.   :1.00  
+ 1st Qu.:0.6931   1st Qu.:2.00  
+ Median :0.8755   Median :2.40  
+ Mean   :0.8707   Mean   :2.52  
+ 3rd Qu.:1.0986   3rd Qu.:3.00  
+ Max.   :1.6094   Max.   :5.00  
+ NA's   :782      NA's   :782   </code></pre>
 </div>
 </div>
-<p>Please note that it is not possible to pass several variables names directly to <code>summary()</code>. We need to group them first into a temporary object using <code>cbind()</code>. In the output <code>V1</code> refers to the first variable, <code>lnleftrigh</code>.</p>
-<p>What if we hypothetically wanted to do the same with the level of agreement to the statement “People like me don't have any say about what the government does”, a categorical variable, originally ranging from 1 (<code>Agree strongly</code>) to 5 (<code>Disagree strongly</code>)? If we try to repeat what we did before:</p>
+<p>It is not possible to pass several variables names directly to <code>summary()</code>. We need to group them first into a temporary object using <code>cbind()</code>. In the output <code>V1</code> refers to the first variable, <code>lnleftrigh</code>.</p>
+<!-- We need to keep in mind that sometimes, categorical variables come as factors, which do not lend themselves to mathematical manipulation. In this case they would need to be converted to numeric format. -->
+<!-- Say  we wanted to also transform to a logarithmic scale `govnosa2`, the level of agreement with the statement "People like me don\'t have any say about what the government does". This variable  ranges  from  1 (`Agree strongly`) to 5 (`Disagree strongly`). Let's also assume for the purpose of this exercise that this was imported as a factor. Attempting to apply the log function will return an error. -->
+<!-- In order to nonetheless transform it we would need to first convert it to a numeric format, with or without creating a new variable.  -->
+<!-- ```{r 4.4} -->
+<!-- bsa$govnosa2.n <- as.numeric(bsa$govnosa2)#convert to numeric  -->
+<!-- class(bsa$govnosa2.n)       #check again -->
+<!-- bsa$lngovnosa2 <- log(bsa$govnosa2.n) #create new log of the LEFTRIGHT variable  -->
+<!-- summary(cbind(bsa$lngovnosa2,bsa$govnosa2.n)) -->
+<!-- ``` -->
+<p>We can easily create completely new variables in the dataset. For instance, the following will create <code>test</code> with a constant value of 1.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>lngovnosa2 <span class="ot">&lt;-</span> <span class="fu">log</span>(bsa<span class="sc">$</span>govnosa2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>… we get an error, due to the fact that <code>govnosa2</code> was imported as a factor, and that <code>log()</code> can only be applied to numeric objects.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(bsa<span class="sc">$</span>govnosa2)       <span class="co">#check to see if it is numeric</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>test <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>test) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "haven_labelled" "vctrs_vctr"     "double"        </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>govnosa2.n <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(bsa<span class="sc">$</span>govnosa2)<span class="co">#convert to numeric </span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(bsa<span class="sc">$</span>govnosa2.n)       <span class="co">#check again</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "numeric"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>lngovnosa2 <span class="ot">&lt;-</span> <span class="fu">log</span>(bsa<span class="sc">$</span>govnosa2.n) <span class="co">#create new log of the LEFTRIGHT variable </span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">cbind</span>(bsa<span class="sc">$</span>lngovnosa2,bsa<span class="sc">$</span>govnosa2.n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       V1               V2       
- Min.   :0.0000   Min.   :1.000  
- 1st Qu.:0.6931   1st Qu.:2.000  
- Median :1.0986   Median :3.000  
- Mean   :0.8910   Mean   :2.705  
- 3rd Qu.:1.3863   3rd Qu.:4.000  
- Max.   :1.6094   Max.   :5.000  
- NA's   :2447     NA's   :2447   </code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+      1       1       1       1       1       1 </code></pre>
 </div>
 </div>
-<p>We can also create a completely new variable in the dataset. For instance, the following will create <code>test</code> with a constant value of 1.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>test <span class="ot">&lt;-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<!-- ### Categorical variables -->
+<!-- We saw in Section 3 that  categorical variables are objects called **factors** in R, with a fixed set of possible  numerical or alphanumerical values (levels) which  can be  accessed with the `levels()` function. -->
+<!-- ```{r 4.6} -->
+<!-- levels(bsa$Married)  -->
+<!-- ``` -->
+<!-- The number in the output does not refer to  underlying numerical values to which  labels are added as with other statistical packages, but instead to the position of a given level in the list returned by `level()`. -->
 </section>
-<section id="categorical-variables" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="categorical-variables"><span class="header-section-number">4.2</span> Categorical variables</h2>
-<p>We saw in Section 3 that categorical variables are objects called <strong>factors</strong> in R, with a fixed set of possible numerical or alphanumerical values (levels) which can be accessed with the <code>levels()</code> function.</p>
+<section id="recoding-variables" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="recoding-variables"><span class="header-section-number">4.2</span> Recoding variables</h2>
+<p>Recoding categorical and numeric variables is very common in survey research. For example, let us create a dichotomic version of the marital status of BSA respondents. The original marital status is recorded by <code>Married</code>. Simply using <code>summary</code> will return descriptive statistics of its numeric values, which is not what we need here:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>Married) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>Married)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>NULL</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  1.000   1.000   1.000   1.977   3.000   4.000       1 </code></pre>
 </div>
 </div>
-<p>The number in the output does not refer to underlying numerical values to which labels are added as with other statistical packages, but instead to the position of a given level in the list returned by <code>level()</code>.</p>
-</section>
-<section id="recoding-variables" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="recoding-variables"><span class="header-section-number">4.3</span> Recoding variables</h2>
-<p>The following commands will create a new variable called <code>Married2</code> where respondents are categorised into two new categories: ‘Not partnered’ and ‘Partnered’. The “separated/divorced” and ‘Never married’ categories of the ‘Married’ variable are recoded as ‘Not partnered’. It is always advised to create new variables when recoding old ones so the original data is not tampered with.</p>
+<p>What we want instead is to work with the factor-converted version of <code>Married</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married.f<span class="ot">&lt;-</span><span class="fu">as_factor</span>(bsa<span class="sc">$</span>Married,<span class="st">"labels"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Married/living as married"</span>,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"Partnered"</span>,bsa<span class="sc">$</span>Married)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Widowed"</span> <span class="sc">|</span> </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                       bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Never married"</span> <span class="sc">|</span> </span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                      bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Separated/divorced"</span>,</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"Not partnered"</span>,bsa<span class="sc">$</span>Married2)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>Married2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">as_factor</span>(bsa<span class="sc">$</span>Married))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-Not partnered     Partnered 
-         1778          2209 </code></pre>
+<pre><code>Married/living as married        Separated/divorced                   Widowed 
+                     2209                       530                       380 
+            Never married            No information                      NA's 
+                      868                         0                         1 </code></pre>
+</div>
+</div>
+<p>Even better, we can produce the exhaustive list of all of <code>Married</code>’s factor levels:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(<span class="fu">as_factor</span>(bsa<span class="sc">$</span>Married))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Married/living as married" "Separated/divorced"       
+[3] "Widowed"                   "Never married"            
+[5] "No information"           </code></pre>
+</div>
+</div>
+<p>We can now move on to creating a new variable called <code>Married2</code> where respondents are categorised into two new categories: ‘Not partnered’ and ‘Partnered’. The “separated/divorced” and ‘Never married’ categories of the ‘Married’ variable are recoded as ‘Not partnered’. It is always advised to create new variables when recoding old ones so the original data is not tampered with.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married.f<span class="ot">&lt;-</span><span class="fu">as_factor</span>(bsa<span class="sc">$</span>Married,<span class="st">"labels"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Married/living as married"</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"Partnered"</span>,bsa<span class="sc">$</span>Married)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Widowed"</span> <span class="sc">|</span> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                       bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Never married"</span> <span class="sc">|</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                      bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Separated/divorced"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"Not partnered"</span>,bsa<span class="sc">$</span>Married2)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married2<span class="ot">&lt;-</span><span class="fu">as.factor</span>(bsa<span class="sc">$</span>Married2)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>Married2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Not partnered" "Partnered"    </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>Married2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Not partnered     Partnered          NA's 
+         1778          2209             1 </code></pre>
 </div>
 </div>
 <p>The second and fourth categories have been renamed to ‘Not partnered’. Now we have two levels: ‘Partnered’ and ‘Not partnered’</p>
-<p><code>ifelse()</code> is a convenient tool when it is required to work with Base R or when the variables have a limited number of categories. More complex cases may require a more advanced function. The <code>dplyr</code> library provides a comprehensive set of data manipulation tools.</p>
+<p><code>ifelse()</code> is a convenient tool when it is required to work with Base R functions only or when variables have a limited number of categories. The syntax consists of three terms:</p>
+<ol type="1">
+<li>the condition to be evaluated: for example <code>bsa$Married.f=="Widowed"</code></li>
+<li>what happens if the condition is met, for example the new variable takes the value “Not partnered”</li>
+<li>what happens if the condition is not met, for example, the new variable retains its existing value</li>
+</ol>
+<p>More complex cases may require a more advanced function. The <code>dplyr</code> library provides a comprehensive set of data manipulation tools, such as <code>case_when()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>bsa<span class="ot">&lt;-</span>bsa<span class="sc">%&gt;%</span></span>
@@ -385,7 +403,7 @@ Not partnered     Partnered
          1778          2209             1 </code></pre>
 </div>
 </div>
-<p>We just created the <code>Married3</code> variable, which is identical to <code>Married2</code> above, but using the more powerful syntax made available by <code>dplyr</code>. Let’s decompose it:</p>
+<p>The syntax above created the <code>Married3</code> variable, which is identical to <code>Married2</code>. Let’s decompose it:</p>
 <ul>
 <li><code>dplyr</code> use the <code>pipe</code> symbol ie <code>%&gt;%</code> or <code>|&gt;</code> which enables to sequentially combine functions. We will come back to this later in this guide.</li>
 <li><code>mutate()</code> is the generic variable creation/alteration command, and can handle complex combinations of conditions as well as multiple simultaneous variable creation operations.</li>
@@ -398,44 +416,52 @@ Not partnered     Partnered
 <li>Unless explicitly specified (in our case, by adding the bsa$ prefix to variable name), the objects created are not included in the data frame from which they were computed.</li>
 </ul>
 </section>
-<section id="missing-values" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="missing-values"><span class="header-section-number">4.4</span> Missing Values</h2>
-<p>Explicit missing values in R (ie values that R itself considers as missing) are represented as <code>NA</code> for factors and numerical variables. For character variables, missing values are simply empty strings, ie <code>""</code>. R has a series of functions specifically designed to handle NAs.</p>
-<p>R has fewer safety nets than other packages for handling missing values. Most function won’t issue warn users about whether or how many how many observations with missing values have been dropped. On the other hand, some commands will return error messages and won’t run when missing values are present. This is the case of <code>mean()</code> for example.</p>
-<section id="inspecting-missing-data" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1" class="anchored" data-anchor-id="inspecting-missing-data"><span class="header-section-number">4.4.1</span> Inspecting missing data</h3>
+<section id="missing-values" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="missing-values"><span class="header-section-number">4.3</span> Missing Values</h2>
+<p>Explicit or system missing values in R (i.e.&nbsp;values that R itself considers as missing) are represented as <code>NA</code> for factors and numerical variables. For character variables, missing values are simply empty strings, ie <code>""</code>. R has a series of functions specifically designed to handle NAs.</p>
+<p>R has fewer safety nets than other packages for handling missing values. Most functions won’t warn users about whether there are observations with missing values that have been dropped. On the other hand, some commands will return error messages and by default won’t run when missing values are present. This is the case of <code>mean()</code> for example.</p>
+<section id="inspecting-missing-data" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="inspecting-missing-data"><span class="header-section-number">4.3.1</span> Inspecting missing data</h3>
 <p>The logical function <code>is.na()</code> assesses each observation in variables and identifies whether cases are valid or missing. The result will appear as a boolean TRUE/FALSE vector for each observation. <code>is.na()</code> can be combined with other functions:</p>
 <ul>
 <li><p>With <code>table()</code> in order to get the frequencies of missing values of a specific variable.</p></li>
-<li><p>With sum() in order to count the number of missing observations of variables or whole datasets.</p></li>
+<li><p>With <code>sum()</code> in order to count the number of missing observations of variables or whole datasets.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">is.na</span>(bsa<span class="sc">$</span>leftrigh))<span class="co">#of missing values in the leftright variable </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(                     <span class="co"># number of missing values in the leftright variable</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(bsa<span class="sc">$</span>leftrigh)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>      ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 FALSE  TRUE 
  3206   782 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(bsa)) <span class="co"># of missing values in the whole dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(                       <span class="co"># of missing values in the whole dataset</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">is.na</span>(bsa)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>   ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 41487</code></pre>
+<pre><code>[1] 36593</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">is.na</span>(bsa<span class="sc">$</span>leftrigh)) <span class="co">#returns the proportion of NAs...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(                     <span class="co"># proportion of NAs for a variable</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">is.na</span>(bsa<span class="sc">$</span>leftrigh)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>     ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.1960883</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">is.na</span>(bsa)) <span class="co"># returns the proportion in the dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(                     <span class="co"># proportion of NAs in the dataset</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">is.na</span>(bsa)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>     ) <span class="co"># returns the proportion in the dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3250925</code></pre>
+<pre><code>[1] 0.3058592</code></pre>
 </div>
 </div>
 </section>
-<section id="recoding-missing-values-as-na-continuous-variables" class="level3" data-number="4.4.2">
-<h3 data-number="4.4.2" class="anchored" data-anchor-id="recoding-missing-values-as-na-continuous-variables"><span class="header-section-number">4.4.2</span> Recoding missing values as NA (continuous variables)</h3>
+<section id="recoding-missing-values-as-na-continuous-variables" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="recoding-missing-values-as-na-continuous-variables"><span class="header-section-number">4.3.2</span> Recoding missing values as NA (continuous variables)</h3>
 <p>It may sometimes be useful to recode implicit missing values (ie considered by the data producer as missing, but not by R) of either numeric objects or factors into <code>&lt;NA&gt;</code>, in order to simplify case selection when conducting analyses. This can either be done with Base R code or the more advanced data manipulation functions from the dplyr package that we explored earlier.</p>
-<p>Let’s assume for a moment that we would like to get rid of respondents aged under 25 for our analysis. A safe way to proceed is by creating a new dataset.</p>
+<p>Let’s assume for a moment that we would like to eliminate respondents aged under 25 for our analysis. A safe way to proceed is by creating a new dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert labelled numeric variable into factor</span></span>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert labelled numeric variable into factor for clarity</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>RAgeCat.f <span class="ot">&lt;-</span> <span class="fu">as_factor</span>(bsa<span class="sc">$</span>RAgeCat) </span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>RAgeCat.f)                      </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -456,20 +482,19 @@ DK/Refused
          0 </code></pre>
 </div>
 </div>
-<p>Why is the number of missing values 227 and not 223 as the original number of respondents aged 18-24? Because there were already 3 missing values for the RAgeCat variable.</p>
-<p>We can also notice that although there are now no observation left in the 18-24 category, it is still displayed by <code>table()</code>. This is because levels are attributes of factors and are not deleted with observations. We can remove unused levels permanently with <code>droplevels()</code></p>
+<p>We can also notice that although there are now no observations left in the 18-24 category, it is still displayed by <code>table()</code>. This is because levels are attributes of factors and are not deleted with observations. We can remove unused levels permanently with <code>droplevels()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>RAgeCat.f<span class="ot">&lt;-</span><span class="fu">droplevels</span>(bsa<span class="sc">$</span>RAgeCat.f)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>RAgeCat.f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>bsa.adults<span class="sc">$</span>RAgeCat.f<span class="ot">&lt;-</span><span class="fu">droplevels</span>(bsa.adults<span class="sc">$</span>RAgeCat.f)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa.adults<span class="sc">$</span>RAgeCat.f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-18-24 25-34 35-44 45-54 55-59 60-64   65+ 
-  223   591   650   729   320   333  1138 </code></pre>
+25-34 35-44 45-54 55-59 60-64   65+ 
+  591   650   729   320   333  1138 </code></pre>
 </div>
 </div>
 </section>
-<section id="working-with-missing-values" class="level3" data-number="4.4.3">
-<h3 data-number="4.4.3" class="anchored" data-anchor-id="working-with-missing-values"><span class="header-section-number">4.4.3</span> Working with missing values</h3>
+<section id="working-with-missing-values" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="working-with-missing-values"><span class="header-section-number">4.3.3</span> Working with missing values</h3>
 <p>Explicit missing values (coded as NA) can be taken care of by R’s own missing values functions. For instance using the <code>na.rm=T</code> or <code>na.rm=TRUE</code> option will remove missing values from an analysis (typing <code>?na.rm</code> will provide more information). Below is a summary of how NAs are dealt with by common R commands:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -519,9 +544,9 @@ DK/Refused
 </div>
 </section>
 </section>
-<section id="subsetting-datasets" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="subsetting-datasets"><span class="header-section-number">4.5</span> Subsetting datasets</h2>
-<p>When analysis survey data. it is often necessary to limit the scope of computation to specific groups or subset of the data we may be interested in. There are many ways of subsetting datasets in R. We will review the most common here.</p>
+<section id="subsetting-datasets" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="subsetting-datasets"><span class="header-section-number">4.4</span> Subsetting datasets</h2>
+<p>When analysing survey data. it is often necessary to limit the scope of computation to specific groups or subset of the data we may be interested in. There are many ways of subsetting datasets in R. We will review the most common here.</p>
 <p><strong>Using Base R</strong></p>
 <p>Most subsetting commands involve some form of conditions whereby the characteristics of a subsample of interest are specified. Suppose we would like to examine the interest for politics among people aged 18-24.</p>
 <p>We can either create an adhoc data frame:</p>
@@ -542,16 +567,18 @@ DK/Refused
 </div>
 <p>Or we can directly limit the extent of the analysis on the go:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(bsa<span class="sc">$</span>Politics[bsa<span class="sc">$</span>RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>        bsa<span class="sc">$</span>Politics[bsa<span class="sc">$</span>RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span>]</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  1  2  3  4  5 
 29 41 72 56 25 </code></pre>
 </div>
 </div>
-<p>In the first example it was necessary to include a comma after specg the condition. This is meant to indicate that we want to retain all variables ie columns in the dataset. The comma is not necessary in the second example as we are already working with a single variable.</p>
+<p>In the first example it was necessary to include a comma after the condition. This is meant to indicate that we want to retain all variables ie columns in the dataset. The comma is not necessary in the second example as we are already working with a single variable.</p>
 <p><strong>Using dplyr</strong>*</p>
-<p>Now suppose we want to further restrict the analysis to people identifying as Males. We could use the same Base R syntax as above, but with more than one condition coding tends to become a bit cumbersome. We could instead use the more convenient syntax from the <code>dplyr</code> package. Either:</p>
+<p>Now suppose we want to further restrict the analysis to people self-identifying as males. We could use the same Base R syntax as above, but with more than one condition coding tends to become a bit cumbersome. We could instead use the more convenient syntax from the <code>dplyr</code> package. Either:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>bsa.young.males<span class="ot">&lt;-</span>bsa<span class="sc">%&gt;%</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span> <span class="sc">&amp;</span> <span class="fu">as_factor</span>(Rsex)<span class="sc">==</span><span class="st">"Male"</span>)  </span>
@@ -565,7 +592,7 @@ Item not applicable   ... a great deal,        quite a lot,               some,
                  18                   9                   0                   0 </code></pre>
 </div>
 </div>
-<p>Or. as before embed it as a condition within <code>table()</code> :</p>
+<p>Or as before, embed it as a condition within <code>table()</code> :</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">as_factor</span>(</span>
@@ -582,7 +609,7 @@ Item not applicable   ... a great deal,        quite a lot,               some,
                  18                   9                   0                   0 </code></pre>
 </div>
 </div>
-<p><code>Filter()</code> and <code>select()</code> are the functions that specify respectively rows and columns to be kept/removed. They can be combined or used independently and used in any order.</p>
+<p><code>filter()</code> and <code>select()</code> are the functions that specify respectively rows and columns to be kept/removed. They can be combined or used independently and used in any order.</p>
 <p>We are now equipped with the necessary information to move to the next stage and carry out basic analysis using R.</p>
 <div style="page-break-after: always;"></div>
 
