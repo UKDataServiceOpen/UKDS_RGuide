@@ -34,7 +34,7 @@ book:
    background: "#FFFFFF"
   sidebar:
    logo: pics/UKDS_Logos_Col_Grey_300dpi.png
-#   logo-alt: "UK Data Service logo"
+   logo-alt: "UK Data Service logo"
    search: false
    title: "Analysing social survey data with R"
    style: "docked"
