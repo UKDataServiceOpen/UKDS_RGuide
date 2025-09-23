@@ -8,7 +8,7 @@ library(dplyr)
 library(Hmisc)
 library(ggplot2)
 library(haven)
-datadir<-"~/OneDrive/data/bsa/"
+datadir<-"~/Data/bsa/"
 bsa<-read_spss(paste0(datadir,"8849spss_V1/bsa2017_open_enviropol.sav"))
 ```
 

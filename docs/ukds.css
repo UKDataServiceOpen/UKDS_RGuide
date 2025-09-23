@@ -1,12 +1,13 @@
 .quarto-title-block .quarto-title-banner {
-#  background-size: 55%;
+#  background-size: 90%;
   background-position: center top;
   background-repeat: no-repeat;
-  padding-left: 50px;
+#  padding-left: 200px;
+  padding-
   padding-top: 10px;
   background-origin: content-box;
 #  background-image: url("pics/UKDS_Logos_Col_Grey_300dpi.png");
-  text-align: center;
+#  text-align: center;
 }
 
 #.cell {

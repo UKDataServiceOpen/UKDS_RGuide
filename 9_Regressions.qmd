@@ -10,7 +10,7 @@ library(Hmisc)
 library(ggplot2)
 library(haven)
 library(sjPlot)
-datadir<-"~/OneDrive/data/bsa/"
+datadir<-"~/Data/bsa/"
 bsa<-read_spss(paste0(datadir,"8849spss_V1/bsa2017_open_enviropol.sav"))
 bsa$RAgeCat.f<-droplevels(as_factor(bsa$RAgeCat))
 bsa$Rsex.f<-droplevels(as_factor(bsa$Rsex))

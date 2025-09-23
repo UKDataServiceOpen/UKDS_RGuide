@@ -6,12 +6,12 @@ execute:
   warning: false
   message: false
   cache: false
-  freeze: auto
+  freeze: false
 book:
   title: "Analysing social survey data using R"
-  author: Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service
-  output-file: "UKDS_R_Guide"
-  date: "June 2024"
+#  author: Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service
+#  output-file: "UKDS_R_Guide"
+#  date: "June 2024"
   downloads: [pdf]
   chapters:
   - index.qmd
@@ -27,23 +27,23 @@ book:
   - 10_Further.qmd
   - 11_References.qmd
   navbar: 
-#   title: " "
-   search: true
-   foreground: "#742082" 
-   background: "#FFFFFF" 
-  sidebar:
+     background: "#FFFFFF" 
+     title: false
+     search: false
+
+  sidebar: 
    logo: pics/UKDS_Logos_Col_Grey_300dpi.png
-   search: false
-   title: "Analysing social survey data with R"
-   style: "docked"
-#   tools: false
    logo-href: https://ukdataservice.ac.uk/
+   logo-alt: "UK Data Service Logo and link to website"
+   title: false
    foreground: "#742082" 
    background: "#FFFFFF" 
+   style: "floating"
+   search: true
 
 #bibliography: references.bib
-mainfont: Arial
-sansfont: Arial
+mainfont: "Open Sans"
+sansfont: "Open Sans"
 monofont: "Courier New"
 monofontoptions: 'Scale=0.8'
 pdf-engine: lualatex
@@ -51,9 +51,11 @@ pdf-engine: lualatex
 format:
   html:
     css: ukds.css
+#    scss: navbar.scss
     toc: true
     title-block-banner: "white"
     title-block-banner-color: "#742082"
+#    page-layout: full
  
   docx: 
      fig-width: 7
