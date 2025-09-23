@@ -133,12 +133,13 @@ Interestingly this time, when accounting for survey design, sampling and non-res
 
 In the previous chapter we used mosaic plots for representing contingency tables of political party affiliation by gender. A nice feature of these plots is that they can also  be used to  visualise significant deviations between observed and expected values. 
 
-This relies on  a function specified with the `gp=` option which defines the  shading of the colours of the respective cells according to the size of these deviations fom expected values, also known as residuals. Thresholds for shading can be customised as required.
+This relies on  a function specified with the `gp=` option which defines the  shading of the colours of the respective cells according to the size of these deviations from expected values, also known as residuals. Thresholds for shading can be customised as required.
 
 
 
 ```{r 8.8}
 #| fig.height: 6
+#| fig-alt: "Unweighted mosaic plot of party affiliation by gender showing among other the larger than expected proportion of conservative men"
 mosaic(t,                            
        shade=T,
        gp = shading_hsv,               # shading function
@@ -168,7 +169,7 @@ The plot below does not display shades of blue or red anymore, reflecting the fa
 
 ```{r 8.10}
 #| fig.height: 6
-
+#| fig-alt: "Weighted mosaic plot of party affiliation by gender, this time showing little significant difference between men and women"
 mosaic(t,                            
        shade=T,
        gp = shading_hcl,

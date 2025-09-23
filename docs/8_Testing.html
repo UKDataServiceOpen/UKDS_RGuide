@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-179d3e05ac3edd972d038e9cd7be3d4e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6b2a7ee387b58c40ee5288a1ca5c66c8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -470,7 +470,7 @@ X-squared = 12.069, df = 5, p-value = 0.1126</code></pre>
 <section id="visualising-association-in-contingency-tables-with-mosaic-plots" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="visualising-association-in-contingency-tables-with-mosaic-plots">Visualising association in contingency tables with mosaic plots</h4>
 <p>In the previous chapter we used mosaic plots for representing contingency tables of political party affiliation by gender. A nice feature of these plots is that they can also be used to visualise significant deviations between observed and expected values.</p>
-<p>This relies on a function specified with the <code>gp=</code> option which defines the shading of the colours of the respective cells according to the size of these deviations fom expected values, also known as residuals. Thresholds for shading can be customised as required.</p>
+<p>This relies on a function specified with the <code>gp=</code> option which defines the shading of the colours of the respective cells according to the size of these deviations from expected values, also known as residuals. Thresholds for shading can be customised as required.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaic</span>(t,                            </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">shade=</span>T,</span>
@@ -487,7 +487,7 @@ X-squared = 12.069, df = 5, p-value = 0.1126</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="8_Testing_files/figure-html/8.8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="8_Testing_files/figure-html/8.8-1.png" class="img-fluid figure-img" alt="Unweighted mosaic plot of party affiliation by gender showing among other the larger than expected proportion of conservative men" width="672"></p>
 </figure>
 </div>
 </div>
@@ -519,7 +519,7 @@ X-squared = 12.069, df = 5, p-value = 0.1126</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="8_Testing_files/figure-html/8.10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="8_Testing_files/figure-html/8.10-1.png" class="img-fluid figure-img" alt="Weighted mosaic plot of party affiliation by gender, this time showing little significant difference between men and women" width="672"></p>
 </figure>
 </div>
 </div>

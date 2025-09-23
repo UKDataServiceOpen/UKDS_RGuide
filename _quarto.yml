@@ -54,7 +54,7 @@ format:
     toc: true
     title-block-banner: "white"
     title-block-banner-color: "#742082"
-  #  theme: journal
+    theme: sandstone
     
 #    page-layout: full
  
