@@ -51,10 +51,11 @@ pdf-engine: lualatex
 format:
   html:
     css: ukds.css
-#    scss: navbar.scss
     toc: true
     title-block-banner: "white"
     title-block-banner-color: "#742082"
+  #  theme: journal
+    
 #    page-layout: full
  
   docx: 

@@ -142,7 +142,8 @@ We can visualise the odd ratios and their confidence intervals using the `plot.m
 install.packages('sjPlot')
 ```
 
-# ```{r 9.12, fig.alt="Horizontal line plot for the odds ratios of the regression of voting behaviour by qualification, age categories and gender together with their confidence intervals"}
+```{r 9.12}
+#| fig.alt: "Horizontal line plot for the odds ratios of the regression of voting behaviour by qualification, age categories and gender together with their confidence intervals"
 library(sjPlot)
 set_theme(base = theme_minimal()) ### Default sets of options 
 plot_model(fit2,
