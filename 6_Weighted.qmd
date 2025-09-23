@@ -141,7 +141,7 @@ confint(a) ### ... and confidence interval
 ```
 We can similarly 
   
-```{r 6.7,error=T}
+```{r 6.7}
 #| error: true
 oldsvyquantile(~leftrigh,
             bsa.design,

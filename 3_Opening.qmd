@@ -41,8 +41,7 @@ setwd("C:\\Users\\Your_User_Name_Here\\Documents\\UKDS")
 
 We can finally open the file:
   
-```{r 3.2}
-#| echo: -1
+```{r 3.2,echo=-1}
 setwd("~/Data/bsa/")
 bsa<-read_spss("8849spss_V1/bsa2017_open_enviropol.sav"
                )
