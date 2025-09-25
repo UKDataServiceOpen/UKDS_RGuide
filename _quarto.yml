@@ -1,17 +1,22 @@
 project:
   type: book
   output-dir: docs
+
+theme: 
+  - default
+  - custom_ukds.scss
+  
 execute:
-  echo: true
   warning: false
   message: false
-  cache: false
   freeze: false
+
 book:
   title: "Analysing social survey data using R"
-#  author: Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service
-#  output-file: "UKDS_R_Guide"
-#  date: "June 2024"
+  author: Pierre Walthéry, Nadia Kennar, Rihab Dahab, UK Data Service
+  output-file: "UKDS_R_Guide"
+  date: "June 2024"
+  date-format: MMMMYYYY
   downloads: [pdf]
   chapters:
   - index.qmd
@@ -26,41 +31,24 @@ book:
   - 9_Regressions.qmd
   - 10_Further.qmd
   - 11_References.qmd
-  navbar: 
-     background: "#FFFFFF" 
-     title: false
-     search: false
-
+  
   sidebar: 
    logo: pics/UKDS_Logos_Col_Grey_300dpi.png
    logo-href: https://ukdataservice.ac.uk/
    logo-alt: "UK Data Service Logo and link to website"
-   title: false
-   foreground: "#742082" 
-   background: "#FFFFFF" 
+   title: " "
    style: "floating"
    search: true
 
 #bibliography: references.bib
-mainfont: "Open Sans"
-sansfont: "Open Sans"
-monofont: "Courier New"
 monofontoptions: 'Scale=0.8'
 pdf-engine: lualatex
 
 format:
   html:
-    css: ukds.css
     toc: true
     title-block-banner: "white"
     title-block-banner-color: "#742082"
-    theme: sandstone
-    
-#    page-layout: full
- 
-  docx: 
-     fig-width: 7
-     papersize: A4
 
   titlepage-pdf:
      titlepage: plain

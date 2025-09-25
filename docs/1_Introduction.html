@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -34,14 +34,15 @@ ul.task-list li input[type="checkbox"] {
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7a4068b46cc005e1514339e2acc6e017.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6b2a7ee387b58c40ee5288a1ca5c66c8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d2c47d96ebf3a3608dc31fc8b991381c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -88,7 +89,6 @@ background: white;
 </style>
 
 
-<link rel="stylesheet" href="ukds.css">
 </head>
 
 <body class="nav-sidebar floating nav-fixed quarto-light">
@@ -97,8 +97,12 @@ background: white;
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+  </div>
         <div class="quarto-navbar-tools tools-end">
-    <a href="./Analysing-social-survey-data-using-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="./UKDS_R_Guide.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -138,7 +142,8 @@ background: white;
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="https://ukdataservice.ac.uk/" class="sidebar-logo-link">
-      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UK Data Service Logo and link to website" class="sidebar-logo py-0 d-lg-inline d-none">
+      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UK Data Service Logo and link to website" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UK Data Service Logo and link to website" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -237,7 +242,7 @@ background: white;
 
 <p>R is a free, user developed, object-oriented statistical programming language. It originates in the ‘S’ and ‘S Plus’ languages developed in the 1970s and 1980s. It has been widely used in science, statistics and data sciences and is increasingly being adopted in the social sciences for teaching and research purposes.</p>
 <p>R can be downloaded from the <a href="https://cran.r-project.org/">Comprehensive R Archive Network (CRAN)</a> website. Installation instructions as well as guides, tutorials and FAQ are available on the CRAN website. A considerable amount of R-related resources is available online.</p>
-<p>Anyone can install and use R without charge, and to some extent contribute and amend the existing program itself. R is particularly favoured by users who want to develop their own statistical functions or implement technical advances that are not yet available in commercial packages. The existence of a vast number of user written packages (22748 at the time of writing this guide) is one of the strengths of R. Users interested in publishing their own packages on CRAN should be aware that <a href="https://cran.r-project.org/web/packages/policies.html">a minimum set of rules</a> need to be followed by contributors.</p>
+<p>Anyone can install and use R without charge, and to some extent contribute and amend the existing program itself. R is particularly favoured by users who want to develop their own statistical functions or implement technical advances that are not yet available in commercial packages. The existence of a vast number of user written packages (22763 at the time of writing this guide) is one of the strengths of R. Users interested in publishing their own packages on CRAN should be aware that <a href="https://cran.r-project.org/web/packages/policies.html">a minimum set of rules</a> need to be followed by contributors.</p>
 <p>Although R can perform most of the analyses available in traditional statistical software such as Stata, SPSS, or SAS, it has broader applications used for mapping, data mining or machine learning. Its flexibility as a language allows users to carry out analyses in multiple ways, each with distinct advantages and disadvantages. Also, users can easily produce publication quality output in R using Markdown (now Quarto) and LaTeX document presentation systems. In addition, R graphs can easily be imported into html, MS Word or LibreOffice documents.</p>
 <p>By contrast with other statistical software, the R interface is minimal and consists of a terminal. Similar to languages such as Python or C, R users can access it via a programming interface or Integrated Development Environment (IDE). In this guide we will use R Studio, one of the most common IDEs for R.<br>
 The data used in this introduction is the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8849">British Social Attitudes Survey, 2017, Environment and Politics: Open Access Teaching Dataset</a>, which can be downloaded from the UK Data Service website without registration. The website also has instructions on how to acquire and download large-scale survey datasets. Links and further information about the other training resources available online are provided at the end of this document.</p>
@@ -354,13 +359,14 @@ The data used in this introduction is the <a href="https://beta.ukdataservice.ac
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
