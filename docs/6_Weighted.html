@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Producing weighted and survey design-informed estimates – Analysing social survey data using R</title>
+<title>Producing weighted and survey design-informed estimates – Analysing social survey data using R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,13 +77,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7a4068b46cc005e1514339e2acc6e017.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d2c47d96ebf3a3608dc31fc8b991381c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ba4580efdef3a346b8353cb6e6f57d39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -105,6 +105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 <style>
 
       .quarto-title-block .quarto-title-banner h1,
@@ -126,27 +127,16 @@ background: white;
 
 </head>
 
-<body class="nav-sidebar floating nav-fixed quarto-light">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    </a>
-  </div>
-        <div class="quarto-navbar-tools tools-end">
-    <a href="./UKDS_R_Guide.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./6_Weighted.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted and survey design-informed estimates</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./6_Weighted.html"><span class="chapter-title">Producing weighted and survey design-informed estimates</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -159,7 +149,7 @@ background: white;
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted and survey design-informed estimates</span></h1>
+      <h1 class="title"><span class="chapter-title">Producing weighted and survey design-informed estimates</span></h1>
                       </div>
   </div>
     
@@ -172,7 +162,7 @@ background: white;
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
@@ -180,6 +170,12 @@ background: white;
       <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UK Data Service Logo and link to website" class="sidebar-logo light-content py-0 d-lg-inline d-none">
       <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UK Data Service Logo and link to website" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./"></a> 
+        <div class="sidebar-tools-main">
+    <a href="./UKDS_R_Guide.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -196,68 +192,57 @@ background: white;
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1_Introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is R ?</span></span></a>
+  <a href="./1_Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">What is R ?</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_Using.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Using R: essential information</span></span></a>
+  <a href="./2_Using.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Using R: essential information</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_Opening.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Opening datasets in R</span></span></a>
+  <a href="./3_Opening.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Opening datasets in R</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_Manipulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Essentials of Data Manipulation</span></span></a>
+  <a href="./4_Manipulation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Essentials of Data Manipulation</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5_Descriptives.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></a>
+  <a href="./5_Descriptives.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Descriptive statistics</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6_Weighted.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted and survey design-informed estimates</span></span></a>
+  <a href="./6_Weighted.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Producing weighted and survey design-informed estimates</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7_Graphs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Graphs and plots</span></span></a>
+  <a href="./7_Graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Graphs and plots</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8_Testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></span></a>
+  <a href="./8_Testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Significance testing</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9_Regressions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression analysis</span></span></a>
+  <a href="./9_Regressions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression analysis</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10_Further.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Further information</span></span></a>
+  <a href="./10_Further.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Further information</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11_References.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">References</span></span></a>
+  <a href="./11_References.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">References</span></a>
   </div>
 </li>
     </ul>
@@ -270,9 +255,9 @@ background: white;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#central-tendency-and-dispersion-continuous-variables" id="toc-central-tendency-and-dispersion-continuous-variables" class="nav-link active" data-scroll-target="#central-tendency-and-dispersion-continuous-variables"><span class="header-section-number">6.1</span> Central tendency and dispersion (continuous variables)</a></li>
-  <li><a href="#frequencies-and-contingency-tables" id="toc-frequencies-and-contingency-tables" class="nav-link" data-scroll-target="#frequencies-and-contingency-tables"><span class="header-section-number">6.2</span> Frequencies and contingency tables</a></li>
-  <li><a href="#inference-using-survey-procedures" id="toc-inference-using-survey-procedures" class="nav-link" data-scroll-target="#inference-using-survey-procedures"><span class="header-section-number">6.3</span> Inference using survey procedures</a></li>
+  <li><a href="#central-tendency-and-dispersion-continuous-variables" id="toc-central-tendency-and-dispersion-continuous-variables" class="nav-link active" data-scroll-target="#central-tendency-and-dispersion-continuous-variables">Central tendency and dispersion (continuous variables)</a></li>
+  <li><a href="#frequencies-and-contingency-tables" id="toc-frequencies-and-contingency-tables" class="nav-link" data-scroll-target="#frequencies-and-contingency-tables">Frequencies and contingency tables</a></li>
+  <li><a href="#inference-using-survey-procedures" id="toc-inference-using-survey-procedures" class="nav-link" data-scroll-target="#inference-using-survey-procedures">Inference using survey procedures</a></li>
   </ul>
 </nav>
     </div>
@@ -285,8 +270,8 @@ background: white;
 
 <p>Most users of social surveys will be looking to produce representative estimates when conducting analyses. Conducting such population inference entail using weights, which are meant to correct estimates for the under/over representation of certain groups in the sample due to the sampling process and non-response. Producing sound results relies not just on weighting estimates but also on computing adequate standard errors or confidence intervals, which measure the precision of the estimates.</p>
 <p>The recommended approach to inferring confidence intervals and standard errors involves accounting for the survey design (ie the way sampling was carried out) when conducting analyses – which can be done with the <code>survey</code> package in R, a topic described in Section 6.3. At the same time, for users who are concerned with quickly computing reasonably accurate point estimates, rather than publication-quality results, it may be useful to be aware which common R commands and operations can be used with weights.</p>
-<section id="central-tendency-and-dispersion-continuous-variables" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="central-tendency-and-dispersion-continuous-variables"><span class="header-section-number">6.1</span> Central tendency and dispersion (continuous variables)</h2>
+<section id="central-tendency-and-dispersion-continuous-variables" class="level2">
+<h2 class="anchored" data-anchor-id="central-tendency-and-dispersion-continuous-variables">Central tendency and dispersion (continuous variables)</h2>
 <p>The <code>stats</code> package, part of Base R, includes <code>weighted.mean()</code> which, as indicated by its name, computes weighted estimates of the mean of a variable when weights are provided. However, the <code>Hmisc</code> package includes a more comprehensive set of functions that can be used when weighting estimates: <code>wtd.mean()</code>, <code>wtd.var()</code> and <code>wtd.quantile()</code>. The code below provides an illustration of weighted means, variance and median of the left-right political attitudes score used in previous chapters, each time comparing it with the unweighted estimates:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Mean</span></span>
@@ -333,8 +318,8 @@ background: white;
 </div>
 </div>
 </section>
-<section id="frequencies-and-contingency-tables" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="frequencies-and-contingency-tables"><span class="header-section-number">6.2</span> Frequencies and contingency tables</h2>
+<section id="frequencies-and-contingency-tables" class="level2">
+<h2 class="anchored" data-anchor-id="frequencies-and-contingency-tables">Frequencies and contingency tables</h2>
 <p>Neither <code>ftable()</code> nor <code>table()</code> that were used in previous chapter allow weights. Although the <code>Hmisc</code> packages includes a <code>wtd.table()</code> function for one-way frequency tables, we recommend using <code>xtabs()</code> as previously, as it is more versatile and allows weights. Indeed, as variables used with <code>xtabs()</code> are specified on the right hand side of a formula:</p>
 <pre><code>&gt; xtabs(~var1, data=mydata)</code></pre>
 <p>or</p>
@@ -396,8 +381,8 @@ disagree strongly          42.3   57.7 41.5   58.5</code></pre>
 </div>
 </div>
 </section>
-<section id="inference-using-survey-procedures" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="inference-using-survey-procedures"><span class="header-section-number">6.3</span> Inference using survey procedures</h2>
+<section id="inference-using-survey-procedures" class="level2">
+<h2 class="anchored" data-anchor-id="inference-using-survey-procedures">Inference using survey procedures</h2>
 <p>The weighting procedures described above could be described as ‘quick and dirty’ in that they compute representative point estimates – i.e.&nbsp;single values. Computing the precision of survey data estimates – for example via their standard error – requires more than just adding weights to a command. Information about the survey design, its primary sampling units, strata and clusters is required so that robust standard errors, statistical tests and/or confidence interval can be computed. The <code>Survey</code> package was designed in order to deal with this set of issues. It provides functions for computing common estimates while accounting for the survey design. Its most important features are described below.</p>
 <p>In order to use survey functions one first needs to create a <code>svydesign</code> object, in essence a version of the data that incorporates the sample design information available, then compute the required estimate using the <code>svydesign</code> object.</p>
 <p>A common issue with survey datasets available in the UK is that sampling information is often only available in a secured version of the data, restricting its access to authorised users in a secure lab. Although it is sometimes possible to use available variables to account for aspects of the sample design – region as a strata in the case of stratified samples – in most cases users are left with computing standard errors without sample design information, which amounts to assuming that the sample was drawn purely at random. Even if this is the case however, using the <code>survey</code> package is recommended, as it provides a coherent framework for computing survey parameters.</p>
@@ -560,6 +545,11 @@ RAgeCat.f Male Female
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -876,12 +866,12 @@ RAgeCat.f Male Female
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./5_Descriptives.html" class="pagination-link" aria-label="Descriptive statistics">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Descriptive statistics</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./7_Graphs.html" class="pagination-link" aria-label="Graphs and plots">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Graphs and plots</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-title">Graphs and plots</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -890,4 +880,5 @@ RAgeCat.f Male Female
 
 
 
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

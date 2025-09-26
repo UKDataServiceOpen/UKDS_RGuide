@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Descriptive statistics – Analysing social survey data using R</title>
+<title>Descriptive statistics – Analysing social survey data using R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,13 +77,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7a4068b46cc005e1514339e2acc6e017.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d2c47d96ebf3a3608dc31fc8b991381c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ba4580efdef3a346b8353cb6e6f57d39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -105,6 +105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 <style>
 
       .quarto-title-block .quarto-title-banner h1,
@@ -126,27 +127,16 @@ background: white;
 
 </head>
 
-<body class="nav-sidebar floating nav-fixed quarto-light">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    </a>
-  </div>
-        <div class="quarto-navbar-tools tools-end">
-    <a href="./UKDS_R_Guide.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./5_Descriptives.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./5_Descriptives.html"><span class="chapter-title">Descriptive statistics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -159,7 +149,7 @@ background: white;
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></h1>
+      <h1 class="title"><span class="chapter-title">Descriptive statistics</span></h1>
                       </div>
   </div>
     
@@ -172,7 +162,7 @@ background: white;
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
@@ -180,6 +170,12 @@ background: white;
       <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UK Data Service Logo and link to website" class="sidebar-logo light-content py-0 d-lg-inline d-none">
       <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UK Data Service Logo and link to website" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./"></a> 
+        <div class="sidebar-tools-main">
+    <a href="./UKDS_R_Guide.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -196,68 +192,57 @@ background: white;
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1_Introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is R ?</span></span></a>
+  <a href="./1_Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">What is R ?</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_Using.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Using R: essential information</span></span></a>
+  <a href="./2_Using.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Using R: essential information</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_Opening.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Opening datasets in R</span></span></a>
+  <a href="./3_Opening.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Opening datasets in R</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_Manipulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Essentials of Data Manipulation</span></span></a>
+  <a href="./4_Manipulation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Essentials of Data Manipulation</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5_Descriptives.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></a>
+  <a href="./5_Descriptives.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Descriptive statistics</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6_Weighted.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted and survey design-informed estimates</span></span></a>
+  <a href="./6_Weighted.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Producing weighted and survey design-informed estimates</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7_Graphs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Graphs and plots</span></span></a>
+  <a href="./7_Graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Graphs and plots</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8_Testing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></span></a>
+  <a href="./8_Testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Significance testing</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9_Regressions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression analysis</span></span></a>
+  <a href="./9_Regressions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression analysis</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10_Further.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Further information</span></span></a>
+  <a href="./10_Further.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Further information</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11_References.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">References</span></span></a>
+  <a href="./11_References.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">References</span></a>
   </div>
 </li>
     </ul>
@@ -270,14 +255,14 @@ background: white;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#continuous-variables" id="toc-continuous-variables" class="nav-link active" data-scroll-target="#continuous-variables"><span class="header-section-number">5.1</span> Continuous variables</a></li>
-  <li><a href="#bivariate-association-between-continuous-variables" id="toc-bivariate-association-between-continuous-variables" class="nav-link" data-scroll-target="#bivariate-association-between-continuous-variables"><span class="header-section-number">5.2</span> Bivariate association between continuous variables</a></li>
-  <li><a href="#categorical-variables" id="toc-categorical-variables" class="nav-link" data-scroll-target="#categorical-variables"><span class="header-section-number">5.3</span> Categorical Variables</a>
+  <li><a href="#continuous-variables" id="toc-continuous-variables" class="nav-link active" data-scroll-target="#continuous-variables">Continuous variables</a></li>
+  <li><a href="#bivariate-association-between-continuous-variables" id="toc-bivariate-association-between-continuous-variables" class="nav-link" data-scroll-target="#bivariate-association-between-continuous-variables">Bivariate association between continuous variables</a></li>
+  <li><a href="#categorical-variables" id="toc-categorical-variables" class="nav-link" data-scroll-target="#categorical-variables">Categorical Variables</a>
   <ul class="collapse">
-  <li><a href="#one-way-frequency-tables" id="toc-one-way-frequency-tables" class="nav-link" data-scroll-target="#one-way-frequency-tables"><span class="header-section-number">5.3.1</span> One way frequency tables</a></li>
-  <li><a href="#two-way-or-more-contingency-table" id="toc-two-way-or-more-contingency-table" class="nav-link" data-scroll-target="#two-way-or-more-contingency-table"><span class="header-section-number">5.3.2</span> Two way or more contingency table</a></li>
+  <li><a href="#one-way-frequency-tables" id="toc-one-way-frequency-tables" class="nav-link" data-scroll-target="#one-way-frequency-tables">One way frequency tables</a></li>
+  <li><a href="#two-way-or-more-contingency-table" id="toc-two-way-or-more-contingency-table" class="nav-link" data-scroll-target="#two-way-or-more-contingency-table">Two way or more contingency table</a></li>
   </ul></li>
-  <li><a href="#grouped-summary-statistics-for-continuous-variables" id="toc-grouped-summary-statistics-for-continuous-variables" class="nav-link" data-scroll-target="#grouped-summary-statistics-for-continuous-variables"><span class="header-section-number">5.4</span> Grouped summary statistics for continuous variables</a></li>
+  <li><a href="#grouped-summary-statistics-for-continuous-variables" id="toc-grouped-summary-statistics-for-continuous-variables" class="nav-link" data-scroll-target="#grouped-summary-statistics-for-continuous-variables">Grouped summary statistics for continuous variables</a></li>
   </ul>
 </nav>
     </div>
@@ -288,8 +273,8 @@ background: white;
 
 
 
-<section id="continuous-variables" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="continuous-variables"><span class="header-section-number">5.1</span> Continuous variables</h2>
+<section id="continuous-variables" class="level2">
+<h2 class="anchored" data-anchor-id="continuous-variables">Continuous variables</h2>
 <p>Producing descriptive statistics in R is relatively straightforward, as key functions are included by default in the Base package. We have already seen above that the <code>summary()</code> command provides essential information about a variable. For instance,</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>leftrigh)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -389,8 +374,8 @@ lowest : 1    1.2  1.4  1.5  1.6 , highest: 4.4  4.6  4.75 4.8  5   </code></pre
 </div>
 <p>would produce the same results using just one line of code .</p>
 </section>
-<section id="bivariate-association-between-continuous-variables" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="bivariate-association-between-continuous-variables"><span class="header-section-number">5.2</span> Bivariate association between continuous variables</h2>
+<section id="bivariate-association-between-continuous-variables" class="level2">
+<h2 class="anchored" data-anchor-id="bivariate-association-between-continuous-variables">Bivariate association between continuous variables</h2>
 <p>The Base R installation comes with a wide range of bivariate statistical functions. <code>cor()</code> and <code>cov()</code> provide basic measures of association between two variables. For instance, in order to measure the correlation between the left-right the libertarian-authoritarian scales:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(bsa<span class="sc">$</span>leftrigh, bsa<span class="sc">$</span>libauth, <span class="at">use=</span><span class="st">'complete.obs'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -402,11 +387,11 @@ lowest : 1    1.2  1.4  1.5  1.6 , highest: 4.4  4.6  4.75 4.8  5   </code></pre
 <p>A correlation of 0.009 indicates a positive but very small relationship. It can be interpreted as ’an increase in authoritarianism is associated with a marginal increase in rightwing views.</p>
 <p>Note: When using <code>cor()</code> and <code>cov()</code>, missing values are dealt with the <code>use=</code> option, which can either take “everything”, “all.obs”, “complete.obs”, “na.or.complete”, or “pairwise.complete.obs” values. See <code>?cor</code> for additional information.</p>
 </section>
-<section id="categorical-variables" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="categorical-variables"><span class="header-section-number">5.3</span> Categorical Variables</h2>
+<section id="categorical-variables" class="level2">
+<h2 class="anchored" data-anchor-id="categorical-variables">Categorical Variables</h2>
 <p>As with continuous variables, R offers several tools that can be used to describe the distribution of categorical variables. One- and two-way contingency tables are the most commonly used.</p>
-<section id="one-way-frequency-tables" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="one-way-frequency-tables"><span class="header-section-number">5.3.1</span> One way frequency tables</h3>
+<section id="one-way-frequency-tables" class="level3">
+<h3 class="anchored" data-anchor-id="one-way-frequency-tables">One way frequency tables</h3>
 <p>There are several R commands that we can use to create frequency tables. The most common ones <code>table()</code>, <code>xtabs()</code> or <code>ftable()</code> which return the frequencies of observations within each level of a factor. For example, in order to obtain the political affiliation of BSA respondents in 2017:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">as_factor</span>(bsa<span class="sc">$</span>PartyId2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -453,8 +438,8 @@ lowest : 1    1.2  1.4  1.5  1.6 , highest: 4.4  4.6  4.75 4.8  5   </code></pre
 </div>
 </div>
 </section>
-<section id="two-way-or-more-contingency-table" class="level3" data-number="5.3.2">
-<h3 data-number="5.3.2" class="anchored" data-anchor-id="two-way-or-more-contingency-table"><span class="header-section-number">5.3.2</span> Two way or more contingency table</h3>
+<section id="two-way-or-more-contingency-table" class="level3">
+<h3 class="anchored" data-anchor-id="two-way-or-more-contingency-table">Two way or more contingency table</h3>
 <p>The simplest way to produce a two-way contingency table is to pass a second variable to <code>table()</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">as_factor</span>(bsa<span class="sc">$</span>PartyId2), <span class="fu">as_factor</span>(bsa<span class="sc">$</span>Rsex))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -595,8 +580,8 @@ Green Party      Male               6.5  32.3  16.1  29.0   6.5   3.2  6.5
 <p>The table gives the relative age breakdown for each gender/political affiliation combination (ie row percentages). Here again we used <code>droplevels()</code>: this removes unused factor levels which would otherwise be displayed and make the table difficult to read. <code>droplevels()</code> can be applied either to entire data frames or single variables.</p>
 </section>
 </section>
-<section id="grouped-summary-statistics-for-continuous-variables" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="grouped-summary-statistics-for-continuous-variables"><span class="header-section-number">5.4</span> Grouped summary statistics for continuous variables</h2>
+<section id="grouped-summary-statistics-for-continuous-variables" class="level2">
+<h2 class="anchored" data-anchor-id="grouped-summary-statistics-for-continuous-variables">Grouped summary statistics for continuous variables</h2>
 <p>A common requirement in survey analysis is the ability to compare descriptive statistics across subgroups of the data. There are different ways to do this in R. We demonstrate below the most straightforward one, which is obtained by using some of the functions available in the <code>dplyr</code> package.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">%&gt;%</span></span>
@@ -768,6 +753,11 @@ Green Party      Male               6.5  32.3  16.1  29.0   6.5   3.2  6.5
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -1084,12 +1074,12 @@ Green Party      Male               6.5  32.3  16.1  29.0   6.5   3.2  6.5
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./4_Manipulation.html" class="pagination-link" aria-label="Essentials of Data Manipulation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Essentials of Data Manipulation</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Essentials of Data Manipulation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./6_Weighted.html" class="pagination-link" aria-label="Producing weighted and survey design-informed estimates">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted and survey design-informed estimates</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-title">Producing weighted and survey design-informed estimates</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1098,4 +1088,5 @@ Green Party      Male               6.5  32.3  16.1  29.0   6.5   3.2  6.5
 
 
 
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

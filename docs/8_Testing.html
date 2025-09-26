@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Significance testing – Analysing social survey data using R</title>
+<title>Significance testing – Analysing social survey data using R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,13 +77,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7a4068b46cc005e1514339e2acc6e017.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d2c47d96ebf3a3608dc31fc8b991381c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ba4580efdef3a346b8353cb6e6f57d39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -105,6 +105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 <style>
 
       .quarto-title-block .quarto-title-banner h1,
@@ -126,27 +127,16 @@ background: white;
 
 </head>
 
-<body class="nav-sidebar floating nav-fixed quarto-light">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    </a>
-  </div>
-        <div class="quarto-navbar-tools tools-end">
-    <a href="./UKDS_R_Guide.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
-</div>
-      </div> <!-- /container-fluid -->
-    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./8_Testing.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./8_Testing.html"><span class="chapter-title">Significance testing</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -159,7 +149,7 @@ background: white;
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></h1>
+      <h1 class="title"><span class="chapter-title">Significance testing</span></h1>
                       </div>
   </div>
     
@@ -172,7 +162,7 @@ background: white;
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
@@ -180,6 +170,12 @@ background: white;
       <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UK Data Service Logo and link to website" class="sidebar-logo light-content py-0 d-lg-inline d-none">
       <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UK Data Service Logo and link to website" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./"></a> 
+        <div class="sidebar-tools-main">
+    <a href="./UKDS_R_Guide.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
@@ -196,68 +192,57 @@ background: white;
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1_Introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is R ?</span></span></a>
+  <a href="./1_Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">What is R ?</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_Using.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Using R: essential information</span></span></a>
+  <a href="./2_Using.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Using R: essential information</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_Opening.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Opening datasets in R</span></span></a>
+  <a href="./3_Opening.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Opening datasets in R</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_Manipulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Essentials of Data Manipulation</span></span></a>
+  <a href="./4_Manipulation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Essentials of Data Manipulation</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5_Descriptives.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></a>
+  <a href="./5_Descriptives.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Descriptive statistics</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6_Weighted.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted and survey design-informed estimates</span></span></a>
+  <a href="./6_Weighted.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Producing weighted and survey design-informed estimates</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7_Graphs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Graphs and plots</span></span></a>
+  <a href="./7_Graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Graphs and plots</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8_Testing.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></span></a>
+  <a href="./8_Testing.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Significance testing</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9_Regressions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression analysis</span></span></a>
+  <a href="./9_Regressions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression analysis</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10_Further.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Further information</span></span></a>
+  <a href="./10_Further.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Further information</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11_References.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">References</span></span></a>
+  <a href="./11_References.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">References</span></a>
   </div>
 </li>
     </ul>
@@ -270,9 +255,9 @@ background: white;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#differences-between-means" id="toc-differences-between-means" class="nav-link active" data-scroll-target="#differences-between-means"><span class="header-section-number">8.1</span> Differences between means</a></li>
-  <li><a href="#differences-in-variance" id="toc-differences-in-variance" class="nav-link" data-scroll-target="#differences-in-variance"><span class="header-section-number">8.2</span> Differences in variance</a></li>
-  <li><a href="#significance-of-measures-of-association" id="toc-significance-of-measures-of-association" class="nav-link" data-scroll-target="#significance-of-measures-of-association"><span class="header-section-number">8.3</span> Significance of measures of association</a>
+  <li><a href="#differences-between-means" id="toc-differences-between-means" class="nav-link active" data-scroll-target="#differences-between-means">Differences between means</a></li>
+  <li><a href="#differences-in-variance" id="toc-differences-in-variance" class="nav-link" data-scroll-target="#differences-in-variance">Differences in variance</a></li>
+  <li><a href="#significance-of-measures-of-association" id="toc-significance-of-measures-of-association" class="nav-link" data-scroll-target="#significance-of-measures-of-association">Significance of measures of association</a>
   <ul class="collapse">
   <li><a href="#between-continuous-variables" id="toc-between-continuous-variables" class="nav-link" data-scroll-target="#between-continuous-variables">Between continuous variables</a></li>
   <li><a href="#between-categorical-variables" id="toc-between-categorical-variables" class="nav-link" data-scroll-target="#between-categorical-variables">Between categorical variables</a></li>
@@ -288,8 +273,8 @@ background: white;
 
 
 <p>This section describes how to implement common statistical tests in R both without and with weights and survey design information. A working knowledge of these tests and their theoretical assumptions is assumed.</p>
-<section id="differences-between-means" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="differences-between-means"><span class="header-section-number">8.1</span> Differences between means</h2>
+<section id="differences-between-means" class="level2">
+<h2 class="anchored" data-anchor-id="differences-between-means">Differences between means</h2>
 <p>Two common ways of conducting significance testing consist in testing whether sample means significantly differ from 0 (one sample t-test), or between two groups (two samples t test). In the latter case, one can further distinguish between independent samples (where means come from different groups), or paired samples (when the same measure is taken at several points in time). Given that it is probably one of the most widely used statistical tests in social sciences, we will only cover the former here. Several R packages provide functions for conducting t tests. We will be using <code>t.test()</code>, provided by the <code>stats</code> package (R Base).</p>
 <p>Suppose we would like to test whether the libertarianism vs authoritarianism score <code>libauth</code> significantly differs between men and women using a t test. A two sided test is the default, with H_0 or the null hypothesis being that there are no differences between groups, and H_1 or the alternative hypothesis that the group means do indeed differ. The test is specified with a formula with on the left-hand side the quantity to be tested and on the right-hand side the grouping variable.</p>
 <p>One sided tests can be conducted by specifying that the alternative hypothesis (H_1) is that quantities are either <strong>greater</strong> or <strong>smaller</strong>. <code>t.test()</code> assumes that by default the variances are unequal. This can be changed with the <code>var.equal=T</code> option.</p>
@@ -372,8 +357,8 @@ difference in mean
 </div>
 <p>In this case the output of <code>svyttest()</code> did not lead to a different conclusion than the one we drew above. However, we can notice that the significance of differences in political affiliation has decreased.</p>
 </section>
-<section id="differences-in-variance" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="differences-in-variance"><span class="header-section-number">8.2</span> Differences in variance</h2>
+<section id="differences-in-variance" class="level2">
+<h2 class="anchored" data-anchor-id="differences-in-variance">Differences in variance</h2>
 <p>Another common significance test in social science is the <strong>variance test</strong> which consists of testing whether the variances of the same variable across two groups are equal. This is usually achieved by testing whether the ratio of the variance between the two groups is significantly different from zero. With the BSA data, this amounts to testing whether men and women are more homogeneous with regard to their political views.</p>
 <p>The syntax for the variance test <code>var.test()</code> also included in <code>stats</code> is almost identical to that of <code>t.test()</code></p>
 <div class="cell">
@@ -416,8 +401,8 @@ ratio of variances
 </div>
 <p>The variance of left-right political leaning is larger among men than women, in other words there are more divergence between men than between women.</p>
 </section>
-<section id="significance-of-measures-of-association" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="significance-of-measures-of-association"><span class="header-section-number">8.3</span> Significance of measures of association</h2>
+<section id="significance-of-measures-of-association" class="level2">
+<h2 class="anchored" data-anchor-id="significance-of-measures-of-association">Significance of measures of association</h2>
 <section id="between-continuous-variables" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="between-continuous-variables">Between continuous variables</h3>
 <p>Another common statistical test in social science examines whether a coefficient of correlation is significantly different from 0 (alternative hypothesis).</p>
@@ -624,6 +609,11 @@ X-squared = 12.069, df = 5, p-value = 0.1126</code></pre>
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -940,12 +930,12 @@ X-squared = 12.069, df = 5, p-value = 0.1126</code></pre>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./7_Graphs.html" class="pagination-link" aria-label="Graphs and plots">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Graphs and plots</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Graphs and plots</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./9_Regressions.html" class="pagination-link" aria-label="Regression analysis">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression analysis</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-title">Regression analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -954,4 +944,5 @@ X-squared = 12.069, df = 5, p-value = 0.1126</code></pre>
 
 
 
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
