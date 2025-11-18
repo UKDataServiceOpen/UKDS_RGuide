@@ -2,10 +2,6 @@ project:
   type: book
   output-dir: docs
 
-theme: 
-  - default
-  - custom_ukds.scss
-  
 execute:
   warning: false
   message: false
@@ -33,35 +29,32 @@ book:
   - 11_References.qmd
   
   sidebar: 
-   logo: pics/UKDS_Logos_Col_Grey_300dpi.png
-   logo-href: https://ukdataservice.ac.uk/
-   logo-alt: "UK Data Service Logo and link to website"
-   foreground: "#742082"
-   title: " "
-   style: "floating"
-   search: true
+    logo: "pics/UKDS_Logos_Col_Grey_300dpi.png"
+    logo-href: https://ukdataservice.ac.uk
+    logo-alt: "Link to the UK Data Service homepage"
+    style: "floating"
+    search: true
+    title: " "
 
 #bibliography: references.bib
-monofontoptions: 'Scale=0.8'
 pdf-engine: lualatex
 
 format:
-  html:
-    code-overflow: scroll
-    code-line-numbers: false
-    toc: true
-    toc-location: right
-    highlight-style: arrow-light
-    smooth-scroll: true
-    link-external-newwindow: true
-    citations-hover: true
-    footnotes-hover: true
-    title-block-banner: "white"
-    title-block-banner-color: "#742082"
-    number-sections: false
+    html: 
+      code-overflow: scroll
+      code-line-numbers: true
+      page-layout: full
+      toc: true
+      toc-location: right
+      highlight-style: arrow-light
+      smooth-scroll: true
+      link-external-newwindow: true
+      citations-hover: true
+      footnotes-hover: true
+      css: ukds_long.css
 
 
-  titlepage-pdf:
+titlepage-pdf:
      titlepage: plain
      titlepage-geometry:
       - top=70mm

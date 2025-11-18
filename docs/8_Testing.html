@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Significance testing – Analysing social survey data using R</title>
+<title>8&nbsp; Significance testing – Analysing social survey data using R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -74,10 +74,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7a4068b46cc005e1514339e2acc6e017.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ba4580efdef3a346b8353cb6e6f57d39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f410b66b4933f15108f8fa93e83e019d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -106,37 +106,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<style>
-
-      .quarto-title-block .quarto-title-banner h1,
-      .quarto-title-block .quarto-title-banner h2,
-      .quarto-title-block .quarto-title-banner h3,
-      .quarto-title-block .quarto-title-banner h4,
-      .quarto-title-block .quarto-title-banner h5,
-      .quarto-title-block .quarto-title-banner h6
-      {
-        color: #742082;
-      }
-
-      .quarto-title-block .quarto-title-banner {
-        color: #742082;
-background: white;
-      }
-</style>
 
 
+<link rel="stylesheet" href="ukds_long.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./8_Testing.html"><span class="chapter-title">Significance testing</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./8_Testing.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -146,29 +130,13 @@ background: white;
   </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title"><span class="chapter-title">Significance testing</span></h1>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="https://ukdataservice.ac.uk/" class="sidebar-logo-link">
-      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UK Data Service Logo and link to website" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UK Data Service Logo and link to website" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      <a href="https://ukdataservice.ac.uk" class="sidebar-logo-link">
+      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="Link to the UK Data Service homepage" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="Link to the UK Data Service homepage" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./"></a> 
@@ -192,57 +160,68 @@ background: white;
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1_Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">What is R ?</span></a>
+  <a href="./1_Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is R ?</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_Using.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Using R: essential information</span></a>
+  <a href="./2_Using.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Using R: essential information</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_Opening.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Opening datasets in R</span></a>
+  <a href="./3_Opening.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Opening datasets in R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_Manipulation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Essentials of Data Manipulation</span></a>
+  <a href="./4_Manipulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Essentials of Data Manipulation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5_Descriptives.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Descriptive statistics</span></a>
+  <a href="./5_Descriptives.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6_Weighted.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Producing weighted and survey design-informed estimates</span></a>
+  <a href="./6_Weighted.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted and survey design-informed estimates</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7_Graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Graphs and plots</span></a>
+  <a href="./7_Graphs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Graphs and plots</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8_Testing.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Significance testing</span></a>
+  <a href="./8_Testing.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9_Regressions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression analysis</span></a>
+  <a href="./9_Regressions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10_Further.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Further information</span></a>
+  <a href="./10_Further.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Further information</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11_References.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">References</span></a>
+  <a href="./11_References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -255,9 +234,9 @@ background: white;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#differences-between-means" id="toc-differences-between-means" class="nav-link active" data-scroll-target="#differences-between-means">Differences between means</a></li>
-  <li><a href="#differences-in-variance" id="toc-differences-in-variance" class="nav-link" data-scroll-target="#differences-in-variance">Differences in variance</a></li>
-  <li><a href="#significance-of-measures-of-association" id="toc-significance-of-measures-of-association" class="nav-link" data-scroll-target="#significance-of-measures-of-association">Significance of measures of association</a>
+  <li><a href="#differences-between-means" id="toc-differences-between-means" class="nav-link active" data-scroll-target="#differences-between-means"><span class="header-section-number">8.1</span> Differences between means</a></li>
+  <li><a href="#differences-in-variance" id="toc-differences-in-variance" class="nav-link" data-scroll-target="#differences-in-variance"><span class="header-section-number">8.2</span> Differences in variance</a></li>
+  <li><a href="#significance-of-measures-of-association" id="toc-significance-of-measures-of-association" class="nav-link" data-scroll-target="#significance-of-measures-of-association"><span class="header-section-number">8.3</span> Significance of measures of association</a>
   <ul class="collapse">
   <li><a href="#between-continuous-variables" id="toc-between-continuous-variables" class="nav-link" data-scroll-target="#between-continuous-variables">Between continuous variables</a></li>
   <li><a href="#between-categorical-variables" id="toc-between-categorical-variables" class="nav-link" data-scroll-target="#between-categorical-variables">Between categorical variables</a></li>
@@ -266,24 +245,39 @@ background: white;
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></h1>
+</div>
 
 
 
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
 
 
 <p>This section describes how to implement common statistical tests in R both without and with weights and survey design information. A working knowledge of these tests and their theoretical assumptions is assumed.</p>
-<section id="differences-between-means" class="level2">
-<h2 class="anchored" data-anchor-id="differences-between-means">Differences between means</h2>
+<section id="differences-between-means" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="differences-between-means"><span class="header-section-number">8.1</span> Differences between means</h2>
 <p>Two common ways of conducting significance testing consist in testing whether sample means significantly differ from 0 (one sample t-test), or between two groups (two samples t test). In the latter case, one can further distinguish between independent samples (where means come from different groups), or paired samples (when the same measure is taken at several points in time). Given that it is probably one of the most widely used statistical tests in social sciences, we will only cover the former here. Several R packages provide functions for conducting t tests. We will be using <code>t.test()</code>, provided by the <code>stats</code> package (R Base).</p>
 <p>Suppose we would like to test whether the libertarianism vs authoritarianism score <code>libauth</code> significantly differs between men and women using a t test. A two sided test is the default, with H_0 or the null hypothesis being that there are no differences between groups, and H_1 or the alternative hypothesis that the group means do indeed differ. The test is specified with a formula with on the left-hand side the quantity to be tested and on the right-hand side the grouping variable.</p>
 <p>One sided tests can be conducted by specifying that the alternative hypothesis (H_1) is that quantities are either <strong>greater</strong> or <strong>smaller</strong>. <code>t.test()</code> assumes that by default the variances are unequal. This can be changed with the <code>var.equal=T</code> option.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing for significant differences in liberal vs authoritarian score</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(libauth<span class="sc">~</span>Rsex.f,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>bsa)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Testing for significant differences in liberal vs authoritarian score</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">summary</span>(</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">t.test</span>(libauth<span class="sc">~</span>Rsex.f,</span>
+<span id="cb1-4"><a href="#cb1-4"></a>       <span class="at">data=</span>bsa)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Length Class  Mode     
 statistic   1      -none- numeric  
@@ -300,10 +294,10 @@ data.name   1      -none- character</code></pre>
 </div>
 <p>No significant differences (ie the difference in <code>libauth</code> between men and women is not significantly different from zero)</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing for whether men have a lower (ie more left-wing)  score</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(leftrigh<span class="sc">~</span>Rsex.f,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">data=</span>bsa, </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">alternative=</span><span class="st">"less"</span>)      </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Testing for whether men have a lower (ie more left-wing)  score</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">t.test</span>(leftrigh<span class="sc">~</span>Rsex.f,</span>
+<span id="cb3-3"><a href="#cb3-3"></a>       <span class="at">data=</span>bsa, </span>
+<span id="cb3-4"><a href="#cb3-4"></a>       <span class="at">alternative=</span><span class="st">"less"</span>)      </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
@@ -321,12 +315,12 @@ sample estimates:
 <p>Men have a significantly lower score on the scale (at the .05 threshold) and are therefore on average leaning more to the left than women.</p>
 <p>The result of the above tests may be biased as they do not account for bias from either sample design or non-response. When results representative of the British population are required, a survey designed informed version of the t test should be used. The <code>survey</code> package that we used earlier in Chapter 6 provides such a function.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>bsa.design<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">ids =</span><span class="sc">~</span><span class="dv">1</span>,           <span class="co"># Declaring the survey design</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">weights=</span><span class="sc">~</span>WtFactor,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data=</span>bsa) </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">svyttest</span>(libauth<span class="sc">~</span>Rsex.f,bsa.design)   <span class="co"># SD informed t-test of libauth by gender</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(survey)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>bsa.design<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">ids =</span><span class="sc">~</span><span class="dv">1</span>,           <span class="co"># Declaring the survey design</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>                      <span class="at">weights=</span><span class="sc">~</span>WtFactor,</span>
+<span id="cb5-4"><a href="#cb5-4"></a>                      <span class="at">data=</span>bsa) </span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="fu">svyttest</span>(libauth<span class="sc">~</span>Rsex.f,bsa.design)   <span class="co"># SD informed t-test of libauth by gender</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Design-based t-test
@@ -340,7 +334,7 @@ sample estimates:
 difference in mean 
        0.002929454 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svyttest</span>(leftrigh<span class="sc">~</span>Rsex.f,bsa.design) <span class="co"># SD informed t-test of leftrigh by gender</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">svyttest</span>(leftrigh<span class="sc">~</span>Rsex.f,bsa.design) <span class="co"># SD informed t-test of leftrigh by gender</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Design-based t-test
@@ -357,14 +351,14 @@ difference in mean
 </div>
 <p>In this case the output of <code>svyttest()</code> did not lead to a different conclusion than the one we drew above. However, we can notice that the significance of differences in political affiliation has decreased.</p>
 </section>
-<section id="differences-in-variance" class="level2">
-<h2 class="anchored" data-anchor-id="differences-in-variance">Differences in variance</h2>
+<section id="differences-in-variance" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="differences-in-variance"><span class="header-section-number">8.2</span> Differences in variance</h2>
 <p>Another common significance test in social science is the <strong>variance test</strong> which consists of testing whether the variances of the same variable across two groups are equal. This is usually achieved by testing whether the ratio of the variance between the two groups is significantly different from zero. With the BSA data, this amounts to testing whether men and women are more homogeneous with regard to their political views.</p>
 <p>The syntax for the variance test <code>var.test()</code> also included in <code>stats</code> is almost identical to that of <code>t.test()</code></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing for gender differences in liberal vs authoritarian score</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(libauth<span class="sc">~</span>Rsex.f,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">data=</span>bsa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Testing for gender differences in liberal vs authoritarian score</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">var.test</span>(libauth<span class="sc">~</span>Rsex.f,</span>
+<span id="cb9-3"><a href="#cb9-3"></a>         <span class="at">data=</span>bsa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     F test to compare two variances
@@ -381,10 +375,10 @@ ratio of variances
 </div>
 <p>Significant differences in the variance between men and women was observed, but only at the .1 threshold.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Testing for whether men have a lower (ie more left-wing)  score</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(leftrigh<span class="sc">~</span>Rsex.f,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">data=</span>bsa,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">alternative=</span><span class="st">"greater"</span>)      </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Testing for whether men have a lower (ie more left-wing)  score</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">var.test</span>(leftrigh<span class="sc">~</span>Rsex.f,</span>
+<span id="cb11-3"><a href="#cb11-3"></a>         <span class="at">data=</span>bsa,</span>
+<span id="cb11-4"><a href="#cb11-4"></a>         <span class="at">alternative=</span><span class="st">"greater"</span>)      </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     F test to compare two variances
@@ -401,14 +395,14 @@ ratio of variances
 </div>
 <p>The variance of left-right political leaning is larger among men than women, in other words there are more divergence between men than between women.</p>
 </section>
-<section id="significance-of-measures-of-association" class="level2">
-<h2 class="anchored" data-anchor-id="significance-of-measures-of-association">Significance of measures of association</h2>
+<section id="significance-of-measures-of-association" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="significance-of-measures-of-association"><span class="header-section-number">8.3</span> Significance of measures of association</h2>
 <section id="between-continuous-variables" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="between-continuous-variables">Between continuous variables</h3>
 <p>Another common statistical test in social science examines whether a coefficient of correlation is significantly different from 0 (alternative hypothesis).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(bsa<span class="sc">$</span>leftrigh, bsa<span class="sc">$</span>libauth, </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">use=</span><span class="st">'complete.obs'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">cor.test</span>(bsa<span class="sc">$</span>leftrigh, bsa<span class="sc">$</span>libauth, </span>
+<span id="cb13-2"><a href="#cb13-2"></a>         <span class="at">use=</span><span class="st">'complete.obs'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's product-moment correlation
@@ -431,8 +425,8 @@ sample estimates:
 <p>The chi-squared test is a very common test of association between categorical variables. It consists in examining whether a pattern of association between two variables is likely to be random or not, in other words whether the variability observed in a contingency table is significantly different from what could be expected were it due to chance.</p>
 <p>We will be using <code>chisq.test()</code>, also from the <code>stats</code> package. By contrast with the test of correlation, the <code>chisq.test()</code> needs to be applied to contingency tables that have already been computed separately.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>t<span class="ot">&lt;-</span><span class="fu">xtabs</span>(<span class="sc">~</span>PartyId2.f <span class="sc">+</span>Rsex.f,bsa)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(t)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>t<span class="ot">&lt;-</span><span class="fu">xtabs</span>(<span class="sc">~</span>PartyId2.f <span class="sc">+</span>Rsex.f,bsa)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">chisq.test</span>(t)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -444,10 +438,10 @@ X-squared = 27.191, df = 5, p-value = 5.236e-05</code></pre>
 <p>As the R output shows, there are highly significant gender differences in political affiliations (p&lt;.001).</p>
 <p>Does this remain true if we account for the survey design, as we did above for the t test? The <code>survey</code> package also has a survey design version of the chi square test:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svychisq</span>(<span class="sc">~</span>PartyId2.f <span class="sc">+</span>Rsex.f, <span class="co"># We directly specify the contingency table here</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>         bsa.design,        </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">statistic =</span> <span class="st">"Chisq"</span> <span class="co"># And we specify the kind of test we would like</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>         )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">svychisq</span>(<span class="sc">~</span>PartyId2.f <span class="sc">+</span>Rsex.f, <span class="co"># We directly specify the contingency table here</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>         bsa.design,        </span>
+<span id="cb17-3"><a href="#cb17-3"></a>          <span class="at">statistic =</span> <span class="st">"Chisq"</span> <span class="co"># And we specify the kind of test we would like</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>         )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's X^2: Rao &amp; Scott adjustment
@@ -462,18 +456,18 @@ X-squared = 12.069, df = 5, p-value = 0.1126</code></pre>
 <p>In the previous chapter we used mosaic plots for representing contingency tables of political party affiliation by gender. A nice feature of these plots is that they can also be used to visualise significant deviations between observed and expected values.</p>
 <p>This relies on a function specified with the <code>gp=</code> option which defines the shading of the colours of the respective cells according to the size of these deviations from expected values, also known as residuals. Thresholds for shading can be customised as required.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaic</span>(t,                            </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">shade=</span>T,</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">gp =</span> shading_hsv,               <span class="co"># shading function</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">labeling=</span><span class="fu">labeling_border</span>(</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">rot_labels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>),      <span class="co"># no label rotation on any plot facet</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">varname=</span>F,                    <span class="co"># no  variable names on the plot</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">just_labels=</span><span class="st">"left"</span>,           <span class="co"># labels left justified</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">gp_labels=</span><span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">12</span>),<span class="co"># label font size</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">offset_labels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">3</span>) <span class="co"># margins between label and plot facet</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>         ),</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="at">main =</span> <span class="st">"Unweighted mosaic plot of party affiliation by gender"</span> <span class="co"># Plot title</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>         )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">mosaic</span>(t,                            </span>
+<span id="cb19-2"><a href="#cb19-2"></a>       <span class="at">shade=</span>T,</span>
+<span id="cb19-3"><a href="#cb19-3"></a>       <span class="at">gp =</span> shading_hsv,               <span class="co"># shading function</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>       <span class="at">labeling=</span><span class="fu">labeling_border</span>(</span>
+<span id="cb19-5"><a href="#cb19-5"></a>         <span class="at">rot_labels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>),      <span class="co"># no label rotation on any plot facet</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>         <span class="at">varname=</span>F,                    <span class="co"># no  variable names on the plot</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>         <span class="at">just_labels=</span><span class="st">"left"</span>,           <span class="co"># labels left justified</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a>         <span class="at">gp_labels=</span><span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">12</span>),<span class="co"># label font size</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a>         <span class="at">offset_labels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">3</span>) <span class="co"># margins between label and plot facet</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a>         ),</span>
+<span id="cb19-11"><a href="#cb19-11"></a><span class="at">main =</span> <span class="st">"Unweighted mosaic plot of party affiliation by gender"</span> <span class="co"># Plot title</span></span>
+<span id="cb19-12"><a href="#cb19-12"></a>         )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -485,27 +479,27 @@ X-squared = 12.069, df = 5, p-value = 0.1126</code></pre>
 <p>The red and blue shaded rectangles in the figure above denote respectively lower and higher numbers of observations than expected if the two variables were independent from each other.</p>
 <p>Another convenient feature of <code>mosaic()</code> is that it readily accepts weighted contingency tables produced by the <code>survey</code> package. If we repeat what we did in Chapter 6, namely, declare the survey design, and perform a survey design-informed chi square test, we can then feed the weighted frequencies computed by <code>svychisq</code> into the mosaic plot.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey) <span class="do">### Loading the package in memory</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>bsa.design<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">ids =</span><span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">weights=</span><span class="sc">~</span>WtFactor,</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data=</span>bsa) </span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>t<span class="ot">&lt;-</span><span class="fu">svychisq</span>(<span class="sc">~</span>PartyId2.f<span class="sc">+</span>Rsex.f,bsa.design,<span class="at">statistic =</span> <span class="st">"Chisq"</span>)<span class="sc">$</span>observed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">library</span>(survey) <span class="do">### Loading the package in memory</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>bsa.design<span class="ot">&lt;-</span><span class="fu">svydesign</span>(<span class="at">ids =</span><span class="sc">~</span><span class="dv">1</span>,</span>
+<span id="cb20-3"><a href="#cb20-3"></a>                      <span class="at">weights=</span><span class="sc">~</span>WtFactor,</span>
+<span id="cb20-4"><a href="#cb20-4"></a>                      <span class="at">data=</span>bsa) </span>
+<span id="cb20-5"><a href="#cb20-5"></a>t<span class="ot">&lt;-</span><span class="fu">svychisq</span>(<span class="sc">~</span>PartyId2.f<span class="sc">+</span>Rsex.f,bsa.design,<span class="at">statistic =</span> <span class="st">"Chisq"</span>)<span class="sc">$</span>observed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The plot below does not display shades of blue or red anymore, reflecting the fact that the weighted distributions of political party affiliation and gender are weakly associated.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaic</span>(t,                            </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">shade=</span>T,</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">gp =</span> shading_hcl,</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">labeling=</span><span class="fu">labeling_border</span>(</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">rot_labels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>),</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">varname=</span>F,</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">just_labels=</span><span class="st">"left"</span>,</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">gp_labels=</span><span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">12</span>),</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">offset_labels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">3</span>)</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>),</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="at">main =</span> <span class="st">"Weighted mosaic plot of party affiliation by gender"</span></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">mosaic</span>(t,                            </span>
+<span id="cb21-2"><a href="#cb21-2"></a>       <span class="at">shade=</span>T,</span>
+<span id="cb21-3"><a href="#cb21-3"></a>       <span class="at">gp =</span> shading_hcl,</span>
+<span id="cb21-4"><a href="#cb21-4"></a>       <span class="at">labeling=</span><span class="fu">labeling_border</span>(</span>
+<span id="cb21-5"><a href="#cb21-5"></a>         <span class="at">rot_labels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>),</span>
+<span id="cb21-6"><a href="#cb21-6"></a>         <span class="at">varname=</span>F,</span>
+<span id="cb21-7"><a href="#cb21-7"></a>         <span class="at">just_labels=</span><span class="st">"left"</span>,</span>
+<span id="cb21-8"><a href="#cb21-8"></a>         <span class="at">gp_labels=</span><span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">12</span>),</span>
+<span id="cb21-9"><a href="#cb21-9"></a>         <span class="at">offset_labels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb21-10"><a href="#cb21-10"></a>),</span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="at">main =</span> <span class="st">"Weighted mosaic plot of party affiliation by gender"</span></span>
+<span id="cb21-12"><a href="#cb21-12"></a></span>
+<span id="cb21-13"><a href="#cb21-13"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -927,15 +921,15 @@ X-squared = 12.069, df = 5, p-value = 0.1126</code></pre>
     }
   });
   </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="./7_Graphs.html" class="pagination-link" aria-label="Graphs and plots">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Graphs and plots</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Graphs and plots</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./9_Regressions.html" class="pagination-link" aria-label="Regression analysis">
-        <span class="nav-page-text"><span class="chapter-title">Regression analysis</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

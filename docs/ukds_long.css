@@ -1,0 +1,389 @@
+/* 
+ * UK Data Service Quarto Book Styles
+ * Default font: Open Sans
+ * Brand color: #742082
+ * Logo with hyperlink in top left
+ * Current page in BOTH TOCs: #742082
+ */
+
+/* Import Open Sans font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+/* CSS Variables for consistent theming */
+:root {
+  --brand-purple: #742082;
+  --brand-purple-light: #8a4a96;
+  --brand-purple-dark: #5a1a66;
+  --text-dark: #333333;
+  --text-light: #666666;
+  --background-light: #f8f9fa;
+  --border-light: #e9ecef;
+}
+
+/* Base typography */
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-dark);
+}
+
+/* Headings - all using brand purple */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  color: var(--brand-purple);
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+h1, .h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--brand-purple);
+  padding-bottom: 0.3em;
+}
+
+h2, .h2 {
+  font-size: 1.875rem;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 0.2em;
+}
+
+h3, .h3 { font-size: 1.5rem; }
+h4, .h4 { font-size: 1.25rem; }
+h5, .h5 { font-size: 1.125rem; }
+h6, .h6 { font-size: 1rem; font-style: italic; }
+
+/* Hyperlinks */
+a {
+  color: var(--brand-purple);
+  text-decoration: none;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+a:hover,
+a:focus {
+  color: var(--brand-purple-dark);
+  text-decoration: underline;
+}
+
+a:visited {
+  color: var(--brand-purple-light);
+}
+
+/* Logo in top left corner - LARGER SIZE 
+.sidebar-header {
+  position: relative;
+  padding: 1.5rem 1.5rem; /* Increased padding for larger logo */
+  border-bottom: 1px solid var(--border-light);
+  background: white;
+}
+
+.sidebar-logo-img {
+  background: url('pics/UKDS_Logos_Col_Grey_300dpi.png') no-repeat; 
+  /* OR use <img> tag in your sidebar */
+}
+
+/* Logo container with hyperlink */
+.sidebar-logo {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* Larger logo size */
+.sidebar-logo-img {
+  height: 80px; /* Increased from 60px to 80px */
+  width: auto;
+  max-width: 280px; /* Increased from 200px to 280px */
+  transition: opacity 0.2s ease;
+}
+
+.sidebar-logo:hover .sidebar-logo-img {
+  opacity: 0.8;
+}
+
+/* Alternative positioning if sidebar header doesn't work - also larger */
+.navbar-brand {
+  padding: 0.75rem 0; /* Increased padding */
+}
+
+.navbar-logo {
+  height: 60px; /* Increased from 40px to 60px */
+  width: auto;
+  max-width: 240px; /* Increased from 180px to 240px */
+}
+*/
+
+/* Main content area adjustments */
+#quarto-document-container {
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* LEFT SIDEBAR TOC - CORRECT SELECTORS FOR SIDEBAR-ITEM-TEXT */
+
+/* Left sidebar regular links */
+.sidebar .sidebar-item-text.sidebar-link,
+.sidebar .sidebar-link,
+.sidebar-item-text.sidebar-link {
+  color: var(--text-dark) !important;
+  font-weight: 400 !important;
+  background-color: transparent !important;
+}
+
+/* Left sidebar ACTIVE links - brand purple */
+.sidebar .sidebar-item-text.sidebar-link.active,
+.sidebar .sidebar-link.active,
+.sidebar-item-text.sidebar-link.active,
+.sidebar .active > .sidebar-item-text.sidebar-link {
+  color: #742082 !important;
+  font-weight: 600 !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+/* Left sidebar hover states - regular links */
+.sidebar .sidebar-item-text.sidebar-link:hover,
+.sidebar .sidebar-link:hover,
+.sidebar-item-text.sidebar-link:hover {
+  color: #742082 !important;
+  text-decoration: underline !important;
+  background-color: transparent !important;
+}
+
+/* Left sidebar hover states - ACTIVE links */
+.sidebar .sidebar-item-text.sidebar-link.active:hover,
+.sidebar .sidebar-link.active:hover,
+.sidebar-item-text.sidebar-link.active:hover,
+.sidebar .active > .sidebar-item-text.sidebar-link:hover {
+  color: #742082 !important;
+  font-weight: 600 !important;
+  text-decoration: underline !important;
+  background-color: transparent !important;
+}
+
+/* Legacy left TOC styling (backward compatibility) */
+.sidebar nav[role="doc-toc"] ul > li > a {
+  color: var(--text-dark);
+  font-weight: 400;
+  padding: 0.25rem 0;
+  background-color: transparent;
+}
+
+.sidebar nav[role="doc-toc"] ul > li > a.active {
+  color: var(--brand-purple);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.sidebar nav[role="doc-toc"] ul > li > a:hover,
+.sidebar nav[role="doc-toc"] ul > li > a:focus {
+  color: var(--brand-purple);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+/* RIGHT SIDEBAR TOC - PRECISE FIX FOR nav-link active */
+
+/* Target the specific active nav-link in right sidebar */
+.sidebar nav[role="doc-toc"] .nav-link.active,
+.sidebar nav[role="doc-toc"] a.nav-link.active,
+#quarto-sidebar .nav-link.active,
+.quarto-sidebar .nav-link.active,
+.quarto-sidebar-nav-contents .nav-link.active,
+nav[role="doc-toc"] .nav-link.active {
+  color: #742082 !important;
+  font-weight: 600 !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+/* Hover state for active nav-link */
+.sidebar nav[role="doc-toc"] .nav-link.active:hover,
+.sidebar nav[role="doc-toc"] a.nav-link.active:hover,
+#quarto-sidebar .nav-link.active:hover,
+.quarto-sidebar .nav-link.active:hover,
+.quarto-sidebar-nav-contents .nav-link.active:hover,
+nav[role="doc-toc"] .nav-link.active:hover {
+  color: #742082 !important;
+  font-weight: 600 !important;
+  text-decoration: underline !important;
+  background-color: transparent !important;
+}
+
+/* Regular nav-links (not active) */
+.sidebar nav[role="doc-toc"] .nav-link,
+.sidebar nav[role="doc-toc"] a.nav-link,
+#quarto-sidebar .nav-link,
+.quarto-sidebar .nav-link,
+.quarto-sidebar-nav-contents .nav-link,
+nav[role="doc-toc"] .nav-link {
+  color: var(--text-dark) !important;
+  font-weight: 400 !important;
+}
+
+/* Hover state for regular nav-links */
+.sidebar nav[role="doc-toc"] .nav-link:hover,
+.sidebar nav[role="doc-toc"] a.nav-link:hover,
+#quarto-sidebar .nav-link:hover,
+.quarto-sidebar .nav-link:hover,
+.quarto-sidebar-nav-contents .nav-link:hover,
+nav[role="doc-toc"] .nav-link:hover {
+  color: #742082 !important;
+  text-decoration: underline !important;
+}
+
+/* Replace "Table of contents" with "Content" in bold - LEFT SIDEBAR 
+.sidebar-header h1.title,
+.sidebar .sidebar-title,
+.sidebar h2.sidebar-title,
+.sidebar .sidebar-header [role="doc-toc"] > h2 {
+  font-weight: 700 !important;
+  font-size: 1.25rem !important;
+}
+
+.sidebar-header h1.title::before,
+.sidebar .sidebar-title::before,
+.sidebar h2.sidebar-title::before {
+  content: "Content";
+  visibility: visible;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+*/
+
+.sidebar-header h1.title,
+.sidebar .sidebar-title,
+.sidebar h2.sidebar-title {
+  visibility: hidden;
+  position: relative;
+}
+
+/* Replace "On this page" in RIGHT SIDEBAR if needed */
+
+#toc-title {
+  visibility: hidden;
+  position: relative;
+}
+
+#toc-title::before {
+  content: "Content";
+  visibility: visible;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* Code blocks */
+pre.sourceCode {
+  border-left: 4px solid var(--brand-purple);
+  background-color: var(--background-light);
+}
+
+code {
+  color: var(--brand-purple-dark);
+  background-color: rgba(116, 32, 130, 0.1);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+table th {
+  background-color: var(--brand-purple);
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+table tr:hover {
+  background-color: rgba(116, 32, 130, 0.05);
+}
+
+/* Blockquotes */
+blockquote {
+  border-left: 4px solid var(--brand-purple);
+  background-color: var(--background-light);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--brand-purple);
+  border-color: var(--brand-purple);
+  color: white;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--brand-purple-dark);
+  border-color: var(--brand-purple-dark);
+  color: white;
+}
+
+/* Print styles for PDF export */
+@media print {
+  .sidebar {
+    display: none !important;
+  }
+  
+  .sidebar-header {
+    display: none !important;
+  }
+  
+  a {
+    color: var(--brand-purple) !important;
+    text-decoration: underline !important;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--brand-purple) !important;
+    page-break-after: avoid;
+  }
+  
+  /* Ensure good contrast for print */
+  body {
+    color: #000000;
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+}
+
+/* Responsive adjustments for larger logo */
+@media (max-width: 768px) {
+  .sidebar-logo-img {
+    height: 65px; /* Slightly smaller on mobile but still larger than original */
+    max-width: 220px;
+  }
+  
+  .navbar-logo {
+    height: 50px; /* Slightly smaller on mobile */
+    max-width: 200px;
+  }
+  
+  h1, .h1 {
+    font-size: 1.875rem;
+  }
+  
+  h2, .h2 {
+    font-size: 1.5rem;
+  }
+}

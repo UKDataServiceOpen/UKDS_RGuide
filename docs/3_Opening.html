@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Opening datasets in R – Analysing social survey data using R</title>
+<title>3&nbsp; Opening datasets in R – Analysing social survey data using R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -74,10 +74,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7a4068b46cc005e1514339e2acc6e017.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ba4580efdef3a346b8353cb6e6f57d39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f410b66b4933f15108f8fa93e83e019d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -106,37 +106,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<style>
-
-      .quarto-title-block .quarto-title-banner h1,
-      .quarto-title-block .quarto-title-banner h2,
-      .quarto-title-block .quarto-title-banner h3,
-      .quarto-title-block .quarto-title-banner h4,
-      .quarto-title-block .quarto-title-banner h5,
-      .quarto-title-block .quarto-title-banner h6
-      {
-        color: #742082;
-      }
-
-      .quarto-title-block .quarto-title-banner {
-        color: #742082;
-background: white;
-      }
-</style>
 
 
+<link rel="stylesheet" href="ukds_long.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3_Opening.html"><span class="chapter-title">Opening datasets in R</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3_Opening.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Opening datasets in R</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -146,29 +130,13 @@ background: white;
   </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title"><span class="chapter-title">Opening datasets in R</span></h1>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="https://ukdataservice.ac.uk/" class="sidebar-logo-link">
-      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UK Data Service Logo and link to website" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UK Data Service Logo and link to website" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      <a href="https://ukdataservice.ac.uk" class="sidebar-logo-link">
+      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="Link to the UK Data Service homepage" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="Link to the UK Data Service homepage" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./"></a> 
@@ -192,57 +160,68 @@ background: white;
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1_Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">What is R ?</span></a>
+  <a href="./1_Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is R ?</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_Using.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Using R: essential information</span></a>
+  <a href="./2_Using.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Using R: essential information</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_Opening.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Opening datasets in R</span></a>
+  <a href="./3_Opening.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Opening datasets in R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_Manipulation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Essentials of Data Manipulation</span></a>
+  <a href="./4_Manipulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Essentials of Data Manipulation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5_Descriptives.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Descriptive statistics</span></a>
+  <a href="./5_Descriptives.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6_Weighted.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Producing weighted and survey design-informed estimates</span></a>
+  <a href="./6_Weighted.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted and survey design-informed estimates</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7_Graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Graphs and plots</span></a>
+  <a href="./7_Graphs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Graphs and plots</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8_Testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Significance testing</span></a>
+  <a href="./8_Testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9_Regressions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression analysis</span></a>
+  <a href="./9_Regressions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10_Further.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Further information</span></a>
+  <a href="./10_Further.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Further information</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11_References.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">References</span></a>
+  <a href="./11_References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -255,27 +234,42 @@ background: white;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#importing-files-essential-information" id="toc-importing-files-essential-information" class="nav-link active" data-scroll-target="#importing-files-essential-information">Importing files: essential information</a>
+  <li><a href="#importing-files-essential-information" id="toc-importing-files-essential-information" class="nav-link active" data-scroll-target="#importing-files-essential-information"><span class="header-section-number">3.1</span> Importing files: essential information</a>
   <ul class="collapse">
   <li><a href="#spreadsheet-and-text-files" id="toc-spreadsheet-and-text-files" class="nav-link" data-scroll-target="#spreadsheet-and-text-files">Spreadsheet and text files</a></li>
   <li><a href="#sas-spss-or-stata" id="toc-sas-spss-or-stata" class="nav-link" data-scroll-target="#sas-spss-or-stata">SAS, SPSS, or Stata</a></li>
   </ul></li>
-  <li><a href="#the-2017-british-social-attitudes-survey" id="toc-the-2017-british-social-attitudes-survey" class="nav-link" data-scroll-target="#the-2017-british-social-attitudes-survey">The 2017 British Social Attitudes Survey</a></li>
-  <li><a href="#understanding-the-dataset" id="toc-understanding-the-dataset" class="nav-link" data-scroll-target="#understanding-the-dataset">Understanding the dataset</a></li>
-  <li><a href="#identifying-and-selecting-variables" id="toc-identifying-and-selecting-variables" class="nav-link" data-scroll-target="#identifying-and-selecting-variables">Identifying and selecting variables</a></li>
-  <li><a href="#factor-variables-in-the-haven-package" id="toc-factor-variables-in-the-haven-package" class="nav-link" data-scroll-target="#factor-variables-in-the-haven-package">Factor variables in the haven package</a></li>
+  <li><a href="#the-2017-british-social-attitudes-survey" id="toc-the-2017-british-social-attitudes-survey" class="nav-link" data-scroll-target="#the-2017-british-social-attitudes-survey"><span class="header-section-number">3.2</span> The 2017 British Social Attitudes Survey</a></li>
+  <li><a href="#understanding-the-dataset" id="toc-understanding-the-dataset" class="nav-link" data-scroll-target="#understanding-the-dataset"><span class="header-section-number">3.3</span> Understanding the dataset</a></li>
+  <li><a href="#identifying-and-selecting-variables" id="toc-identifying-and-selecting-variables" class="nav-link" data-scroll-target="#identifying-and-selecting-variables"><span class="header-section-number">3.4</span> Identifying and selecting variables</a></li>
+  <li><a href="#factor-variables-in-the-haven-package" id="toc-factor-variables-in-the-haven-package" class="nav-link" data-scroll-target="#factor-variables-in-the-haven-package"><span class="header-section-number">3.5</span> Factor variables in the haven package</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Opening datasets in R</span></h1>
+</div>
 
 
 
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
 
 
-<section id="importing-files-essential-information" class="level2">
-<h2 class="anchored" data-anchor-id="importing-files-essential-information">Importing files: essential information</h2>
+</header>
+
+
+<section id="importing-files-essential-information" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="importing-files-essential-information"><span class="header-section-number">3.1</span> Importing files: essential information</h2>
 <section id="spreadsheet-and-text-files" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="spreadsheet-and-text-files">Spreadsheet and text files</h3>
 <p>In principle, any dataset whether in CSV, or spreadsheet format can be imported into R:</p>
@@ -291,32 +285,32 @@ background: white;
 <p>For the record, the <code>foreign</code> package used to be the standard for importing MINITAB, SAS, SPSS and Stata datasets into R, but its development ceased in 2000 (Stata version 12).</p>
 </section>
 </section>
-<section id="the-2017-british-social-attitudes-survey" class="level2">
-<h2 class="anchored" data-anchor-id="the-2017-british-social-attitudes-survey">The 2017 British Social Attitudes Survey</h2>
+<section id="the-2017-british-social-attitudes-survey" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="the-2017-british-social-attitudes-survey"><span class="header-section-number">3.2</span> The 2017 British Social Attitudes Survey</h2>
 <p>In the remainder of this guide, we will be using the <em>British Social Attitudes Survey, 2017, Environment and Politics: Open Access Teaching Dataset</em>, which can be downloaded from the <a href="https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8849">UK Data Service website</a>. We will import the SPSS version of the dataset, We will import the SPSS version of the dataset. We will assume that the data is saved in a folder named <code>UKDA</code> inside the <code>Documents</code> folder (on a Windows computer). We will set . <code>C:\\Users\\Your_User_Name_Here\\Documents</code> as the default working directory.</p>
 <p>This way, we won’t have to specify the full path each time that we will be opening or saving file.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">Your_User_Name_Here</span><span class="sc">\\</span><span class="st">Documents</span><span class="sc">\\</span><span class="st">UKDS"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">setwd</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">Your_User_Name_Here</span><span class="sc">\\</span><span class="st">Documents</span><span class="sc">\\</span><span class="st">UKDS"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can finally open the file:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="ot">&lt;-</span><span class="fu">read_spss</span>(<span class="st">"8849spss_V1/bsa2017_open_enviropol.sav"</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>               )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>bsa<span class="ot">&lt;-</span><span class="fu">read_spss</span>(<span class="st">"8849spss_V1/bsa2017_open_enviropol.sav"</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>               )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Typing:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">ls</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "bsa"</code></pre>
 </div>
 </div>
 <p>will show us that the object ‘bsa’ has appeared in the environment.</p>
 </section>
-<section id="understanding-the-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="understanding-the-dataset">Understanding the dataset</h2>
+<section id="understanding-the-dataset" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="understanding-the-dataset"><span class="header-section-number">3.3</span> Understanding the dataset</h2>
 <p>As mentioned in earlier sections, we can find out the number of observations and variables in the dataset by typing the following:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(bsa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">dim</span>(bsa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3988   25</code></pre>
 </div>
@@ -324,7 +318,7 @@ background: white;
 <p>We can see that there are 3988 observations and 25 variables in the dataset.</p>
 <p>What if we want to get the list of all variables in the dataset? We need to type:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(bsa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ls</span>(bsa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "actchar"          "actpol"           "carallow"         "carenvdc"        
  [5] "carnod2"          "carreduc"         "cartaxhi"         "CCBELIEV"        
@@ -337,7 +331,7 @@ background: white;
 </div>
 <p>If we want to get a better sense of the data, we use the <code>head()</code> function which will return the first six rows.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bsa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">head</span>(bsa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Sserial Rsex RAgeCat Married ChildHh HEdQual3 eq_inc_quintiles RClassGp
 1  290001    1       3       1       1        3                3        4
@@ -365,7 +359,7 @@ background: white;
 <p>Single variables may be also summarised with <code>head()</code>.</p>
 <p>For example:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bsa<span class="sc">$</span>Rsex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">head</span>(bsa<span class="sc">$</span>Rsex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Male   Female Female Female Male   Female
 Levels: skipped or na Male Female Dontknow Refusal</code></pre>
@@ -377,7 +371,7 @@ Levels: skipped or na Male Female Dontknow Refusal</code></pre>
 <p>will list its first 1000 observations.</p>
 <p>Other commands, such as <code>summary()</code> provide more synthetic information.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>Rsex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>Rsex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>skipped or na          Male        Female      Dontknow       Refusal 
             0          1806          2182             0             0 </code></pre>
@@ -385,7 +379,7 @@ Levels: skipped or na Male Female Dontknow Refusal</code></pre>
 </div>
 <p><code>summary()</code> is a generic function that tailors the most appropriate output to an object class. Since <code>Rsex</code> is a categorical variable, the output of <code>summary()</code> is identical to what we would have obtained with the straightforward tabulation function <code>table()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>Rsex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>Rsex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 skipped or na          Male        Female      Dontknow       Refusal 
@@ -394,45 +388,45 @@ skipped or na          Male        Female      Dontknow       Refusal
 </div>
 <p>When encountering a numeric variable, <code>summary()</code> will compute basic descriptive statistics (mean, median, quartiles, maximum and minimum). For example, in the case of the libertarian-authoritarian scale <code>libauth</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>libauth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>libauth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
   1.167   3.000   3.500   3.511   4.000   5.000     775 </code></pre>
 </div>
 </div>
 </section>
-<section id="identifying-and-selecting-variables" class="level2">
-<h2 class="anchored" data-anchor-id="identifying-and-selecting-variables">Identifying and selecting variables</h2>
+<section id="identifying-and-selecting-variables" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="identifying-and-selecting-variables"><span class="header-section-number">3.4</span> Identifying and selecting variables</h2>
 <p>As we have already seen, variables are objects. R automatically stores variables using the appropriate object class. Categorical variables are ‘Factors’ with ‘Levels’ as categories within these, while continuous variables are ‘Numeric’ types of objects. The <code>class()</code> displays the type of an object:.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(bsa<span class="sc">$</span>Rsex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">class</span>(bsa<span class="sc">$</span>Rsex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "factor"</code></pre>
 </div>
 </div>
 <p>The levels() function returns the categories of the variable.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>Rsex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>Rsex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "skipped or na" "Male"          "Female"        "Dontknow"     
 [5] "Refusal"      </code></pre>
 </div>
 </div>
 </section>
-<section id="factor-variables-in-the-haven-package" class="level2">
-<h2 class="anchored" data-anchor-id="factor-variables-in-the-haven-package">Factor variables in the haven package</h2>
+<section id="factor-variables-in-the-haven-package" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="factor-variables-in-the-haven-package"><span class="header-section-number">3.5</span> Factor variables in the haven package</h2>
 <p>As we have seen in the previous chapter, statistical software such as SPSS or Stata treat categorical variables as numerical variables. Values labels are then ‘attached’, allocating a substantive meaning to these values. On the other hand, R records categorical variables in objects that are called <em>factors</em>, that may be ordered or not. Factors consist of a limited number of <em>levels</em> sequentially numbered values (ranging from 1 to the number of levels) that are paired with arbitrary character strings. The number of a factor level is therefore distinct from the values categorical variables are allocated in codebooks.</p>
 <p>Unfortunately, there are no straightforward ways to convert SPSS or Stata labelled categorical variables into R factors. The approach followed by the <code>haven</code> package is to preserve the arbitrary numeric values of the original variables, and add <em>attributes</em> that contain the value labels that can be manipulated separately. Attributes are a special type of R objects that have a name, and can be retrieved using the <code>attr()</code> function. <code>haven</code>-converted categorical variables all have a ‘label’ and ‘labels’ attribute. The former is the variable description aka variable label, the latter the value labels.</p>
 <p>Let’s examine the original variable description and value labels with the <code>attr()</code> function.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(bsa<span class="sc">$</span>HEdQual3, <span class="st">"label"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">attr</span>(bsa<span class="sc">$</span>HEdQual3, <span class="st">"label"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Highest educational qual obtained - dv"</code></pre>
 </div>
 </div>
 <p>We do the same with value labels:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(bsa<span class="sc">$</span>HEdQual3, <span class="st">"labels"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">attr</span>(bsa<span class="sc">$</span>HEdQual3, <span class="st">"labels"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                          Degree Higher educ below degree/A level 
                                1                                2 
@@ -445,9 +439,9 @@ skipped or na          Male        Female      Dontknow       Refusal
 <p>The value labels displayed above include both the text description and the original (i.e.&nbsp;codebook) numeric values from SPSS/Stata.</p>
 <p>These <code>haven</code>-imported numeric variables can be converted into R factors using <code>as_factor()</code>, with their numeric values simply reflecting their order in the vector of levels. The factor levels in the converted variables can consist of either the value labels:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">as_factor</span>(bsa<span class="sc">$</span>HEdQual3, <span class="at">levels=</span><span class="st">"labels"</span>)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>       )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">levels</span>(</span>
+<span id="cb28-2"><a href="#cb28-2"></a>       <span class="fu">as_factor</span>(bsa<span class="sc">$</span>HEdQual3, <span class="at">levels=</span><span class="st">"labels"</span>)</span>
+<span id="cb28-3"><a href="#cb28-3"></a>       )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Degree"                           "Higher educ below degree/A level"
 [3] "O level or equiv/CSE"             "No qualification"                
@@ -456,9 +450,9 @@ skipped or na          Male        Female      Dontknow       Refusal
 </div>
 <p>… or, as in the earlier output, of both the original SPSS/Stata numeric values and the value labels:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">as_factor</span>(bsa<span class="sc">$</span>HEdQual3, <span class="at">levels=</span><span class="st">"both"</span>)</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>       )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">levels</span>(</span>
+<span id="cb30-2"><a href="#cb30-2"></a>       <span class="fu">as_factor</span>(bsa<span class="sc">$</span>HEdQual3, <span class="at">levels=</span><span class="st">"both"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3"></a>       )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "[1] Degree"                          
 [2] "[2] Higher educ below degree/A level"
@@ -878,15 +872,15 @@ skipped or na          Male        Female      Dontknow       Refusal
     }
   });
   </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="./2_Using.html" class="pagination-link" aria-label="Using R: essential information">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Using R: essential information</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Using R: essential information</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./4_Manipulation.html" class="pagination-link" aria-label="Essentials of Data Manipulation">
-        <span class="nav-page-text"><span class="chapter-title">Essentials of Data Manipulation</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Essentials of Data Manipulation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Essentials of Data Manipulation – Analysing social survey data using R</title>
+<title>4&nbsp; Essentials of Data Manipulation – Analysing social survey data using R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -74,10 +74,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7a4068b46cc005e1514339e2acc6e017.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ba4580efdef3a346b8353cb6e6f57d39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f410b66b4933f15108f8fa93e83e019d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -106,37 +106,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<style>
-
-      .quarto-title-block .quarto-title-banner h1,
-      .quarto-title-block .quarto-title-banner h2,
-      .quarto-title-block .quarto-title-banner h3,
-      .quarto-title-block .quarto-title-banner h4,
-      .quarto-title-block .quarto-title-banner h5,
-      .quarto-title-block .quarto-title-banner h6
-      {
-        color: #742082;
-      }
-
-      .quarto-title-block .quarto-title-banner {
-        color: #742082;
-background: white;
-      }
-</style>
 
 
+<link rel="stylesheet" href="ukds_long.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4_Manipulation.html"><span class="chapter-title">Essentials of Data Manipulation</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4_Manipulation.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Essentials of Data Manipulation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -146,29 +130,13 @@ background: white;
   </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title"><span class="chapter-title">Essentials of Data Manipulation</span></h1>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="https://ukdataservice.ac.uk/" class="sidebar-logo-link">
-      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UK Data Service Logo and link to website" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="UK Data Service Logo and link to website" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      <a href="https://ukdataservice.ac.uk" class="sidebar-logo-link">
+      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="Link to the UK Data Service homepage" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./pics/UKDS_Logos_Col_Grey_300dpi.png" alt="Link to the UK Data Service homepage" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./"></a> 
@@ -192,57 +160,68 @@ background: white;
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1_Introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">What is R ?</span></a>
+  <a href="./1_Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is R ?</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_Using.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Using R: essential information</span></a>
+  <a href="./2_Using.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Using R: essential information</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_Opening.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Opening datasets in R</span></a>
+  <a href="./3_Opening.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Opening datasets in R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_Manipulation.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Essentials of Data Manipulation</span></a>
+  <a href="./4_Manipulation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Essentials of Data Manipulation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5_Descriptives.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Descriptive statistics</span></a>
+  <a href="./5_Descriptives.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6_Weighted.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Producing weighted and survey design-informed estimates</span></a>
+  <a href="./6_Weighted.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Producing weighted and survey design-informed estimates</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7_Graphs.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Graphs and plots</span></a>
+  <a href="./7_Graphs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Graphs and plots</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8_Testing.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Significance testing</span></a>
+  <a href="./8_Testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Significance testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9_Regressions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Regression analysis</span></a>
+  <a href="./9_Regressions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10_Further.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Further information</span></a>
+  <a href="./10_Further.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Further information</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11_References.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">References</span></a>
+  <a href="./11_References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -255,35 +234,50 @@ background: white;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#creating-and-transforming-numeric-variables" id="toc-creating-and-transforming-numeric-variables" class="nav-link active" data-scroll-target="#creating-and-transforming-numeric-variables">Creating and transforming numeric variables</a></li>
-  <li><a href="#recoding-variables" id="toc-recoding-variables" class="nav-link" data-scroll-target="#recoding-variables">Recoding variables</a></li>
-  <li><a href="#missing-values" id="toc-missing-values" class="nav-link" data-scroll-target="#missing-values">Missing Values</a>
+  <li><a href="#creating-and-transforming-numeric-variables" id="toc-creating-and-transforming-numeric-variables" class="nav-link active" data-scroll-target="#creating-and-transforming-numeric-variables"><span class="header-section-number">4.1</span> Creating and transforming numeric variables</a></li>
+  <li><a href="#recoding-variables" id="toc-recoding-variables" class="nav-link" data-scroll-target="#recoding-variables"><span class="header-section-number">4.2</span> Recoding variables</a></li>
+  <li><a href="#missing-values" id="toc-missing-values" class="nav-link" data-scroll-target="#missing-values"><span class="header-section-number">4.3</span> Missing Values</a>
   <ul class="collapse">
-  <li><a href="#inspecting-missing-data" id="toc-inspecting-missing-data" class="nav-link" data-scroll-target="#inspecting-missing-data">Inspecting missing data</a></li>
-  <li><a href="#recoding-missing-values-as-na-continuous-variables" id="toc-recoding-missing-values-as-na-continuous-variables" class="nav-link" data-scroll-target="#recoding-missing-values-as-na-continuous-variables">Recoding missing values as NA (continuous variables)</a></li>
-  <li><a href="#working-with-missing-values" id="toc-working-with-missing-values" class="nav-link" data-scroll-target="#working-with-missing-values">Working with missing values</a></li>
+  <li><a href="#inspecting-missing-data" id="toc-inspecting-missing-data" class="nav-link" data-scroll-target="#inspecting-missing-data"><span class="header-section-number">4.3.1</span> Inspecting missing data</a></li>
+  <li><a href="#recoding-missing-values-as-na-continuous-variables" id="toc-recoding-missing-values-as-na-continuous-variables" class="nav-link" data-scroll-target="#recoding-missing-values-as-na-continuous-variables"><span class="header-section-number">4.3.2</span> Recoding missing values as NA (continuous variables)</a></li>
+  <li><a href="#working-with-missing-values" id="toc-working-with-missing-values" class="nav-link" data-scroll-target="#working-with-missing-values"><span class="header-section-number">4.3.3</span> Working with missing values</a></li>
   </ul></li>
-  <li><a href="#subsetting-datasets" id="toc-subsetting-datasets" class="nav-link" data-scroll-target="#subsetting-datasets">Subsetting datasets</a></li>
+  <li><a href="#subsetting-datasets" id="toc-subsetting-datasets" class="nav-link" data-scroll-target="#subsetting-datasets"><span class="header-section-number">4.4</span> Subsetting datasets</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Essentials of Data Manipulation</span></h1>
+</div>
 
 
 
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
 
 
 <p>In this section we will cover how to recode variables and deal with missing data.</p>
-<section id="creating-and-transforming-numeric-variables" class="level2">
-<h2 class="anchored" data-anchor-id="creating-and-transforming-numeric-variables">Creating and transforming numeric variables</h2>
+<section id="creating-and-transforming-numeric-variables" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="creating-and-transforming-numeric-variables"><span class="header-section-number">4.1</span> Creating and transforming numeric variables</h2>
 <p>Let’s say we would like to transform our numerical political orientation variable: <code>leftrigh</code> into a logarithmic scale. We can use the <code>log()</code> function which is available in R Base and simply returns the natural logarithm (base-e). We will use the assignment operator ( &lt;- ) to create a new variable called ‘lnleftright’ from the original variable</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>lnleftrigh <span class="ot">&lt;-</span> <span class="fu">log</span>(bsa<span class="sc">$</span>leftrigh)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>bsa<span class="sc">$</span>lnleftrigh <span class="ot">&lt;-</span> <span class="fu">log</span>(bsa<span class="sc">$</span>leftrigh)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Note that if we had not specified <code>bsa$</code> the command would have created a transformed variable outside of the BSA data frame. We can now check the results with <code>summary()</code></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">cbind</span>(bsa<span class="sc">$</span>lnleftrigh,bsa<span class="sc">$</span>leftrigh))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">summary</span>(<span class="fu">cbind</span>(bsa<span class="sc">$</span>lnleftrigh,bsa<span class="sc">$</span>leftrigh))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       V1               V2      
  Min.   :0.0000   Min.   :1.00  
@@ -307,9 +301,9 @@ background: white;
 <!-- ``` -->
 <p>We can easily create completely new variables in the dataset. For instance, the following will create <code>test</code> with a constant value of 1.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>test <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>test) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>bsa<span class="sc">$</span>test <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>test) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
       1       1       1       1       1       1 </code></pre>
@@ -322,11 +316,11 @@ background: white;
 <!-- ``` -->
 <!-- The number in the output does not refer to  underlying numerical values to which  labels are added as with other statistical packages, but instead to the position of a given level in the list returned by `level()`. -->
 </section>
-<section id="recoding-variables" class="level2">
-<h2 class="anchored" data-anchor-id="recoding-variables">Recoding variables</h2>
+<section id="recoding-variables" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="recoding-variables"><span class="header-section-number">4.2</span> Recoding variables</h2>
 <p>Recoding categorical and numeric variables is very common in survey research. For example, let us create a dichotomic version of the marital status of BSA respondents. The original marital status is recorded by <code>Married</code>. Simply using <code>summary</code> will return descriptive statistics of its numeric values, which is not what we need here:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>Married)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>Married)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
   1.000   1.000   1.000   1.977   3.000   4.000       1 </code></pre>
@@ -334,7 +328,7 @@ background: white;
 </div>
 <p>What we want instead is to work with the factor-converted version of <code>Married</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">as_factor</span>(bsa<span class="sc">$</span>Married))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">summary</span>(<span class="fu">as_factor</span>(bsa<span class="sc">$</span>Married))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Married/living as married        Separated/divorced                   Widowed 
                      2209                       530                       380 
@@ -344,7 +338,7 @@ background: white;
 </div>
 <p>Even better, we can produce the exhaustive list of all of <code>Married</code>’s factor levels:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(<span class="fu">as_factor</span>(bsa<span class="sc">$</span>Married))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">levels</span>(<span class="fu">as_factor</span>(bsa<span class="sc">$</span>Married))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Married/living as married" "Separated/divorced"       
 [3] "Widowed"                   "Never married"            
@@ -353,20 +347,20 @@ background: white;
 </div>
 <p>We can now move on to creating a new variable called <code>Married2</code> where respondents are categorised into two new categories: ‘Not partnered’ and ‘Partnered’. The “separated/divorced” and ‘Never married’ categories of the ‘Married’ variable are recoded as ‘Not partnered’. It is always advised to create new variables when recoding old ones so the original data is not tampered with.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married.f<span class="ot">&lt;-</span><span class="fu">as_factor</span>(bsa<span class="sc">$</span>Married,<span class="st">"labels"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Married/living as married"</span>,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"Partnered"</span>,bsa<span class="sc">$</span>Married)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Widowed"</span> <span class="sc">|</span> </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                       bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Never married"</span> <span class="sc">|</span> </span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                      bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Separated/divorced"</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"Not partnered"</span>,bsa<span class="sc">$</span>Married2)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married2<span class="ot">&lt;-</span><span class="fu">as.factor</span>(bsa<span class="sc">$</span>Married2)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>Married2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>bsa<span class="sc">$</span>Married.f<span class="ot">&lt;-</span><span class="fu">as_factor</span>(bsa<span class="sc">$</span>Married,<span class="st">"labels"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2"></a>bsa<span class="sc">$</span>Married2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Married/living as married"</span>,</span>
+<span id="cb12-3"><a href="#cb12-3"></a>                                      <span class="st">"Partnered"</span>,bsa<span class="sc">$</span>Married)</span>
+<span id="cb12-4"><a href="#cb12-4"></a>bsa<span class="sc">$</span>Married2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Widowed"</span> <span class="sc">|</span> </span>
+<span id="cb12-5"><a href="#cb12-5"></a>                       bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Never married"</span> <span class="sc">|</span> </span>
+<span id="cb12-6"><a href="#cb12-6"></a>                      bsa<span class="sc">$</span>Married.f<span class="sc">==</span><span class="st">"Separated/divorced"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7"></a>                                      <span class="st">"Not partnered"</span>,bsa<span class="sc">$</span>Married2)</span>
+<span id="cb12-8"><a href="#cb12-8"></a></span>
+<span id="cb12-9"><a href="#cb12-9"></a>bsa<span class="sc">$</span>Married2<span class="ot">&lt;-</span><span class="fu">as.factor</span>(bsa<span class="sc">$</span>Married2)</span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="fu">levels</span>(bsa<span class="sc">$</span>Married2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Not partnered" "Partnered"    </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>Married2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>Married2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Not partnered     Partnered          NA's 
          1778          2209             1 </code></pre>
@@ -381,17 +375,17 @@ background: white;
 </ol>
 <p>More complex cases may require a more advanced function. The <code>dplyr</code> library provides a comprehensive set of data manipulation tools, such as <code>case_when()</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>bsa<span class="ot">&lt;-</span>bsa<span class="sc">%&gt;%</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">Married3=</span><span class="fu">case_when</span>(</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>               Married.f <span class="sc">==</span> <span class="st">"Married/living as married"</span> <span class="sc">~</span> <span class="st">"Partnered"</span>,  </span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>               Married.f <span class="sc">==</span> <span class="st">"Separated/divorced"</span> <span class="sc">|</span> </span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>               Married.f <span class="sc">==</span> <span class="st">"Widowed"</span> <span class="sc">~</span> <span class="st">"Not Partnered"</span>,</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>               Married.f <span class="sc">==</span> <span class="st">"Never married"</span> <span class="sc">~</span> <span class="st">"Not Partnered"</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>Married3<span class="ot">&lt;-</span><span class="fu">as.factor</span>(bsa<span class="sc">$</span>Married3)</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>Married3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb16-2"><a href="#cb16-2"></a>bsa<span class="ot">&lt;-</span>bsa<span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>     <span class="fu">mutate</span>(<span class="at">Married3=</span><span class="fu">case_when</span>(</span>
+<span id="cb16-4"><a href="#cb16-4"></a>               Married.f <span class="sc">==</span> <span class="st">"Married/living as married"</span> <span class="sc">~</span> <span class="st">"Partnered"</span>,  </span>
+<span id="cb16-5"><a href="#cb16-5"></a>               Married.f <span class="sc">==</span> <span class="st">"Separated/divorced"</span> <span class="sc">|</span> </span>
+<span id="cb16-6"><a href="#cb16-6"></a>               Married.f <span class="sc">==</span> <span class="st">"Widowed"</span> <span class="sc">~</span> <span class="st">"Not Partnered"</span>,</span>
+<span id="cb16-7"><a href="#cb16-7"></a>               Married.f <span class="sc">==</span> <span class="st">"Never married"</span> <span class="sc">~</span> <span class="st">"Not Partnered"</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a>)</span>
+<span id="cb16-9"><a href="#cb16-9"></a>)</span>
+<span id="cb16-10"><a href="#cb16-10"></a>bsa<span class="sc">$</span>Married3<span class="ot">&lt;-</span><span class="fu">as.factor</span>(bsa<span class="sc">$</span>Married3)</span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="fu">summary</span>(bsa<span class="sc">$</span>Married3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Not Partnered     Partnered          NA's 
          1778          2209             1 </code></pre>
@@ -410,54 +404,54 @@ background: white;
 <li>Unless explicitly specified (in our case, by adding the bsa$ prefix to variable name), the objects created are not included in the data frame from which they were computed.</li>
 </ul>
 </section>
-<section id="missing-values" class="level2">
-<h2 class="anchored" data-anchor-id="missing-values">Missing Values</h2>
+<section id="missing-values" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="missing-values"><span class="header-section-number">4.3</span> Missing Values</h2>
 <p>Explicit or system missing values in R (i.e.&nbsp;values that R itself considers as missing) are represented as <code>NA</code> for factors and numerical variables. For character variables, missing values are simply empty strings, ie <code>""</code>. R has a series of functions specifically designed to handle NAs.</p>
 <p>R has fewer safety nets than other packages for handling missing values. Most functions won’t warn users about whether there are observations with missing values that have been dropped. On the other hand, some commands will return error messages and by default won’t run when missing values are present. This is the case of <code>mean()</code> for example.</p>
-<section id="inspecting-missing-data" class="level3">
-<h3 class="anchored" data-anchor-id="inspecting-missing-data">Inspecting missing data</h3>
+<section id="inspecting-missing-data" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="inspecting-missing-data"><span class="header-section-number">4.3.1</span> Inspecting missing data</h3>
 <p>The logical function <code>is.na()</code> assesses each observation in variables and identifies whether cases are valid or missing. The result will appear as a boolean TRUE/FALSE vector for each observation. <code>is.na()</code> can be combined with other functions:</p>
 <ul>
 <li><p>With <code>table()</code> in order to get the frequencies of missing values of a specific variable.</p></li>
 <li><p>With <code>sum()</code> in order to count the number of missing observations of variables or whole datasets.</p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(                     <span class="co"># number of missing values in the leftright variable</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">is.na</span>(bsa<span class="sc">$</span>leftrigh)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>      ) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">table</span>(                     <span class="co"># number of missing values in the leftright variable</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>      <span class="fu">is.na</span>(bsa<span class="sc">$</span>leftrigh)</span>
+<span id="cb18-3"><a href="#cb18-3"></a>      ) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 FALSE  TRUE 
  3206   782 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(                       <span class="co"># of missing values in the whole dataset</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">is.na</span>(bsa)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>   ) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">sum</span>(                       <span class="co"># of missing values in the whole dataset</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>   <span class="fu">is.na</span>(bsa)</span>
+<span id="cb20-3"><a href="#cb20-3"></a>   ) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 36593</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(                     <span class="co"># proportion of NAs for a variable</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">is.na</span>(bsa<span class="sc">$</span>leftrigh)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>     ) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">mean</span>(                     <span class="co"># proportion of NAs for a variable</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>     <span class="fu">is.na</span>(bsa<span class="sc">$</span>leftrigh)</span>
+<span id="cb22-3"><a href="#cb22-3"></a>     ) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.1960883</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(                     <span class="co"># proportion of NAs in the dataset</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">is.na</span>(bsa)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>     ) <span class="co"># returns the proportion in the dataset</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">mean</span>(                     <span class="co"># proportion of NAs in the dataset</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>     <span class="fu">is.na</span>(bsa)</span>
+<span id="cb24-3"><a href="#cb24-3"></a>     ) <span class="co"># returns the proportion in the dataset</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3058592</code></pre>
 </div>
 </div>
 </section>
-<section id="recoding-missing-values-as-na-continuous-variables" class="level3">
-<h3 class="anchored" data-anchor-id="recoding-missing-values-as-na-continuous-variables">Recoding missing values as NA (continuous variables)</h3>
+<section id="recoding-missing-values-as-na-continuous-variables" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="recoding-missing-values-as-na-continuous-variables"><span class="header-section-number">4.3.2</span> Recoding missing values as NA (continuous variables)</h3>
 <p>It may sometimes be useful to recode implicit missing values (ie considered by the data producer as missing, but not by R) of either numeric objects or factors into <code>&lt;NA&gt;</code>, in order to simplify case selection when conducting analyses. This can either be done with Base R code or the more advanced data manipulation functions from the dplyr package that we explored earlier.</p>
 <p>Let’s assume for a moment that we would like to eliminate respondents aged under 25 for our analysis. A safe way to proceed is by creating a new dataset.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert labelled numeric variable into factor for clarity</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>bsa<span class="sc">$</span>RAgeCat.f <span class="ot">&lt;-</span> <span class="fu">as_factor</span>(bsa<span class="sc">$</span>RAgeCat) </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>RAgeCat.f)                      </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># convert labelled numeric variable into factor for clarity</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>bsa<span class="sc">$</span>RAgeCat.f <span class="ot">&lt;-</span> <span class="fu">as_factor</span>(bsa<span class="sc">$</span>RAgeCat) </span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="fu">table</span>(bsa<span class="sc">$</span>RAgeCat.f)                      </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      18-24      25-34      35-44      45-54      55-59      60-64        65+ 
@@ -465,9 +459,9 @@ FALSE  TRUE
 DK/Refused 
          0 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># retains all values except those that match the condition:  </span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>bsa.adults<span class="ot">&lt;-</span>bsa[<span class="sc">!</span>bsa<span class="sc">$</span>RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span>, ] </span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa.adults<span class="sc">$</span>RAgeCat.f)                      </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># retains all values except those that match the condition:  </span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>bsa.adults<span class="ot">&lt;-</span>bsa[<span class="sc">!</span>bsa<span class="sc">$</span>RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span>, ] </span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="fu">table</span>(bsa.adults<span class="sc">$</span>RAgeCat.f)                      </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      18-24      25-34      35-44      45-54      55-59      60-64        65+ 
@@ -478,8 +472,8 @@ DK/Refused
 </div>
 <p>We can also notice that although there are now no observations left in the 18-24 category, it is still displayed by <code>table()</code>. This is because levels are attributes of factors and are not deleted with observations. We can remove unused levels permanently with <code>droplevels()</code></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>bsa.adults<span class="sc">$</span>RAgeCat.f<span class="ot">&lt;-</span><span class="fu">droplevels</span>(bsa.adults<span class="sc">$</span>RAgeCat.f)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa.adults<span class="sc">$</span>RAgeCat.f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>bsa.adults<span class="sc">$</span>RAgeCat.f<span class="ot">&lt;-</span><span class="fu">droplevels</span>(bsa.adults<span class="sc">$</span>RAgeCat.f)</span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="fu">table</span>(bsa.adults<span class="sc">$</span>RAgeCat.f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 25-34 35-44 45-54 55-59 60-64   65+ 
@@ -487,8 +481,8 @@ DK/Refused
 </div>
 </div>
 </section>
-<section id="working-with-missing-values" class="level3">
-<h3 class="anchored" data-anchor-id="working-with-missing-values">Working with missing values</h3>
+<section id="working-with-missing-values" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="working-with-missing-values"><span class="header-section-number">4.3.3</span> Working with missing values</h3>
 <p>Explicit missing values (coded as NA) can be taken care of by R’s own missing values functions. For instance using the <code>na.rm=T</code> or <code>na.rm=TRUE</code> option will remove missing values from an analysis (typing <code>?na.rm</code> will provide more information). Below is a summary of how NAs are dealt with by common R commands:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -538,21 +532,21 @@ DK/Refused
 </div>
 </section>
 </section>
-<section id="subsetting-datasets" class="level2">
-<h2 class="anchored" data-anchor-id="subsetting-datasets">Subsetting datasets</h2>
+<section id="subsetting-datasets" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="subsetting-datasets"><span class="header-section-number">4.4</span> Subsetting datasets</h2>
 <p>When analysing survey data. it is often necessary to limit the scope of computation to specific groups or subset of the data we may be interested in. There are many ways of subsetting datasets in R. We will review the most common here.</p>
 <p><strong>Using Base R</strong></p>
 <p>Most subsetting commands involve some form of conditions whereby the characteristics of a subsample of interest are specified. Suppose we would like to examine the interest for politics among people aged 18-24.</p>
 <p>We can either create an adhoc data frame:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>Politics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">table</span>(bsa<span class="sc">$</span>Politics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
    1    2    3    4    5 
  739  982 1179  708  379 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>bsa.young<span class="ot">&lt;-</span>bsa[bsa<span class="sc">$</span>RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span>,]  </span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bsa.young<span class="sc">$</span>Politics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>bsa.young<span class="ot">&lt;-</span>bsa[bsa<span class="sc">$</span>RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span>,]  </span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="fu">table</span>(bsa.young<span class="sc">$</span>Politics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  1  2  3  4  5 
@@ -561,9 +555,9 @@ DK/Refused
 </div>
 <p>Or we can directly limit the extent of the analysis on the go:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>        bsa<span class="sc">$</span>Politics[bsa<span class="sc">$</span>RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span>]</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>  <span class="fu">table</span>(</span>
+<span id="cb36-2"><a href="#cb36-2"></a>        bsa<span class="sc">$</span>Politics[bsa<span class="sc">$</span>RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span>]</span>
+<span id="cb36-3"><a href="#cb36-3"></a>        )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  1  2  3  4  5 
@@ -574,10 +568,10 @@ DK/Refused
 <p><strong>Using dplyr</strong>*</p>
 <p>Now suppose we want to further restrict the analysis to people self-identifying as males. We could use the same Base R syntax as above, but with more than one condition coding tends to become a bit cumbersome. We could instead use the more convenient syntax from the <code>dplyr</code> package. Either:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>bsa.young.males<span class="ot">&lt;-</span>bsa<span class="sc">%&gt;%</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span> <span class="sc">&amp;</span> <span class="fu">as_factor</span>(Rsex)<span class="sc">==</span><span class="st">"Male"</span>)  </span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">as_factor</span>(bsa.young.males<span class="sc">$</span>Politics))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>bsa.young.males<span class="ot">&lt;-</span>bsa<span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>  <span class="fu">filter</span>(RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span> <span class="sc">&amp;</span> <span class="fu">as_factor</span>(Rsex)<span class="sc">==</span><span class="st">"Male"</span>)  </span>
+<span id="cb38-3"><a href="#cb38-3"></a></span>
+<span id="cb38-4"><a href="#cb38-4"></a><span class="fu">table</span>(<span class="fu">as_factor</span>(bsa.young.males<span class="sc">$</span>Politics))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Item not applicable   ... a great deal,        quite a lot,               some, 
@@ -588,13 +582,13 @@ Item not applicable   ... a great deal,        quite a lot,               some,
 </div>
 <p>Or as before, embed it as a condition within <code>table()</code> :</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>(</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">as_factor</span>(</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>          bsa<span class="sc">%&gt;%</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">filter</span>(RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span> <span class="sc">&amp;</span> <span class="fu">as_factor</span>(Rsex)<span class="sc">==</span><span class="st">"Male"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>          <span class="fu">select</span>(Politics)</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>  <span class="fu">table</span>(</span>
+<span id="cb40-2"><a href="#cb40-2"></a>         <span class="fu">as_factor</span>(</span>
+<span id="cb40-3"><a href="#cb40-3"></a>          bsa<span class="sc">%&gt;%</span></span>
+<span id="cb40-4"><a href="#cb40-4"></a>          <span class="fu">filter</span>(RAgeCat.f<span class="sc">==</span><span class="st">"18-24"</span> <span class="sc">&amp;</span> <span class="fu">as_factor</span>(Rsex)<span class="sc">==</span><span class="st">"Male"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb40-5"><a href="#cb40-5"></a>          <span class="fu">select</span>(Politics)</span>
+<span id="cb40-6"><a href="#cb40-6"></a>  )</span>
+<span id="cb40-7"><a href="#cb40-7"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Politics
 Item not applicable   ... a great deal,        quite a lot,               some, 
@@ -1016,15 +1010,15 @@ Item not applicable   ... a great deal,        quite a lot,               some,
     }
   });
   </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="./3_Opening.html" class="pagination-link" aria-label="Opening datasets in R">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Opening datasets in R</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Opening datasets in R</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./5_Descriptives.html" class="pagination-link" aria-label="Descriptive statistics">
-        <span class="nav-page-text"><span class="chapter-title">Descriptive statistics</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
