@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Analysing social survey data using R",
     "section": "",
-    "text": "Introduction\nThis guide provides an introduction to analysing large scale social survey data using R, with examples from the British Social Attitudes Survey 2017. It is aimed at two categories of users: \n\nThose inside or outside higher education, or who do not have access to commercial statistical software such as Stata, SPSS or SAS but who would like to conduct their own analysis beyond what is usually published by data producers: for example statistics for specific groups of the population. This guide provides this group of users with a range of procedures that will help them produce straightforward and robust analyses tailored to their needs without spending unnecessary time on learning the inner workings of R. \nMore advanced users who are already familiar with other data analysis tools but who would like to learn how to carry out their analyses in R.\n\nA wealth of introductory content on R programming is already available online. The guide therefore focuses on providing succinct examples of common operations that most users of social surveys carry out in the course of their research, including how to:\n\nread in and open datasets.\ndo common data manipulation operations.\nproduce simple descriptive statistics or tabulations.\nhandle survey weights and survey design variables",
+    "text": "Introduction\nThis guide provides an introduction to analysing large scale social survey data using R, with examples from the British Social Attitudes Survey 2017. It is aimed at two categories of users:\nA wealth of introductory content on R programming is already available online. The guide therefore focuses on providing succinct examples of common operations that most users of social surveys carry out in the course of their research, including how to:",
     "crumbs": [
       "Introduction"
     ]
@@ -347,6 +347,16 @@
     "text": "R Core Team. (2023). R: A language and environment for statistical computing. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from https://www.r-project.org/ RStudio Team.\nRStudio: Integrated Development for R. Boston, USA: RStudio, Inc. Retrieved from http://www.rstudio.com/\nTennekes, M. (2018) tmap: Thematic Maps. R package version 1.10. Retrieved from https://cran.r-project.org/package=tmap\nWickham, H., & Francois, R. (2023). dplyr: A Grammar of Data Manipulation. R package version 1.1.4. Retrieved from https://cran.r-project.org/package=dplyr\nWickham, H. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2016. Retrieved from https://cran.r-project.org/package=ggplot2",
     "crumbs": [
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>References</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#introduction",
+    "href": "index.html#introduction",
+    "title": "Analysing social survey data using R",
+    "section": "",
+    "text": "Those inside or outside higher education, or who do not have access to commercial statistical software such as Stata, SPSS or SAS but who would like to conduct their own analysis beyond what is usually published by data producers: for example statistics for specific groups of the population. This guide provides this group of users with a range of procedures that will help them produce straightforward and robust analyses tailored to their needs without spending unnecessary time on learning the inner workings of R. \nMore advanced users who are already familiar with other data analysis tools but who would like to learn how to carry out their analyses in R.\n\n\n\nread in and open datasets.\ndo common data manipulation operations.\nproduce simple descriptive statistics or tabulations.\nhandle survey weights and survey design variables",
+    "crumbs": [
+      "Introduction"
     ]
   }
 ]
